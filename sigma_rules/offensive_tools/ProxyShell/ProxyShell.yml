@@ -1,0 +1,110 @@
+title: Simple keyword detection rule for ProxyShell
+id: 82999d9d-2402-41cb-beb5-52dc7ee6a7c2
+status: experimental
+description:
+- ''' Microsoft Exchange Servers exploits - ProxyLogon and ProxyShell  CVE-2021-27065
+  CVE-2021-34473 CVE-2021-34523 CVE-2021-31207'''
+references:
+- https://www.cert.ssi.gouv.fr/uploads/ANSSI_TLPWHITE_ProxyShell_ProxyLogon_Sigma_yml.txt
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1059.001
+- attack.T1059.003
+- attack.T1059.005
+- attack.T1190
+- attack.T1210.003
+- attack.T1505
+- attack.TA0001
+- attack.TA0002
+- attack.TA0003
+- attack.TA0006
+- attack.TA0011
+logsource:
+  category:
+  - endpoint
+falsepositives:
+- Unknown
+level:
+- Unknown
+detection:
+  selection:
+    ParentCommandLine:
+    - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
+    - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
+    CommandLine:
+    - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
+    - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
+    Details:
+    - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
+    - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
+    registry.value:
+    - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
+    - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
+    process.args:
+    - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
+    - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
+    process.command_line:
+    - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
+    - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
+    process.env_vars:
+    - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
+    - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
+    process.io.text:
+    - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
+    - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
+    process.title:
+    - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
+    - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
+    pe.company:
+    - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
+    - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
+    pe.description:
+    - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
+    - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
+    pe.product:
+    - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
+    - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
+    os.full:
+    - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
+    - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
+    host.hostname:
+    - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
+    - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
+    event.original:
+    - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
+    - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
+    email.subject:
+    - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
+    - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
+    device.model.name:
+    - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
+    - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
+    container.image.name:
+    - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
+    - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
+    container.name:
+    - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
+    - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name

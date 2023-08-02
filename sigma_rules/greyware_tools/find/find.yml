@@ -1,0 +1,428 @@
+title: Simple keyword detection rule for find
+id: d7bd77bf-86fe-42ba-966a-328ed9aa58de
+status: experimental
+description:
+- '''Detects suspicious shell commands indicating the information gathering phase
+  as preparation for the Privilege Escalation. # sticky bits'''
+- '''Detects suspicious shell commands indicating the information gathering phase
+  as preparation for the Privilege Escalation. sticky bits'''
+- '''Detects suspicious shell commands indicating the information gathering phase
+  as preparation for the Privilege Escalation.# sticky bits'''
+- '''Find sensitive files'''
+- '''Find SGID enabled files'''
+- '''Find SUID enabled files'''
+- '''linux commands abused by attackers - find guid and suid sensitives perm'''
+references:
+- https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/
+- N/A
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1005
+- attack.T1012
+- attack.T1027
+- attack.T1035
+- attack.T1036
+- attack.T1041
+- attack.T1044
+- attack.T1046
+- attack.T1053.005
+- attack.T1057
+- attack.T1059
+- attack.T1059.003
+- attack.T1070.001
+- attack.T1078.004
+- attack.T1083
+- attack.T1087.002
+- attack.T1105
+- attack.T1112
+- attack.T1136
+- attack.T1213.002
+- attack.T1562.001
+- attack.T1564.001
+- attack.T1564.002
+- attack.T1564.003
+- attack.T1564.005
+- attack.TA0002
+- attack.TA0003
+- attack.TA0004
+- attack.TA0006
+- attack.TA0007
+- attack.TA0008
+- attack.TA0009
+- attack.TA0010
+logsource:
+  category:
+  - endpoint
+falsepositives:
+- Unknown
+level:
+- critical
+- medium
+- Unknown
+detection:
+  selection:
+    ParentCommandLine:
+    - '*find / -perm +8000 -ls 2>/dev/null*'
+    - '*find / -perm -u=s -type f 2>/dev/null*'
+    - '*find / -name id_rsa 2>*'
+    - '*find / -user root -perm -6000 -type f 2>*'
+    - '*find / -name authorized_keys *> /dev/null*'
+    - '*find /* -perm -u=s -type f 2>*'
+    - '*find /* -perm -04000 -o -perm -02000*'
+    - '*find / -perm /2000 -ls 2>/dev/null*'
+    - '*find / -perm -g=s'
+    - '*find / -perm -u=s'
+    - '*find / -name id_rsa *> /dev/null*'
+    - '*find / -perm -2000'
+    - '*find / -name id_dsa 2>*'
+    - '*find / -uid 0 -perm -4000 -type f *'
+    - '*find / -perm +4000 -type f 2>/dev/null*'
+    - '*find / -perm -4000'
+    - '*find / -perm -4000 -type f *'
+    CommandLine:
+    - '*find / -perm +8000 -ls 2>/dev/null*'
+    - '*find / -perm -u=s -type f 2>/dev/null*'
+    - '*find / -name id_rsa 2>*'
+    - '*find / -user root -perm -6000 -type f 2>*'
+    - '*find / -name authorized_keys *> /dev/null*'
+    - '*find /* -perm -u=s -type f 2>*'
+    - '*find /* -perm -04000 -o -perm -02000*'
+    - '*find / -perm /2000 -ls 2>/dev/null*'
+    - '*find / -perm -g=s'
+    - '*find / -perm -u=s'
+    - '*find / -name id_rsa *> /dev/null*'
+    - '*find / -perm -2000'
+    - '*find / -name id_dsa 2>*'
+    - '*find / -uid 0 -perm -4000 -type f *'
+    - '*find / -perm +4000 -type f 2>/dev/null*'
+    - '*find / -perm -4000'
+    - '*find / -perm -4000 -type f *'
+    Details:
+    - '*find / -perm +8000 -ls 2>/dev/null*'
+    - '*find / -perm -u=s -type f 2>/dev/null*'
+    - '*find / -name id_rsa 2>*'
+    - '*find / -user root -perm -6000 -type f 2>*'
+    - '*find / -name authorized_keys *> /dev/null*'
+    - '*find /* -perm -u=s -type f 2>*'
+    - '*find /* -perm -04000 -o -perm -02000*'
+    - '*find / -perm /2000 -ls 2>/dev/null*'
+    - '*find / -perm -g=s'
+    - '*find / -perm -u=s'
+    - '*find / -name id_rsa *> /dev/null*'
+    - '*find / -perm -2000'
+    - '*find / -name id_dsa 2>*'
+    - '*find / -uid 0 -perm -4000 -type f *'
+    - '*find / -perm +4000 -type f 2>/dev/null*'
+    - '*find / -perm -4000'
+    - '*find / -perm -4000 -type f *'
+    registry.value:
+    - '*find / -perm +8000 -ls 2>/dev/null*'
+    - '*find / -perm -u=s -type f 2>/dev/null*'
+    - '*find / -name id_rsa 2>*'
+    - '*find / -user root -perm -6000 -type f 2>*'
+    - '*find / -name authorized_keys *> /dev/null*'
+    - '*find /* -perm -u=s -type f 2>*'
+    - '*find /* -perm -04000 -o -perm -02000*'
+    - '*find / -perm /2000 -ls 2>/dev/null*'
+    - '*find / -perm -g=s'
+    - '*find / -perm -u=s'
+    - '*find / -name id_rsa *> /dev/null*'
+    - '*find / -perm -2000'
+    - '*find / -name id_dsa 2>*'
+    - '*find / -uid 0 -perm -4000 -type f *'
+    - '*find / -perm +4000 -type f 2>/dev/null*'
+    - '*find / -perm -4000'
+    - '*find / -perm -4000 -type f *'
+    process.args:
+    - '*find / -perm +8000 -ls 2>/dev/null*'
+    - '*find / -perm -u=s -type f 2>/dev/null*'
+    - '*find / -name id_rsa 2>*'
+    - '*find / -user root -perm -6000 -type f 2>*'
+    - '*find / -name authorized_keys *> /dev/null*'
+    - '*find /* -perm -u=s -type f 2>*'
+    - '*find /* -perm -04000 -o -perm -02000*'
+    - '*find / -perm /2000 -ls 2>/dev/null*'
+    - '*find / -perm -g=s'
+    - '*find / -perm -u=s'
+    - '*find / -name id_rsa *> /dev/null*'
+    - '*find / -perm -2000'
+    - '*find / -name id_dsa 2>*'
+    - '*find / -uid 0 -perm -4000 -type f *'
+    - '*find / -perm +4000 -type f 2>/dev/null*'
+    - '*find / -perm -4000'
+    - '*find / -perm -4000 -type f *'
+    process.command_line:
+    - '*find / -perm +8000 -ls 2>/dev/null*'
+    - '*find / -perm -u=s -type f 2>/dev/null*'
+    - '*find / -name id_rsa 2>*'
+    - '*find / -user root -perm -6000 -type f 2>*'
+    - '*find / -name authorized_keys *> /dev/null*'
+    - '*find /* -perm -u=s -type f 2>*'
+    - '*find /* -perm -04000 -o -perm -02000*'
+    - '*find / -perm /2000 -ls 2>/dev/null*'
+    - '*find / -perm -g=s'
+    - '*find / -perm -u=s'
+    - '*find / -name id_rsa *> /dev/null*'
+    - '*find / -perm -2000'
+    - '*find / -name id_dsa 2>*'
+    - '*find / -uid 0 -perm -4000 -type f *'
+    - '*find / -perm +4000 -type f 2>/dev/null*'
+    - '*find / -perm -4000'
+    - '*find / -perm -4000 -type f *'
+    process.env_vars:
+    - '*find / -perm +8000 -ls 2>/dev/null*'
+    - '*find / -perm -u=s -type f 2>/dev/null*'
+    - '*find / -name id_rsa 2>*'
+    - '*find / -user root -perm -6000 -type f 2>*'
+    - '*find / -name authorized_keys *> /dev/null*'
+    - '*find /* -perm -u=s -type f 2>*'
+    - '*find /* -perm -04000 -o -perm -02000*'
+    - '*find / -perm /2000 -ls 2>/dev/null*'
+    - '*find / -perm -g=s'
+    - '*find / -perm -u=s'
+    - '*find / -name id_rsa *> /dev/null*'
+    - '*find / -perm -2000'
+    - '*find / -name id_dsa 2>*'
+    - '*find / -uid 0 -perm -4000 -type f *'
+    - '*find / -perm +4000 -type f 2>/dev/null*'
+    - '*find / -perm -4000'
+    - '*find / -perm -4000 -type f *'
+    process.io.text:
+    - '*find / -perm +8000 -ls 2>/dev/null*'
+    - '*find / -perm -u=s -type f 2>/dev/null*'
+    - '*find / -name id_rsa 2>*'
+    - '*find / -user root -perm -6000 -type f 2>*'
+    - '*find / -name authorized_keys *> /dev/null*'
+    - '*find /* -perm -u=s -type f 2>*'
+    - '*find /* -perm -04000 -o -perm -02000*'
+    - '*find / -perm /2000 -ls 2>/dev/null*'
+    - '*find / -perm -g=s'
+    - '*find / -perm -u=s'
+    - '*find / -name id_rsa *> /dev/null*'
+    - '*find / -perm -2000'
+    - '*find / -name id_dsa 2>*'
+    - '*find / -uid 0 -perm -4000 -type f *'
+    - '*find / -perm +4000 -type f 2>/dev/null*'
+    - '*find / -perm -4000'
+    - '*find / -perm -4000 -type f *'
+    process.title:
+    - '*find / -perm +8000 -ls 2>/dev/null*'
+    - '*find / -perm -u=s -type f 2>/dev/null*'
+    - '*find / -name id_rsa 2>*'
+    - '*find / -user root -perm -6000 -type f 2>*'
+    - '*find / -name authorized_keys *> /dev/null*'
+    - '*find /* -perm -u=s -type f 2>*'
+    - '*find /* -perm -04000 -o -perm -02000*'
+    - '*find / -perm /2000 -ls 2>/dev/null*'
+    - '*find / -perm -g=s'
+    - '*find / -perm -u=s'
+    - '*find / -name id_rsa *> /dev/null*'
+    - '*find / -perm -2000'
+    - '*find / -name id_dsa 2>*'
+    - '*find / -uid 0 -perm -4000 -type f *'
+    - '*find / -perm +4000 -type f 2>/dev/null*'
+    - '*find / -perm -4000'
+    - '*find / -perm -4000 -type f *'
+    pe.company:
+    - '*find / -perm +8000 -ls 2>/dev/null*'
+    - '*find / -perm -u=s -type f 2>/dev/null*'
+    - '*find / -name id_rsa 2>*'
+    - '*find / -user root -perm -6000 -type f 2>*'
+    - '*find / -name authorized_keys *> /dev/null*'
+    - '*find /* -perm -u=s -type f 2>*'
+    - '*find /* -perm -04000 -o -perm -02000*'
+    - '*find / -perm /2000 -ls 2>/dev/null*'
+    - '*find / -perm -g=s'
+    - '*find / -perm -u=s'
+    - '*find / -name id_rsa *> /dev/null*'
+    - '*find / -perm -2000'
+    - '*find / -name id_dsa 2>*'
+    - '*find / -uid 0 -perm -4000 -type f *'
+    - '*find / -perm +4000 -type f 2>/dev/null*'
+    - '*find / -perm -4000'
+    - '*find / -perm -4000 -type f *'
+    pe.description:
+    - '*find / -perm +8000 -ls 2>/dev/null*'
+    - '*find / -perm -u=s -type f 2>/dev/null*'
+    - '*find / -name id_rsa 2>*'
+    - '*find / -user root -perm -6000 -type f 2>*'
+    - '*find / -name authorized_keys *> /dev/null*'
+    - '*find /* -perm -u=s -type f 2>*'
+    - '*find /* -perm -04000 -o -perm -02000*'
+    - '*find / -perm /2000 -ls 2>/dev/null*'
+    - '*find / -perm -g=s'
+    - '*find / -perm -u=s'
+    - '*find / -name id_rsa *> /dev/null*'
+    - '*find / -perm -2000'
+    - '*find / -name id_dsa 2>*'
+    - '*find / -uid 0 -perm -4000 -type f *'
+    - '*find / -perm +4000 -type f 2>/dev/null*'
+    - '*find / -perm -4000'
+    - '*find / -perm -4000 -type f *'
+    pe.product:
+    - '*find / -perm +8000 -ls 2>/dev/null*'
+    - '*find / -perm -u=s -type f 2>/dev/null*'
+    - '*find / -name id_rsa 2>*'
+    - '*find / -user root -perm -6000 -type f 2>*'
+    - '*find / -name authorized_keys *> /dev/null*'
+    - '*find /* -perm -u=s -type f 2>*'
+    - '*find /* -perm -04000 -o -perm -02000*'
+    - '*find / -perm /2000 -ls 2>/dev/null*'
+    - '*find / -perm -g=s'
+    - '*find / -perm -u=s'
+    - '*find / -name id_rsa *> /dev/null*'
+    - '*find / -perm -2000'
+    - '*find / -name id_dsa 2>*'
+    - '*find / -uid 0 -perm -4000 -type f *'
+    - '*find / -perm +4000 -type f 2>/dev/null*'
+    - '*find / -perm -4000'
+    - '*find / -perm -4000 -type f *'
+    os.full:
+    - '*find / -perm +8000 -ls 2>/dev/null*'
+    - '*find / -perm -u=s -type f 2>/dev/null*'
+    - '*find / -name id_rsa 2>*'
+    - '*find / -user root -perm -6000 -type f 2>*'
+    - '*find / -name authorized_keys *> /dev/null*'
+    - '*find /* -perm -u=s -type f 2>*'
+    - '*find /* -perm -04000 -o -perm -02000*'
+    - '*find / -perm /2000 -ls 2>/dev/null*'
+    - '*find / -perm -g=s'
+    - '*find / -perm -u=s'
+    - '*find / -name id_rsa *> /dev/null*'
+    - '*find / -perm -2000'
+    - '*find / -name id_dsa 2>*'
+    - '*find / -uid 0 -perm -4000 -type f *'
+    - '*find / -perm +4000 -type f 2>/dev/null*'
+    - '*find / -perm -4000'
+    - '*find / -perm -4000 -type f *'
+    host.hostname:
+    - '*find / -perm +8000 -ls 2>/dev/null*'
+    - '*find / -perm -u=s -type f 2>/dev/null*'
+    - '*find / -name id_rsa 2>*'
+    - '*find / -user root -perm -6000 -type f 2>*'
+    - '*find / -name authorized_keys *> /dev/null*'
+    - '*find /* -perm -u=s -type f 2>*'
+    - '*find /* -perm -04000 -o -perm -02000*'
+    - '*find / -perm /2000 -ls 2>/dev/null*'
+    - '*find / -perm -g=s'
+    - '*find / -perm -u=s'
+    - '*find / -name id_rsa *> /dev/null*'
+    - '*find / -perm -2000'
+    - '*find / -name id_dsa 2>*'
+    - '*find / -uid 0 -perm -4000 -type f *'
+    - '*find / -perm +4000 -type f 2>/dev/null*'
+    - '*find / -perm -4000'
+    - '*find / -perm -4000 -type f *'
+    event.original:
+    - '*find / -perm +8000 -ls 2>/dev/null*'
+    - '*find / -perm -u=s -type f 2>/dev/null*'
+    - '*find / -name id_rsa 2>*'
+    - '*find / -user root -perm -6000 -type f 2>*'
+    - '*find / -name authorized_keys *> /dev/null*'
+    - '*find /* -perm -u=s -type f 2>*'
+    - '*find /* -perm -04000 -o -perm -02000*'
+    - '*find / -perm /2000 -ls 2>/dev/null*'
+    - '*find / -perm -g=s'
+    - '*find / -perm -u=s'
+    - '*find / -name id_rsa *> /dev/null*'
+    - '*find / -perm -2000'
+    - '*find / -name id_dsa 2>*'
+    - '*find / -uid 0 -perm -4000 -type f *'
+    - '*find / -perm +4000 -type f 2>/dev/null*'
+    - '*find / -perm -4000'
+    - '*find / -perm -4000 -type f *'
+    email.subject:
+    - '*find / -perm +8000 -ls 2>/dev/null*'
+    - '*find / -perm -u=s -type f 2>/dev/null*'
+    - '*find / -name id_rsa 2>*'
+    - '*find / -user root -perm -6000 -type f 2>*'
+    - '*find / -name authorized_keys *> /dev/null*'
+    - '*find /* -perm -u=s -type f 2>*'
+    - '*find /* -perm -04000 -o -perm -02000*'
+    - '*find / -perm /2000 -ls 2>/dev/null*'
+    - '*find / -perm -g=s'
+    - '*find / -perm -u=s'
+    - '*find / -name id_rsa *> /dev/null*'
+    - '*find / -perm -2000'
+    - '*find / -name id_dsa 2>*'
+    - '*find / -uid 0 -perm -4000 -type f *'
+    - '*find / -perm +4000 -type f 2>/dev/null*'
+    - '*find / -perm -4000'
+    - '*find / -perm -4000 -type f *'
+    device.model.name:
+    - '*find / -perm +8000 -ls 2>/dev/null*'
+    - '*find / -perm -u=s -type f 2>/dev/null*'
+    - '*find / -name id_rsa 2>*'
+    - '*find / -user root -perm -6000 -type f 2>*'
+    - '*find / -name authorized_keys *> /dev/null*'
+    - '*find /* -perm -u=s -type f 2>*'
+    - '*find /* -perm -04000 -o -perm -02000*'
+    - '*find / -perm /2000 -ls 2>/dev/null*'
+    - '*find / -perm -g=s'
+    - '*find / -perm -u=s'
+    - '*find / -name id_rsa *> /dev/null*'
+    - '*find / -perm -2000'
+    - '*find / -name id_dsa 2>*'
+    - '*find / -uid 0 -perm -4000 -type f *'
+    - '*find / -perm +4000 -type f 2>/dev/null*'
+    - '*find / -perm -4000'
+    - '*find / -perm -4000 -type f *'
+    container.image.name:
+    - '*find / -perm +8000 -ls 2>/dev/null*'
+    - '*find / -perm -u=s -type f 2>/dev/null*'
+    - '*find / -name id_rsa 2>*'
+    - '*find / -user root -perm -6000 -type f 2>*'
+    - '*find / -name authorized_keys *> /dev/null*'
+    - '*find /* -perm -u=s -type f 2>*'
+    - '*find /* -perm -04000 -o -perm -02000*'
+    - '*find / -perm /2000 -ls 2>/dev/null*'
+    - '*find / -perm -g=s'
+    - '*find / -perm -u=s'
+    - '*find / -name id_rsa *> /dev/null*'
+    - '*find / -perm -2000'
+    - '*find / -name id_dsa 2>*'
+    - '*find / -uid 0 -perm -4000 -type f *'
+    - '*find / -perm +4000 -type f 2>/dev/null*'
+    - '*find / -perm -4000'
+    - '*find / -perm -4000 -type f *'
+    container.name:
+    - '*find / -perm +8000 -ls 2>/dev/null*'
+    - '*find / -perm -u=s -type f 2>/dev/null*'
+    - '*find / -name id_rsa 2>*'
+    - '*find / -user root -perm -6000 -type f 2>*'
+    - '*find / -name authorized_keys *> /dev/null*'
+    - '*find /* -perm -u=s -type f 2>*'
+    - '*find /* -perm -04000 -o -perm -02000*'
+    - '*find / -perm /2000 -ls 2>/dev/null*'
+    - '*find / -perm -g=s'
+    - '*find / -perm -u=s'
+    - '*find / -name id_rsa *> /dev/null*'
+    - '*find / -perm -2000'
+    - '*find / -name id_dsa 2>*'
+    - '*find / -uid 0 -perm -4000 -type f *'
+    - '*find / -perm +4000 -type f 2>/dev/null*'
+    - '*find / -perm -4000'
+    - '*find / -perm -4000 -type f *'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name

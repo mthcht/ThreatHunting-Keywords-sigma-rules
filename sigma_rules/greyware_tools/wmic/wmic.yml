@@ -1,0 +1,721 @@
+title: Simple keyword detection rule for wmic
+id: 6ea6220c-62a3-4393-8df7-29276f0cb7f1
+status: experimental
+description:
+- '''Execute a .EXE file stored as an Alternate Data Stream (ADS)'''
+- '''Lateral Movement with wmic'''
+- '''Like the ntds.dit file it should not normally be found in the Temp directory.'''
+- '''Like the ntds.dit file it should not normally be found in this directory.'''
+- '''The actor has executed WMIC commands [T1047] to create a copy of the ntds.dit
+  file and SYSTEM registry hive using ntdsutil.exe'''
+- '''The NTDS.dit file is the heart of Active Directory including user accounts If
+  it''s found in the Temp directory it could indicate that an attacker has copied
+  the file here in an attempt to extract sensitive information.'''
+- '''this file shouldn''t be found in the Users\Public directory. Its presence could
+  be a sign of an ongoing or past attack.'''
+- '''User Enumeration'''
+- '''VSS is a feature in Windows that allows for the creation of snapshots of a volume
+  capturing its state at a specific point in time. Adversaries may abuse the wmic
+  shadowcopy command to interact with these shadow copies for defense evasion purposes.'''
+- '''WMIC suspicious transfer '''
+references:
+- https://github.com/RoseSecurity/Red-Teaming-TTPs/blob/main/Anti-Forensics.md
+- https://media.defense.gov/2023/May/24/2003229517/-1/-1/0/CSA_Living_off_the_Land.PDF
+- N/A
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1005
+- attack.T1027.001
+- attack.T1028
+- attack.T1033
+- attack.T1036
+- attack.T1041
+- attack.T1047
+- attack.T1048
+- attack.T1078
+- attack.T1087
+- attack.T1096
+- attack.T1105
+- attack.T1106
+- attack.T1490
+- attack.T1562.002
+- attack.T1567.001
+- attack.TA0002
+- attack.TA0003
+- attack.TA0004
+- attack.TA0006
+- attack.TA0007
+- attack.TA0008
+- attack.TA0010
+- attack.TA0040
+logsource:
+  category:
+  - endpoint
+falsepositives:
+- Unknown
+level:
+- Unknown
+detection:
+  selection:
+    Image:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    OriginalFileName:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    CurrentDirectory:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    ParentImage:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    ParentCommandLine:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*ac i ntds*\\127.0.0.1\ADMIN$\*'
+    - '*wmic.exe process call create *.txt:*.exe*'
+    - '*wmic process call create*ntdsutil *ac i ntds* ifm*create full*'
+    - '*start wmic /node:@C:\*.txt /user:*/password:* process call create *cmd.exe
+      /c bitsadmin /transfer *.exe *'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*wmic /* /user:administrator process call create *cmd.exe /c *'
+    - '*\Users\Public\*ntds.dit*'
+    - '*wmic useraccount get /ALL /format:csv*'
+    - '*wmic SHADOWCOPY /nointeractive*'
+    TargetFilename:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    Signature:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    signature:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    ImageLoaded:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    Company:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    Description:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    description:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    CommandLine:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*ac i ntds*\\127.0.0.1\ADMIN$\*'
+    - '*wmic.exe process call create *.txt:*.exe*'
+    - '*wmic process call create*ntdsutil *ac i ntds* ifm*create full*'
+    - '*start wmic /node:@C:\*.txt /user:*/password:* process call create *cmd.exe
+      /c bitsadmin /transfer *.exe *'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*wmic /* /user:administrator process call create *cmd.exe /c *'
+    - '*\Users\Public\*ntds.dit*'
+    - '*wmic useraccount get /ALL /format:csv*'
+    - '*wmic SHADOWCOPY /nointeractive*'
+    SourceImage:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    TargetImage:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    CallTrace:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    TargetObject:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    Details:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*ac i ntds*\\127.0.0.1\ADMIN$\*'
+    - '*wmic.exe process call create *.txt:*.exe*'
+    - '*wmic process call create*ntdsutil *ac i ntds* ifm*create full*'
+    - '*start wmic /node:@C:\*.txt /user:*/password:* process call create *cmd.exe
+      /c bitsadmin /transfer *.exe *'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*wmic /* /user:administrator process call create *cmd.exe /c *'
+    - '*\Users\Public\*ntds.dit*'
+    - '*wmic useraccount get /ALL /format:csv*'
+    - '*wmic SHADOWCOPY /nointeractive*'
+    PipeName:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    Consumer:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    Destination:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    Name:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    Query:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    NewName:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    StartAddress:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    StartModule:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    StartFunction:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    SourceHostname:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    Device:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    file_name:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    file_path:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    process:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    original_file_name:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    parent_process:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    process_path:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    service_path:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    registry_path:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    registry_value_data:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    registry_value_name:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    ContextInfo:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    Payload:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    ScriptBlockText:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    ServerName:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    TransportName:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    NewProcessName:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    ParentProcessName:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    Application:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    Product Name:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    Threat Name:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    Process Name:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    Path:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    ImagePath:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    ServiceName:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    ProcessPath:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    AppName:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    AppPath:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    ModulePath:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    registry.data.strings:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    registry.path:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    registry.value:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*ac i ntds*\\127.0.0.1\ADMIN$\*'
+    - '*wmic.exe process call create *.txt:*.exe*'
+    - '*wmic process call create*ntdsutil *ac i ntds* ifm*create full*'
+    - '*start wmic /node:@C:\*.txt /user:*/password:* process call create *cmd.exe
+      /c bitsadmin /transfer *.exe *'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*wmic /* /user:administrator process call create *cmd.exe /c *'
+    - '*\Users\Public\*ntds.dit*'
+    - '*wmic useraccount get /ALL /format:csv*'
+    - '*wmic SHADOWCOPY /nointeractive*'
+    process.args:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*ac i ntds*\\127.0.0.1\ADMIN$\*'
+    - '*wmic.exe process call create *.txt:*.exe*'
+    - '*wmic process call create*ntdsutil *ac i ntds* ifm*create full*'
+    - '*start wmic /node:@C:\*.txt /user:*/password:* process call create *cmd.exe
+      /c bitsadmin /transfer *.exe *'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*wmic /* /user:administrator process call create *cmd.exe /c *'
+    - '*\Users\Public\*ntds.dit*'
+    - '*wmic useraccount get /ALL /format:csv*'
+    - '*wmic SHADOWCOPY /nointeractive*'
+    process.command_line:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*ac i ntds*\\127.0.0.1\ADMIN$\*'
+    - '*wmic.exe process call create *.txt:*.exe*'
+    - '*wmic process call create*ntdsutil *ac i ntds* ifm*create full*'
+    - '*start wmic /node:@C:\*.txt /user:*/password:* process call create *cmd.exe
+      /c bitsadmin /transfer *.exe *'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*wmic /* /user:administrator process call create *cmd.exe /c *'
+    - '*\Users\Public\*ntds.dit*'
+    - '*wmic useraccount get /ALL /format:csv*'
+    - '*wmic SHADOWCOPY /nointeractive*'
+    process.env_vars:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*ac i ntds*\\127.0.0.1\ADMIN$\*'
+    - '*wmic.exe process call create *.txt:*.exe*'
+    - '*wmic process call create*ntdsutil *ac i ntds* ifm*create full*'
+    - '*start wmic /node:@C:\*.txt /user:*/password:* process call create *cmd.exe
+      /c bitsadmin /transfer *.exe *'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*wmic /* /user:administrator process call create *cmd.exe /c *'
+    - '*\Users\Public\*ntds.dit*'
+    - '*wmic useraccount get /ALL /format:csv*'
+    - '*wmic SHADOWCOPY /nointeractive*'
+    process.io.text:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*ac i ntds*\\127.0.0.1\ADMIN$\*'
+    - '*wmic.exe process call create *.txt:*.exe*'
+    - '*wmic process call create*ntdsutil *ac i ntds* ifm*create full*'
+    - '*start wmic /node:@C:\*.txt /user:*/password:* process call create *cmd.exe
+      /c bitsadmin /transfer *.exe *'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*wmic /* /user:administrator process call create *cmd.exe /c *'
+    - '*\Users\Public\*ntds.dit*'
+    - '*wmic useraccount get /ALL /format:csv*'
+    - '*wmic SHADOWCOPY /nointeractive*'
+    process.executable:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    process.name:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    process.title:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*ac i ntds*\\127.0.0.1\ADMIN$\*'
+    - '*wmic.exe process call create *.txt:*.exe*'
+    - '*wmic process call create*ntdsutil *ac i ntds* ifm*create full*'
+    - '*start wmic /node:@C:\*.txt /user:*/password:* process call create *cmd.exe
+      /c bitsadmin /transfer *.exe *'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*wmic /* /user:administrator process call create *cmd.exe /c *'
+    - '*\Users\Public\*ntds.dit*'
+    - '*wmic useraccount get /ALL /format:csv*'
+    - '*wmic SHADOWCOPY /nointeractive*'
+    pe.company:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*ac i ntds*\\127.0.0.1\ADMIN$\*'
+    - '*wmic.exe process call create *.txt:*.exe*'
+    - '*wmic process call create*ntdsutil *ac i ntds* ifm*create full*'
+    - '*start wmic /node:@C:\*.txt /user:*/password:* process call create *cmd.exe
+      /c bitsadmin /transfer *.exe *'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*wmic /* /user:administrator process call create *cmd.exe /c *'
+    - '*\Users\Public\*ntds.dit*'
+    - '*wmic useraccount get /ALL /format:csv*'
+    - '*wmic SHADOWCOPY /nointeractive*'
+    pe.description:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*ac i ntds*\\127.0.0.1\ADMIN$\*'
+    - '*wmic.exe process call create *.txt:*.exe*'
+    - '*wmic process call create*ntdsutil *ac i ntds* ifm*create full*'
+    - '*start wmic /node:@C:\*.txt /user:*/password:* process call create *cmd.exe
+      /c bitsadmin /transfer *.exe *'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*wmic /* /user:administrator process call create *cmd.exe /c *'
+    - '*\Users\Public\*ntds.dit*'
+    - '*wmic useraccount get /ALL /format:csv*'
+    - '*wmic SHADOWCOPY /nointeractive*'
+    pe.original_file_name:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    pe.product:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*ac i ntds*\\127.0.0.1\ADMIN$\*'
+    - '*wmic.exe process call create *.txt:*.exe*'
+    - '*wmic process call create*ntdsutil *ac i ntds* ifm*create full*'
+    - '*start wmic /node:@C:\*.txt /user:*/password:* process call create *cmd.exe
+      /c bitsadmin /transfer *.exe *'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*wmic /* /user:administrator process call create *cmd.exe /c *'
+    - '*\Users\Public\*ntds.dit*'
+    - '*wmic useraccount get /ALL /format:csv*'
+    - '*wmic SHADOWCOPY /nointeractive*'
+    os.full:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*ac i ntds*\\127.0.0.1\ADMIN$\*'
+    - '*wmic.exe process call create *.txt:*.exe*'
+    - '*wmic process call create*ntdsutil *ac i ntds* ifm*create full*'
+    - '*start wmic /node:@C:\*.txt /user:*/password:* process call create *cmd.exe
+      /c bitsadmin /transfer *.exe *'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*wmic /* /user:administrator process call create *cmd.exe /c *'
+    - '*\Users\Public\*ntds.dit*'
+    - '*wmic useraccount get /ALL /format:csv*'
+    - '*wmic SHADOWCOPY /nointeractive*'
+    host.hostname:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*ac i ntds*\\127.0.0.1\ADMIN$\*'
+    - '*wmic.exe process call create *.txt:*.exe*'
+    - '*wmic process call create*ntdsutil *ac i ntds* ifm*create full*'
+    - '*start wmic /node:@C:\*.txt /user:*/password:* process call create *cmd.exe
+      /c bitsadmin /transfer *.exe *'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*wmic /* /user:administrator process call create *cmd.exe /c *'
+    - '*\Users\Public\*ntds.dit*'
+    - '*wmic useraccount get /ALL /format:csv*'
+    - '*wmic SHADOWCOPY /nointeractive*'
+    file.fork_name:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    file.name:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    file.path:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    file.target_path:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    email.attachments.file.name:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    email.subject:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*ac i ntds*\\127.0.0.1\ADMIN$\*'
+    - '*wmic.exe process call create *.txt:*.exe*'
+    - '*wmic process call create*ntdsutil *ac i ntds* ifm*create full*'
+    - '*start wmic /node:@C:\*.txt /user:*/password:* process call create *cmd.exe
+      /c bitsadmin /transfer *.exe *'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*wmic /* /user:administrator process call create *cmd.exe /c *'
+    - '*\Users\Public\*ntds.dit*'
+    - '*wmic useraccount get /ALL /format:csv*'
+    - '*wmic SHADOWCOPY /nointeractive*'
+    dll.path:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    device.model.name:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*ac i ntds*\\127.0.0.1\ADMIN$\*'
+    - '*wmic.exe process call create *.txt:*.exe*'
+    - '*wmic process call create*ntdsutil *ac i ntds* ifm*create full*'
+    - '*start wmic /node:@C:\*.txt /user:*/password:* process call create *cmd.exe
+      /c bitsadmin /transfer *.exe *'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*wmic /* /user:administrator process call create *cmd.exe /c *'
+    - '*\Users\Public\*ntds.dit*'
+    - '*wmic useraccount get /ALL /format:csv*'
+    - '*wmic SHADOWCOPY /nointeractive*'
+    container.image.name:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*ac i ntds*\\127.0.0.1\ADMIN$\*'
+    - '*wmic.exe process call create *.txt:*.exe*'
+    - '*wmic process call create*ntdsutil *ac i ntds* ifm*create full*'
+    - '*start wmic /node:@C:\*.txt /user:*/password:* process call create *cmd.exe
+      /c bitsadmin /transfer *.exe *'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*wmic /* /user:administrator process call create *cmd.exe /c *'
+    - '*\Users\Public\*ntds.dit*'
+    - '*wmic useraccount get /ALL /format:csv*'
+    - '*wmic SHADOWCOPY /nointeractive*'
+    container.name:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*ac i ntds*\\127.0.0.1\ADMIN$\*'
+    - '*wmic.exe process call create *.txt:*.exe*'
+    - '*wmic process call create*ntdsutil *ac i ntds* ifm*create full*'
+    - '*start wmic /node:@C:\*.txt /user:*/password:* process call create *cmd.exe
+      /c bitsadmin /transfer *.exe *'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*wmic /* /user:administrator process call create *cmd.exe /c *'
+    - '*\Users\Public\*ntds.dit*'
+    - '*wmic useraccount get /ALL /format:csv*'
+    - '*wmic SHADOWCOPY /nointeractive*'
+    object:
+    - '*\Users\Public\*ntds.jfm*'
+    - '*\Temp\*\ntds.dit*'
+    - '*\Temp\*\ntds.jfm*'
+    - '*\Users\Public\*ntds.dit*'
+    event.original:
+    - '*ac i ntds*\\127.0.0.1\ADMIN$\*'
+    - '*wmic.exe process call create *.txt:*.exe*'
+    - '*wmic process call create*ntdsutil *ac i ntds* ifm*create full*'
+    - '*start wmic /node:@C:\*.txt /user:*/password:* process call create *cmd.exe
+      /c bitsadmin /transfer *.exe *'
+    - '*wmic /* /user:administrator process call create *cmd.exe /c *'
+    - '*wmic useraccount get /ALL /format:csv*'
+    - '*wmic SHADOWCOPY /nointeractive*'
+  condition: selection
+fields:
+- Image
+- OriginalFileName
+- CurrentDirectory
+- ParentImage
+- ParentCommandLine
+- TargetFilename
+- Signature
+- signature
+- ImageLoaded
+- Company
+- Description
+- description
+- CommandLine
+- SourceImage
+- TargetImage
+- CallTrace
+- TargetObject
+- Details
+- PipeName
+- Consumer
+- Destination
+- Name
+- Query
+- NewName
+- StartAddress
+- StartModule
+- StartFunction
+- SourceHostname
+- Device
+- file_name
+- file_path
+- process
+- original_file_name
+- parent_process
+- process_path
+- service_path
+- registry_path
+- registry_value_data
+- registry_value_name
+- ContextInfo
+- Payload
+- ScriptBlockText
+- ServerName
+- TransportName
+- NewProcessName
+- ParentProcessName
+- Application
+- Product Name
+- Threat Name
+- Process Name
+- Path
+- ImagePath
+- ServiceName
+- ProcessPath
+- AppName
+- AppPath
+- ModulePath
+- registry.data.strings
+- registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.executable
+- process.name
+- process.title
+- pe.company
+- pe.description
+- pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
+- file.fork_name
+- file.name
+- file.path
+- file.target_path
+- email.attachments.file.name
+- email.subject
+- dll.path
+- device.model.name
+- container.image.name
+- container.name
+- object
+- event.original

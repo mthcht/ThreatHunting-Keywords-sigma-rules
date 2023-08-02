@@ -1,0 +1,738 @@
+title: Simple keyword detection rule for PoshC2
+id: a09ccd6b-3ce9-41f1-9ac9-0dbb12d16652
+status: experimental
+description:
+- '''PoshC2 is a proxy aware C2 framework used to aid penetration testers with red
+  teaming. post-exploitation and lateral movement. PoshC2 is primarily written in
+  Python3 and follows a modular format to enable users to add their own modules and
+  tools. allowing an extendible and flexible C2 framework. Out-of-the-box PoshC2 comes
+  PowerShell/C# and Python implants with payloads written in PowerShell v2 and v4.
+  C++ and C# source code. a variety of executables. DLLs and raw shellcode in addition
+  to a Python2 payload. These enable C2 functionality on a wide range of devices and
+  operating systems. including Windows. *nix and OSX.'''
+references:
+- https://github.com/nettitude/PoshC2
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1003.001
+- attack.T1007
+- attack.T1016
+- attack.T1040
+- attack.T1046
+- attack.T1047
+- attack.T1049
+- attack.T1055
+- attack.T1056.001
+- attack.T1068
+- attack.T1069.001
+- attack.T1071.001
+- attack.T1082
+- attack.T1083
+- attack.T1087.001
+- attack.T1087.002
+- attack.T1090
+- attack.T1110
+- attack.T1119
+- attack.T1134.002
+- attack.T1201
+- attack.T1210
+- attack.T1482
+- attack.T1546.003
+- attack.T1548.002
+- attack.T1550.002
+- attack.T1552.001
+- attack.T1555
+- attack.T1557.001
+- attack.T1560.001
+- attack.T1569.002
+- attack.TA0002
+- attack.TA0003
+- attack.TA0004
+- attack.TA0005
+- attack.TA0006
+- attack.TA0007
+- attack.TA0008
+- attack.TA0009
+- attack.TA0011
+logsource:
+  category:
+  - endpoint
+  - network
+falsepositives:
+- Unknown
+level:
+- critical
+detection:
+  selection:
+    ParentCommandLine:
+    - '* -LocalPoshC2ProjectDir *'
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '* -PoshC2Dir *'
+    - '*poshc2-ansible-main.yml*'
+    CommandLine:
+    - '* -LocalPoshC2ProjectDir *'
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '* -PoshC2Dir *'
+    - '*poshc2-ansible-main.yml*'
+    Details:
+    - '* -LocalPoshC2ProjectDir *'
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '* -PoshC2Dir *'
+    - '*poshc2-ansible-main.yml*'
+    registry.value:
+    - '* -LocalPoshC2ProjectDir *'
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '* -PoshC2Dir *'
+    - '*poshc2-ansible-main.yml*'
+    process.args:
+    - '* -LocalPoshC2ProjectDir *'
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '* -PoshC2Dir *'
+    - '*poshc2-ansible-main.yml*'
+    process.command_line:
+    - '* -LocalPoshC2ProjectDir *'
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '* -PoshC2Dir *'
+    - '*poshc2-ansible-main.yml*'
+    process.env_vars:
+    - '* -LocalPoshC2ProjectDir *'
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '* -PoshC2Dir *'
+    - '*poshc2-ansible-main.yml*'
+    process.io.text:
+    - '* -LocalPoshC2ProjectDir *'
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '* -PoshC2Dir *'
+    - '*poshc2-ansible-main.yml*'
+    process.title:
+    - '* -LocalPoshC2ProjectDir *'
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '* -PoshC2Dir *'
+    - '*poshc2-ansible-main.yml*'
+    pe.company:
+    - '* -LocalPoshC2ProjectDir *'
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '* -PoshC2Dir *'
+    - '*poshc2-ansible-main.yml*'
+    pe.description:
+    - '* -LocalPoshC2ProjectDir *'
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '* -PoshC2Dir *'
+    - '*poshc2-ansible-main.yml*'
+    pe.product:
+    - '* -LocalPoshC2ProjectDir *'
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '* -PoshC2Dir *'
+    - '*poshc2-ansible-main.yml*'
+    os.full:
+    - '* -LocalPoshC2ProjectDir *'
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '* -PoshC2Dir *'
+    - '*poshc2-ansible-main.yml*'
+    host.hostname:
+    - '* -LocalPoshC2ProjectDir *'
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '* -PoshC2Dir *'
+    - '*poshc2-ansible-main.yml*'
+    event.original:
+    - '* -LocalPoshC2ProjectDir *'
+    - '* -PoshC2Dir *'
+    email.subject:
+    - '* -LocalPoshC2ProjectDir *'
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '* -PoshC2Dir *'
+    - '*poshc2-ansible-main.yml*'
+    device.model.name:
+    - '* -LocalPoshC2ProjectDir *'
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '* -PoshC2Dir *'
+    - '*poshc2-ansible-main.yml*'
+    container.image.name:
+    - '* -LocalPoshC2ProjectDir *'
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '* -PoshC2Dir *'
+    - '*poshc2-ansible-main.yml*'
+    container.name:
+    - '* -LocalPoshC2ProjectDir *'
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '* -PoshC2Dir *'
+    - '*poshc2-ansible-main.yml*'
+    Image:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    OriginalFileName:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    CurrentDirectory:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    ParentImage:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    TargetFilename:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    Signature:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    signature:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    ImageLoaded:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    Company:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    Description:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    description:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    SourceImage:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    TargetImage:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    CallTrace:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    TargetObject:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    PipeName:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    Consumer:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    Destination:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    Name:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    Query:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    NewName:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    StartAddress:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    StartModule:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    StartFunction:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    SourceHostname:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    Device:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    file_name:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    file_path:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    process:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    original_file_name:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    parent_process:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    process_path:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    service_path:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    registry_path:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    registry_value_data:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    registry_value_name:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    ContextInfo:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    Payload:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    ScriptBlockText:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    ServerName:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    TransportName:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    NewProcessName:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    ParentProcessName:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    Application:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    Product Name:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    Threat Name:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    Process Name:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    Path:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    ImagePath:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    ServiceName:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    ProcessPath:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    AppName:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    AppPath:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    ModulePath:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    registry.data.strings:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    registry.path:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    process.executable:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    process.name:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    pe.original_file_name:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    file.fork_name:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    file.name:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    file.path:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    file.target_path:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    email.attachments.file.name:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    dll.path:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    object:
+    - '*/PoshC2*'
+    - '*posh-server -*'
+    - '*posh-project -*'
+    - '*poshc2-ansible-main.yml*'
+    url:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    dest_url:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    uri:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    uri_query:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    query:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    url_domain:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    uri_path:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    domain:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    QueryName:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    QueryResults:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    DestinationHostname:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    DestinationIp:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    http_referrer:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    http_referrer_domain:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    http_user_agent:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    dest_nt_host:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    sender:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    recipient:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    orig_recipient:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    subject:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    url.domain:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    url.full:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    url.original:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    url.query:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    user_agent.original:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    network.application:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    http.request.body.content:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    http.request.referrer:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    email.from.address:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    dns.question.name:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+    destination.domain:
+    - '*/PoshC2*'
+    - '*poshc2-ansible-main.yml*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+- Image
+- OriginalFileName
+- CurrentDirectory
+- ParentImage
+- TargetFilename
+- Signature
+- signature
+- ImageLoaded
+- Company
+- Description
+- description
+- SourceImage
+- TargetImage
+- CallTrace
+- TargetObject
+- PipeName
+- Consumer
+- Destination
+- Name
+- Query
+- NewName
+- StartAddress
+- StartModule
+- StartFunction
+- SourceHostname
+- Device
+- file_name
+- file_path
+- process
+- original_file_name
+- parent_process
+- process_path
+- service_path
+- registry_path
+- registry_value_data
+- registry_value_name
+- ContextInfo
+- Payload
+- ScriptBlockText
+- ServerName
+- TransportName
+- NewProcessName
+- ParentProcessName
+- Application
+- Product Name
+- Threat Name
+- Process Name
+- Path
+- ImagePath
+- ServiceName
+- ProcessPath
+- AppName
+- AppPath
+- ModulePath
+- registry.data.strings
+- registry.path
+- process.executable
+- process.name
+- pe.original_file_name
+- file.fork_name
+- file.name
+- file.path
+- file.target_path
+- email.attachments.file.name
+- dll.path
+- object
+- url
+- dest_url
+- uri
+- uri_query
+- query
+- url_domain
+- uri_path
+- domain
+- QueryName
+- QueryResults
+- DestinationHostname
+- DestinationIp
+- http_referrer
+- http_referrer_domain
+- http_user_agent
+- dest_nt_host
+- sender
+- recipient
+- orig_recipient
+- subject
+- url.domain
+- url.full
+- url.original
+- url.query
+- user_agent.original
+- network.application
+- http.request.body.content
+- http.request.referrer
+- email.from.address
+- dns.question.name
+- destination.domain

@@ -1,0 +1,103 @@
+title: Simple keyword detection rule for dig
+id: 8bac093f-c64e-4ce9-8475-7e8f623058ba
+status: experimental
+description:
+- '''classic DNS Zone transfer request. The idea behind it is to attempt to duplicate
+  all the DNS records for a given zone (or domain). This is a technique often used
+  by attackers to gather information about the infrastructure of a target organization.'''
+- '''dig'''
+references:
+- https://linux.die.net/man/1/dig
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1018
+- attack.TA0007
+logsource:
+  category:
+  - endpoint
+falsepositives:
+- Unknown
+level:
+- Unknown
+detection:
+  selection:
+    ParentCommandLine:
+    - '*dig *@* axfr*'
+    - '*dig * axfr *@*'
+    CommandLine:
+    - '*dig *@* axfr*'
+    - '*dig * axfr *@*'
+    Details:
+    - '*dig *@* axfr*'
+    - '*dig * axfr *@*'
+    registry.value:
+    - '*dig *@* axfr*'
+    - '*dig * axfr *@*'
+    process.args:
+    - '*dig *@* axfr*'
+    - '*dig * axfr *@*'
+    process.command_line:
+    - '*dig *@* axfr*'
+    - '*dig * axfr *@*'
+    process.env_vars:
+    - '*dig *@* axfr*'
+    - '*dig * axfr *@*'
+    process.io.text:
+    - '*dig *@* axfr*'
+    - '*dig * axfr *@*'
+    process.title:
+    - '*dig *@* axfr*'
+    - '*dig * axfr *@*'
+    pe.company:
+    - '*dig *@* axfr*'
+    - '*dig * axfr *@*'
+    pe.description:
+    - '*dig *@* axfr*'
+    - '*dig * axfr *@*'
+    pe.product:
+    - '*dig *@* axfr*'
+    - '*dig * axfr *@*'
+    os.full:
+    - '*dig *@* axfr*'
+    - '*dig * axfr *@*'
+    host.hostname:
+    - '*dig *@* axfr*'
+    - '*dig * axfr *@*'
+    event.original:
+    - '*dig *@* axfr*'
+    - '*dig * axfr *@*'
+    email.subject:
+    - '*dig *@* axfr*'
+    - '*dig * axfr *@*'
+    device.model.name:
+    - '*dig *@* axfr*'
+    - '*dig * axfr *@*'
+    container.image.name:
+    - '*dig *@* axfr*'
+    - '*dig * axfr *@*'
+    container.name:
+    - '*dig *@* axfr*'
+    - '*dig * axfr *@*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name

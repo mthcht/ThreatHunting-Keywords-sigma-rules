@@ -1,0 +1,700 @@
+title: Simple keyword detection rule for SharpGPOAbuse
+id: 675bcb17-2982-4ec2-bf6a-925fcf904983
+status: experimental
+description:
+- '''SharpGPOAbuse is a .NET application written in C# that can be used to take advantage
+  of a user''s edit rights on a Group Policy Object (GPO) in order to compromise the
+  objects that are controlled by that GPO.'''
+- '''SharpGPOAbuse is a .NET application written in C# that can be used to take advantage
+  of a users edit rights on a Group Policy Object (GPO) in order to compromise the
+  objects that are controlled by that GPO.'''
+references:
+- https://github.com/FSecureLABS/SharpGPOAbuse
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- 'attack.T1134 '
+- attack.T1204
+- attack.T1484
+- attack.T1546.008
+- attack.T1556
+- attack.T1562
+- attack.T1574
+- attack.TA0002
+- attack.TA0003
+- 'attack.TA0004  '
+- attack.TA0007
+- attack.TA0008
+logsource:
+  category:
+  - endpoint
+  - network
+falsepositives:
+- Unknown
+level:
+- Unknown
+detection:
+  selection:
+    ParentCommandLine:
+    - '* --AddUserScript --ScriptName * --ScriptContents * --GPOName *'
+    - '* --AddComputerTask --TaskName * --Author * --Command * --Arguments * --GPOName
+      *'
+    - '*SharpGPOAbuse*'
+    - '* --AddLocalAdmin --UserAccount * --GPOName *'
+    - '* NewLocalAdmin(*'
+    - '* --AddUserRights --UserRights * --UserAccount * --GPOName *'
+    - '*  --GPOName * --FilterEnabled --TargetDnsName *'
+    - '*SharpGPOAbuse*'
+    CommandLine:
+    - '* --AddUserScript --ScriptName * --ScriptContents * --GPOName *'
+    - '* --AddComputerTask --TaskName * --Author * --Command * --Arguments * --GPOName
+      *'
+    - '*SharpGPOAbuse*'
+    - '* --AddLocalAdmin --UserAccount * --GPOName *'
+    - '* NewLocalAdmin(*'
+    - '* --AddUserRights --UserRights * --UserAccount * --GPOName *'
+    - '*  --GPOName * --FilterEnabled --TargetDnsName *'
+    - '*SharpGPOAbuse*'
+    Details:
+    - '* --AddUserScript --ScriptName * --ScriptContents * --GPOName *'
+    - '* --AddComputerTask --TaskName * --Author * --Command * --Arguments * --GPOName
+      *'
+    - '*SharpGPOAbuse*'
+    - '* --AddLocalAdmin --UserAccount * --GPOName *'
+    - '* NewLocalAdmin(*'
+    - '* --AddUserRights --UserRights * --UserAccount * --GPOName *'
+    - '*  --GPOName * --FilterEnabled --TargetDnsName *'
+    - '*SharpGPOAbuse*'
+    registry.value:
+    - '* --AddUserScript --ScriptName * --ScriptContents * --GPOName *'
+    - '* --AddComputerTask --TaskName * --Author * --Command * --Arguments * --GPOName
+      *'
+    - '*SharpGPOAbuse*'
+    - '* --AddLocalAdmin --UserAccount * --GPOName *'
+    - '* NewLocalAdmin(*'
+    - '* --AddUserRights --UserRights * --UserAccount * --GPOName *'
+    - '*  --GPOName * --FilterEnabled --TargetDnsName *'
+    - '*SharpGPOAbuse*'
+    process.args:
+    - '* --AddUserScript --ScriptName * --ScriptContents * --GPOName *'
+    - '* --AddComputerTask --TaskName * --Author * --Command * --Arguments * --GPOName
+      *'
+    - '*SharpGPOAbuse*'
+    - '* --AddLocalAdmin --UserAccount * --GPOName *'
+    - '* NewLocalAdmin(*'
+    - '* --AddUserRights --UserRights * --UserAccount * --GPOName *'
+    - '*  --GPOName * --FilterEnabled --TargetDnsName *'
+    - '*SharpGPOAbuse*'
+    process.command_line:
+    - '* --AddUserScript --ScriptName * --ScriptContents * --GPOName *'
+    - '* --AddComputerTask --TaskName * --Author * --Command * --Arguments * --GPOName
+      *'
+    - '*SharpGPOAbuse*'
+    - '* --AddLocalAdmin --UserAccount * --GPOName *'
+    - '* NewLocalAdmin(*'
+    - '* --AddUserRights --UserRights * --UserAccount * --GPOName *'
+    - '*  --GPOName * --FilterEnabled --TargetDnsName *'
+    - '*SharpGPOAbuse*'
+    process.env_vars:
+    - '* --AddUserScript --ScriptName * --ScriptContents * --GPOName *'
+    - '* --AddComputerTask --TaskName * --Author * --Command * --Arguments * --GPOName
+      *'
+    - '*SharpGPOAbuse*'
+    - '* --AddLocalAdmin --UserAccount * --GPOName *'
+    - '* NewLocalAdmin(*'
+    - '* --AddUserRights --UserRights * --UserAccount * --GPOName *'
+    - '*  --GPOName * --FilterEnabled --TargetDnsName *'
+    - '*SharpGPOAbuse*'
+    process.io.text:
+    - '* --AddUserScript --ScriptName * --ScriptContents * --GPOName *'
+    - '* --AddComputerTask --TaskName * --Author * --Command * --Arguments * --GPOName
+      *'
+    - '*SharpGPOAbuse*'
+    - '* --AddLocalAdmin --UserAccount * --GPOName *'
+    - '* NewLocalAdmin(*'
+    - '* --AddUserRights --UserRights * --UserAccount * --GPOName *'
+    - '*  --GPOName * --FilterEnabled --TargetDnsName *'
+    - '*SharpGPOAbuse*'
+    process.title:
+    - '* --AddUserScript --ScriptName * --ScriptContents * --GPOName *'
+    - '* --AddComputerTask --TaskName * --Author * --Command * --Arguments * --GPOName
+      *'
+    - '*SharpGPOAbuse*'
+    - '* --AddLocalAdmin --UserAccount * --GPOName *'
+    - '* NewLocalAdmin(*'
+    - '* --AddUserRights --UserRights * --UserAccount * --GPOName *'
+    - '*  --GPOName * --FilterEnabled --TargetDnsName *'
+    - '*SharpGPOAbuse*'
+    pe.company:
+    - '* --AddUserScript --ScriptName * --ScriptContents * --GPOName *'
+    - '* --AddComputerTask --TaskName * --Author * --Command * --Arguments * --GPOName
+      *'
+    - '*SharpGPOAbuse*'
+    - '* --AddLocalAdmin --UserAccount * --GPOName *'
+    - '* NewLocalAdmin(*'
+    - '* --AddUserRights --UserRights * --UserAccount * --GPOName *'
+    - '*  --GPOName * --FilterEnabled --TargetDnsName *'
+    - '*SharpGPOAbuse*'
+    pe.description:
+    - '* --AddUserScript --ScriptName * --ScriptContents * --GPOName *'
+    - '* --AddComputerTask --TaskName * --Author * --Command * --Arguments * --GPOName
+      *'
+    - '*SharpGPOAbuse*'
+    - '* --AddLocalAdmin --UserAccount * --GPOName *'
+    - '* NewLocalAdmin(*'
+    - '* --AddUserRights --UserRights * --UserAccount * --GPOName *'
+    - '*  --GPOName * --FilterEnabled --TargetDnsName *'
+    - '*SharpGPOAbuse*'
+    pe.product:
+    - '* --AddUserScript --ScriptName * --ScriptContents * --GPOName *'
+    - '* --AddComputerTask --TaskName * --Author * --Command * --Arguments * --GPOName
+      *'
+    - '*SharpGPOAbuse*'
+    - '* --AddLocalAdmin --UserAccount * --GPOName *'
+    - '* NewLocalAdmin(*'
+    - '* --AddUserRights --UserRights * --UserAccount * --GPOName *'
+    - '*  --GPOName * --FilterEnabled --TargetDnsName *'
+    - '*SharpGPOAbuse*'
+    os.full:
+    - '* --AddUserScript --ScriptName * --ScriptContents * --GPOName *'
+    - '* --AddComputerTask --TaskName * --Author * --Command * --Arguments * --GPOName
+      *'
+    - '*SharpGPOAbuse*'
+    - '* --AddLocalAdmin --UserAccount * --GPOName *'
+    - '* NewLocalAdmin(*'
+    - '* --AddUserRights --UserRights * --UserAccount * --GPOName *'
+    - '*  --GPOName * --FilterEnabled --TargetDnsName *'
+    - '*SharpGPOAbuse*'
+    host.hostname:
+    - '* --AddUserScript --ScriptName * --ScriptContents * --GPOName *'
+    - '* --AddComputerTask --TaskName * --Author * --Command * --Arguments * --GPOName
+      *'
+    - '*SharpGPOAbuse*'
+    - '* --AddLocalAdmin --UserAccount * --GPOName *'
+    - '* NewLocalAdmin(*'
+    - '* --AddUserRights --UserRights * --UserAccount * --GPOName *'
+    - '*  --GPOName * --FilterEnabled --TargetDnsName *'
+    - '*SharpGPOAbuse*'
+    event.original:
+    - '* --AddUserScript --ScriptName * --ScriptContents * --GPOName *'
+    - '* --AddComputerTask --TaskName * --Author * --Command * --Arguments * --GPOName
+      *'
+    - '* --AddLocalAdmin --UserAccount * --GPOName *'
+    - '* --AddUserRights --UserRights * --UserAccount * --GPOName *'
+    - '*  --GPOName * --FilterEnabled --TargetDnsName *'
+    email.subject:
+    - '* --AddUserScript --ScriptName * --ScriptContents * --GPOName *'
+    - '* --AddComputerTask --TaskName * --Author * --Command * --Arguments * --GPOName
+      *'
+    - '*SharpGPOAbuse*'
+    - '* --AddLocalAdmin --UserAccount * --GPOName *'
+    - '* NewLocalAdmin(*'
+    - '* --AddUserRights --UserRights * --UserAccount * --GPOName *'
+    - '*  --GPOName * --FilterEnabled --TargetDnsName *'
+    - '*SharpGPOAbuse*'
+    device.model.name:
+    - '* --AddUserScript --ScriptName * --ScriptContents * --GPOName *'
+    - '* --AddComputerTask --TaskName * --Author * --Command * --Arguments * --GPOName
+      *'
+    - '*SharpGPOAbuse*'
+    - '* --AddLocalAdmin --UserAccount * --GPOName *'
+    - '* NewLocalAdmin(*'
+    - '* --AddUserRights --UserRights * --UserAccount * --GPOName *'
+    - '*  --GPOName * --FilterEnabled --TargetDnsName *'
+    - '*SharpGPOAbuse*'
+    container.image.name:
+    - '* --AddUserScript --ScriptName * --ScriptContents * --GPOName *'
+    - '* --AddComputerTask --TaskName * --Author * --Command * --Arguments * --GPOName
+      *'
+    - '*SharpGPOAbuse*'
+    - '* --AddLocalAdmin --UserAccount * --GPOName *'
+    - '* NewLocalAdmin(*'
+    - '* --AddUserRights --UserRights * --UserAccount * --GPOName *'
+    - '*  --GPOName * --FilterEnabled --TargetDnsName *'
+    - '*SharpGPOAbuse*'
+    container.name:
+    - '* --AddUserScript --ScriptName * --ScriptContents * --GPOName *'
+    - '* --AddComputerTask --TaskName * --Author * --Command * --Arguments * --GPOName
+      *'
+    - '*SharpGPOAbuse*'
+    - '* --AddLocalAdmin --UserAccount * --GPOName *'
+    - '* NewLocalAdmin(*'
+    - '* --AddUserRights --UserRights * --UserAccount * --GPOName *'
+    - '*  --GPOName * --FilterEnabled --TargetDnsName *'
+    - '*SharpGPOAbuse*'
+    Image:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    OriginalFileName:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    CurrentDirectory:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    ParentImage:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    TargetFilename:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    Signature:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    signature:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    ImageLoaded:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    Company:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    Description:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    description:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    SourceImage:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    TargetImage:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    CallTrace:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    TargetObject:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    PipeName:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    Consumer:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    Destination:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    Name:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    Query:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    NewName:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    StartAddress:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    StartModule:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    StartFunction:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    SourceHostname:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    Device:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    file_name:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    file_path:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    process:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    original_file_name:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    parent_process:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    process_path:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    service_path:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    registry_path:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    registry_value_data:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    registry_value_name:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    ContextInfo:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    Payload:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    ScriptBlockText:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    ServerName:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    TransportName:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    NewProcessName:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    ParentProcessName:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    Application:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    Product Name:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    Threat Name:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    Process Name:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    Path:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    ImagePath:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    ServiceName:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    ProcessPath:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    AppName:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    AppPath:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    ModulePath:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    registry.data.strings:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    registry.path:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    process.executable:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    process.name:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    pe.original_file_name:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    file.fork_name:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    file.name:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    file.path:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    file.target_path:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    email.attachments.file.name:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    dll.path:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    object:
+    - '*SharpGPOAbuse*'
+    - '* NewLocalAdmin(*'
+    - '*SharpGPOAbuse*'
+    url:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    dest_url:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    uri:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    uri_query:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    query:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    url_domain:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    uri_path:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    domain:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    QueryName:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    QueryResults:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    DestinationHostname:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    DestinationIp:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    http_referrer:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    http_referrer_domain:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    http_user_agent:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    dest_nt_host:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    sender:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    recipient:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    orig_recipient:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    subject:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    url.domain:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    url.full:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    url.original:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    url.query:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    user_agent.original:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    network.application:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    http.request.body.content:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    http.request.referrer:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    email.from.address:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    dns.question.name:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+    destination.domain:
+    - '*SharpGPOAbuse*'
+    - '*SharpGPOAbuse*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+- Image
+- OriginalFileName
+- CurrentDirectory
+- ParentImage
+- TargetFilename
+- Signature
+- signature
+- ImageLoaded
+- Company
+- Description
+- description
+- SourceImage
+- TargetImage
+- CallTrace
+- TargetObject
+- PipeName
+- Consumer
+- Destination
+- Name
+- Query
+- NewName
+- StartAddress
+- StartModule
+- StartFunction
+- SourceHostname
+- Device
+- file_name
+- file_path
+- process
+- original_file_name
+- parent_process
+- process_path
+- service_path
+- registry_path
+- registry_value_data
+- registry_value_name
+- ContextInfo
+- Payload
+- ScriptBlockText
+- ServerName
+- TransportName
+- NewProcessName
+- ParentProcessName
+- Application
+- Product Name
+- Threat Name
+- Process Name
+- Path
+- ImagePath
+- ServiceName
+- ProcessPath
+- AppName
+- AppPath
+- ModulePath
+- registry.data.strings
+- registry.path
+- process.executable
+- process.name
+- pe.original_file_name
+- file.fork_name
+- file.name
+- file.path
+- file.target_path
+- email.attachments.file.name
+- dll.path
+- object
+- url
+- dest_url
+- uri
+- uri_query
+- query
+- url_domain
+- uri_path
+- domain
+- QueryName
+- QueryResults
+- DestinationHostname
+- DestinationIp
+- http_referrer
+- http_referrer_domain
+- http_user_agent
+- dest_nt_host
+- sender
+- recipient
+- orig_recipient
+- subject
+- url.domain
+- url.full
+- url.original
+- url.query
+- user_agent.original
+- network.application
+- http.request.body.content
+- http.request.referrer
+- email.from.address
+- dns.question.name
+- destination.domain

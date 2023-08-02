@@ -1,0 +1,106 @@
+title: Simple keyword detection rule for wevtutil
+id: 26c2e66d-c404-4b7c-9203-83056fcd9467
+status: experimental
+description:
+- '''adversaries can delete specific event logs or clear their contents. erasing potentially
+  valuable information that could aid in detection. incident response. or forensic
+  investigations. This tactic aims to hinder forensic analysis efforts and make it
+  more challenging for defenders to reconstruct the timeline of events or identify
+  malicious activities.'''
+references:
+- N/A
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1070.004
+- attack.T1562.001
+- attack.TA0005
+- attack.TA0040
+logsource:
+  category:
+  - endpoint
+falsepositives:
+- Unknown
+level:
+- critical
+detection:
+  selection:
+    ParentCommandLine:
+    - '*cmd* wevtutil.exe cl *'
+    - '*wevtutil cl *'
+    CommandLine:
+    - '*cmd* wevtutil.exe cl *'
+    - '*wevtutil cl *'
+    Details:
+    - '*cmd* wevtutil.exe cl *'
+    - '*wevtutil cl *'
+    registry.value:
+    - '*cmd* wevtutil.exe cl *'
+    - '*wevtutil cl *'
+    process.args:
+    - '*cmd* wevtutil.exe cl *'
+    - '*wevtutil cl *'
+    process.command_line:
+    - '*cmd* wevtutil.exe cl *'
+    - '*wevtutil cl *'
+    process.env_vars:
+    - '*cmd* wevtutil.exe cl *'
+    - '*wevtutil cl *'
+    process.io.text:
+    - '*cmd* wevtutil.exe cl *'
+    - '*wevtutil cl *'
+    process.title:
+    - '*cmd* wevtutil.exe cl *'
+    - '*wevtutil cl *'
+    pe.company:
+    - '*cmd* wevtutil.exe cl *'
+    - '*wevtutil cl *'
+    pe.description:
+    - '*cmd* wevtutil.exe cl *'
+    - '*wevtutil cl *'
+    pe.product:
+    - '*cmd* wevtutil.exe cl *'
+    - '*wevtutil cl *'
+    os.full:
+    - '*cmd* wevtutil.exe cl *'
+    - '*wevtutil cl *'
+    host.hostname:
+    - '*cmd* wevtutil.exe cl *'
+    - '*wevtutil cl *'
+    event.original:
+    - '*cmd* wevtutil.exe cl *'
+    - '*wevtutil cl *'
+    email.subject:
+    - '*cmd* wevtutil.exe cl *'
+    - '*wevtutil cl *'
+    device.model.name:
+    - '*cmd* wevtutil.exe cl *'
+    - '*wevtutil cl *'
+    container.image.name:
+    - '*cmd* wevtutil.exe cl *'
+    - '*wevtutil cl *'
+    container.name:
+    - '*cmd* wevtutil.exe cl *'
+    - '*wevtutil cl *'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name

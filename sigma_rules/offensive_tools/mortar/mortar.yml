@@ -1,0 +1,776 @@
+title: Simple keyword detection rule for mortar
+id: ed973452-393f-4d52-911e-ec8dffade81b
+status: experimental
+description:
+- '''red teaming evasion technique to defeat and divert detection and prevention of
+  security products.Mortar Loader performs encryption and decryption of selected binary
+  inside the memory streams and execute it directly with out writing any malicious
+  indicator into the hard-drive. Mortar is able to bypass modern anti-virus products
+  and advanced XDR solutions'''
+references:
+- https://github.com/0xsp-SRD/mortar
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1027
+- attack.T1036
+- attack.T1037
+- attack.T1055
+- attack.T1059
+- attack.T1105
+- attack.T1112
+- attack.T1562
+- attack.TA0002
+- attack.TA0003
+- attack.TA0006
+- attack.TA0008
+logsource:
+  category:
+  - endpoint
+  - network
+falsepositives:
+- Unknown
+level:
+- Unknown
+detection:
+  selection:
+    ParentCommandLine:
+    - '*deliver.exe -d -c * -f*.enc*'
+    - '*cmd.exe /c rundll32.exe agressor.dll*stealth*'
+    - '*deliver.exe -d -f *.enc*'
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*./encryptor -f *.exe -o *.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    CommandLine:
+    - '*deliver.exe -d -c * -f*.enc*'
+    - '*cmd.exe /c rundll32.exe agressor.dll*stealth*'
+    - '*deliver.exe -d -f *.enc*'
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*./encryptor -f *.exe -o *.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    Details:
+    - '*deliver.exe -d -c * -f*.enc*'
+    - '*cmd.exe /c rundll32.exe agressor.dll*stealth*'
+    - '*deliver.exe -d -f *.enc*'
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*./encryptor -f *.exe -o *.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    registry.value:
+    - '*deliver.exe -d -c * -f*.enc*'
+    - '*cmd.exe /c rundll32.exe agressor.dll*stealth*'
+    - '*deliver.exe -d -f *.enc*'
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*./encryptor -f *.exe -o *.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    process.args:
+    - '*deliver.exe -d -c * -f*.enc*'
+    - '*cmd.exe /c rundll32.exe agressor.dll*stealth*'
+    - '*deliver.exe -d -f *.enc*'
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*./encryptor -f *.exe -o *.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    process.command_line:
+    - '*deliver.exe -d -c * -f*.enc*'
+    - '*cmd.exe /c rundll32.exe agressor.dll*stealth*'
+    - '*deliver.exe -d -f *.enc*'
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*./encryptor -f *.exe -o *.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    process.env_vars:
+    - '*deliver.exe -d -c * -f*.enc*'
+    - '*cmd.exe /c rundll32.exe agressor.dll*stealth*'
+    - '*deliver.exe -d -f *.enc*'
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*./encryptor -f *.exe -o *.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    process.io.text:
+    - '*deliver.exe -d -c * -f*.enc*'
+    - '*cmd.exe /c rundll32.exe agressor.dll*stealth*'
+    - '*deliver.exe -d -f *.enc*'
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*./encryptor -f *.exe -o *.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    process.title:
+    - '*deliver.exe -d -c * -f*.enc*'
+    - '*cmd.exe /c rundll32.exe agressor.dll*stealth*'
+    - '*deliver.exe -d -f *.enc*'
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*./encryptor -f *.exe -o *.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    pe.company:
+    - '*deliver.exe -d -c * -f*.enc*'
+    - '*cmd.exe /c rundll32.exe agressor.dll*stealth*'
+    - '*deliver.exe -d -f *.enc*'
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*./encryptor -f *.exe -o *.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    pe.description:
+    - '*deliver.exe -d -c * -f*.enc*'
+    - '*cmd.exe /c rundll32.exe agressor.dll*stealth*'
+    - '*deliver.exe -d -f *.enc*'
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*./encryptor -f *.exe -o *.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    pe.product:
+    - '*deliver.exe -d -c * -f*.enc*'
+    - '*cmd.exe /c rundll32.exe agressor.dll*stealth*'
+    - '*deliver.exe -d -f *.enc*'
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*./encryptor -f *.exe -o *.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    os.full:
+    - '*deliver.exe -d -c * -f*.enc*'
+    - '*cmd.exe /c rundll32.exe agressor.dll*stealth*'
+    - '*deliver.exe -d -f *.enc*'
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*./encryptor -f *.exe -o *.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    host.hostname:
+    - '*deliver.exe -d -c * -f*.enc*'
+    - '*cmd.exe /c rundll32.exe agressor.dll*stealth*'
+    - '*deliver.exe -d -f *.enc*'
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*./encryptor -f *.exe -o *.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    event.original:
+    - '*deliver.exe -d -c * -f*.enc*'
+    - '*cmd.exe /c rundll32.exe agressor.dll*stealth*'
+    - '*deliver.exe -d -f *.enc*'
+    - '*./encryptor -f *.exe -o *.enc*'
+    email.subject:
+    - '*deliver.exe -d -c * -f*.enc*'
+    - '*cmd.exe /c rundll32.exe agressor.dll*stealth*'
+    - '*deliver.exe -d -f *.enc*'
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*./encryptor -f *.exe -o *.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    device.model.name:
+    - '*deliver.exe -d -c * -f*.enc*'
+    - '*cmd.exe /c rundll32.exe agressor.dll*stealth*'
+    - '*deliver.exe -d -f *.enc*'
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*./encryptor -f *.exe -o *.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    container.image.name:
+    - '*deliver.exe -d -c * -f*.enc*'
+    - '*cmd.exe /c rundll32.exe agressor.dll*stealth*'
+    - '*deliver.exe -d -f *.enc*'
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*./encryptor -f *.exe -o *.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    container.name:
+    - '*deliver.exe -d -c * -f*.enc*'
+    - '*cmd.exe /c rundll32.exe agressor.dll*stealth*'
+    - '*deliver.exe -d -f *.enc*'
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*./encryptor -f *.exe -o *.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    Image:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    OriginalFileName:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    CurrentDirectory:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    ParentImage:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    TargetFilename:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    Signature:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    signature:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    ImageLoaded:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    Company:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    Description:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    description:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    SourceImage:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    TargetImage:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    CallTrace:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    TargetObject:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    PipeName:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    Consumer:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    Destination:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    Name:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    Query:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    NewName:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    StartAddress:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    StartModule:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    StartFunction:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    SourceHostname:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    Device:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    file_name:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    file_path:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    process:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    original_file_name:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    parent_process:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    process_path:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    service_path:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    registry_path:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    registry_value_data:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    registry_value_name:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    ContextInfo:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    Payload:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    ScriptBlockText:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    ServerName:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    TransportName:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    NewProcessName:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    ParentProcessName:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    Application:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    Product Name:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    Threat Name:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    Process Name:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    Path:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    ImagePath:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    ServiceName:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    ProcessPath:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    AppName:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    AppPath:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    ModulePath:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    registry.data.strings:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    registry.path:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    process.executable:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    process.name:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    pe.original_file_name:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    file.fork_name:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    file.name:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    file.path:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    file.target_path:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    email.attachments.file.name:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    dll.path:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    object:
+    - '*/mimikatz.enc*'
+    - '*rundll32.exe agressor.dll*dec*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    url:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    dest_url:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    uri:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    uri_query:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    query:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    url_domain:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    uri_path:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    domain:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    QueryName:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    QueryResults:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    DestinationHostname:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    DestinationIp:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    http_referrer:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    http_referrer_domain:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    http_user_agent:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    dest_nt_host:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    sender:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    recipient:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    orig_recipient:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    subject:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    url.domain:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    url.full:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    url.original:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    url.query:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    user_agent.original:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    network.application:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    http.request.body.content:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    http.request.referrer:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    email.from.address:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    dns.question.name:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+    destination.domain:
+    - '*/mimikatz.enc*'
+    - '*mortar-main.zip*'
+    - '*0xsp-SRD/mortar*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+- Image
+- OriginalFileName
+- CurrentDirectory
+- ParentImage
+- TargetFilename
+- Signature
+- signature
+- ImageLoaded
+- Company
+- Description
+- description
+- SourceImage
+- TargetImage
+- CallTrace
+- TargetObject
+- PipeName
+- Consumer
+- Destination
+- Name
+- Query
+- NewName
+- StartAddress
+- StartModule
+- StartFunction
+- SourceHostname
+- Device
+- file_name
+- file_path
+- process
+- original_file_name
+- parent_process
+- process_path
+- service_path
+- registry_path
+- registry_value_data
+- registry_value_name
+- ContextInfo
+- Payload
+- ScriptBlockText
+- ServerName
+- TransportName
+- NewProcessName
+- ParentProcessName
+- Application
+- Product Name
+- Threat Name
+- Process Name
+- Path
+- ImagePath
+- ServiceName
+- ProcessPath
+- AppName
+- AppPath
+- ModulePath
+- registry.data.strings
+- registry.path
+- process.executable
+- process.name
+- pe.original_file_name
+- file.fork_name
+- file.name
+- file.path
+- file.target_path
+- email.attachments.file.name
+- dll.path
+- object
+- url
+- dest_url
+- uri
+- uri_query
+- query
+- url_domain
+- uri_path
+- domain
+- QueryName
+- QueryResults
+- DestinationHostname
+- DestinationIp
+- http_referrer
+- http_referrer_domain
+- http_user_agent
+- dest_nt_host
+- sender
+- recipient
+- orig_recipient
+- subject
+- url.domain
+- url.full
+- url.original
+- url.query
+- user_agent.original
+- network.application
+- http.request.body.content
+- http.request.referrer
+- email.from.address
+- dns.question.name
+- destination.domain

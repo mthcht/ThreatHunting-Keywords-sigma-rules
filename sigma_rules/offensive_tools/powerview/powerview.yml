@@ -1,0 +1,336 @@
+title: Simple keyword detection rule for powerview
+id: cf54ddf6-c413-4d3f-926c-be8223490994
+status: experimental
+description:
+- '''modifying existing permissions on an Active Directory object (''AdminSDHolder'').
+  which can be used to maintain unauthorized access or escalate privileges in the
+  targeted environment. The ''AdminSDHolder'' container plays a crucial role in managing
+  the security of protected groups in Active Directory. and modifying its permissions
+  may lead to unintended security consequences.'''
+- '''PowerView is a PowerShell tool to gain network situational awareness on Windows
+  domains. It contains a set of pure-PowerShell replacements for various windows net
+  commands. which utilize PowerShell AD hooks and underlying Win32 API functions to
+  perform useful Windows domain functionality It also implements various useful metafunctions.
+  including some custom-written user-hunting functions which will identify where on
+  the network specific users are logged into. It can also check which machines on
+  the domain the current user has local administrator access on. Several functions
+  for the enumeration and abuse of domain trusts also exist'''
+references:
+- https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon
+- https://github.com/zloeber/PSAD/blob/master/src/inprogress/Add-ObjectACL.ps1
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1002
+- attack.T1064
+- attack.T1069
+- attack.T1087
+- attack.T1222
+- attack.T1552
+- attack.TA0002
+- attack.TA0003
+- attack.TA0008
+logsource:
+  category:
+  - endpoint
+falsepositives:
+- Unknown
+level:
+- Unknown
+detection:
+  selection:
+    ParentCommandLine:
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+    - '*PowerView.ps1*'
+    CommandLine:
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+    - '*PowerView.ps1*'
+    Details:
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+    - '*PowerView.ps1*'
+    registry.value:
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+    - '*PowerView.ps1*'
+    process.args:
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+    - '*PowerView.ps1*'
+    process.command_line:
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+    - '*PowerView.ps1*'
+    process.env_vars:
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+    - '*PowerView.ps1*'
+    process.io.text:
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+    - '*PowerView.ps1*'
+    process.title:
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+    - '*PowerView.ps1*'
+    pe.company:
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+    - '*PowerView.ps1*'
+    pe.description:
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+    - '*PowerView.ps1*'
+    pe.product:
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+    - '*PowerView.ps1*'
+    os.full:
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+    - '*PowerView.ps1*'
+    host.hostname:
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+    - '*PowerView.ps1*'
+    event.original:
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+    email.subject:
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+    - '*PowerView.ps1*'
+    device.model.name:
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+    - '*PowerView.ps1*'
+    container.image.name:
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+    - '*PowerView.ps1*'
+    container.name:
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+    - '*PowerView.ps1*'
+    Image:
+    - '*PowerView.ps1*'
+    OriginalFileName:
+    - '*PowerView.ps1*'
+    CurrentDirectory:
+    - '*PowerView.ps1*'
+    ParentImage:
+    - '*PowerView.ps1*'
+    TargetFilename:
+    - '*PowerView.ps1*'
+    Signature:
+    - '*PowerView.ps1*'
+    signature:
+    - '*PowerView.ps1*'
+    ImageLoaded:
+    - '*PowerView.ps1*'
+    Company:
+    - '*PowerView.ps1*'
+    Description:
+    - '*PowerView.ps1*'
+    description:
+    - '*PowerView.ps1*'
+    SourceImage:
+    - '*PowerView.ps1*'
+    TargetImage:
+    - '*PowerView.ps1*'
+    CallTrace:
+    - '*PowerView.ps1*'
+    TargetObject:
+    - '*PowerView.ps1*'
+    PipeName:
+    - '*PowerView.ps1*'
+    Consumer:
+    - '*PowerView.ps1*'
+    Destination:
+    - '*PowerView.ps1*'
+    Name:
+    - '*PowerView.ps1*'
+    Query:
+    - '*PowerView.ps1*'
+    NewName:
+    - '*PowerView.ps1*'
+    StartAddress:
+    - '*PowerView.ps1*'
+    StartModule:
+    - '*PowerView.ps1*'
+    StartFunction:
+    - '*PowerView.ps1*'
+    SourceHostname:
+    - '*PowerView.ps1*'
+    Device:
+    - '*PowerView.ps1*'
+    file_name:
+    - '*PowerView.ps1*'
+    file_path:
+    - '*PowerView.ps1*'
+    process:
+    - '*PowerView.ps1*'
+    original_file_name:
+    - '*PowerView.ps1*'
+    parent_process:
+    - '*PowerView.ps1*'
+    process_path:
+    - '*PowerView.ps1*'
+    service_path:
+    - '*PowerView.ps1*'
+    registry_path:
+    - '*PowerView.ps1*'
+    registry_value_data:
+    - '*PowerView.ps1*'
+    registry_value_name:
+    - '*PowerView.ps1*'
+    ContextInfo:
+    - '*PowerView.ps1*'
+    Payload:
+    - '*PowerView.ps1*'
+    ScriptBlockText:
+    - '*PowerView.ps1*'
+    ServerName:
+    - '*PowerView.ps1*'
+    TransportName:
+    - '*PowerView.ps1*'
+    NewProcessName:
+    - '*PowerView.ps1*'
+    ParentProcessName:
+    - '*PowerView.ps1*'
+    Application:
+    - '*PowerView.ps1*'
+    Product Name:
+    - '*PowerView.ps1*'
+    Threat Name:
+    - '*PowerView.ps1*'
+    Process Name:
+    - '*PowerView.ps1*'
+    Path:
+    - '*PowerView.ps1*'
+    ImagePath:
+    - '*PowerView.ps1*'
+    ServiceName:
+    - '*PowerView.ps1*'
+    ProcessPath:
+    - '*PowerView.ps1*'
+    AppName:
+    - '*PowerView.ps1*'
+    AppPath:
+    - '*PowerView.ps1*'
+    ModulePath:
+    - '*PowerView.ps1*'
+    registry.data.strings:
+    - '*PowerView.ps1*'
+    registry.path:
+    - '*PowerView.ps1*'
+    process.executable:
+    - '*PowerView.ps1*'
+    process.name:
+    - '*PowerView.ps1*'
+    pe.original_file_name:
+    - '*PowerView.ps1*'
+    file.fork_name:
+    - '*PowerView.ps1*'
+    file.name:
+    - '*PowerView.ps1*'
+    file.path:
+    - '*PowerView.ps1*'
+    file.target_path:
+    - '*PowerView.ps1*'
+    email.attachments.file.name:
+    - '*PowerView.ps1*'
+    dll.path:
+    - '*PowerView.ps1*'
+    object:
+    - '*PowerView.ps1*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+- Image
+- OriginalFileName
+- CurrentDirectory
+- ParentImage
+- TargetFilename
+- Signature
+- signature
+- ImageLoaded
+- Company
+- Description
+- description
+- SourceImage
+- TargetImage
+- CallTrace
+- TargetObject
+- PipeName
+- Consumer
+- Destination
+- Name
+- Query
+- NewName
+- StartAddress
+- StartModule
+- StartFunction
+- SourceHostname
+- Device
+- file_name
+- file_path
+- process
+- original_file_name
+- parent_process
+- process_path
+- service_path
+- registry_path
+- registry_value_data
+- registry_value_name
+- ContextInfo
+- Payload
+- ScriptBlockText
+- ServerName
+- TransportName
+- NewProcessName
+- ParentProcessName
+- Application
+- Product Name
+- Threat Name
+- Process Name
+- Path
+- ImagePath
+- ServiceName
+- ProcessPath
+- AppName
+- AppPath
+- ModulePath
+- registry.data.strings
+- registry.path
+- process.executable
+- process.name
+- pe.original_file_name
+- file.fork_name
+- file.name
+- file.path
+- file.target_path
+- email.attachments.file.name
+- dll.path
+- object

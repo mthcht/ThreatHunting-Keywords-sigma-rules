@@ -1,0 +1,552 @@
+title: Simple keyword detection rule for grep
+id: d9da8184-8628-44ab-8a3c-0e0f03f15e5d
+status: experimental
+description:
+- '''Detects suspicious shell commands indicating the information gathering phase
+  as preparation for the Privilege Escalation. # search for plain text user/passwords'''
+- '''Detects suspicious shell commands indicating the information gathering phase
+  as preparation for the Privilege Escalation.'''
+- '''Look for users with a UID of 0'''
+- '''search for passwords in memory and core dumps'''
+- '''search for passwords'''
+references:
+- https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/
+- https://github.com/RoseSecurity/Red-Teaming-TTPs/blob/main/Linux.md
+- https://gtfobins.github.io/
+- N/A
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1005
+- attack.T1046
+- attack.T1059
+- attack.T1078.004
+- attack.T1081
+- attack.T1083
+- attack.T1087.002
+- attack.T1213
+- attack.TA0002
+- attack.TA0004
+- attack.TA0006
+- attack.TA0007
+logsource:
+  category:
+  - endpoint
+falsepositives:
+- Unknown
+level:
+- Unknown
+detection:
+  selection:
+    ParentCommandLine:
+    - '*grep -i user *'
+    - '*grep -R db_passwd*'
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep -roiE *password*'
+    - '*grep -i pass *'
+    - '*grep :0: /etc/passwd*'
+    - '*grep *password /var/www*'
+    - '*grep *password.* /etc/*.conf*'
+    - '*strings -n * /dev/mem | grep -i pass*'
+    - '*grep*password|pwd|pass*'
+    - '*grep -* *DBPassword*'
+    CommandLine:
+    - '*grep -i user *'
+    - '*grep -R db_passwd*'
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep -roiE *password*'
+    - '*grep -i pass *'
+    - '*grep :0: /etc/passwd*'
+    - '*grep *password /var/www*'
+    - '*grep *password.* /etc/*.conf*'
+    - '*strings -n * /dev/mem | grep -i pass*'
+    - '*grep*password|pwd|pass*'
+    - '*grep -* *DBPassword*'
+    Details:
+    - '*grep -i user *'
+    - '*grep -R db_passwd*'
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep -roiE *password*'
+    - '*grep -i pass *'
+    - '*grep :0: /etc/passwd*'
+    - '*grep *password /var/www*'
+    - '*grep *password.* /etc/*.conf*'
+    - '*strings -n * /dev/mem | grep -i pass*'
+    - '*grep*password|pwd|pass*'
+    - '*grep -* *DBPassword*'
+    registry.value:
+    - '*grep -i user *'
+    - '*grep -R db_passwd*'
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep -roiE *password*'
+    - '*grep -i pass *'
+    - '*grep :0: /etc/passwd*'
+    - '*grep *password /var/www*'
+    - '*grep *password.* /etc/*.conf*'
+    - '*strings -n * /dev/mem | grep -i pass*'
+    - '*grep*password|pwd|pass*'
+    - '*grep -* *DBPassword*'
+    process.args:
+    - '*grep -i user *'
+    - '*grep -R db_passwd*'
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep -roiE *password*'
+    - '*grep -i pass *'
+    - '*grep :0: /etc/passwd*'
+    - '*grep *password /var/www*'
+    - '*grep *password.* /etc/*.conf*'
+    - '*strings -n * /dev/mem | grep -i pass*'
+    - '*grep*password|pwd|pass*'
+    - '*grep -* *DBPassword*'
+    process.command_line:
+    - '*grep -i user *'
+    - '*grep -R db_passwd*'
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep -roiE *password*'
+    - '*grep -i pass *'
+    - '*grep :0: /etc/passwd*'
+    - '*grep *password /var/www*'
+    - '*grep *password.* /etc/*.conf*'
+    - '*strings -n * /dev/mem | grep -i pass*'
+    - '*grep*password|pwd|pass*'
+    - '*grep -* *DBPassword*'
+    process.env_vars:
+    - '*grep -i user *'
+    - '*grep -R db_passwd*'
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep -roiE *password*'
+    - '*grep -i pass *'
+    - '*grep :0: /etc/passwd*'
+    - '*grep *password /var/www*'
+    - '*grep *password.* /etc/*.conf*'
+    - '*strings -n * /dev/mem | grep -i pass*'
+    - '*grep*password|pwd|pass*'
+    - '*grep -* *DBPassword*'
+    process.io.text:
+    - '*grep -i user *'
+    - '*grep -R db_passwd*'
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep -roiE *password*'
+    - '*grep -i pass *'
+    - '*grep :0: /etc/passwd*'
+    - '*grep *password /var/www*'
+    - '*grep *password.* /etc/*.conf*'
+    - '*strings -n * /dev/mem | grep -i pass*'
+    - '*grep*password|pwd|pass*'
+    - '*grep -* *DBPassword*'
+    process.title:
+    - '*grep -i user *'
+    - '*grep -R db_passwd*'
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep -roiE *password*'
+    - '*grep -i pass *'
+    - '*grep :0: /etc/passwd*'
+    - '*grep *password /var/www*'
+    - '*grep *password.* /etc/*.conf*'
+    - '*strings -n * /dev/mem | grep -i pass*'
+    - '*grep*password|pwd|pass*'
+    - '*grep -* *DBPassword*'
+    pe.company:
+    - '*grep -i user *'
+    - '*grep -R db_passwd*'
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep -roiE *password*'
+    - '*grep -i pass *'
+    - '*grep :0: /etc/passwd*'
+    - '*grep *password /var/www*'
+    - '*grep *password.* /etc/*.conf*'
+    - '*strings -n * /dev/mem | grep -i pass*'
+    - '*grep*password|pwd|pass*'
+    - '*grep -* *DBPassword*'
+    pe.description:
+    - '*grep -i user *'
+    - '*grep -R db_passwd*'
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep -roiE *password*'
+    - '*grep -i pass *'
+    - '*grep :0: /etc/passwd*'
+    - '*grep *password /var/www*'
+    - '*grep *password.* /etc/*.conf*'
+    - '*strings -n * /dev/mem | grep -i pass*'
+    - '*grep*password|pwd|pass*'
+    - '*grep -* *DBPassword*'
+    pe.product:
+    - '*grep -i user *'
+    - '*grep -R db_passwd*'
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep -roiE *password*'
+    - '*grep -i pass *'
+    - '*grep :0: /etc/passwd*'
+    - '*grep *password /var/www*'
+    - '*grep *password.* /etc/*.conf*'
+    - '*strings -n * /dev/mem | grep -i pass*'
+    - '*grep*password|pwd|pass*'
+    - '*grep -* *DBPassword*'
+    os.full:
+    - '*grep -i user *'
+    - '*grep -R db_passwd*'
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep -roiE *password*'
+    - '*grep -i pass *'
+    - '*grep :0: /etc/passwd*'
+    - '*grep *password /var/www*'
+    - '*grep *password.* /etc/*.conf*'
+    - '*strings -n * /dev/mem | grep -i pass*'
+    - '*grep*password|pwd|pass*'
+    - '*grep -* *DBPassword*'
+    host.hostname:
+    - '*grep -i user *'
+    - '*grep -R db_passwd*'
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep -roiE *password*'
+    - '*grep -i pass *'
+    - '*grep :0: /etc/passwd*'
+    - '*grep *password /var/www*'
+    - '*grep *password.* /etc/*.conf*'
+    - '*strings -n * /dev/mem | grep -i pass*'
+    - '*grep*password|pwd|pass*'
+    - '*grep -* *DBPassword*'
+    event.original:
+    - '*grep -i user *'
+    - '*grep -R db_passwd*'
+    - '*grep -roiE *password*'
+    - '*grep -i pass *'
+    - '*grep :0: /etc/passwd*'
+    - '*grep *password /var/www*'
+    - '*grep *password.* /etc/*.conf*'
+    - '*strings -n * /dev/mem | grep -i pass*'
+    - '*grep -* *DBPassword*'
+    email.subject:
+    - '*grep -i user *'
+    - '*grep -R db_passwd*'
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep -roiE *password*'
+    - '*grep -i pass *'
+    - '*grep :0: /etc/passwd*'
+    - '*grep *password /var/www*'
+    - '*grep *password.* /etc/*.conf*'
+    - '*strings -n * /dev/mem | grep -i pass*'
+    - '*grep*password|pwd|pass*'
+    - '*grep -* *DBPassword*'
+    device.model.name:
+    - '*grep -i user *'
+    - '*grep -R db_passwd*'
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep -roiE *password*'
+    - '*grep -i pass *'
+    - '*grep :0: /etc/passwd*'
+    - '*grep *password /var/www*'
+    - '*grep *password.* /etc/*.conf*'
+    - '*strings -n * /dev/mem | grep -i pass*'
+    - '*grep*password|pwd|pass*'
+    - '*grep -* *DBPassword*'
+    container.image.name:
+    - '*grep -i user *'
+    - '*grep -R db_passwd*'
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep -roiE *password*'
+    - '*grep -i pass *'
+    - '*grep :0: /etc/passwd*'
+    - '*grep *password /var/www*'
+    - '*grep *password.* /etc/*.conf*'
+    - '*strings -n * /dev/mem | grep -i pass*'
+    - '*grep*password|pwd|pass*'
+    - '*grep -* *DBPassword*'
+    container.name:
+    - '*grep -i user *'
+    - '*grep -R db_passwd*'
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep -roiE *password*'
+    - '*grep -i pass *'
+    - '*grep :0: /etc/passwd*'
+    - '*grep *password /var/www*'
+    - '*grep *password.* /etc/*.conf*'
+    - '*strings -n * /dev/mem | grep -i pass*'
+    - '*grep*password|pwd|pass*'
+    - '*grep -* *DBPassword*'
+    Image:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    OriginalFileName:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    CurrentDirectory:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    ParentImage:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    TargetFilename:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    Signature:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    signature:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    ImageLoaded:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    Company:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    Description:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    description:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    SourceImage:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    TargetImage:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    CallTrace:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    TargetObject:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    PipeName:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    Consumer:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    Destination:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    Name:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    Query:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    NewName:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    StartAddress:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    StartModule:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    StartFunction:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    SourceHostname:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    Device:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    file_name:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    file_path:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    process:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    original_file_name:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    parent_process:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    process_path:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    service_path:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    registry_path:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    registry_value_data:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    registry_value_name:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    ContextInfo:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    Payload:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    ScriptBlockText:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    ServerName:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    TransportName:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    NewProcessName:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    ParentProcessName:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    Application:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    Product Name:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    Threat Name:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    Process Name:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    Path:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    ImagePath:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    ServiceName:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    ProcessPath:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    AppName:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    AppPath:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    ModulePath:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    registry.data.strings:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    registry.path:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    process.executable:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    process.name:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    pe.original_file_name:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    file.fork_name:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    file.name:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    file.path:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    file.target_path:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    email.attachments.file.name:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    dll.path:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+    object:
+    - '*grep*|pwd=|passwd=|password=*'
+    - '*grep*password|pwd|pass*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+- Image
+- OriginalFileName
+- CurrentDirectory
+- ParentImage
+- TargetFilename
+- Signature
+- signature
+- ImageLoaded
+- Company
+- Description
+- description
+- SourceImage
+- TargetImage
+- CallTrace
+- TargetObject
+- PipeName
+- Consumer
+- Destination
+- Name
+- Query
+- NewName
+- StartAddress
+- StartModule
+- StartFunction
+- SourceHostname
+- Device
+- file_name
+- file_path
+- process
+- original_file_name
+- parent_process
+- process_path
+- service_path
+- registry_path
+- registry_value_data
+- registry_value_name
+- ContextInfo
+- Payload
+- ScriptBlockText
+- ServerName
+- TransportName
+- NewProcessName
+- ParentProcessName
+- Application
+- Product Name
+- Threat Name
+- Process Name
+- Path
+- ImagePath
+- ServiceName
+- ProcessPath
+- AppName
+- AppPath
+- ModulePath
+- registry.data.strings
+- registry.path
+- process.executable
+- process.name
+- pe.original_file_name
+- file.fork_name
+- file.name
+- file.path
+- file.target_path
+- email.attachments.file.name
+- dll.path
+- object

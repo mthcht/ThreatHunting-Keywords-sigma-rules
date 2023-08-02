@@ -1,0 +1,234 @@
+title: Simple keyword detection rule for nc
+id: 18cf3ae7-cc2a-4818-9e63-107c09338c67
+status: experimental
+description:
+- '''linux commands abused by attackers'''
+- '''Linux Persistence Shell cron'''
+- '''Netcat Backdoor on Linux - create a relay that sends packets from the local port
+  to a netcat client connecte to the target ip on the targeted port'''
+- '''Netcat Backdoor on Windows - create a relay that sends packets from the local
+  port to a netcat client connecte to the target ip on the targeted port'''
+- '''Netcat Realy on windows - create a relay that sends packets from the local port
+  to a netcat client connecte to the target ip on the targeted port'''
+- '''Port scanner with netcat'''
+references:
+- https://github.com/RoseSecurity/Red-Teaming-TTPs/blob/main/Linux.md
+- https://github.com/RoseSecurity/Red-Teaming-TTPs/blob/main/NetcatCheatSheet.pdf
+- N/A
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1012
+- attack.T1021.001
+- attack.T1027
+- attack.T1035
+- attack.T1036
+- attack.T1037
+- attack.T1041
+- attack.T1046
+- attack.T1053
+- attack.T1053.005
+- attack.T1057
+- attack.T1059.003
+- attack.T1070.001
+- attack.T1083
+- attack.T1090.001
+- attack.T1105
+- attack.T1112
+- attack.T1136
+- attack.T1562.001
+- attack.T1564.001
+- attack.T1564.002
+- attack.T1564.003
+- attack.T1564.005
+- attack.TA0002
+- attack.TA0003
+- attack.TA0006
+- attack.TA0007
+- attack.TA0008
+- attack.TA0010
+- attack.TA0011
+- attack.TA0040
+logsource:
+  category:
+  - endpoint
+falsepositives:
+- Unknown
+level:
+- Unknown
+detection:
+  selection:
+    ParentCommandLine:
+    - '*nc -l -p * -e *.bat*'
+    - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
+    - '*echo nc -l -p * > *.bat*'
+    - '* /bin/nc * -e /bin/bash*> * crontab cron*'
+    - '*nc -l -p * -e cmd.exe*'
+    - '*nc -v -n -z -w1 *-*'
+    - '*nc -l -p * -e /bin/bash*'
+    CommandLine:
+    - '*nc -l -p * -e *.bat*'
+    - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
+    - '*echo nc -l -p * > *.bat*'
+    - '* /bin/nc * -e /bin/bash*> * crontab cron*'
+    - '*nc -l -p * -e cmd.exe*'
+    - '*nc -v -n -z -w1 *-*'
+    - '*nc -l -p * -e /bin/bash*'
+    Details:
+    - '*nc -l -p * -e *.bat*'
+    - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
+    - '*echo nc -l -p * > *.bat*'
+    - '* /bin/nc * -e /bin/bash*> * crontab cron*'
+    - '*nc -l -p * -e cmd.exe*'
+    - '*nc -v -n -z -w1 *-*'
+    - '*nc -l -p * -e /bin/bash*'
+    registry.value:
+    - '*nc -l -p * -e *.bat*'
+    - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
+    - '*echo nc -l -p * > *.bat*'
+    - '* /bin/nc * -e /bin/bash*> * crontab cron*'
+    - '*nc -l -p * -e cmd.exe*'
+    - '*nc -v -n -z -w1 *-*'
+    - '*nc -l -p * -e /bin/bash*'
+    process.args:
+    - '*nc -l -p * -e *.bat*'
+    - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
+    - '*echo nc -l -p * > *.bat*'
+    - '* /bin/nc * -e /bin/bash*> * crontab cron*'
+    - '*nc -l -p * -e cmd.exe*'
+    - '*nc -v -n -z -w1 *-*'
+    - '*nc -l -p * -e /bin/bash*'
+    process.command_line:
+    - '*nc -l -p * -e *.bat*'
+    - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
+    - '*echo nc -l -p * > *.bat*'
+    - '* /bin/nc * -e /bin/bash*> * crontab cron*'
+    - '*nc -l -p * -e cmd.exe*'
+    - '*nc -v -n -z -w1 *-*'
+    - '*nc -l -p * -e /bin/bash*'
+    process.env_vars:
+    - '*nc -l -p * -e *.bat*'
+    - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
+    - '*echo nc -l -p * > *.bat*'
+    - '* /bin/nc * -e /bin/bash*> * crontab cron*'
+    - '*nc -l -p * -e cmd.exe*'
+    - '*nc -v -n -z -w1 *-*'
+    - '*nc -l -p * -e /bin/bash*'
+    process.io.text:
+    - '*nc -l -p * -e *.bat*'
+    - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
+    - '*echo nc -l -p * > *.bat*'
+    - '* /bin/nc * -e /bin/bash*> * crontab cron*'
+    - '*nc -l -p * -e cmd.exe*'
+    - '*nc -v -n -z -w1 *-*'
+    - '*nc -l -p * -e /bin/bash*'
+    process.title:
+    - '*nc -l -p * -e *.bat*'
+    - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
+    - '*echo nc -l -p * > *.bat*'
+    - '* /bin/nc * -e /bin/bash*> * crontab cron*'
+    - '*nc -l -p * -e cmd.exe*'
+    - '*nc -v -n -z -w1 *-*'
+    - '*nc -l -p * -e /bin/bash*'
+    pe.company:
+    - '*nc -l -p * -e *.bat*'
+    - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
+    - '*echo nc -l -p * > *.bat*'
+    - '* /bin/nc * -e /bin/bash*> * crontab cron*'
+    - '*nc -l -p * -e cmd.exe*'
+    - '*nc -v -n -z -w1 *-*'
+    - '*nc -l -p * -e /bin/bash*'
+    pe.description:
+    - '*nc -l -p * -e *.bat*'
+    - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
+    - '*echo nc -l -p * > *.bat*'
+    - '* /bin/nc * -e /bin/bash*> * crontab cron*'
+    - '*nc -l -p * -e cmd.exe*'
+    - '*nc -v -n -z -w1 *-*'
+    - '*nc -l -p * -e /bin/bash*'
+    pe.product:
+    - '*nc -l -p * -e *.bat*'
+    - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
+    - '*echo nc -l -p * > *.bat*'
+    - '* /bin/nc * -e /bin/bash*> * crontab cron*'
+    - '*nc -l -p * -e cmd.exe*'
+    - '*nc -v -n -z -w1 *-*'
+    - '*nc -l -p * -e /bin/bash*'
+    os.full:
+    - '*nc -l -p * -e *.bat*'
+    - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
+    - '*echo nc -l -p * > *.bat*'
+    - '* /bin/nc * -e /bin/bash*> * crontab cron*'
+    - '*nc -l -p * -e cmd.exe*'
+    - '*nc -v -n -z -w1 *-*'
+    - '*nc -l -p * -e /bin/bash*'
+    host.hostname:
+    - '*nc -l -p * -e *.bat*'
+    - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
+    - '*echo nc -l -p * > *.bat*'
+    - '* /bin/nc * -e /bin/bash*> * crontab cron*'
+    - '*nc -l -p * -e cmd.exe*'
+    - '*nc -v -n -z -w1 *-*'
+    - '*nc -l -p * -e /bin/bash*'
+    event.original:
+    - '*nc -l -p * -e *.bat*'
+    - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
+    - '*echo nc -l -p * > *.bat*'
+    - '* /bin/nc * -e /bin/bash*> * crontab cron*'
+    - '*nc -l -p * -e cmd.exe*'
+    - '*nc -v -n -z -w1 *-*'
+    - '*nc -l -p * -e /bin/bash*'
+    email.subject:
+    - '*nc -l -p * -e *.bat*'
+    - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
+    - '*echo nc -l -p * > *.bat*'
+    - '* /bin/nc * -e /bin/bash*> * crontab cron*'
+    - '*nc -l -p * -e cmd.exe*'
+    - '*nc -v -n -z -w1 *-*'
+    - '*nc -l -p * -e /bin/bash*'
+    device.model.name:
+    - '*nc -l -p * -e *.bat*'
+    - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
+    - '*echo nc -l -p * > *.bat*'
+    - '* /bin/nc * -e /bin/bash*> * crontab cron*'
+    - '*nc -l -p * -e cmd.exe*'
+    - '*nc -v -n -z -w1 *-*'
+    - '*nc -l -p * -e /bin/bash*'
+    container.image.name:
+    - '*nc -l -p * -e *.bat*'
+    - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
+    - '*echo nc -l -p * > *.bat*'
+    - '* /bin/nc * -e /bin/bash*> * crontab cron*'
+    - '*nc -l -p * -e cmd.exe*'
+    - '*nc -v -n -z -w1 *-*'
+    - '*nc -l -p * -e /bin/bash*'
+    container.name:
+    - '*nc -l -p * -e *.bat*'
+    - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
+    - '*echo nc -l -p * > *.bat*'
+    - '* /bin/nc * -e /bin/bash*> * crontab cron*'
+    - '*nc -l -p * -e cmd.exe*'
+    - '*nc -v -n -z -w1 *-*'
+    - '*nc -l -p * -e /bin/bash*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name

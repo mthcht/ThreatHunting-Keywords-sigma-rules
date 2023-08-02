@@ -1,0 +1,533 @@
+title: Simple keyword detection rule for ETW
+id: 3882c0b5-4283-4df4-b748-6d3ca544739b
+status: experimental
+description:
+- '''stop ETW from giving up your loaded .NET assemblies to that pesky EDR but can''t
+  be bothered patching memory? Just pass COMPlus_ETWEnabled=0 as an environment variable
+  during your CreateProcess call'''
+references:
+- https://gist.github.com/xpn/64e5b6f7ad370c343e3ab7e9f9e22503
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1055.001
+- attack.T1059.001
+- attack.T1562.001
+- attack.TA0005
+- attack.TA0040
+logsource:
+  category:
+  - endpoint
+falsepositives:
+- Unknown
+level:
+- critical
+detection:
+  selection:
+    Image:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    OriginalFileName:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    CurrentDirectory:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    ParentImage:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    ParentCommandLine:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    TargetFilename:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    Signature:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    signature:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    ImageLoaded:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    Company:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    Description:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    description:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    CommandLine:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    SourceImage:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    TargetImage:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    CallTrace:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    TargetObject:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    Details:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    PipeName:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    Consumer:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    Destination:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    Name:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    Query:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    NewName:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    StartAddress:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    StartModule:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    StartFunction:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    SourceHostname:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    Device:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    file_name:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    file_path:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    process:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    original_file_name:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    parent_process:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    process_path:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    service_path:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    registry_path:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    registry_value_data:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    registry_value_name:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    ContextInfo:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    Payload:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    ScriptBlockText:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    ServerName:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    TransportName:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    NewProcessName:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    ParentProcessName:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    Application:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    Product Name:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    Threat Name:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    Process Name:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    Path:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    ImagePath:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    ServiceName:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    ProcessPath:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    AppName:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    AppPath:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    ModulePath:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    registry.data.strings:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    registry.path:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    registry.value:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    process.args:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    process.command_line:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    process.env_vars:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    process.io.text:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    process.executable:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    process.name:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    process.title:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    pe.company:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    pe.description:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    pe.original_file_name:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    pe.product:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    os.full:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    host.hostname:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    file.fork_name:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    file.name:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    file.path:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    file.target_path:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    email.attachments.file.name:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    email.subject:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    dll.path:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    device.model.name:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    container.image.name:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    container.name:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+    object:
+    - '*env_var_spoofing_poc.cpp*'
+    - '*$env:COMPlus_ETWEnabled=0*'
+    - '*COMPlus_ETWEnabled=0\0\0\0*'
+    - '*set COMPlus_ETWEnabled=0*'
+  condition: selection
+fields:
+- Image
+- OriginalFileName
+- CurrentDirectory
+- ParentImage
+- ParentCommandLine
+- TargetFilename
+- Signature
+- signature
+- ImageLoaded
+- Company
+- Description
+- description
+- CommandLine
+- SourceImage
+- TargetImage
+- CallTrace
+- TargetObject
+- Details
+- PipeName
+- Consumer
+- Destination
+- Name
+- Query
+- NewName
+- StartAddress
+- StartModule
+- StartFunction
+- SourceHostname
+- Device
+- file_name
+- file_path
+- process
+- original_file_name
+- parent_process
+- process_path
+- service_path
+- registry_path
+- registry_value_data
+- registry_value_name
+- ContextInfo
+- Payload
+- ScriptBlockText
+- ServerName
+- TransportName
+- NewProcessName
+- ParentProcessName
+- Application
+- Product Name
+- Threat Name
+- Process Name
+- Path
+- ImagePath
+- ServiceName
+- ProcessPath
+- AppName
+- AppPath
+- ModulePath
+- registry.data.strings
+- registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.executable
+- process.name
+- process.title
+- pe.company
+- pe.description
+- pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
+- file.fork_name
+- file.name
+- file.path
+- file.target_path
+- email.attachments.file.name
+- email.subject
+- dll.path
+- device.model.name
+- container.image.name
+- container.name
+- object

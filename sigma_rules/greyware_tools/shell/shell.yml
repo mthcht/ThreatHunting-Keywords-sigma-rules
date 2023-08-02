@@ -1,0 +1,694 @@
+title: Simple keyword detection rule for shell
+id: a43e98c4-e3dd-471b-b25a-d6cf76004b1b
+status: experimental
+description:
+- '''Adversaries may disable security tools to avoid possible detection of their tools
+  and activities. This can take the form of killing security software or event logging
+  processes* deleting Registry keys so that tools do not start at run time* or other
+  methods to interfere with security tools scanning or reporting information.'''
+- '''Defense evasion technique In order to avoid detection at any point of the kill
+  chain. attackers use several ways to disable anti-virus. disable Microsoft firewall
+  and clear logs.'''
+- '''Reverse Shell Command Line'''
+references:
+- https://attack.mitre.org/techniques/T1562/001/
+- https://github.com/SigmaHQ/sigma/blob/master/rules/linux/lnx_shell_susp_rev_shells.yml
+- N/A
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1021.001
+- attack.T1021.002
+- attack.T1055
+- attack.T1070.004
+- attack.T1089
+- attack.T1105
+- attack.T1218.011
+- attack.T1562.001
+- attack.T1562.002
+- attack.TA0002
+- attack.TA0005
+- attack.TA0007
+- attack.TA0008
+- attack.TA0040
+logsource:
+  category:
+  - endpoint
+  - network
+falsepositives:
+- Unknown
+level:
+- Unknown
+detection:
+  selection:
+    ParentCommandLine:
+    - '*sc config WinDefend start= disabled*'
+    - '*uname -a* w* id* /bin/bash -i*'
+    - '*/bin/sh -i <&3 >&3 2>&3*'
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - '*/bin/sh | nc*'
+    - schkconfig off cbdaemon
+    - service cbdaemon stop
+    - setenforce 0
+    - '*rm -f backpipe* mknod /tmp/backpipe p && nc *'
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    CommandLine:
+    - '*sc config WinDefend start= disabled*'
+    - '*uname -a* w* id* /bin/bash -i*'
+    - '*/bin/sh -i <&3 >&3 2>&3*'
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - '*/bin/sh | nc*'
+    - schkconfig off cbdaemon
+    - service cbdaemon stop
+    - setenforce 0
+    - '*rm -f backpipe* mknod /tmp/backpipe p && nc *'
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    Details:
+    - '*sc config WinDefend start= disabled*'
+    - '*uname -a* w* id* /bin/bash -i*'
+    - '*/bin/sh -i <&3 >&3 2>&3*'
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - '*/bin/sh | nc*'
+    - schkconfig off cbdaemon
+    - service cbdaemon stop
+    - setenforce 0
+    - '*rm -f backpipe* mknod /tmp/backpipe p && nc *'
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    registry.value:
+    - '*sc config WinDefend start= disabled*'
+    - '*uname -a* w* id* /bin/bash -i*'
+    - '*/bin/sh -i <&3 >&3 2>&3*'
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - '*/bin/sh | nc*'
+    - schkconfig off cbdaemon
+    - service cbdaemon stop
+    - setenforce 0
+    - '*rm -f backpipe* mknod /tmp/backpipe p && nc *'
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    process.args:
+    - '*sc config WinDefend start= disabled*'
+    - '*uname -a* w* id* /bin/bash -i*'
+    - '*/bin/sh -i <&3 >&3 2>&3*'
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - '*/bin/sh | nc*'
+    - schkconfig off cbdaemon
+    - service cbdaemon stop
+    - setenforce 0
+    - '*rm -f backpipe* mknod /tmp/backpipe p && nc *'
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    process.command_line:
+    - '*sc config WinDefend start= disabled*'
+    - '*uname -a* w* id* /bin/bash -i*'
+    - '*/bin/sh -i <&3 >&3 2>&3*'
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - '*/bin/sh | nc*'
+    - schkconfig off cbdaemon
+    - service cbdaemon stop
+    - setenforce 0
+    - '*rm -f backpipe* mknod /tmp/backpipe p && nc *'
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    process.env_vars:
+    - '*sc config WinDefend start= disabled*'
+    - '*uname -a* w* id* /bin/bash -i*'
+    - '*/bin/sh -i <&3 >&3 2>&3*'
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - '*/bin/sh | nc*'
+    - schkconfig off cbdaemon
+    - service cbdaemon stop
+    - setenforce 0
+    - '*rm -f backpipe* mknod /tmp/backpipe p && nc *'
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    process.io.text:
+    - '*sc config WinDefend start= disabled*'
+    - '*uname -a* w* id* /bin/bash -i*'
+    - '*/bin/sh -i <&3 >&3 2>&3*'
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - '*/bin/sh | nc*'
+    - schkconfig off cbdaemon
+    - service cbdaemon stop
+    - setenforce 0
+    - '*rm -f backpipe* mknod /tmp/backpipe p && nc *'
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    process.title:
+    - '*sc config WinDefend start= disabled*'
+    - '*uname -a* w* id* /bin/bash -i*'
+    - '*/bin/sh -i <&3 >&3 2>&3*'
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - '*/bin/sh | nc*'
+    - schkconfig off cbdaemon
+    - service cbdaemon stop
+    - setenforce 0
+    - '*rm -f backpipe* mknod /tmp/backpipe p && nc *'
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    pe.company:
+    - '*sc config WinDefend start= disabled*'
+    - '*uname -a* w* id* /bin/bash -i*'
+    - '*/bin/sh -i <&3 >&3 2>&3*'
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - '*/bin/sh | nc*'
+    - schkconfig off cbdaemon
+    - service cbdaemon stop
+    - setenforce 0
+    - '*rm -f backpipe* mknod /tmp/backpipe p && nc *'
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    pe.description:
+    - '*sc config WinDefend start= disabled*'
+    - '*uname -a* w* id* /bin/bash -i*'
+    - '*/bin/sh -i <&3 >&3 2>&3*'
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - '*/bin/sh | nc*'
+    - schkconfig off cbdaemon
+    - service cbdaemon stop
+    - setenforce 0
+    - '*rm -f backpipe* mknod /tmp/backpipe p && nc *'
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    pe.product:
+    - '*sc config WinDefend start= disabled*'
+    - '*uname -a* w* id* /bin/bash -i*'
+    - '*/bin/sh -i <&3 >&3 2>&3*'
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - '*/bin/sh | nc*'
+    - schkconfig off cbdaemon
+    - service cbdaemon stop
+    - setenforce 0
+    - '*rm -f backpipe* mknod /tmp/backpipe p && nc *'
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    os.full:
+    - '*sc config WinDefend start= disabled*'
+    - '*uname -a* w* id* /bin/bash -i*'
+    - '*/bin/sh -i <&3 >&3 2>&3*'
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - '*/bin/sh | nc*'
+    - schkconfig off cbdaemon
+    - service cbdaemon stop
+    - setenforce 0
+    - '*rm -f backpipe* mknod /tmp/backpipe p && nc *'
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    host.hostname:
+    - '*sc config WinDefend start= disabled*'
+    - '*uname -a* w* id* /bin/bash -i*'
+    - '*/bin/sh -i <&3 >&3 2>&3*'
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - '*/bin/sh | nc*'
+    - schkconfig off cbdaemon
+    - service cbdaemon stop
+    - setenforce 0
+    - '*rm -f backpipe* mknod /tmp/backpipe p && nc *'
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    event.original:
+    - '*sc config WinDefend start= disabled*'
+    - '*uname -a* w* id* /bin/bash -i*'
+    - '*/bin/sh -i <&3 >&3 2>&3*'
+    - '*/bin/sh | nc*'
+    - schkconfig off cbdaemon
+    - service cbdaemon stop
+    - '*rm -f backpipe* mknod /tmp/backpipe p && nc *'
+    email.subject:
+    - '*sc config WinDefend start= disabled*'
+    - '*uname -a* w* id* /bin/bash -i*'
+    - '*/bin/sh -i <&3 >&3 2>&3*'
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - '*/bin/sh | nc*'
+    - schkconfig off cbdaemon
+    - service cbdaemon stop
+    - setenforce 0
+    - '*rm -f backpipe* mknod /tmp/backpipe p && nc *'
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    device.model.name:
+    - '*sc config WinDefend start= disabled*'
+    - '*uname -a* w* id* /bin/bash -i*'
+    - '*/bin/sh -i <&3 >&3 2>&3*'
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - '*/bin/sh | nc*'
+    - schkconfig off cbdaemon
+    - service cbdaemon stop
+    - setenforce 0
+    - '*rm -f backpipe* mknod /tmp/backpipe p && nc *'
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    container.image.name:
+    - '*sc config WinDefend start= disabled*'
+    - '*uname -a* w* id* /bin/bash -i*'
+    - '*/bin/sh -i <&3 >&3 2>&3*'
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - '*/bin/sh | nc*'
+    - schkconfig off cbdaemon
+    - service cbdaemon stop
+    - setenforce 0
+    - '*rm -f backpipe* mknod /tmp/backpipe p && nc *'
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    container.name:
+    - '*sc config WinDefend start= disabled*'
+    - '*uname -a* w* id* /bin/bash -i*'
+    - '*/bin/sh -i <&3 >&3 2>&3*'
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - '*/bin/sh | nc*'
+    - schkconfig off cbdaemon
+    - service cbdaemon stop
+    - setenforce 0
+    - '*rm -f backpipe* mknod /tmp/backpipe p && nc *'
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    Image:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    OriginalFileName:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    CurrentDirectory:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    ParentImage:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    TargetFilename:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    Signature:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    signature:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    ImageLoaded:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    Company:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    Description:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    description:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    SourceImage:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    TargetImage:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    CallTrace:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    TargetObject:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    PipeName:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    Consumer:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    Destination:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    Name:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    Query:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    NewName:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    StartAddress:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    StartModule:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    StartFunction:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    SourceHostname:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    Device:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    file_name:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    file_path:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    process:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    original_file_name:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    parent_process:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    process_path:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    service_path:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    registry_path:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    registry_value_data:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    registry_value_name:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    ContextInfo:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    Payload:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    ScriptBlockText:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    ServerName:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    TransportName:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    NewProcessName:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    ParentProcessName:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    Application:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    Product Name:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    Threat Name:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    Process Name:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    Path:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    ImagePath:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    ServiceName:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    ProcessPath:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    AppName:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    AppPath:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    ModulePath:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    registry.data.strings:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    registry.path:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    process.executable:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    process.name:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    pe.original_file_name:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    file.fork_name:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    file.name:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    file.path:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    file.target_path:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    email.attachments.file.name:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    dll.path:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    object:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    - setenforce 0
+    - '*STDIN->fdopen($c*r)*$~->fdopen($c*w)*system$_ while<>*'
+    url:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    dest_url:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    uri:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    uri_query:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    query:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    url_domain:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    uri_path:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    domain:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    QueryName:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    QueryResults:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    DestinationHostname:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    DestinationIp:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    http_referrer:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    http_referrer_domain:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    http_user_agent:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    dest_nt_host:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    sender:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    recipient:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    orig_recipient:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    subject:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    url.domain:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    url.full:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    url.original:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    url.query:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    user_agent.original:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    network.application:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    http.request.body.content:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    http.request.referrer:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    email.from.address:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    dns.question.name:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+    destination.domain:
+    - '*socket(S*PF_INET*SOCK_STREAM*getprotobyname(*tcp*))*if(connect(S*sockaddr_in($p*inet_aton($i))))*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+- Image
+- OriginalFileName
+- CurrentDirectory
+- ParentImage
+- TargetFilename
+- Signature
+- signature
+- ImageLoaded
+- Company
+- Description
+- description
+- SourceImage
+- TargetImage
+- CallTrace
+- TargetObject
+- PipeName
+- Consumer
+- Destination
+- Name
+- Query
+- NewName
+- StartAddress
+- StartModule
+- StartFunction
+- SourceHostname
+- Device
+- file_name
+- file_path
+- process
+- original_file_name
+- parent_process
+- process_path
+- service_path
+- registry_path
+- registry_value_data
+- registry_value_name
+- ContextInfo
+- Payload
+- ScriptBlockText
+- ServerName
+- TransportName
+- NewProcessName
+- ParentProcessName
+- Application
+- Product Name
+- Threat Name
+- Process Name
+- Path
+- ImagePath
+- ServiceName
+- ProcessPath
+- AppName
+- AppPath
+- ModulePath
+- registry.data.strings
+- registry.path
+- process.executable
+- process.name
+- pe.original_file_name
+- file.fork_name
+- file.name
+- file.path
+- file.target_path
+- email.attachments.file.name
+- dll.path
+- object
+- url
+- dest_url
+- uri
+- uri_query
+- query
+- url_domain
+- uri_path
+- domain
+- QueryName
+- QueryResults
+- DestinationHostname
+- DestinationIp
+- http_referrer
+- http_referrer_domain
+- http_user_agent
+- dest_nt_host
+- sender
+- recipient
+- orig_recipient
+- subject
+- url.domain
+- url.full
+- url.original
+- url.query
+- user_agent.original
+- network.application
+- http.request.body.content
+- http.request.referrer
+- email.from.address
+- dns.question.name
+- destination.domain

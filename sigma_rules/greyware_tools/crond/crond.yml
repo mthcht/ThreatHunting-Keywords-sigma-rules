@@ -1,0 +1,88 @@
+title: Simple keyword detection rule for crond
+id: f6dcb0b5-85dc-4575-bf78-44f4367a8496
+status: experimental
+description:
+- '''Masquerading as Linux Crond Process.Masquerading occurs when the name or location
+  of an executable* legitimate or malicious. is manipulated or abused for the sake
+  of evading defenses and observation. Several different variations of this technique
+  have been observed.'''
+references:
+- https://github.com/SigmaHQ/sigma/blob/master/rules/linux/auditd/lnx_auditd_masquerading_crond.yml
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1036
+- attack.T1059.004
+- attack.T1564.003
+- attack.TA0002
+- attack.TA0004
+- attack.TA0005
+logsource:
+  category:
+  - endpoint
+falsepositives:
+- Unknown
+level:
+- Unknown
+detection:
+  selection:
+    ParentCommandLine:
+    - '*cp -i /bin/sh */crond*'
+    CommandLine:
+    - '*cp -i /bin/sh */crond*'
+    Details:
+    - '*cp -i /bin/sh */crond*'
+    registry.value:
+    - '*cp -i /bin/sh */crond*'
+    process.args:
+    - '*cp -i /bin/sh */crond*'
+    process.command_line:
+    - '*cp -i /bin/sh */crond*'
+    process.env_vars:
+    - '*cp -i /bin/sh */crond*'
+    process.io.text:
+    - '*cp -i /bin/sh */crond*'
+    process.title:
+    - '*cp -i /bin/sh */crond*'
+    pe.company:
+    - '*cp -i /bin/sh */crond*'
+    pe.description:
+    - '*cp -i /bin/sh */crond*'
+    pe.product:
+    - '*cp -i /bin/sh */crond*'
+    os.full:
+    - '*cp -i /bin/sh */crond*'
+    host.hostname:
+    - '*cp -i /bin/sh */crond*'
+    event.original:
+    - '*cp -i /bin/sh */crond*'
+    email.subject:
+    - '*cp -i /bin/sh */crond*'
+    device.model.name:
+    - '*cp -i /bin/sh */crond*'
+    container.image.name:
+    - '*cp -i /bin/sh */crond*'
+    container.name:
+    - '*cp -i /bin/sh */crond*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name

@@ -1,0 +1,85 @@
+title: Simple keyword detection rule for sysctl
+id: 36f75e15-6e2b-42f5-a645-bdbb8143214c
+status: experimental
+description:
+- '''Disable echo reply for icmpsh C2'''
+references:
+- https://github.com/bdamele/icmpsh
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1040
+- attack.T1090.001
+- attack.T1095
+- attack.TA0005
+- attack.TA0010
+- attack.TA0011
+logsource:
+  category:
+  - endpoint
+falsepositives:
+- Unknown
+level:
+- medium
+detection:
+  selection:
+    ParentCommandLine:
+    - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
+    CommandLine:
+    - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
+    Details:
+    - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
+    registry.value:
+    - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
+    process.args:
+    - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
+    process.command_line:
+    - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
+    process.env_vars:
+    - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
+    process.io.text:
+    - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
+    process.title:
+    - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
+    pe.company:
+    - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
+    pe.description:
+    - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
+    pe.product:
+    - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
+    os.full:
+    - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
+    host.hostname:
+    - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
+    event.original:
+    - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
+    email.subject:
+    - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
+    device.model.name:
+    - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
+    container.image.name:
+    - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
+    container.name:
+    - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name

@@ -1,0 +1,1848 @@
+title: Simple keyword detection rule for EQGRP tools
+id: cd047610-3906-49f3-8c7c-433163dc84c8
+status: experimental
+description:
+- '''Equation Group hack tool leaked by ShadowBrokers - EncTelnet/Poptop To use Nopen
+  over an existing connection'''
+- '''Equation Group hack tool leaked by ShadowBrokers anti forensic - cleans up audit.log'''
+- '''Equation Group hack tool leaked by ShadowBrokers- file  Anti forensic: Manipulate
+  utmp'''
+- '''Equation Group hack tool leaked by ShadowBrokers- file  ghost:statmon/tooltalk
+  privesc'''
+- '''Equation Group hack tool leaked by ShadowBrokers- file echowrecker. samba 2.2
+  and 3.0.2a - 3.0.12-5 RCE (with DWARF symbols)  for FreeBSD  OpenBSD 3.1  OpenBSD
+  3.2 (with a non-executable stack  zomg)  and Linux. Likely CVE-2003-0201. There
+  is also a Solaris version'''
+- '''Equation Group hack tool leaked by ShadowBrokers- file ELATEDMONKEY is a local
+  privelege escalation exploit against systems running the cPanel Remote Management
+  Web Interface '''
+- '''Equation Group hack tool leaked by ShadowBrokers- file emptybowl.py RCE for MailCenter
+  Gateway (mcgate) - an application that comes with Asia Info Message Center mailserver  buffer
+  overflow allows a string passed to popen() call to be controlled by an attacker  arbitraty
+  cmd execute known to work only for AIMC Version 2.9.5.1'''
+- '''Equation Group hack tool leaked by ShadowBrokers- file ewok (snmpwalk like)'''
+- '''Equation Group hack tool leaked by ShadowBrokers- file noclient CNC server for
+  NOPEN*'''
+- '''Equation Group hack tool leaked by ShadowBrokers- from files ftshell File transfer
+  shell'''
+- '''Equation Group hack tool leaked note defense evasion'''
+references:
+- https://github.com/Artogn/EQGRP-1/blob/master/Linux/bin/Auditcleaner
+- https://github.com/Artogn/EQGRP-1/blob/master/Linux/bin/ftshell.v3.10.2.1
+- https://github.com/thePevertedSpartan/EQ1/blob/0c2354ff1073099b2aa417030b3167ec29d7279c/Linux/doc/old/etc/user.tool.poptop.COMMON
+- https://github.com/wolf-project/NSA-TOOLS-SHADOW-BROKERS
+- https://github.com/x0rz/EQGRP/blob/master/Linux/bin/echowrecker
+- https://github.com/x0rz/EQGRP/blob/master/Linux/bin/emptybowl.py
+- https://github.com/x0rz/EQGRP/blob/master/Linux/bin/noclient-3.3.2.3-linux-i386
+- https://github.com/x0rz/EQGRP/blob/master/Linux/doc/old/etc/user.tool.dubmoat.COMMON
+- https://github.com/x0rz/EQGRP/blob/master/Linux/doc/user.tool.elatedmonkey
+- https://github.com/x0rz/EQGRP/tree/master/Linux/bin
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1036
+- attack.T1038
+- attack.T1053
+- attack.T1055
+- attack.T1059
+- attack.T1064
+- attack.T1203
+- attack.T1218
+- attack.TA0002
+- attack.TA0003
+- attack.TA0007
+- attack.TA0008
+logsource:
+  category:
+  - endpoint
+  - network
+falsepositives:
+- Unknown
+level:
+- Unknown
+detection:
+  selection:
+    ParentCommandLine:
+    - '*system rm -f /current/tmp/ftshell.latest*'
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*Attempting connection from 0.0.0.0:*'
+    - '*dubmoat*'
+    - '*chmod 700 nscd crond*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*< /dev/console | uudecode && uncompress*'
+    - '*noclient: failed to execute %s: %s*'
+    - '*cat > /dev/tcp/127.0.0.1*<<END*'
+    - '*chmod 666 /var/run/utmp~*'
+    - '*echowrecker*'
+    - '*ewok -t *'
+    - '*Dubmoat_TruncateFile*'
+    - '*sh -c *ping -c 2 %s  grep %s /proc/net/arp >/tmp/gx *'
+    - '*ghost_x86*'
+    - '*> /var/log/audit/audit.log* rm -f .*'
+    - '*iptables -%c OUTPUT -p tcp -d 127.0.0.1 --tcp-flags RST RST -j DROP *'
+    - '*sendmail -osendmail chmod +x sendmail*'
+    - '*cp /var/log/audit/audit.log .tmp*'
+    - '*send \*\[ \\*\$BASH\\* = \\*/bin/bash\\* -o \\*\$SHELL\\* = \\*/bin/bash\\*
+      \]*'
+    - '*127.0.0.1 is not advisable as a source. Use -l 127.0.0.1 to override this
+      warning*'
+    - '*usr/bin/wget -O /tmp/a http* chmod 755 /tmp/cron*'
+    - noclient-3.*
+    CommandLine:
+    - '*system rm -f /current/tmp/ftshell.latest*'
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*Attempting connection from 0.0.0.0:*'
+    - '*dubmoat*'
+    - '*chmod 700 nscd crond*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*< /dev/console | uudecode && uncompress*'
+    - '*noclient: failed to execute %s: %s*'
+    - '*cat > /dev/tcp/127.0.0.1*<<END*'
+    - '*chmod 666 /var/run/utmp~*'
+    - '*echowrecker*'
+    - '*ewok -t *'
+    - '*Dubmoat_TruncateFile*'
+    - '*sh -c *ping -c 2 %s  grep %s /proc/net/arp >/tmp/gx *'
+    - '*ghost_x86*'
+    - '*> /var/log/audit/audit.log* rm -f .*'
+    - '*iptables -%c OUTPUT -p tcp -d 127.0.0.1 --tcp-flags RST RST -j DROP *'
+    - '*sendmail -osendmail chmod +x sendmail*'
+    - '*cp /var/log/audit/audit.log .tmp*'
+    - '*send \*\[ \\*\$BASH\\* = \\*/bin/bash\\* -o \\*\$SHELL\\* = \\*/bin/bash\\*
+      \]*'
+    - '*127.0.0.1 is not advisable as a source. Use -l 127.0.0.1 to override this
+      warning*'
+    - '*usr/bin/wget -O /tmp/a http* chmod 755 /tmp/cron*'
+    - noclient-3.*
+    Details:
+    - '*system rm -f /current/tmp/ftshell.latest*'
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*Attempting connection from 0.0.0.0:*'
+    - '*dubmoat*'
+    - '*chmod 700 nscd crond*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*< /dev/console | uudecode && uncompress*'
+    - '*noclient: failed to execute %s: %s*'
+    - '*cat > /dev/tcp/127.0.0.1*<<END*'
+    - '*chmod 666 /var/run/utmp~*'
+    - '*echowrecker*'
+    - '*ewok -t *'
+    - '*Dubmoat_TruncateFile*'
+    - '*sh -c *ping -c 2 %s  grep %s /proc/net/arp >/tmp/gx *'
+    - '*ghost_x86*'
+    - '*> /var/log/audit/audit.log* rm -f .*'
+    - '*iptables -%c OUTPUT -p tcp -d 127.0.0.1 --tcp-flags RST RST -j DROP *'
+    - '*sendmail -osendmail chmod +x sendmail*'
+    - '*cp /var/log/audit/audit.log .tmp*'
+    - '*send \*\[ \\*\$BASH\\* = \\*/bin/bash\\* -o \\*\$SHELL\\* = \\*/bin/bash\\*
+      \]*'
+    - '*127.0.0.1 is not advisable as a source. Use -l 127.0.0.1 to override this
+      warning*'
+    - '*usr/bin/wget -O /tmp/a http* chmod 755 /tmp/cron*'
+    - noclient-3.*
+    registry.value:
+    - '*system rm -f /current/tmp/ftshell.latest*'
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*Attempting connection from 0.0.0.0:*'
+    - '*dubmoat*'
+    - '*chmod 700 nscd crond*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*< /dev/console | uudecode && uncompress*'
+    - '*noclient: failed to execute %s: %s*'
+    - '*cat > /dev/tcp/127.0.0.1*<<END*'
+    - '*chmod 666 /var/run/utmp~*'
+    - '*echowrecker*'
+    - '*ewok -t *'
+    - '*Dubmoat_TruncateFile*'
+    - '*sh -c *ping -c 2 %s  grep %s /proc/net/arp >/tmp/gx *'
+    - '*ghost_x86*'
+    - '*> /var/log/audit/audit.log* rm -f .*'
+    - '*iptables -%c OUTPUT -p tcp -d 127.0.0.1 --tcp-flags RST RST -j DROP *'
+    - '*sendmail -osendmail chmod +x sendmail*'
+    - '*cp /var/log/audit/audit.log .tmp*'
+    - '*send \*\[ \\*\$BASH\\* = \\*/bin/bash\\* -o \\*\$SHELL\\* = \\*/bin/bash\\*
+      \]*'
+    - '*127.0.0.1 is not advisable as a source. Use -l 127.0.0.1 to override this
+      warning*'
+    - '*usr/bin/wget -O /tmp/a http* chmod 755 /tmp/cron*'
+    - noclient-3.*
+    process.args:
+    - '*system rm -f /current/tmp/ftshell.latest*'
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*Attempting connection from 0.0.0.0:*'
+    - '*dubmoat*'
+    - '*chmod 700 nscd crond*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*< /dev/console | uudecode && uncompress*'
+    - '*noclient: failed to execute %s: %s*'
+    - '*cat > /dev/tcp/127.0.0.1*<<END*'
+    - '*chmod 666 /var/run/utmp~*'
+    - '*echowrecker*'
+    - '*ewok -t *'
+    - '*Dubmoat_TruncateFile*'
+    - '*sh -c *ping -c 2 %s  grep %s /proc/net/arp >/tmp/gx *'
+    - '*ghost_x86*'
+    - '*> /var/log/audit/audit.log* rm -f .*'
+    - '*iptables -%c OUTPUT -p tcp -d 127.0.0.1 --tcp-flags RST RST -j DROP *'
+    - '*sendmail -osendmail chmod +x sendmail*'
+    - '*cp /var/log/audit/audit.log .tmp*'
+    - '*send \*\[ \\*\$BASH\\* = \\*/bin/bash\\* -o \\*\$SHELL\\* = \\*/bin/bash\\*
+      \]*'
+    - '*127.0.0.1 is not advisable as a source. Use -l 127.0.0.1 to override this
+      warning*'
+    - '*usr/bin/wget -O /tmp/a http* chmod 755 /tmp/cron*'
+    - noclient-3.*
+    process.command_line:
+    - '*system rm -f /current/tmp/ftshell.latest*'
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*Attempting connection from 0.0.0.0:*'
+    - '*dubmoat*'
+    - '*chmod 700 nscd crond*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*< /dev/console | uudecode && uncompress*'
+    - '*noclient: failed to execute %s: %s*'
+    - '*cat > /dev/tcp/127.0.0.1*<<END*'
+    - '*chmod 666 /var/run/utmp~*'
+    - '*echowrecker*'
+    - '*ewok -t *'
+    - '*Dubmoat_TruncateFile*'
+    - '*sh -c *ping -c 2 %s  grep %s /proc/net/arp >/tmp/gx *'
+    - '*ghost_x86*'
+    - '*> /var/log/audit/audit.log* rm -f .*'
+    - '*iptables -%c OUTPUT -p tcp -d 127.0.0.1 --tcp-flags RST RST -j DROP *'
+    - '*sendmail -osendmail chmod +x sendmail*'
+    - '*cp /var/log/audit/audit.log .tmp*'
+    - '*send \*\[ \\*\$BASH\\* = \\*/bin/bash\\* -o \\*\$SHELL\\* = \\*/bin/bash\\*
+      \]*'
+    - '*127.0.0.1 is not advisable as a source. Use -l 127.0.0.1 to override this
+      warning*'
+    - '*usr/bin/wget -O /tmp/a http* chmod 755 /tmp/cron*'
+    - noclient-3.*
+    process.env_vars:
+    - '*system rm -f /current/tmp/ftshell.latest*'
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*Attempting connection from 0.0.0.0:*'
+    - '*dubmoat*'
+    - '*chmod 700 nscd crond*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*< /dev/console | uudecode && uncompress*'
+    - '*noclient: failed to execute %s: %s*'
+    - '*cat > /dev/tcp/127.0.0.1*<<END*'
+    - '*chmod 666 /var/run/utmp~*'
+    - '*echowrecker*'
+    - '*ewok -t *'
+    - '*Dubmoat_TruncateFile*'
+    - '*sh -c *ping -c 2 %s  grep %s /proc/net/arp >/tmp/gx *'
+    - '*ghost_x86*'
+    - '*> /var/log/audit/audit.log* rm -f .*'
+    - '*iptables -%c OUTPUT -p tcp -d 127.0.0.1 --tcp-flags RST RST -j DROP *'
+    - '*sendmail -osendmail chmod +x sendmail*'
+    - '*cp /var/log/audit/audit.log .tmp*'
+    - '*send \*\[ \\*\$BASH\\* = \\*/bin/bash\\* -o \\*\$SHELL\\* = \\*/bin/bash\\*
+      \]*'
+    - '*127.0.0.1 is not advisable as a source. Use -l 127.0.0.1 to override this
+      warning*'
+    - '*usr/bin/wget -O /tmp/a http* chmod 755 /tmp/cron*'
+    - noclient-3.*
+    process.io.text:
+    - '*system rm -f /current/tmp/ftshell.latest*'
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*Attempting connection from 0.0.0.0:*'
+    - '*dubmoat*'
+    - '*chmod 700 nscd crond*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*< /dev/console | uudecode && uncompress*'
+    - '*noclient: failed to execute %s: %s*'
+    - '*cat > /dev/tcp/127.0.0.1*<<END*'
+    - '*chmod 666 /var/run/utmp~*'
+    - '*echowrecker*'
+    - '*ewok -t *'
+    - '*Dubmoat_TruncateFile*'
+    - '*sh -c *ping -c 2 %s  grep %s /proc/net/arp >/tmp/gx *'
+    - '*ghost_x86*'
+    - '*> /var/log/audit/audit.log* rm -f .*'
+    - '*iptables -%c OUTPUT -p tcp -d 127.0.0.1 --tcp-flags RST RST -j DROP *'
+    - '*sendmail -osendmail chmod +x sendmail*'
+    - '*cp /var/log/audit/audit.log .tmp*'
+    - '*send \*\[ \\*\$BASH\\* = \\*/bin/bash\\* -o \\*\$SHELL\\* = \\*/bin/bash\\*
+      \]*'
+    - '*127.0.0.1 is not advisable as a source. Use -l 127.0.0.1 to override this
+      warning*'
+    - '*usr/bin/wget -O /tmp/a http* chmod 755 /tmp/cron*'
+    - noclient-3.*
+    process.title:
+    - '*system rm -f /current/tmp/ftshell.latest*'
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*Attempting connection from 0.0.0.0:*'
+    - '*dubmoat*'
+    - '*chmod 700 nscd crond*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*< /dev/console | uudecode && uncompress*'
+    - '*noclient: failed to execute %s: %s*'
+    - '*cat > /dev/tcp/127.0.0.1*<<END*'
+    - '*chmod 666 /var/run/utmp~*'
+    - '*echowrecker*'
+    - '*ewok -t *'
+    - '*Dubmoat_TruncateFile*'
+    - '*sh -c *ping -c 2 %s  grep %s /proc/net/arp >/tmp/gx *'
+    - '*ghost_x86*'
+    - '*> /var/log/audit/audit.log* rm -f .*'
+    - '*iptables -%c OUTPUT -p tcp -d 127.0.0.1 --tcp-flags RST RST -j DROP *'
+    - '*sendmail -osendmail chmod +x sendmail*'
+    - '*cp /var/log/audit/audit.log .tmp*'
+    - '*send \*\[ \\*\$BASH\\* = \\*/bin/bash\\* -o \\*\$SHELL\\* = \\*/bin/bash\\*
+      \]*'
+    - '*127.0.0.1 is not advisable as a source. Use -l 127.0.0.1 to override this
+      warning*'
+    - '*usr/bin/wget -O /tmp/a http* chmod 755 /tmp/cron*'
+    - noclient-3.*
+    pe.company:
+    - '*system rm -f /current/tmp/ftshell.latest*'
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*Attempting connection from 0.0.0.0:*'
+    - '*dubmoat*'
+    - '*chmod 700 nscd crond*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*< /dev/console | uudecode && uncompress*'
+    - '*noclient: failed to execute %s: %s*'
+    - '*cat > /dev/tcp/127.0.0.1*<<END*'
+    - '*chmod 666 /var/run/utmp~*'
+    - '*echowrecker*'
+    - '*ewok -t *'
+    - '*Dubmoat_TruncateFile*'
+    - '*sh -c *ping -c 2 %s  grep %s /proc/net/arp >/tmp/gx *'
+    - '*ghost_x86*'
+    - '*> /var/log/audit/audit.log* rm -f .*'
+    - '*iptables -%c OUTPUT -p tcp -d 127.0.0.1 --tcp-flags RST RST -j DROP *'
+    - '*sendmail -osendmail chmod +x sendmail*'
+    - '*cp /var/log/audit/audit.log .tmp*'
+    - '*send \*\[ \\*\$BASH\\* = \\*/bin/bash\\* -o \\*\$SHELL\\* = \\*/bin/bash\\*
+      \]*'
+    - '*127.0.0.1 is not advisable as a source. Use -l 127.0.0.1 to override this
+      warning*'
+    - '*usr/bin/wget -O /tmp/a http* chmod 755 /tmp/cron*'
+    - noclient-3.*
+    pe.description:
+    - '*system rm -f /current/tmp/ftshell.latest*'
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*Attempting connection from 0.0.0.0:*'
+    - '*dubmoat*'
+    - '*chmod 700 nscd crond*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*< /dev/console | uudecode && uncompress*'
+    - '*noclient: failed to execute %s: %s*'
+    - '*cat > /dev/tcp/127.0.0.1*<<END*'
+    - '*chmod 666 /var/run/utmp~*'
+    - '*echowrecker*'
+    - '*ewok -t *'
+    - '*Dubmoat_TruncateFile*'
+    - '*sh -c *ping -c 2 %s  grep %s /proc/net/arp >/tmp/gx *'
+    - '*ghost_x86*'
+    - '*> /var/log/audit/audit.log* rm -f .*'
+    - '*iptables -%c OUTPUT -p tcp -d 127.0.0.1 --tcp-flags RST RST -j DROP *'
+    - '*sendmail -osendmail chmod +x sendmail*'
+    - '*cp /var/log/audit/audit.log .tmp*'
+    - '*send \*\[ \\*\$BASH\\* = \\*/bin/bash\\* -o \\*\$SHELL\\* = \\*/bin/bash\\*
+      \]*'
+    - '*127.0.0.1 is not advisable as a source. Use -l 127.0.0.1 to override this
+      warning*'
+    - '*usr/bin/wget -O /tmp/a http* chmod 755 /tmp/cron*'
+    - noclient-3.*
+    pe.product:
+    - '*system rm -f /current/tmp/ftshell.latest*'
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*Attempting connection from 0.0.0.0:*'
+    - '*dubmoat*'
+    - '*chmod 700 nscd crond*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*< /dev/console | uudecode && uncompress*'
+    - '*noclient: failed to execute %s: %s*'
+    - '*cat > /dev/tcp/127.0.0.1*<<END*'
+    - '*chmod 666 /var/run/utmp~*'
+    - '*echowrecker*'
+    - '*ewok -t *'
+    - '*Dubmoat_TruncateFile*'
+    - '*sh -c *ping -c 2 %s  grep %s /proc/net/arp >/tmp/gx *'
+    - '*ghost_x86*'
+    - '*> /var/log/audit/audit.log* rm -f .*'
+    - '*iptables -%c OUTPUT -p tcp -d 127.0.0.1 --tcp-flags RST RST -j DROP *'
+    - '*sendmail -osendmail chmod +x sendmail*'
+    - '*cp /var/log/audit/audit.log .tmp*'
+    - '*send \*\[ \\*\$BASH\\* = \\*/bin/bash\\* -o \\*\$SHELL\\* = \\*/bin/bash\\*
+      \]*'
+    - '*127.0.0.1 is not advisable as a source. Use -l 127.0.0.1 to override this
+      warning*'
+    - '*usr/bin/wget -O /tmp/a http* chmod 755 /tmp/cron*'
+    - noclient-3.*
+    os.full:
+    - '*system rm -f /current/tmp/ftshell.latest*'
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*Attempting connection from 0.0.0.0:*'
+    - '*dubmoat*'
+    - '*chmod 700 nscd crond*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*< /dev/console | uudecode && uncompress*'
+    - '*noclient: failed to execute %s: %s*'
+    - '*cat > /dev/tcp/127.0.0.1*<<END*'
+    - '*chmod 666 /var/run/utmp~*'
+    - '*echowrecker*'
+    - '*ewok -t *'
+    - '*Dubmoat_TruncateFile*'
+    - '*sh -c *ping -c 2 %s  grep %s /proc/net/arp >/tmp/gx *'
+    - '*ghost_x86*'
+    - '*> /var/log/audit/audit.log* rm -f .*'
+    - '*iptables -%c OUTPUT -p tcp -d 127.0.0.1 --tcp-flags RST RST -j DROP *'
+    - '*sendmail -osendmail chmod +x sendmail*'
+    - '*cp /var/log/audit/audit.log .tmp*'
+    - '*send \*\[ \\*\$BASH\\* = \\*/bin/bash\\* -o \\*\$SHELL\\* = \\*/bin/bash\\*
+      \]*'
+    - '*127.0.0.1 is not advisable as a source. Use -l 127.0.0.1 to override this
+      warning*'
+    - '*usr/bin/wget -O /tmp/a http* chmod 755 /tmp/cron*'
+    - noclient-3.*
+    host.hostname:
+    - '*system rm -f /current/tmp/ftshell.latest*'
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*Attempting connection from 0.0.0.0:*'
+    - '*dubmoat*'
+    - '*chmod 700 nscd crond*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*< /dev/console | uudecode && uncompress*'
+    - '*noclient: failed to execute %s: %s*'
+    - '*cat > /dev/tcp/127.0.0.1*<<END*'
+    - '*chmod 666 /var/run/utmp~*'
+    - '*echowrecker*'
+    - '*ewok -t *'
+    - '*Dubmoat_TruncateFile*'
+    - '*sh -c *ping -c 2 %s  grep %s /proc/net/arp >/tmp/gx *'
+    - '*ghost_x86*'
+    - '*> /var/log/audit/audit.log* rm -f .*'
+    - '*iptables -%c OUTPUT -p tcp -d 127.0.0.1 --tcp-flags RST RST -j DROP *'
+    - '*sendmail -osendmail chmod +x sendmail*'
+    - '*cp /var/log/audit/audit.log .tmp*'
+    - '*send \*\[ \\*\$BASH\\* = \\*/bin/bash\\* -o \\*\$SHELL\\* = \\*/bin/bash\\*
+      \]*'
+    - '*127.0.0.1 is not advisable as a source. Use -l 127.0.0.1 to override this
+      warning*'
+    - '*usr/bin/wget -O /tmp/a http* chmod 755 /tmp/cron*'
+    - noclient-3.*
+    event.original:
+    - '*system rm -f /current/tmp/ftshell.latest*'
+    - '*Attempting connection from 0.0.0.0:*'
+    - '*chmod 700 nscd crond*'
+    - '*< /dev/console | uudecode && uncompress*'
+    - '*noclient: failed to execute %s: %s*'
+    - '*cat > /dev/tcp/127.0.0.1*<<END*'
+    - '*chmod 666 /var/run/utmp~*'
+    - '*ewok -t *'
+    - '*sh -c *ping -c 2 %s  grep %s /proc/net/arp >/tmp/gx *'
+    - '*> /var/log/audit/audit.log* rm -f .*'
+    - '*iptables -%c OUTPUT -p tcp -d 127.0.0.1 --tcp-flags RST RST -j DROP *'
+    - '*sendmail -osendmail chmod +x sendmail*'
+    - '*cp /var/log/audit/audit.log .tmp*'
+    - '*send \*\[ \\*\$BASH\\* = \\*/bin/bash\\* -o \\*\$SHELL\\* = \\*/bin/bash\\*
+      \]*'
+    - '*127.0.0.1 is not advisable as a source. Use -l 127.0.0.1 to override this
+      warning*'
+    - '*usr/bin/wget -O /tmp/a http* chmod 755 /tmp/cron*'
+    email.subject:
+    - '*system rm -f /current/tmp/ftshell.latest*'
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*Attempting connection from 0.0.0.0:*'
+    - '*dubmoat*'
+    - '*chmod 700 nscd crond*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*< /dev/console | uudecode && uncompress*'
+    - '*noclient: failed to execute %s: %s*'
+    - '*cat > /dev/tcp/127.0.0.1*<<END*'
+    - '*chmod 666 /var/run/utmp~*'
+    - '*echowrecker*'
+    - '*ewok -t *'
+    - '*Dubmoat_TruncateFile*'
+    - '*sh -c *ping -c 2 %s  grep %s /proc/net/arp >/tmp/gx *'
+    - '*ghost_x86*'
+    - '*> /var/log/audit/audit.log* rm -f .*'
+    - '*iptables -%c OUTPUT -p tcp -d 127.0.0.1 --tcp-flags RST RST -j DROP *'
+    - '*sendmail -osendmail chmod +x sendmail*'
+    - '*cp /var/log/audit/audit.log .tmp*'
+    - '*send \*\[ \\*\$BASH\\* = \\*/bin/bash\\* -o \\*\$SHELL\\* = \\*/bin/bash\\*
+      \]*'
+    - '*127.0.0.1 is not advisable as a source. Use -l 127.0.0.1 to override this
+      warning*'
+    - '*usr/bin/wget -O /tmp/a http* chmod 755 /tmp/cron*'
+    - noclient-3.*
+    device.model.name:
+    - '*system rm -f /current/tmp/ftshell.latest*'
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*Attempting connection from 0.0.0.0:*'
+    - '*dubmoat*'
+    - '*chmod 700 nscd crond*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*< /dev/console | uudecode && uncompress*'
+    - '*noclient: failed to execute %s: %s*'
+    - '*cat > /dev/tcp/127.0.0.1*<<END*'
+    - '*chmod 666 /var/run/utmp~*'
+    - '*echowrecker*'
+    - '*ewok -t *'
+    - '*Dubmoat_TruncateFile*'
+    - '*sh -c *ping -c 2 %s  grep %s /proc/net/arp >/tmp/gx *'
+    - '*ghost_x86*'
+    - '*> /var/log/audit/audit.log* rm -f .*'
+    - '*iptables -%c OUTPUT -p tcp -d 127.0.0.1 --tcp-flags RST RST -j DROP *'
+    - '*sendmail -osendmail chmod +x sendmail*'
+    - '*cp /var/log/audit/audit.log .tmp*'
+    - '*send \*\[ \\*\$BASH\\* = \\*/bin/bash\\* -o \\*\$SHELL\\* = \\*/bin/bash\\*
+      \]*'
+    - '*127.0.0.1 is not advisable as a source. Use -l 127.0.0.1 to override this
+      warning*'
+    - '*usr/bin/wget -O /tmp/a http* chmod 755 /tmp/cron*'
+    - noclient-3.*
+    container.image.name:
+    - '*system rm -f /current/tmp/ftshell.latest*'
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*Attempting connection from 0.0.0.0:*'
+    - '*dubmoat*'
+    - '*chmod 700 nscd crond*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*< /dev/console | uudecode && uncompress*'
+    - '*noclient: failed to execute %s: %s*'
+    - '*cat > /dev/tcp/127.0.0.1*<<END*'
+    - '*chmod 666 /var/run/utmp~*'
+    - '*echowrecker*'
+    - '*ewok -t *'
+    - '*Dubmoat_TruncateFile*'
+    - '*sh -c *ping -c 2 %s  grep %s /proc/net/arp >/tmp/gx *'
+    - '*ghost_x86*'
+    - '*> /var/log/audit/audit.log* rm -f .*'
+    - '*iptables -%c OUTPUT -p tcp -d 127.0.0.1 --tcp-flags RST RST -j DROP *'
+    - '*sendmail -osendmail chmod +x sendmail*'
+    - '*cp /var/log/audit/audit.log .tmp*'
+    - '*send \*\[ \\*\$BASH\\* = \\*/bin/bash\\* -o \\*\$SHELL\\* = \\*/bin/bash\\*
+      \]*'
+    - '*127.0.0.1 is not advisable as a source. Use -l 127.0.0.1 to override this
+      warning*'
+    - '*usr/bin/wget -O /tmp/a http* chmod 755 /tmp/cron*'
+    - noclient-3.*
+    container.name:
+    - '*system rm -f /current/tmp/ftshell.latest*'
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*Attempting connection from 0.0.0.0:*'
+    - '*dubmoat*'
+    - '*chmod 700 nscd crond*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*< /dev/console | uudecode && uncompress*'
+    - '*noclient: failed to execute %s: %s*'
+    - '*cat > /dev/tcp/127.0.0.1*<<END*'
+    - '*chmod 666 /var/run/utmp~*'
+    - '*echowrecker*'
+    - '*ewok -t *'
+    - '*Dubmoat_TruncateFile*'
+    - '*sh -c *ping -c 2 %s  grep %s /proc/net/arp >/tmp/gx *'
+    - '*ghost_x86*'
+    - '*> /var/log/audit/audit.log* rm -f .*'
+    - '*iptables -%c OUTPUT -p tcp -d 127.0.0.1 --tcp-flags RST RST -j DROP *'
+    - '*sendmail -osendmail chmod +x sendmail*'
+    - '*cp /var/log/audit/audit.log .tmp*'
+    - '*send \*\[ \\*\$BASH\\* = \\*/bin/bash\\* -o \\*\$SHELL\\* = \\*/bin/bash\\*
+      \]*'
+    - '*127.0.0.1 is not advisable as a source. Use -l 127.0.0.1 to override this
+      warning*'
+    - '*usr/bin/wget -O /tmp/a http* chmod 755 /tmp/cron*'
+    - noclient-3.*
+    Image:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    OriginalFileName:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    CurrentDirectory:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    ParentImage:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    TargetFilename:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    Signature:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    signature:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    ImageLoaded:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    Company:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    Description:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    description:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    SourceImage:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    TargetImage:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    CallTrace:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    TargetObject:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    PipeName:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    Consumer:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    Destination:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    Name:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    Query:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    NewName:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    StartAddress:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    StartModule:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    StartFunction:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    SourceHostname:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    Device:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    file_name:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    file_path:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    process:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    original_file_name:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    parent_process:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    process_path:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    service_path:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    registry_path:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    registry_value_data:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    registry_value_name:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    ContextInfo:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    Payload:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    ScriptBlockText:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    ServerName:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    TransportName:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    NewProcessName:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    ParentProcessName:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    Application:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    Product Name:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    Threat Name:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    Process Name:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    Path:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    ImagePath:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    ServiceName:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    ProcessPath:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    AppName:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    AppPath:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    ModulePath:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    registry.data.strings:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    registry.path:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    process.executable:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    process.name:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    pe.original_file_name:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    file.fork_name:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    file.name:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    file.path:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    file.target_path:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    email.attachments.file.name:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    dll.path:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    object:
+    - '*ftshell -*'
+    - '*Dubmoat_PrintFilename*'
+    - '*ourtn-ftshell-upcommand*'
+    - '*ghost_* -v*'
+    - '*dubmoat*'
+    - '*Auditcleaner.*'
+    - '*Dubmoat_ExtractData*'
+    - '*ghost_sparc*'
+    - '*ftshell.v3*'
+    - '*emptybowl.py*'
+    - '*echowrecker*'
+    - '*Dubmoat_TruncateFile*'
+    - '*ghost_x86*'
+    - noclient-3.*
+    url:
+    - '*emptybowl.py*'
+    dest_url:
+    - '*emptybowl.py*'
+    uri:
+    - '*emptybowl.py*'
+    uri_query:
+    - '*emptybowl.py*'
+    query:
+    - '*emptybowl.py*'
+    url_domain:
+    - '*emptybowl.py*'
+    uri_path:
+    - '*emptybowl.py*'
+    domain:
+    - '*emptybowl.py*'
+    QueryName:
+    - '*emptybowl.py*'
+    QueryResults:
+    - '*emptybowl.py*'
+    DestinationHostname:
+    - '*emptybowl.py*'
+    DestinationIp:
+    - '*emptybowl.py*'
+    http_referrer:
+    - '*emptybowl.py*'
+    http_referrer_domain:
+    - '*emptybowl.py*'
+    http_user_agent:
+    - '*emptybowl.py*'
+    dest_nt_host:
+    - '*emptybowl.py*'
+    sender:
+    - '*emptybowl.py*'
+    recipient:
+    - '*emptybowl.py*'
+    orig_recipient:
+    - '*emptybowl.py*'
+    subject:
+    - '*emptybowl.py*'
+    url.domain:
+    - '*emptybowl.py*'
+    url.full:
+    - '*emptybowl.py*'
+    url.original:
+    - '*emptybowl.py*'
+    url.query:
+    - '*emptybowl.py*'
+    user_agent.original:
+    - '*emptybowl.py*'
+    network.application:
+    - '*emptybowl.py*'
+    http.request.body.content:
+    - '*emptybowl.py*'
+    http.request.referrer:
+    - '*emptybowl.py*'
+    email.from.address:
+    - '*emptybowl.py*'
+    dns.question.name:
+    - '*emptybowl.py*'
+    destination.domain:
+    - '*emptybowl.py*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+- Image
+- OriginalFileName
+- CurrentDirectory
+- ParentImage
+- TargetFilename
+- Signature
+- signature
+- ImageLoaded
+- Company
+- Description
+- description
+- SourceImage
+- TargetImage
+- CallTrace
+- TargetObject
+- PipeName
+- Consumer
+- Destination
+- Name
+- Query
+- NewName
+- StartAddress
+- StartModule
+- StartFunction
+- SourceHostname
+- Device
+- file_name
+- file_path
+- process
+- original_file_name
+- parent_process
+- process_path
+- service_path
+- registry_path
+- registry_value_data
+- registry_value_name
+- ContextInfo
+- Payload
+- ScriptBlockText
+- ServerName
+- TransportName
+- NewProcessName
+- ParentProcessName
+- Application
+- Product Name
+- Threat Name
+- Process Name
+- Path
+- ImagePath
+- ServiceName
+- ProcessPath
+- AppName
+- AppPath
+- ModulePath
+- registry.data.strings
+- registry.path
+- process.executable
+- process.name
+- pe.original_file_name
+- file.fork_name
+- file.name
+- file.path
+- file.target_path
+- email.attachments.file.name
+- dll.path
+- object
+- url
+- dest_url
+- uri
+- uri_query
+- query
+- url_domain
+- uri_path
+- domain
+- QueryName
+- QueryResults
+- DestinationHostname
+- DestinationIp
+- http_referrer
+- http_referrer_domain
+- http_user_agent
+- dest_nt_host
+- sender
+- recipient
+- orig_recipient
+- subject
+- url.domain
+- url.full
+- url.original
+- url.query
+- user_agent.original
+- network.application
+- http.request.body.content
+- http.request.referrer
+- email.from.address
+- dns.question.name
+- destination.domain

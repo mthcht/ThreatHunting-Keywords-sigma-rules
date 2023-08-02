@@ -1,0 +1,500 @@
+title: Simple keyword detection rule for MockDirUACBypass
+id: c0ca1df3-c242-401f-b801-23670aa6bad9
+status: experimental
+description:
+- '''Creates a mock trusted directory C:\Windows \System32\ and moves an auto-elevating
+  Windows executable into the mock directory. A user-supplied DLL which exports the
+  appropriate functions is dropped and when the executable is run - the DLL is loaded
+  and run as high integrity.'''
+references:
+- https://github.com/matterpreter/OffensiveCSharp/tree/master/MockDirUACBypass
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1059.001
+- attack.T1547.008
+- attack.T1574.002
+- attack.TA0002
+- attack.TA0005
+logsource:
+  category:
+  - endpoint
+  - network
+falsepositives:
+- Unknown
+level:
+- critical
+detection:
+  selection:
+    ParentCommandLine:
+    - '*[+] Creating mock directories*'
+    - '*MockDirUACBypass*'
+    - '*[+] Attempting to call the target EXE from the mock directory*'
+    - '*hijackDll*WINMM.dll*'
+    CommandLine:
+    - '*[+] Creating mock directories*'
+    - '*MockDirUACBypass*'
+    - '*[+] Attempting to call the target EXE from the mock directory*'
+    - '*hijackDll*WINMM.dll*'
+    Details:
+    - '*[+] Creating mock directories*'
+    - '*MockDirUACBypass*'
+    - '*[+] Attempting to call the target EXE from the mock directory*'
+    - '*hijackDll*WINMM.dll*'
+    registry.value:
+    - '*[+] Creating mock directories*'
+    - '*MockDirUACBypass*'
+    - '*[+] Attempting to call the target EXE from the mock directory*'
+    - '*hijackDll*WINMM.dll*'
+    process.args:
+    - '*[+] Creating mock directories*'
+    - '*MockDirUACBypass*'
+    - '*[+] Attempting to call the target EXE from the mock directory*'
+    - '*hijackDll*WINMM.dll*'
+    process.command_line:
+    - '*[+] Creating mock directories*'
+    - '*MockDirUACBypass*'
+    - '*[+] Attempting to call the target EXE from the mock directory*'
+    - '*hijackDll*WINMM.dll*'
+    process.env_vars:
+    - '*[+] Creating mock directories*'
+    - '*MockDirUACBypass*'
+    - '*[+] Attempting to call the target EXE from the mock directory*'
+    - '*hijackDll*WINMM.dll*'
+    process.io.text:
+    - '*[+] Creating mock directories*'
+    - '*MockDirUACBypass*'
+    - '*[+] Attempting to call the target EXE from the mock directory*'
+    - '*hijackDll*WINMM.dll*'
+    process.title:
+    - '*[+] Creating mock directories*'
+    - '*MockDirUACBypass*'
+    - '*[+] Attempting to call the target EXE from the mock directory*'
+    - '*hijackDll*WINMM.dll*'
+    pe.company:
+    - '*[+] Creating mock directories*'
+    - '*MockDirUACBypass*'
+    - '*[+] Attempting to call the target EXE from the mock directory*'
+    - '*hijackDll*WINMM.dll*'
+    pe.description:
+    - '*[+] Creating mock directories*'
+    - '*MockDirUACBypass*'
+    - '*[+] Attempting to call the target EXE from the mock directory*'
+    - '*hijackDll*WINMM.dll*'
+    pe.product:
+    - '*[+] Creating mock directories*'
+    - '*MockDirUACBypass*'
+    - '*[+] Attempting to call the target EXE from the mock directory*'
+    - '*hijackDll*WINMM.dll*'
+    os.full:
+    - '*[+] Creating mock directories*'
+    - '*MockDirUACBypass*'
+    - '*[+] Attempting to call the target EXE from the mock directory*'
+    - '*hijackDll*WINMM.dll*'
+    host.hostname:
+    - '*[+] Creating mock directories*'
+    - '*MockDirUACBypass*'
+    - '*[+] Attempting to call the target EXE from the mock directory*'
+    - '*hijackDll*WINMM.dll*'
+    event.original:
+    - '*[+] Creating mock directories*'
+    - '*[+] Attempting to call the target EXE from the mock directory*'
+    email.subject:
+    - '*[+] Creating mock directories*'
+    - '*MockDirUACBypass*'
+    - '*[+] Attempting to call the target EXE from the mock directory*'
+    - '*hijackDll*WINMM.dll*'
+    device.model.name:
+    - '*[+] Creating mock directories*'
+    - '*MockDirUACBypass*'
+    - '*[+] Attempting to call the target EXE from the mock directory*'
+    - '*hijackDll*WINMM.dll*'
+    container.image.name:
+    - '*[+] Creating mock directories*'
+    - '*MockDirUACBypass*'
+    - '*[+] Attempting to call the target EXE from the mock directory*'
+    - '*hijackDll*WINMM.dll*'
+    container.name:
+    - '*[+] Creating mock directories*'
+    - '*MockDirUACBypass*'
+    - '*[+] Attempting to call the target EXE from the mock directory*'
+    - '*hijackDll*WINMM.dll*'
+    Image:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    OriginalFileName:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    CurrentDirectory:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    ParentImage:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    TargetFilename:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    Signature:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    signature:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    ImageLoaded:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    Company:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    Description:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    description:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    SourceImage:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    TargetImage:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    CallTrace:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    TargetObject:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    PipeName:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    Consumer:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    Destination:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    Name:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    Query:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    NewName:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    StartAddress:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    StartModule:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    StartFunction:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    SourceHostname:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    Device:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    file_name:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    file_path:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    process:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    original_file_name:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    parent_process:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    process_path:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    service_path:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    registry_path:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    registry_value_data:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    registry_value_name:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    ContextInfo:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    Payload:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    ScriptBlockText:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    ServerName:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    TransportName:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    NewProcessName:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    ParentProcessName:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    Application:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    Product Name:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    Threat Name:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    Process Name:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    Path:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    ImagePath:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    ServiceName:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    ProcessPath:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    AppName:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    AppPath:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    ModulePath:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    registry.data.strings:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    registry.path:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    process.executable:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    process.name:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    pe.original_file_name:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    file.fork_name:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    file.name:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    file.path:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    file.target_path:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    email.attachments.file.name:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    dll.path:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    object:
+    - '*MockDirUACBypass*'
+    - '*hijackDll*WINMM.dll*'
+    url:
+    - '*MockDirUACBypass*'
+    dest_url:
+    - '*MockDirUACBypass*'
+    uri:
+    - '*MockDirUACBypass*'
+    uri_query:
+    - '*MockDirUACBypass*'
+    query:
+    - '*MockDirUACBypass*'
+    url_domain:
+    - '*MockDirUACBypass*'
+    uri_path:
+    - '*MockDirUACBypass*'
+    domain:
+    - '*MockDirUACBypass*'
+    QueryName:
+    - '*MockDirUACBypass*'
+    QueryResults:
+    - '*MockDirUACBypass*'
+    DestinationHostname:
+    - '*MockDirUACBypass*'
+    DestinationIp:
+    - '*MockDirUACBypass*'
+    http_referrer:
+    - '*MockDirUACBypass*'
+    http_referrer_domain:
+    - '*MockDirUACBypass*'
+    http_user_agent:
+    - '*MockDirUACBypass*'
+    dest_nt_host:
+    - '*MockDirUACBypass*'
+    sender:
+    - '*MockDirUACBypass*'
+    recipient:
+    - '*MockDirUACBypass*'
+    orig_recipient:
+    - '*MockDirUACBypass*'
+    subject:
+    - '*MockDirUACBypass*'
+    url.domain:
+    - '*MockDirUACBypass*'
+    url.full:
+    - '*MockDirUACBypass*'
+    url.original:
+    - '*MockDirUACBypass*'
+    url.query:
+    - '*MockDirUACBypass*'
+    user_agent.original:
+    - '*MockDirUACBypass*'
+    network.application:
+    - '*MockDirUACBypass*'
+    http.request.body.content:
+    - '*MockDirUACBypass*'
+    http.request.referrer:
+    - '*MockDirUACBypass*'
+    email.from.address:
+    - '*MockDirUACBypass*'
+    dns.question.name:
+    - '*MockDirUACBypass*'
+    destination.domain:
+    - '*MockDirUACBypass*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+- Image
+- OriginalFileName
+- CurrentDirectory
+- ParentImage
+- TargetFilename
+- Signature
+- signature
+- ImageLoaded
+- Company
+- Description
+- description
+- SourceImage
+- TargetImage
+- CallTrace
+- TargetObject
+- PipeName
+- Consumer
+- Destination
+- Name
+- Query
+- NewName
+- StartAddress
+- StartModule
+- StartFunction
+- SourceHostname
+- Device
+- file_name
+- file_path
+- process
+- original_file_name
+- parent_process
+- process_path
+- service_path
+- registry_path
+- registry_value_data
+- registry_value_name
+- ContextInfo
+- Payload
+- ScriptBlockText
+- ServerName
+- TransportName
+- NewProcessName
+- ParentProcessName
+- Application
+- Product Name
+- Threat Name
+- Process Name
+- Path
+- ImagePath
+- ServiceName
+- ProcessPath
+- AppName
+- AppPath
+- ModulePath
+- registry.data.strings
+- registry.path
+- process.executable
+- process.name
+- pe.original_file_name
+- file.fork_name
+- file.name
+- file.path
+- file.target_path
+- email.attachments.file.name
+- dll.path
+- object
+- url
+- dest_url
+- uri
+- uri_query
+- query
+- url_domain
+- uri_path
+- domain
+- QueryName
+- QueryResults
+- DestinationHostname
+- DestinationIp
+- http_referrer
+- http_referrer_domain
+- http_user_agent
+- dest_nt_host
+- sender
+- recipient
+- orig_recipient
+- subject
+- url.domain
+- url.full
+- url.original
+- url.query
+- user_agent.original
+- network.application
+- http.request.body.content
+- http.request.referrer
+- email.from.address
+- dns.question.name
+- destination.domain

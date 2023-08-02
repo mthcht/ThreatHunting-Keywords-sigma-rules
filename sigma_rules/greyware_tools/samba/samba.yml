@@ -1,0 +1,85 @@
+title: Simple keyword detection rule for samba
+id: a51c1819-e7bc-4bd8-b729-8db5c33360d6
+status: experimental
+description:
+- '''The net command is one of the new features of Samba-3 and is an attempt to provide
+  a useful tool for the majority of remote management operations necessary for common
+  tasks. It is used by attackers to find users list'''
+references:
+- https://www.samba.org/samba/docs/old/Samba3-HOWTO/NetCommand.html
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1003.002
+- attack.T1087.002
+- attack.TA0006
+- attack.TA0007
+logsource:
+  category:
+  - endpoint
+falsepositives:
+- Unknown
+level:
+- Unknown
+detection:
+  selection:
+    ParentCommandLine:
+    - '*net rpc group members ''Domain Users'' -W *'
+    CommandLine:
+    - '*net rpc group members ''Domain Users'' -W *'
+    Details:
+    - '*net rpc group members ''Domain Users'' -W *'
+    registry.value:
+    - '*net rpc group members ''Domain Users'' -W *'
+    process.args:
+    - '*net rpc group members ''Domain Users'' -W *'
+    process.command_line:
+    - '*net rpc group members ''Domain Users'' -W *'
+    process.env_vars:
+    - '*net rpc group members ''Domain Users'' -W *'
+    process.io.text:
+    - '*net rpc group members ''Domain Users'' -W *'
+    process.title:
+    - '*net rpc group members ''Domain Users'' -W *'
+    pe.company:
+    - '*net rpc group members ''Domain Users'' -W *'
+    pe.description:
+    - '*net rpc group members ''Domain Users'' -W *'
+    pe.product:
+    - '*net rpc group members ''Domain Users'' -W *'
+    os.full:
+    - '*net rpc group members ''Domain Users'' -W *'
+    host.hostname:
+    - '*net rpc group members ''Domain Users'' -W *'
+    event.original:
+    - '*net rpc group members ''Domain Users'' -W *'
+    email.subject:
+    - '*net rpc group members ''Domain Users'' -W *'
+    device.model.name:
+    - '*net rpc group members ''Domain Users'' -W *'
+    container.image.name:
+    - '*net rpc group members ''Domain Users'' -W *'
+    container.name:
+    - '*net rpc group members ''Domain Users'' -W *'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name

@@ -1,0 +1,681 @@
+title: Simple keyword detection rule for SharpSCCM
+id: 6b3799c4-4c59-4f0e-8934-1201c5f0b397
+status: experimental
+description:
+- '''SharpSCCM is a post-exploitation tool designed to leverage Microsoft Endpoint
+  Configuration Manager (a.k.a. ConfigMgr. formerly SCCM) for lateral movement and
+  credential gathering without requiring access to the SCCM administration console
+  GUI'''
+references:
+- https://github.com/Mayyhem/SharpSCCM/
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1003
+- attack.T1021
+- attack.T1056
+- attack.T1059
+- attack.T1075
+- attack.T1078
+- attack.T1087
+- attack.T1098
+- attack.T1105
+- attack.T1110
+- attack.T1212
+- attack.T1547
+- attack.T1552
+- attack.T1574
+- attack.T1608
+- attack.TA0001
+- attack.TA0002
+- attack.TA0003
+- attack.TA0004
+- attack.TA0005
+- attack.TA0006
+- attack.TA0007
+- attack.TA0011
+logsource:
+  category:
+  - endpoint
+  - network
+falsepositives:
+- Unknown
+level:
+- Unknown
+detection:
+  selection:
+    ParentCommandLine:
+    - '* -p LastLogonTimestamp -p LastLogonUserName *'
+    - '* local grep *ccmsetup started *ccmsetup.log*'
+    - '* invoke admin-service -q *'
+    - '* get collection-members -n USERS*'
+    - '* invoke query *FROM SMS_Admin*'
+    - '* local class-properties SMS_Authority*'
+    - '* get primary-users -u *'
+    - '* local class-instances SMS_Authority*'
+    - '* get site-push-settings*'
+    - '* local query * FROM SMS_Authority*'
+    - '* local secrets -m disk*'
+    - '*SharpSCCM*'
+    - '* get class-properties SMS_Admin*'
+    - '* remove device GUID:001B2EE1-AE95-4146-AE7B-5928F1E4F396*'
+    - '* local secrets -m wmi*'
+    - '* get class-instances SMS_R_System *'
+    CommandLine:
+    - '* -p LastLogonTimestamp -p LastLogonUserName *'
+    - '* local grep *ccmsetup started *ccmsetup.log*'
+    - '* invoke admin-service -q *'
+    - '* get collection-members -n USERS*'
+    - '* invoke query *FROM SMS_Admin*'
+    - '* local class-properties SMS_Authority*'
+    - '* get primary-users -u *'
+    - '* local class-instances SMS_Authority*'
+    - '* get site-push-settings*'
+    - '* local query * FROM SMS_Authority*'
+    - '* local secrets -m disk*'
+    - '*SharpSCCM*'
+    - '* get class-properties SMS_Admin*'
+    - '* remove device GUID:001B2EE1-AE95-4146-AE7B-5928F1E4F396*'
+    - '* local secrets -m wmi*'
+    - '* get class-instances SMS_R_System *'
+    Details:
+    - '* -p LastLogonTimestamp -p LastLogonUserName *'
+    - '* local grep *ccmsetup started *ccmsetup.log*'
+    - '* invoke admin-service -q *'
+    - '* get collection-members -n USERS*'
+    - '* invoke query *FROM SMS_Admin*'
+    - '* local class-properties SMS_Authority*'
+    - '* get primary-users -u *'
+    - '* local class-instances SMS_Authority*'
+    - '* get site-push-settings*'
+    - '* local query * FROM SMS_Authority*'
+    - '* local secrets -m disk*'
+    - '*SharpSCCM*'
+    - '* get class-properties SMS_Admin*'
+    - '* remove device GUID:001B2EE1-AE95-4146-AE7B-5928F1E4F396*'
+    - '* local secrets -m wmi*'
+    - '* get class-instances SMS_R_System *'
+    registry.value:
+    - '* -p LastLogonTimestamp -p LastLogonUserName *'
+    - '* local grep *ccmsetup started *ccmsetup.log*'
+    - '* invoke admin-service -q *'
+    - '* get collection-members -n USERS*'
+    - '* invoke query *FROM SMS_Admin*'
+    - '* local class-properties SMS_Authority*'
+    - '* get primary-users -u *'
+    - '* local class-instances SMS_Authority*'
+    - '* get site-push-settings*'
+    - '* local query * FROM SMS_Authority*'
+    - '* local secrets -m disk*'
+    - '*SharpSCCM*'
+    - '* get class-properties SMS_Admin*'
+    - '* remove device GUID:001B2EE1-AE95-4146-AE7B-5928F1E4F396*'
+    - '* local secrets -m wmi*'
+    - '* get class-instances SMS_R_System *'
+    process.args:
+    - '* -p LastLogonTimestamp -p LastLogonUserName *'
+    - '* local grep *ccmsetup started *ccmsetup.log*'
+    - '* invoke admin-service -q *'
+    - '* get collection-members -n USERS*'
+    - '* invoke query *FROM SMS_Admin*'
+    - '* local class-properties SMS_Authority*'
+    - '* get primary-users -u *'
+    - '* local class-instances SMS_Authority*'
+    - '* get site-push-settings*'
+    - '* local query * FROM SMS_Authority*'
+    - '* local secrets -m disk*'
+    - '*SharpSCCM*'
+    - '* get class-properties SMS_Admin*'
+    - '* remove device GUID:001B2EE1-AE95-4146-AE7B-5928F1E4F396*'
+    - '* local secrets -m wmi*'
+    - '* get class-instances SMS_R_System *'
+    process.command_line:
+    - '* -p LastLogonTimestamp -p LastLogonUserName *'
+    - '* local grep *ccmsetup started *ccmsetup.log*'
+    - '* invoke admin-service -q *'
+    - '* get collection-members -n USERS*'
+    - '* invoke query *FROM SMS_Admin*'
+    - '* local class-properties SMS_Authority*'
+    - '* get primary-users -u *'
+    - '* local class-instances SMS_Authority*'
+    - '* get site-push-settings*'
+    - '* local query * FROM SMS_Authority*'
+    - '* local secrets -m disk*'
+    - '*SharpSCCM*'
+    - '* get class-properties SMS_Admin*'
+    - '* remove device GUID:001B2EE1-AE95-4146-AE7B-5928F1E4F396*'
+    - '* local secrets -m wmi*'
+    - '* get class-instances SMS_R_System *'
+    process.env_vars:
+    - '* -p LastLogonTimestamp -p LastLogonUserName *'
+    - '* local grep *ccmsetup started *ccmsetup.log*'
+    - '* invoke admin-service -q *'
+    - '* get collection-members -n USERS*'
+    - '* invoke query *FROM SMS_Admin*'
+    - '* local class-properties SMS_Authority*'
+    - '* get primary-users -u *'
+    - '* local class-instances SMS_Authority*'
+    - '* get site-push-settings*'
+    - '* local query * FROM SMS_Authority*'
+    - '* local secrets -m disk*'
+    - '*SharpSCCM*'
+    - '* get class-properties SMS_Admin*'
+    - '* remove device GUID:001B2EE1-AE95-4146-AE7B-5928F1E4F396*'
+    - '* local secrets -m wmi*'
+    - '* get class-instances SMS_R_System *'
+    process.io.text:
+    - '* -p LastLogonTimestamp -p LastLogonUserName *'
+    - '* local grep *ccmsetup started *ccmsetup.log*'
+    - '* invoke admin-service -q *'
+    - '* get collection-members -n USERS*'
+    - '* invoke query *FROM SMS_Admin*'
+    - '* local class-properties SMS_Authority*'
+    - '* get primary-users -u *'
+    - '* local class-instances SMS_Authority*'
+    - '* get site-push-settings*'
+    - '* local query * FROM SMS_Authority*'
+    - '* local secrets -m disk*'
+    - '*SharpSCCM*'
+    - '* get class-properties SMS_Admin*'
+    - '* remove device GUID:001B2EE1-AE95-4146-AE7B-5928F1E4F396*'
+    - '* local secrets -m wmi*'
+    - '* get class-instances SMS_R_System *'
+    process.title:
+    - '* -p LastLogonTimestamp -p LastLogonUserName *'
+    - '* local grep *ccmsetup started *ccmsetup.log*'
+    - '* invoke admin-service -q *'
+    - '* get collection-members -n USERS*'
+    - '* invoke query *FROM SMS_Admin*'
+    - '* local class-properties SMS_Authority*'
+    - '* get primary-users -u *'
+    - '* local class-instances SMS_Authority*'
+    - '* get site-push-settings*'
+    - '* local query * FROM SMS_Authority*'
+    - '* local secrets -m disk*'
+    - '*SharpSCCM*'
+    - '* get class-properties SMS_Admin*'
+    - '* remove device GUID:001B2EE1-AE95-4146-AE7B-5928F1E4F396*'
+    - '* local secrets -m wmi*'
+    - '* get class-instances SMS_R_System *'
+    pe.company:
+    - '* -p LastLogonTimestamp -p LastLogonUserName *'
+    - '* local grep *ccmsetup started *ccmsetup.log*'
+    - '* invoke admin-service -q *'
+    - '* get collection-members -n USERS*'
+    - '* invoke query *FROM SMS_Admin*'
+    - '* local class-properties SMS_Authority*'
+    - '* get primary-users -u *'
+    - '* local class-instances SMS_Authority*'
+    - '* get site-push-settings*'
+    - '* local query * FROM SMS_Authority*'
+    - '* local secrets -m disk*'
+    - '*SharpSCCM*'
+    - '* get class-properties SMS_Admin*'
+    - '* remove device GUID:001B2EE1-AE95-4146-AE7B-5928F1E4F396*'
+    - '* local secrets -m wmi*'
+    - '* get class-instances SMS_R_System *'
+    pe.description:
+    - '* -p LastLogonTimestamp -p LastLogonUserName *'
+    - '* local grep *ccmsetup started *ccmsetup.log*'
+    - '* invoke admin-service -q *'
+    - '* get collection-members -n USERS*'
+    - '* invoke query *FROM SMS_Admin*'
+    - '* local class-properties SMS_Authority*'
+    - '* get primary-users -u *'
+    - '* local class-instances SMS_Authority*'
+    - '* get site-push-settings*'
+    - '* local query * FROM SMS_Authority*'
+    - '* local secrets -m disk*'
+    - '*SharpSCCM*'
+    - '* get class-properties SMS_Admin*'
+    - '* remove device GUID:001B2EE1-AE95-4146-AE7B-5928F1E4F396*'
+    - '* local secrets -m wmi*'
+    - '* get class-instances SMS_R_System *'
+    pe.product:
+    - '* -p LastLogonTimestamp -p LastLogonUserName *'
+    - '* local grep *ccmsetup started *ccmsetup.log*'
+    - '* invoke admin-service -q *'
+    - '* get collection-members -n USERS*'
+    - '* invoke query *FROM SMS_Admin*'
+    - '* local class-properties SMS_Authority*'
+    - '* get primary-users -u *'
+    - '* local class-instances SMS_Authority*'
+    - '* get site-push-settings*'
+    - '* local query * FROM SMS_Authority*'
+    - '* local secrets -m disk*'
+    - '*SharpSCCM*'
+    - '* get class-properties SMS_Admin*'
+    - '* remove device GUID:001B2EE1-AE95-4146-AE7B-5928F1E4F396*'
+    - '* local secrets -m wmi*'
+    - '* get class-instances SMS_R_System *'
+    os.full:
+    - '* -p LastLogonTimestamp -p LastLogonUserName *'
+    - '* local grep *ccmsetup started *ccmsetup.log*'
+    - '* invoke admin-service -q *'
+    - '* get collection-members -n USERS*'
+    - '* invoke query *FROM SMS_Admin*'
+    - '* local class-properties SMS_Authority*'
+    - '* get primary-users -u *'
+    - '* local class-instances SMS_Authority*'
+    - '* get site-push-settings*'
+    - '* local query * FROM SMS_Authority*'
+    - '* local secrets -m disk*'
+    - '*SharpSCCM*'
+    - '* get class-properties SMS_Admin*'
+    - '* remove device GUID:001B2EE1-AE95-4146-AE7B-5928F1E4F396*'
+    - '* local secrets -m wmi*'
+    - '* get class-instances SMS_R_System *'
+    host.hostname:
+    - '* -p LastLogonTimestamp -p LastLogonUserName *'
+    - '* local grep *ccmsetup started *ccmsetup.log*'
+    - '* invoke admin-service -q *'
+    - '* get collection-members -n USERS*'
+    - '* invoke query *FROM SMS_Admin*'
+    - '* local class-properties SMS_Authority*'
+    - '* get primary-users -u *'
+    - '* local class-instances SMS_Authority*'
+    - '* get site-push-settings*'
+    - '* local query * FROM SMS_Authority*'
+    - '* local secrets -m disk*'
+    - '*SharpSCCM*'
+    - '* get class-properties SMS_Admin*'
+    - '* remove device GUID:001B2EE1-AE95-4146-AE7B-5928F1E4F396*'
+    - '* local secrets -m wmi*'
+    - '* get class-instances SMS_R_System *'
+    event.original:
+    - '* -p LastLogonTimestamp -p LastLogonUserName *'
+    - '* local grep *ccmsetup started *ccmsetup.log*'
+    - '* invoke admin-service -q *'
+    - '* get collection-members -n USERS*'
+    - '* invoke query *FROM SMS_Admin*'
+    - '* local class-properties SMS_Authority*'
+    - '* get primary-users -u *'
+    - '* local class-instances SMS_Authority*'
+    - '* get site-push-settings*'
+    - '* local query * FROM SMS_Authority*'
+    - '* local secrets -m disk*'
+    - '* get class-properties SMS_Admin*'
+    - '* remove device GUID:001B2EE1-AE95-4146-AE7B-5928F1E4F396*'
+    - '* local secrets -m wmi*'
+    - '* get class-instances SMS_R_System *'
+    email.subject:
+    - '* -p LastLogonTimestamp -p LastLogonUserName *'
+    - '* local grep *ccmsetup started *ccmsetup.log*'
+    - '* invoke admin-service -q *'
+    - '* get collection-members -n USERS*'
+    - '* invoke query *FROM SMS_Admin*'
+    - '* local class-properties SMS_Authority*'
+    - '* get primary-users -u *'
+    - '* local class-instances SMS_Authority*'
+    - '* get site-push-settings*'
+    - '* local query * FROM SMS_Authority*'
+    - '* local secrets -m disk*'
+    - '*SharpSCCM*'
+    - '* get class-properties SMS_Admin*'
+    - '* remove device GUID:001B2EE1-AE95-4146-AE7B-5928F1E4F396*'
+    - '* local secrets -m wmi*'
+    - '* get class-instances SMS_R_System *'
+    device.model.name:
+    - '* -p LastLogonTimestamp -p LastLogonUserName *'
+    - '* local grep *ccmsetup started *ccmsetup.log*'
+    - '* invoke admin-service -q *'
+    - '* get collection-members -n USERS*'
+    - '* invoke query *FROM SMS_Admin*'
+    - '* local class-properties SMS_Authority*'
+    - '* get primary-users -u *'
+    - '* local class-instances SMS_Authority*'
+    - '* get site-push-settings*'
+    - '* local query * FROM SMS_Authority*'
+    - '* local secrets -m disk*'
+    - '*SharpSCCM*'
+    - '* get class-properties SMS_Admin*'
+    - '* remove device GUID:001B2EE1-AE95-4146-AE7B-5928F1E4F396*'
+    - '* local secrets -m wmi*'
+    - '* get class-instances SMS_R_System *'
+    container.image.name:
+    - '* -p LastLogonTimestamp -p LastLogonUserName *'
+    - '* local grep *ccmsetup started *ccmsetup.log*'
+    - '* invoke admin-service -q *'
+    - '* get collection-members -n USERS*'
+    - '* invoke query *FROM SMS_Admin*'
+    - '* local class-properties SMS_Authority*'
+    - '* get primary-users -u *'
+    - '* local class-instances SMS_Authority*'
+    - '* get site-push-settings*'
+    - '* local query * FROM SMS_Authority*'
+    - '* local secrets -m disk*'
+    - '*SharpSCCM*'
+    - '* get class-properties SMS_Admin*'
+    - '* remove device GUID:001B2EE1-AE95-4146-AE7B-5928F1E4F396*'
+    - '* local secrets -m wmi*'
+    - '* get class-instances SMS_R_System *'
+    container.name:
+    - '* -p LastLogonTimestamp -p LastLogonUserName *'
+    - '* local grep *ccmsetup started *ccmsetup.log*'
+    - '* invoke admin-service -q *'
+    - '* get collection-members -n USERS*'
+    - '* invoke query *FROM SMS_Admin*'
+    - '* local class-properties SMS_Authority*'
+    - '* get primary-users -u *'
+    - '* local class-instances SMS_Authority*'
+    - '* get site-push-settings*'
+    - '* local query * FROM SMS_Authority*'
+    - '* local secrets -m disk*'
+    - '*SharpSCCM*'
+    - '* get class-properties SMS_Admin*'
+    - '* remove device GUID:001B2EE1-AE95-4146-AE7B-5928F1E4F396*'
+    - '* local secrets -m wmi*'
+    - '* get class-instances SMS_R_System *'
+    Image:
+    - '*SharpSCCM*'
+    OriginalFileName:
+    - '*SharpSCCM*'
+    CurrentDirectory:
+    - '*SharpSCCM*'
+    ParentImage:
+    - '*SharpSCCM*'
+    TargetFilename:
+    - '*SharpSCCM*'
+    Signature:
+    - '*SharpSCCM*'
+    signature:
+    - '*SharpSCCM*'
+    ImageLoaded:
+    - '*SharpSCCM*'
+    Company:
+    - '*SharpSCCM*'
+    Description:
+    - '*SharpSCCM*'
+    description:
+    - '*SharpSCCM*'
+    SourceImage:
+    - '*SharpSCCM*'
+    TargetImage:
+    - '*SharpSCCM*'
+    CallTrace:
+    - '*SharpSCCM*'
+    TargetObject:
+    - '*SharpSCCM*'
+    PipeName:
+    - '*SharpSCCM*'
+    Consumer:
+    - '*SharpSCCM*'
+    Destination:
+    - '*SharpSCCM*'
+    Name:
+    - '*SharpSCCM*'
+    Query:
+    - '*SharpSCCM*'
+    NewName:
+    - '*SharpSCCM*'
+    StartAddress:
+    - '*SharpSCCM*'
+    StartModule:
+    - '*SharpSCCM*'
+    StartFunction:
+    - '*SharpSCCM*'
+    SourceHostname:
+    - '*SharpSCCM*'
+    Device:
+    - '*SharpSCCM*'
+    file_name:
+    - '*SharpSCCM*'
+    file_path:
+    - '*SharpSCCM*'
+    process:
+    - '*SharpSCCM*'
+    original_file_name:
+    - '*SharpSCCM*'
+    parent_process:
+    - '*SharpSCCM*'
+    process_path:
+    - '*SharpSCCM*'
+    service_path:
+    - '*SharpSCCM*'
+    registry_path:
+    - '*SharpSCCM*'
+    registry_value_data:
+    - '*SharpSCCM*'
+    registry_value_name:
+    - '*SharpSCCM*'
+    ContextInfo:
+    - '*SharpSCCM*'
+    Payload:
+    - '*SharpSCCM*'
+    ScriptBlockText:
+    - '*SharpSCCM*'
+    ServerName:
+    - '*SharpSCCM*'
+    TransportName:
+    - '*SharpSCCM*'
+    NewProcessName:
+    - '*SharpSCCM*'
+    ParentProcessName:
+    - '*SharpSCCM*'
+    Application:
+    - '*SharpSCCM*'
+    Product Name:
+    - '*SharpSCCM*'
+    Threat Name:
+    - '*SharpSCCM*'
+    Process Name:
+    - '*SharpSCCM*'
+    Path:
+    - '*SharpSCCM*'
+    ImagePath:
+    - '*SharpSCCM*'
+    ServiceName:
+    - '*SharpSCCM*'
+    ProcessPath:
+    - '*SharpSCCM*'
+    AppName:
+    - '*SharpSCCM*'
+    AppPath:
+    - '*SharpSCCM*'
+    ModulePath:
+    - '*SharpSCCM*'
+    registry.data.strings:
+    - '*SharpSCCM*'
+    registry.path:
+    - '*SharpSCCM*'
+    process.executable:
+    - '*SharpSCCM*'
+    process.name:
+    - '*SharpSCCM*'
+    pe.original_file_name:
+    - '*SharpSCCM*'
+    file.fork_name:
+    - '*SharpSCCM*'
+    file.name:
+    - '*SharpSCCM*'
+    file.path:
+    - '*SharpSCCM*'
+    file.target_path:
+    - '*SharpSCCM*'
+    email.attachments.file.name:
+    - '*SharpSCCM*'
+    dll.path:
+    - '*SharpSCCM*'
+    object:
+    - '*SharpSCCM*'
+    url:
+    - '*SharpSCCM*'
+    dest_url:
+    - '*SharpSCCM*'
+    uri:
+    - '*SharpSCCM*'
+    uri_query:
+    - '*SharpSCCM*'
+    query:
+    - '*SharpSCCM*'
+    url_domain:
+    - '*SharpSCCM*'
+    uri_path:
+    - '*SharpSCCM*'
+    domain:
+    - '*SharpSCCM*'
+    QueryName:
+    - '*SharpSCCM*'
+    QueryResults:
+    - '*SharpSCCM*'
+    DestinationHostname:
+    - '*SharpSCCM*'
+    DestinationIp:
+    - '*SharpSCCM*'
+    http_referrer:
+    - '*SharpSCCM*'
+    http_referrer_domain:
+    - '*SharpSCCM*'
+    http_user_agent:
+    - '*SharpSCCM*'
+    dest_nt_host:
+    - '*SharpSCCM*'
+    sender:
+    - '*SharpSCCM*'
+    recipient:
+    - '*SharpSCCM*'
+    orig_recipient:
+    - '*SharpSCCM*'
+    subject:
+    - '*SharpSCCM*'
+    url.domain:
+    - '*SharpSCCM*'
+    url.full:
+    - '*SharpSCCM*'
+    url.original:
+    - '*SharpSCCM*'
+    url.query:
+    - '*SharpSCCM*'
+    user_agent.original:
+    - '*SharpSCCM*'
+    network.application:
+    - '*SharpSCCM*'
+    http.request.body.content:
+    - '*SharpSCCM*'
+    http.request.referrer:
+    - '*SharpSCCM*'
+    email.from.address:
+    - '*SharpSCCM*'
+    dns.question.name:
+    - '*SharpSCCM*'
+    destination.domain:
+    - '*SharpSCCM*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+- Image
+- OriginalFileName
+- CurrentDirectory
+- ParentImage
+- TargetFilename
+- Signature
+- signature
+- ImageLoaded
+- Company
+- Description
+- description
+- SourceImage
+- TargetImage
+- CallTrace
+- TargetObject
+- PipeName
+- Consumer
+- Destination
+- Name
+- Query
+- NewName
+- StartAddress
+- StartModule
+- StartFunction
+- SourceHostname
+- Device
+- file_name
+- file_path
+- process
+- original_file_name
+- parent_process
+- process_path
+- service_path
+- registry_path
+- registry_value_data
+- registry_value_name
+- ContextInfo
+- Payload
+- ScriptBlockText
+- ServerName
+- TransportName
+- NewProcessName
+- ParentProcessName
+- Application
+- Product Name
+- Threat Name
+- Process Name
+- Path
+- ImagePath
+- ServiceName
+- ProcessPath
+- AppName
+- AppPath
+- ModulePath
+- registry.data.strings
+- registry.path
+- process.executable
+- process.name
+- pe.original_file_name
+- file.fork_name
+- file.name
+- file.path
+- file.target_path
+- email.attachments.file.name
+- dll.path
+- object
+- url
+- dest_url
+- uri
+- uri_query
+- query
+- url_domain
+- uri_path
+- domain
+- QueryName
+- QueryResults
+- DestinationHostname
+- DestinationIp
+- http_referrer
+- http_referrer_domain
+- http_user_agent
+- dest_nt_host
+- sender
+- recipient
+- orig_recipient
+- subject
+- url.domain
+- url.full
+- url.original
+- url.query
+- user_agent.original
+- network.application
+- http.request.body.content
+- http.request.referrer
+- email.from.address
+- dns.question.name
+- destination.domain

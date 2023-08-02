@@ -1,0 +1,170 @@
+title: Simple keyword detection rule for net
+id: 5e6b29c7-c415-48a1-aff5-2c4ed92fb638
+status: experimental
+description:
+- '''adding a user to a privileged group. This action can be used by adversaries to
+  maintain unauthorized access or escalate privileges within the targeted environment.'''
+- '''Conti Ransomware Proxyshell PowerShell command #9'''
+- '''Query Domain Comtrollers Computers in the current domain'''
+- '''Query users from domain admins in current domain'''
+references:
+- https://github.com/RoseSecurity/Red-Teaming-TTPs
+- https://news.sophos.com/en-us/2021/09/03/conti-affiliates-use-proxyshell-exchange-exploit-in-ransomware-attacks/
+- N/A
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1016
+- attack.T1018
+- attack.T1021.002
+- attack.T1027
+- attack.T1049
+- attack.T1055.001
+- attack.T1057
+- attack.T1059.003
+- attack.T1069.002
+- attack.T1080
+- attack.T1083
+- attack.T1087.002
+- attack.T1098
+- attack.T1106
+- attack.T1135
+- attack.T1140
+- attack.T1486
+- attack.T1489
+- attack.T1490
+- attack.TA0001
+- attack.TA0002
+- attack.TA0003
+- attack.TA0006
+- attack.TA0007
+- 'attack.TA0008 '
+- attack.TA0009
+- attack.TA0010
+- attack.TA0011
+logsource:
+  category:
+  - endpoint
+falsepositives:
+- Unknown
+level:
+- Unknown
+detection:
+  selection:
+    ParentCommandLine:
+    - '*net group /domain *Domain Admins*'
+    - '*net group *domain admins* /domain*'
+    - '*net* group Administrator* /add /domain*'
+    - '*net group *Domain Controllers*/domain*'
+    CommandLine:
+    - '*net group /domain *Domain Admins*'
+    - '*net group *domain admins* /domain*'
+    - '*net* group Administrator* /add /domain*'
+    - '*net group *Domain Controllers*/domain*'
+    Details:
+    - '*net group /domain *Domain Admins*'
+    - '*net group *domain admins* /domain*'
+    - '*net* group Administrator* /add /domain*'
+    - '*net group *Domain Controllers*/domain*'
+    registry.value:
+    - '*net group /domain *Domain Admins*'
+    - '*net group *domain admins* /domain*'
+    - '*net* group Administrator* /add /domain*'
+    - '*net group *Domain Controllers*/domain*'
+    process.args:
+    - '*net group /domain *Domain Admins*'
+    - '*net group *domain admins* /domain*'
+    - '*net* group Administrator* /add /domain*'
+    - '*net group *Domain Controllers*/domain*'
+    process.command_line:
+    - '*net group /domain *Domain Admins*'
+    - '*net group *domain admins* /domain*'
+    - '*net* group Administrator* /add /domain*'
+    - '*net group *Domain Controllers*/domain*'
+    process.env_vars:
+    - '*net group /domain *Domain Admins*'
+    - '*net group *domain admins* /domain*'
+    - '*net* group Administrator* /add /domain*'
+    - '*net group *Domain Controllers*/domain*'
+    process.io.text:
+    - '*net group /domain *Domain Admins*'
+    - '*net group *domain admins* /domain*'
+    - '*net* group Administrator* /add /domain*'
+    - '*net group *Domain Controllers*/domain*'
+    process.title:
+    - '*net group /domain *Domain Admins*'
+    - '*net group *domain admins* /domain*'
+    - '*net* group Administrator* /add /domain*'
+    - '*net group *Domain Controllers*/domain*'
+    pe.company:
+    - '*net group /domain *Domain Admins*'
+    - '*net group *domain admins* /domain*'
+    - '*net* group Administrator* /add /domain*'
+    - '*net group *Domain Controllers*/domain*'
+    pe.description:
+    - '*net group /domain *Domain Admins*'
+    - '*net group *domain admins* /domain*'
+    - '*net* group Administrator* /add /domain*'
+    - '*net group *Domain Controllers*/domain*'
+    pe.product:
+    - '*net group /domain *Domain Admins*'
+    - '*net group *domain admins* /domain*'
+    - '*net* group Administrator* /add /domain*'
+    - '*net group *Domain Controllers*/domain*'
+    os.full:
+    - '*net group /domain *Domain Admins*'
+    - '*net group *domain admins* /domain*'
+    - '*net* group Administrator* /add /domain*'
+    - '*net group *Domain Controllers*/domain*'
+    host.hostname:
+    - '*net group /domain *Domain Admins*'
+    - '*net group *domain admins* /domain*'
+    - '*net* group Administrator* /add /domain*'
+    - '*net group *Domain Controllers*/domain*'
+    event.original:
+    - '*net group /domain *Domain Admins*'
+    - '*net group *domain admins* /domain*'
+    - '*net* group Administrator* /add /domain*'
+    - '*net group *Domain Controllers*/domain*'
+    email.subject:
+    - '*net group /domain *Domain Admins*'
+    - '*net group *domain admins* /domain*'
+    - '*net* group Administrator* /add /domain*'
+    - '*net group *Domain Controllers*/domain*'
+    device.model.name:
+    - '*net group /domain *Domain Admins*'
+    - '*net group *domain admins* /domain*'
+    - '*net* group Administrator* /add /domain*'
+    - '*net group *Domain Controllers*/domain*'
+    container.image.name:
+    - '*net group /domain *Domain Admins*'
+    - '*net group *domain admins* /domain*'
+    - '*net* group Administrator* /add /domain*'
+    - '*net group *Domain Controllers*/domain*'
+    container.name:
+    - '*net group /domain *Domain Admins*'
+    - '*net group *domain admins* /domain*'
+    - '*net* group Administrator* /add /domain*'
+    - '*net group *Domain Controllers*/domain*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name

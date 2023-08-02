@@ -1,0 +1,1078 @@
+title: Simple keyword detection rule for adfind
+id: 538c6010-4bb3-412b-8435-81231eefe8dc
+status: experimental
+description:
+- '''Adfind is a command-line tool often used by administrators for Active Directory
+  queries. However. attackers can misuse it to gather valuable information about the
+  network environment. including user accounts. group memberships. domain controllers.
+  and domain trusts. This gathered intelligence can aid in lateral movement. privilege
+  escalation. or even data exfiltration. Such reconnaissance activities often precede
+  more damaging attacks.'''
+- '''attackers perform Active Directory collection using AdFind in batch scripts from
+  C:\Windows\Temp\adf\ or C:\temp\ and store output in CSV files'''
+references:
+- http://www.joeware.net/freetools/tools/adfind/index.htm
+- https://thedfirreport.com/2022/08/08/bumblebee-roasts-its-way-to-domain-admin/
+- https://www.joeware.net/freetools/tools/adfind/usage.htm
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1018
+- attack.T1027
+- attack.T1046
+- attack.T1057
+- attack.T1069
+- attack.T1087
+- attack.T1098
+- attack.T1482
+- attack.T1548 T1134 T1078 T1078.002
+- attack.TA0001
+- attack.TA0002
+- attack.TA0003
+- attack.TA0004
+- attack.TA0007
+- attack.TA0011
+logsource:
+  category:
+  - endpoint
+  - network
+falsepositives:
+- Unknown
+level:
+- Unknown
+detection:
+  selection:
+    Image:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    OriginalFileName:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    CurrentDirectory:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    ParentImage:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    ParentCommandLine:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '* dclist *'
+    - '*adfind.exe -f *(objectcategory=group)* > *.txt*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '* -sc trustdump*'
+    - '*adfind.exe -subnets -f (objectCategory=subnet) > *.txt*'
+    - '*tools/adfind*'
+    - '*adfind.exe -gcb -sc trustdmp > *.txt*'
+    - '*name=*Domain Admins*'
+    - '*adfind.exe -f (objectcategory=person) > *.txt*'
+    - '*adfind -f *'
+    - '*adfind.exe -f (objectcategory=organizationalUnit) > *.txt*'
+    - '*adfind.exe -f objectcategory=computer > *.txt*'
+    TargetFilename:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    Signature:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    signature:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    ImageLoaded:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    Company:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    Description:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    description:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    CommandLine:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '* dclist *'
+    - '*adfind.exe -f *(objectcategory=group)* > *.txt*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '* -sc trustdump*'
+    - '*adfind.exe -subnets -f (objectCategory=subnet) > *.txt*'
+    - '*tools/adfind*'
+    - '*adfind.exe -gcb -sc trustdmp > *.txt*'
+    - '*name=*Domain Admins*'
+    - '*adfind.exe -f (objectcategory=person) > *.txt*'
+    - '*adfind -f *'
+    - '*adfind.exe -f (objectcategory=organizationalUnit) > *.txt*'
+    - '*adfind.exe -f objectcategory=computer > *.txt*'
+    SourceImage:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    TargetImage:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    CallTrace:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    TargetObject:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    Details:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '* dclist *'
+    - '*adfind.exe -f *(objectcategory=group)* > *.txt*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '* -sc trustdump*'
+    - '*adfind.exe -subnets -f (objectCategory=subnet) > *.txt*'
+    - '*tools/adfind*'
+    - '*adfind.exe -gcb -sc trustdmp > *.txt*'
+    - '*name=*Domain Admins*'
+    - '*adfind.exe -f (objectcategory=person) > *.txt*'
+    - '*adfind -f *'
+    - '*adfind.exe -f (objectcategory=organizationalUnit) > *.txt*'
+    - '*adfind.exe -f objectcategory=computer > *.txt*'
+    PipeName:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    Consumer:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    Destination:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    Name:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    Query:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    NewName:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    StartAddress:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    StartModule:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    StartFunction:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    SourceHostname:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    Device:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    file_name:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    file_path:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    process:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    original_file_name:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    parent_process:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    process_path:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    service_path:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    registry_path:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    registry_value_data:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    registry_value_name:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    ContextInfo:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    Payload:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    ScriptBlockText:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    ServerName:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    TransportName:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    NewProcessName:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    ParentProcessName:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    Application:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    Product Name:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    Threat Name:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    Process Name:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    Path:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    ImagePath:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    ServiceName:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    ProcessPath:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    AppName:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    AppPath:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    ModulePath:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    registry.data.strings:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    registry.path:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    registry.value:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '* dclist *'
+    - '*adfind.exe -f *(objectcategory=group)* > *.txt*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '* -sc trustdump*'
+    - '*adfind.exe -subnets -f (objectCategory=subnet) > *.txt*'
+    - '*tools/adfind*'
+    - '*adfind.exe -gcb -sc trustdmp > *.txt*'
+    - '*name=*Domain Admins*'
+    - '*adfind.exe -f (objectcategory=person) > *.txt*'
+    - '*adfind -f *'
+    - '*adfind.exe -f (objectcategory=organizationalUnit) > *.txt*'
+    - '*adfind.exe -f objectcategory=computer > *.txt*'
+    process.args:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '* dclist *'
+    - '*adfind.exe -f *(objectcategory=group)* > *.txt*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '* -sc trustdump*'
+    - '*adfind.exe -subnets -f (objectCategory=subnet) > *.txt*'
+    - '*tools/adfind*'
+    - '*adfind.exe -gcb -sc trustdmp > *.txt*'
+    - '*name=*Domain Admins*'
+    - '*adfind.exe -f (objectcategory=person) > *.txt*'
+    - '*adfind -f *'
+    - '*adfind.exe -f (objectcategory=organizationalUnit) > *.txt*'
+    - '*adfind.exe -f objectcategory=computer > *.txt*'
+    process.command_line:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '* dclist *'
+    - '*adfind.exe -f *(objectcategory=group)* > *.txt*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '* -sc trustdump*'
+    - '*adfind.exe -subnets -f (objectCategory=subnet) > *.txt*'
+    - '*tools/adfind*'
+    - '*adfind.exe -gcb -sc trustdmp > *.txt*'
+    - '*name=*Domain Admins*'
+    - '*adfind.exe -f (objectcategory=person) > *.txt*'
+    - '*adfind -f *'
+    - '*adfind.exe -f (objectcategory=organizationalUnit) > *.txt*'
+    - '*adfind.exe -f objectcategory=computer > *.txt*'
+    process.env_vars:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '* dclist *'
+    - '*adfind.exe -f *(objectcategory=group)* > *.txt*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '* -sc trustdump*'
+    - '*adfind.exe -subnets -f (objectCategory=subnet) > *.txt*'
+    - '*tools/adfind*'
+    - '*adfind.exe -gcb -sc trustdmp > *.txt*'
+    - '*name=*Domain Admins*'
+    - '*adfind.exe -f (objectcategory=person) > *.txt*'
+    - '*adfind -f *'
+    - '*adfind.exe -f (objectcategory=organizationalUnit) > *.txt*'
+    - '*adfind.exe -f objectcategory=computer > *.txt*'
+    process.io.text:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '* dclist *'
+    - '*adfind.exe -f *(objectcategory=group)* > *.txt*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '* -sc trustdump*'
+    - '*adfind.exe -subnets -f (objectCategory=subnet) > *.txt*'
+    - '*tools/adfind*'
+    - '*adfind.exe -gcb -sc trustdmp > *.txt*'
+    - '*name=*Domain Admins*'
+    - '*adfind.exe -f (objectcategory=person) > *.txt*'
+    - '*adfind -f *'
+    - '*adfind.exe -f (objectcategory=organizationalUnit) > *.txt*'
+    - '*adfind.exe -f objectcategory=computer > *.txt*'
+    process.executable:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    process.name:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    process.title:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '* dclist *'
+    - '*adfind.exe -f *(objectcategory=group)* > *.txt*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '* -sc trustdump*'
+    - '*adfind.exe -subnets -f (objectCategory=subnet) > *.txt*'
+    - '*tools/adfind*'
+    - '*adfind.exe -gcb -sc trustdmp > *.txt*'
+    - '*name=*Domain Admins*'
+    - '*adfind.exe -f (objectcategory=person) > *.txt*'
+    - '*adfind -f *'
+    - '*adfind.exe -f (objectcategory=organizationalUnit) > *.txt*'
+    - '*adfind.exe -f objectcategory=computer > *.txt*'
+    pe.company:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '* dclist *'
+    - '*adfind.exe -f *(objectcategory=group)* > *.txt*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '* -sc trustdump*'
+    - '*adfind.exe -subnets -f (objectCategory=subnet) > *.txt*'
+    - '*tools/adfind*'
+    - '*adfind.exe -gcb -sc trustdmp > *.txt*'
+    - '*name=*Domain Admins*'
+    - '*adfind.exe -f (objectcategory=person) > *.txt*'
+    - '*adfind -f *'
+    - '*adfind.exe -f (objectcategory=organizationalUnit) > *.txt*'
+    - '*adfind.exe -f objectcategory=computer > *.txt*'
+    pe.description:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '* dclist *'
+    - '*adfind.exe -f *(objectcategory=group)* > *.txt*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '* -sc trustdump*'
+    - '*adfind.exe -subnets -f (objectCategory=subnet) > *.txt*'
+    - '*tools/adfind*'
+    - '*adfind.exe -gcb -sc trustdmp > *.txt*'
+    - '*name=*Domain Admins*'
+    - '*adfind.exe -f (objectcategory=person) > *.txt*'
+    - '*adfind -f *'
+    - '*adfind.exe -f (objectcategory=organizationalUnit) > *.txt*'
+    - '*adfind.exe -f objectcategory=computer > *.txt*'
+    pe.original_file_name:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    pe.product:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '* dclist *'
+    - '*adfind.exe -f *(objectcategory=group)* > *.txt*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '* -sc trustdump*'
+    - '*adfind.exe -subnets -f (objectCategory=subnet) > *.txt*'
+    - '*tools/adfind*'
+    - '*adfind.exe -gcb -sc trustdmp > *.txt*'
+    - '*name=*Domain Admins*'
+    - '*adfind.exe -f (objectcategory=person) > *.txt*'
+    - '*adfind -f *'
+    - '*adfind.exe -f (objectcategory=organizationalUnit) > *.txt*'
+    - '*adfind.exe -f objectcategory=computer > *.txt*'
+    os.full:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '* dclist *'
+    - '*adfind.exe -f *(objectcategory=group)* > *.txt*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '* -sc trustdump*'
+    - '*adfind.exe -subnets -f (objectCategory=subnet) > *.txt*'
+    - '*tools/adfind*'
+    - '*adfind.exe -gcb -sc trustdmp > *.txt*'
+    - '*name=*Domain Admins*'
+    - '*adfind.exe -f (objectcategory=person) > *.txt*'
+    - '*adfind -f *'
+    - '*adfind.exe -f (objectcategory=organizationalUnit) > *.txt*'
+    - '*adfind.exe -f objectcategory=computer > *.txt*'
+    host.hostname:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '* dclist *'
+    - '*adfind.exe -f *(objectcategory=group)* > *.txt*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '* -sc trustdump*'
+    - '*adfind.exe -subnets -f (objectCategory=subnet) > *.txt*'
+    - '*tools/adfind*'
+    - '*adfind.exe -gcb -sc trustdmp > *.txt*'
+    - '*name=*Domain Admins*'
+    - '*adfind.exe -f (objectcategory=person) > *.txt*'
+    - '*adfind -f *'
+    - '*adfind.exe -f (objectcategory=organizationalUnit) > *.txt*'
+    - '*adfind.exe -f objectcategory=computer > *.txt*'
+    file.fork_name:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    file.name:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    file.path:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    file.target_path:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    email.attachments.file.name:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    email.subject:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '* dclist *'
+    - '*adfind.exe -f *(objectcategory=group)* > *.txt*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '* -sc trustdump*'
+    - '*adfind.exe -subnets -f (objectCategory=subnet) > *.txt*'
+    - '*tools/adfind*'
+    - '*adfind.exe -gcb -sc trustdmp > *.txt*'
+    - '*name=*Domain Admins*'
+    - '*adfind.exe -f (objectcategory=person) > *.txt*'
+    - '*adfind -f *'
+    - '*adfind.exe -f (objectcategory=organizationalUnit) > *.txt*'
+    - '*adfind.exe -f objectcategory=computer > *.txt*'
+    dll.path:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    device.model.name:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '* dclist *'
+    - '*adfind.exe -f *(objectcategory=group)* > *.txt*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '* -sc trustdump*'
+    - '*adfind.exe -subnets -f (objectCategory=subnet) > *.txt*'
+    - '*tools/adfind*'
+    - '*adfind.exe -gcb -sc trustdmp > *.txt*'
+    - '*name=*Domain Admins*'
+    - '*adfind.exe -f (objectcategory=person) > *.txt*'
+    - '*adfind -f *'
+    - '*adfind.exe -f (objectcategory=organizationalUnit) > *.txt*'
+    - '*adfind.exe -f objectcategory=computer > *.txt*'
+    container.image.name:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '* dclist *'
+    - '*adfind.exe -f *(objectcategory=group)* > *.txt*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '* -sc trustdump*'
+    - '*adfind.exe -subnets -f (objectCategory=subnet) > *.txt*'
+    - '*tools/adfind*'
+    - '*adfind.exe -gcb -sc trustdmp > *.txt*'
+    - '*name=*Domain Admins*'
+    - '*adfind.exe -f (objectcategory=person) > *.txt*'
+    - '*adfind -f *'
+    - '*adfind.exe -f (objectcategory=organizationalUnit) > *.txt*'
+    - '*adfind.exe -f objectcategory=computer > *.txt*'
+    container.name:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '* dclist *'
+    - '*adfind.exe -f *(objectcategory=group)* > *.txt*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '* -sc trustdump*'
+    - '*adfind.exe -subnets -f (objectCategory=subnet) > *.txt*'
+    - '*tools/adfind*'
+    - '*adfind.exe -gcb -sc trustdmp > *.txt*'
+    - '*name=*Domain Admins*'
+    - '*adfind.exe -f (objectcategory=person) > *.txt*'
+    - '*adfind -f *'
+    - '*adfind.exe -f (objectcategory=organizationalUnit) > *.txt*'
+    - '*adfind.exe -f objectcategory=computer > *.txt*'
+    object:
+    - '*AdFind.zip*'
+    - '*computers_pwdnotreqd*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    - '*name=*Domain Admins*'
+    url:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    dest_url:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    uri:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    uri_query:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    query:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    url_domain:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    uri_path:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    domain:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    QueryName:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    QueryResults:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    DestinationHostname:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    DestinationIp:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    http_referrer:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    http_referrer_domain:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    http_user_agent:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    dest_nt_host:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    sender:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    recipient:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    orig_recipient:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    subject:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    url.domain:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    url.full:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    url.original:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    url.query:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    user_agent.original:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    network.application:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    http.request.body.content:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    http.request.referrer:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    email.from.address:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    dns.question.name:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    destination.domain:
+    - '*AdFind.zip*'
+    - '*adfind.bat*'
+    - '*adfind.exe*'
+    - '*tools/adfind*'
+    event.original:
+    - '* dclist *'
+    - '*adfind.exe -f *(objectcategory=group)* > *.txt*'
+    - '* -sc trustdump*'
+    - '*adfind.exe -subnets -f (objectCategory=subnet) > *.txt*'
+    - '*adfind.exe -gcb -sc trustdmp > *.txt*'
+    - '*adfind.exe -f (objectcategory=person) > *.txt*'
+    - '*adfind -f *'
+    - '*adfind.exe -f (objectcategory=organizationalUnit) > *.txt*'
+    - '*adfind.exe -f objectcategory=computer > *.txt*'
+  condition: selection
+fields:
+- Image
+- OriginalFileName
+- CurrentDirectory
+- ParentImage
+- ParentCommandLine
+- TargetFilename
+- Signature
+- signature
+- ImageLoaded
+- Company
+- Description
+- description
+- CommandLine
+- SourceImage
+- TargetImage
+- CallTrace
+- TargetObject
+- Details
+- PipeName
+- Consumer
+- Destination
+- Name
+- Query
+- NewName
+- StartAddress
+- StartModule
+- StartFunction
+- SourceHostname
+- Device
+- file_name
+- file_path
+- process
+- original_file_name
+- parent_process
+- process_path
+- service_path
+- registry_path
+- registry_value_data
+- registry_value_name
+- ContextInfo
+- Payload
+- ScriptBlockText
+- ServerName
+- TransportName
+- NewProcessName
+- ParentProcessName
+- Application
+- Product Name
+- Threat Name
+- Process Name
+- Path
+- ImagePath
+- ServiceName
+- ProcessPath
+- AppName
+- AppPath
+- ModulePath
+- registry.data.strings
+- registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.executable
+- process.name
+- process.title
+- pe.company
+- pe.description
+- pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
+- file.fork_name
+- file.name
+- file.path
+- file.target_path
+- email.attachments.file.name
+- email.subject
+- dll.path
+- device.model.name
+- container.image.name
+- container.name
+- object
+- url
+- dest_url
+- uri
+- uri_query
+- query
+- url_domain
+- uri_path
+- domain
+- QueryName
+- QueryResults
+- DestinationHostname
+- DestinationIp
+- http_referrer
+- http_referrer_domain
+- http_user_agent
+- dest_nt_host
+- sender
+- recipient
+- orig_recipient
+- subject
+- url.domain
+- url.full
+- url.original
+- url.query
+- user_agent.original
+- network.application
+- http.request.body.content
+- http.request.referrer
+- email.from.address
+- dns.question.name
+- destination.domain
+- event.original

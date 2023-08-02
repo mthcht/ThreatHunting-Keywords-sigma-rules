@@ -1,0 +1,341 @@
+title: Simple keyword detection rule for Neo4j
+id: cab25b26-9952-431c-a3a3-4ae887d02618
+status: experimental
+description:
+- '''Neo4j queries - Computers AllowedToDelegate to other computers'''
+- '''Neo4j queries - Computers in Unconstrained Delegations'''
+- '''Neo4j queries - Potential SQL Admins'''
+references:
+- https://hideandsec.sh/books/cheatsheets-82c/page/active-directory
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1046
+- attack.T1078.003
+- attack.T1210.002
+- attack.TA0001
+- attack.TA0007
+- attack.TA0040
+logsource:
+  category:
+  - endpoint
+falsepositives:
+- Unknown
+level:
+- Unknown
+detection:
+  selection:
+    ParentCommandLine:
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*neo4j start*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+    CommandLine:
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*neo4j start*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+    Details:
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*neo4j start*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+    registry.value:
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*neo4j start*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+    process.args:
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*neo4j start*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+    process.command_line:
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*neo4j start*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+    process.env_vars:
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*neo4j start*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+    process.io.text:
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*neo4j start*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+    process.title:
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*neo4j start*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+    pe.company:
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*neo4j start*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+    pe.description:
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*neo4j start*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+    pe.product:
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*neo4j start*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+    os.full:
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*neo4j start*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+    host.hostname:
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*neo4j start*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+    event.original:
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+    email.subject:
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*neo4j start*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+    device.model.name:
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*neo4j start*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+    container.image.name:
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*neo4j start*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+    container.name:
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*neo4j start*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+    Image:
+    - '*neo4j start*'
+    OriginalFileName:
+    - '*neo4j start*'
+    CurrentDirectory:
+    - '*neo4j start*'
+    ParentImage:
+    - '*neo4j start*'
+    TargetFilename:
+    - '*neo4j start*'
+    Signature:
+    - '*neo4j start*'
+    signature:
+    - '*neo4j start*'
+    ImageLoaded:
+    - '*neo4j start*'
+    Company:
+    - '*neo4j start*'
+    Description:
+    - '*neo4j start*'
+    description:
+    - '*neo4j start*'
+    SourceImage:
+    - '*neo4j start*'
+    TargetImage:
+    - '*neo4j start*'
+    CallTrace:
+    - '*neo4j start*'
+    TargetObject:
+    - '*neo4j start*'
+    PipeName:
+    - '*neo4j start*'
+    Consumer:
+    - '*neo4j start*'
+    Destination:
+    - '*neo4j start*'
+    Name:
+    - '*neo4j start*'
+    Query:
+    - '*neo4j start*'
+    NewName:
+    - '*neo4j start*'
+    StartAddress:
+    - '*neo4j start*'
+    StartModule:
+    - '*neo4j start*'
+    StartFunction:
+    - '*neo4j start*'
+    SourceHostname:
+    - '*neo4j start*'
+    Device:
+    - '*neo4j start*'
+    file_name:
+    - '*neo4j start*'
+    file_path:
+    - '*neo4j start*'
+    process:
+    - '*neo4j start*'
+    original_file_name:
+    - '*neo4j start*'
+    parent_process:
+    - '*neo4j start*'
+    process_path:
+    - '*neo4j start*'
+    service_path:
+    - '*neo4j start*'
+    registry_path:
+    - '*neo4j start*'
+    registry_value_data:
+    - '*neo4j start*'
+    registry_value_name:
+    - '*neo4j start*'
+    ContextInfo:
+    - '*neo4j start*'
+    Payload:
+    - '*neo4j start*'
+    ScriptBlockText:
+    - '*neo4j start*'
+    ServerName:
+    - '*neo4j start*'
+    TransportName:
+    - '*neo4j start*'
+    NewProcessName:
+    - '*neo4j start*'
+    ParentProcessName:
+    - '*neo4j start*'
+    Application:
+    - '*neo4j start*'
+    Product Name:
+    - '*neo4j start*'
+    Threat Name:
+    - '*neo4j start*'
+    Process Name:
+    - '*neo4j start*'
+    Path:
+    - '*neo4j start*'
+    ImagePath:
+    - '*neo4j start*'
+    ServiceName:
+    - '*neo4j start*'
+    ProcessPath:
+    - '*neo4j start*'
+    AppName:
+    - '*neo4j start*'
+    AppPath:
+    - '*neo4j start*'
+    ModulePath:
+    - '*neo4j start*'
+    registry.data.strings:
+    - '*neo4j start*'
+    registry.path:
+    - '*neo4j start*'
+    process.executable:
+    - '*neo4j start*'
+    process.name:
+    - '*neo4j start*'
+    pe.original_file_name:
+    - '*neo4j start*'
+    file.fork_name:
+    - '*neo4j start*'
+    file.name:
+    - '*neo4j start*'
+    file.path:
+    - '*neo4j start*'
+    file.target_path:
+    - '*neo4j start*'
+    email.attachments.file.name:
+    - '*neo4j start*'
+    dll.path:
+    - '*neo4j start*'
+    object:
+    - '*neo4j start*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+- Image
+- OriginalFileName
+- CurrentDirectory
+- ParentImage
+- TargetFilename
+- Signature
+- signature
+- ImageLoaded
+- Company
+- Description
+- description
+- SourceImage
+- TargetImage
+- CallTrace
+- TargetObject
+- PipeName
+- Consumer
+- Destination
+- Name
+- Query
+- NewName
+- StartAddress
+- StartModule
+- StartFunction
+- SourceHostname
+- Device
+- file_name
+- file_path
+- process
+- original_file_name
+- parent_process
+- process_path
+- service_path
+- registry_path
+- registry_value_data
+- registry_value_name
+- ContextInfo
+- Payload
+- ScriptBlockText
+- ServerName
+- TransportName
+- NewProcessName
+- ParentProcessName
+- Application
+- Product Name
+- Threat Name
+- Process Name
+- Path
+- ImagePath
+- ServiceName
+- ProcessPath
+- AppName
+- AppPath
+- ModulePath
+- registry.data.strings
+- registry.path
+- process.executable
+- process.name
+- pe.original_file_name
+- file.fork_name
+- file.name
+- file.path
+- file.target_path
+- email.attachments.file.name
+- dll.path
+- object

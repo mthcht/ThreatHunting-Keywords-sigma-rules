@@ -1,0 +1,84 @@
+title: Simple keyword detection rule for fltMC
+id: 7f3f8c8c-d6b8-4b5b-89ce-f57bd7e5fa97
+status: experimental
+description:
+- '''Unload Sysmon driver. allow the attacker to bypass sysmon detections (most of
+  it. network monitoring will still be effective)'''
+references:
+- https://github.com/mthcht/Purpleteam/blob/main/Simulation/Windows/System/unload_sysmon_driver_with_fltmc.ps1
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1562.001
+- attack.T1562.002
+- attack.T1562.006
+- attack.TA0005
+logsource:
+  category:
+  - endpoint
+falsepositives:
+- Unknown
+level:
+- Unknown
+detection:
+  selection:
+    ParentCommandLine:
+    - '*fltMC* unload SysmonDrv*'
+    CommandLine:
+    - '*fltMC* unload SysmonDrv*'
+    Details:
+    - '*fltMC* unload SysmonDrv*'
+    registry.value:
+    - '*fltMC* unload SysmonDrv*'
+    process.args:
+    - '*fltMC* unload SysmonDrv*'
+    process.command_line:
+    - '*fltMC* unload SysmonDrv*'
+    process.env_vars:
+    - '*fltMC* unload SysmonDrv*'
+    process.io.text:
+    - '*fltMC* unload SysmonDrv*'
+    process.title:
+    - '*fltMC* unload SysmonDrv*'
+    pe.company:
+    - '*fltMC* unload SysmonDrv*'
+    pe.description:
+    - '*fltMC* unload SysmonDrv*'
+    pe.product:
+    - '*fltMC* unload SysmonDrv*'
+    os.full:
+    - '*fltMC* unload SysmonDrv*'
+    host.hostname:
+    - '*fltMC* unload SysmonDrv*'
+    event.original:
+    - '*fltMC* unload SysmonDrv*'
+    email.subject:
+    - '*fltMC* unload SysmonDrv*'
+    device.model.name:
+    - '*fltMC* unload SysmonDrv*'
+    container.image.name:
+    - '*fltMC* unload SysmonDrv*'
+    container.name:
+    - '*fltMC* unload SysmonDrv*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name

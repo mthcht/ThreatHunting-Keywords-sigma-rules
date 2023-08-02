@@ -1,0 +1,107 @@
+title: Simple keyword detection rule for netsh
+id: 2b2bdd52-8a23-40a3-8dc8-88458eac9f41
+status: experimental
+description:
+- '''Disable Windows Firewall'''
+- '''The actor has used the following commands to enable port forwarding [T1090] on
+  the host'''
+references:
+- https://media.defense.gov/2023/May/24/2003229517/-1/-1/0/CSA_Living_off_the_Land.PDF
+- N/A
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1055.001
+- attack.T1090.003
+- attack.T1123
+- attack.T1562.004
+- attack.TA0002
+- attack.TA0005
+logsource:
+  category:
+  - endpoint
+falsepositives:
+- Unknown
+level:
+- Unknown
+detection:
+  selection:
+    ParentCommandLine:
+    - '*NetSh Advfirewall set allprofiles state off*'
+    - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
+    CommandLine:
+    - '*NetSh Advfirewall set allprofiles state off*'
+    - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
+    Details:
+    - '*NetSh Advfirewall set allprofiles state off*'
+    - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
+    registry.value:
+    - '*NetSh Advfirewall set allprofiles state off*'
+    - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
+    process.args:
+    - '*NetSh Advfirewall set allprofiles state off*'
+    - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
+    process.command_line:
+    - '*NetSh Advfirewall set allprofiles state off*'
+    - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
+    process.env_vars:
+    - '*NetSh Advfirewall set allprofiles state off*'
+    - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
+    process.io.text:
+    - '*NetSh Advfirewall set allprofiles state off*'
+    - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
+    process.title:
+    - '*NetSh Advfirewall set allprofiles state off*'
+    - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
+    pe.company:
+    - '*NetSh Advfirewall set allprofiles state off*'
+    - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
+    pe.description:
+    - '*NetSh Advfirewall set allprofiles state off*'
+    - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
+    pe.product:
+    - '*NetSh Advfirewall set allprofiles state off*'
+    - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
+    os.full:
+    - '*NetSh Advfirewall set allprofiles state off*'
+    - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
+    host.hostname:
+    - '*NetSh Advfirewall set allprofiles state off*'
+    - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
+    event.original:
+    - '*NetSh Advfirewall set allprofiles state off*'
+    - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
+    email.subject:
+    - '*NetSh Advfirewall set allprofiles state off*'
+    - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
+    device.model.name:
+    - '*NetSh Advfirewall set allprofiles state off*'
+    - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
+    container.image.name:
+    - '*NetSh Advfirewall set allprofiles state off*'
+    - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
+    container.name:
+    - '*NetSh Advfirewall set allprofiles state off*'
+    - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name

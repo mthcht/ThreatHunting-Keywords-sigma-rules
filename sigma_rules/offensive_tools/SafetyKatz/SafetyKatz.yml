@@ -1,0 +1,1038 @@
+title: Simple keyword detection rule for SafetyKatz
+id: 0539422f-7e87-4cfe-bae9-82da13cadda6
+status: experimental
+description:
+- '''SafetyKatz is a combination of slightly modified version of @gentilkiwis Mimikatz
+  project and @subtees .NET PE Loader. First. the MiniDumpWriteDump Win32 API call
+  is used to create a minidump of LSASS to C:\Windows\Temp\debug.bin. Then @subtees
+  PELoader is used to load a customized version of Mimikatz that runs sekurlsa::logonpasswords
+  and sekurlsa::ekeys on the minidump file. removing the file after execution is complete'''
+references:
+- https://github.com/GhostPack/SafetyKatz
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1003
+- attack.T1055
+- attack.T1059
+- attack.T1574
+- attack.TA0002
+- attack.TA0003
+- attack.TA0008
+logsource:
+  category:
+  - endpoint
+  - network
+falsepositives:
+- Unknown
+level:
+- critical
+detection:
+  selection:
+    Image:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    OriginalFileName:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    CurrentDirectory:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    ParentImage:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    ParentCommandLine:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    TargetFilename:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    Signature:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    signature:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    ImageLoaded:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    Company:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    Description:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    description:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    CommandLine:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    SourceImage:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    TargetImage:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    CallTrace:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    TargetObject:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    Details:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    PipeName:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    Consumer:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    Destination:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    Name:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    Query:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    NewName:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    StartAddress:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    StartModule:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    StartFunction:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    SourceHostname:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    Device:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    file_name:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    file_path:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    process:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    original_file_name:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    parent_process:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    process_path:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    service_path:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    registry_path:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    registry_value_data:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    registry_value_name:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    ContextInfo:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    Payload:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    ScriptBlockText:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    ServerName:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    TransportName:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    NewProcessName:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    ParentProcessName:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    Application:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    Product Name:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    Threat Name:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    Process Name:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    Path:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    ImagePath:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    ServiceName:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    ProcessPath:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    AppName:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    AppPath:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    ModulePath:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    registry.data.strings:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    registry.path:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    registry.value:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    process.args:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    process.command_line:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    process.env_vars:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    process.io.text:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    process.executable:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    process.name:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    process.title:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    pe.company:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    pe.description:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    pe.original_file_name:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    pe.product:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    os.full:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    host.hostname:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    file.fork_name:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    file.name:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    file.path:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    file.target_path:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    email.attachments.file.name:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    email.subject:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    dll.path:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    device.model.name:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    container.image.name:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    container.name:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    object:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*\SafetyKatz*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    url:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    dest_url:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    uri:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    uri_query:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    query:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    url_domain:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    uri_path:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    domain:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    QueryName:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    QueryResults:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    DestinationHostname:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    DestinationIp:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    http_referrer:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    http_referrer_domain:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    http_user_agent:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    dest_nt_host:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    sender:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    recipient:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    orig_recipient:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    subject:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    url.domain:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    url.full:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    url.original:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    url.query:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    user_agent.original:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    network.application:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    http.request.body.content:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    http.request.referrer:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    email.from.address:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    dns.question.name:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+    destination.domain:
+    - '*SafetyKatz.csproj*'
+    - '*GhostPack/SafetyKatz*'
+    - '*SafetyKatz-master*'
+    - '*/SafetyKatz.git*'
+    - '*SafetyKatz.exe*'
+    - '*SafetyKatz.sln*'
+  condition: selection
+fields:
+- Image
+- OriginalFileName
+- CurrentDirectory
+- ParentImage
+- ParentCommandLine
+- TargetFilename
+- Signature
+- signature
+- ImageLoaded
+- Company
+- Description
+- description
+- CommandLine
+- SourceImage
+- TargetImage
+- CallTrace
+- TargetObject
+- Details
+- PipeName
+- Consumer
+- Destination
+- Name
+- Query
+- NewName
+- StartAddress
+- StartModule
+- StartFunction
+- SourceHostname
+- Device
+- file_name
+- file_path
+- process
+- original_file_name
+- parent_process
+- process_path
+- service_path
+- registry_path
+- registry_value_data
+- registry_value_name
+- ContextInfo
+- Payload
+- ScriptBlockText
+- ServerName
+- TransportName
+- NewProcessName
+- ParentProcessName
+- Application
+- Product Name
+- Threat Name
+- Process Name
+- Path
+- ImagePath
+- ServiceName
+- ProcessPath
+- AppName
+- AppPath
+- ModulePath
+- registry.data.strings
+- registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.executable
+- process.name
+- process.title
+- pe.company
+- pe.description
+- pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
+- file.fork_name
+- file.name
+- file.path
+- file.target_path
+- email.attachments.file.name
+- email.subject
+- dll.path
+- device.model.name
+- container.image.name
+- container.name
+- object
+- url
+- dest_url
+- uri
+- uri_query
+- query
+- url_domain
+- uri_path
+- domain
+- QueryName
+- QueryResults
+- DestinationHostname
+- DestinationIp
+- http_referrer
+- http_referrer_domain
+- http_user_agent
+- dest_nt_host
+- sender
+- recipient
+- orig_recipient
+- subject
+- url.domain
+- url.full
+- url.original
+- url.query
+- user_agent.original
+- network.application
+- http.request.body.content
+- http.request.referrer
+- email.from.address
+- dns.question.name
+- destination.domain

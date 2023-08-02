@@ -1,0 +1,86 @@
+title: Simple keyword detection rule for dpapi.py
+id: 91dc4519-89e4-48d4-8f43-9027f8183d60
+status: experimental
+description:
+- '''the command is used to extract the Data Protection API (DPAPI) backup keys from
+  a target system. DPAPI is a Windows API that provides data protection services to
+  secure sensitive data. such as private keys. passwords. and other secrets. By obtaining
+  the DPAPI backup keys. an attacker can potentially decrypt sensitive data stored
+  on the target system or impersonate users. gaining unauthorized access to other
+  systems and resources.'''
+references:
+- N/A
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1552.006
+- attack.TA0009
+logsource:
+  category:
+  - endpoint
+falsepositives:
+- Unknown
+level:
+- Unknown
+detection:
+  selection:
+    ParentCommandLine:
+    - '*dpapi.py backupkeys -t */*@*'
+    CommandLine:
+    - '*dpapi.py backupkeys -t */*@*'
+    Details:
+    - '*dpapi.py backupkeys -t */*@*'
+    registry.value:
+    - '*dpapi.py backupkeys -t */*@*'
+    process.args:
+    - '*dpapi.py backupkeys -t */*@*'
+    process.command_line:
+    - '*dpapi.py backupkeys -t */*@*'
+    process.env_vars:
+    - '*dpapi.py backupkeys -t */*@*'
+    process.io.text:
+    - '*dpapi.py backupkeys -t */*@*'
+    process.title:
+    - '*dpapi.py backupkeys -t */*@*'
+    pe.company:
+    - '*dpapi.py backupkeys -t */*@*'
+    pe.description:
+    - '*dpapi.py backupkeys -t */*@*'
+    pe.product:
+    - '*dpapi.py backupkeys -t */*@*'
+    os.full:
+    - '*dpapi.py backupkeys -t */*@*'
+    host.hostname:
+    - '*dpapi.py backupkeys -t */*@*'
+    event.original:
+    - '*dpapi.py backupkeys -t */*@*'
+    email.subject:
+    - '*dpapi.py backupkeys -t */*@*'
+    device.model.name:
+    - '*dpapi.py backupkeys -t */*@*'
+    container.image.name:
+    - '*dpapi.py backupkeys -t */*@*'
+    container.name:
+    - '*dpapi.py backupkeys -t */*@*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name

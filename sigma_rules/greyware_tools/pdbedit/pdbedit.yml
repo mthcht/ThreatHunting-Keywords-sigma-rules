@@ -1,0 +1,106 @@
+title: Simple keyword detection rule for pdbedit
+id: 0368f48f-36b6-4aa3-ae92-7aa4f44d2aa2
+status: experimental
+description:
+- '''Enables the verbose listing format. It causes pdbedit to list the users in the
+  database - printing out the account fields in a descriptive format'''
+- '''Sets the smbpasswd listing format. It will make pdbedit list the users in the
+  database - printing out the account fields in a format compatible with the smbpasswd
+  file format.'''
+references:
+- https://github.com/RoseSecurity/Red-Teaming-TTPs/blob/main/Linux.md
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.T1003.003
+- attack.T1087.001
+- attack.TA0006
+- attack.TA0007
+logsource:
+  category:
+  - endpoint
+falsepositives:
+- Unknown
+level:
+- Unknown
+detection:
+  selection:
+    ParentCommandLine:
+    - '*pdbedit -L -v*'
+    - '*pdbedit -L -w*'
+    CommandLine:
+    - '*pdbedit -L -v*'
+    - '*pdbedit -L -w*'
+    Details:
+    - '*pdbedit -L -v*'
+    - '*pdbedit -L -w*'
+    registry.value:
+    - '*pdbedit -L -v*'
+    - '*pdbedit -L -w*'
+    process.args:
+    - '*pdbedit -L -v*'
+    - '*pdbedit -L -w*'
+    process.command_line:
+    - '*pdbedit -L -v*'
+    - '*pdbedit -L -w*'
+    process.env_vars:
+    - '*pdbedit -L -v*'
+    - '*pdbedit -L -w*'
+    process.io.text:
+    - '*pdbedit -L -v*'
+    - '*pdbedit -L -w*'
+    process.title:
+    - '*pdbedit -L -v*'
+    - '*pdbedit -L -w*'
+    pe.company:
+    - '*pdbedit -L -v*'
+    - '*pdbedit -L -w*'
+    pe.description:
+    - '*pdbedit -L -v*'
+    - '*pdbedit -L -w*'
+    pe.product:
+    - '*pdbedit -L -v*'
+    - '*pdbedit -L -w*'
+    os.full:
+    - '*pdbedit -L -v*'
+    - '*pdbedit -L -w*'
+    host.hostname:
+    - '*pdbedit -L -v*'
+    - '*pdbedit -L -w*'
+    event.original:
+    - '*pdbedit -L -v*'
+    - '*pdbedit -L -w*'
+    email.subject:
+    - '*pdbedit -L -v*'
+    - '*pdbedit -L -w*'
+    device.model.name:
+    - '*pdbedit -L -v*'
+    - '*pdbedit -L -w*'
+    container.image.name:
+    - '*pdbedit -L -v*'
+    - '*pdbedit -L -w*'
+    container.name:
+    - '*pdbedit -L -v*'
+    - '*pdbedit -L -w*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name

@@ -1,0 +1,3213 @@
+title: Simple keyword detection rule for powershell
+id: 1d8ddf99-78cc-4d3c-a485-ffdebfd53388
+status: experimental
+description:
+- ''' Command to get the list of accounts with PrincipalsAllowedToDelegateToAccount
+  (used to exploit Bronze Bit Attack)'''
+- ''' propagation of ACL changes on the ''AdminSDHolder'' container. which can be
+  used to maintain unauthorized access or escalate privileges in the targeted environment.
+  The ''AdminSDHolder'' container plays a crucial role in managing the security of
+  protected groups in Active Directory. and forcing ACL changes to propagate may lead
+  to unintended security consequences.'''
+- '''AD Module Enumerate computers with Unconstrained Delegation'''
+- '''AD Module Enumerate principals with Constrained Delegation enabled'''
+- '''AD module Enumerate users'''
+- '''AD Module GroupPolicy - List of GPO in the domain'''
+- '''AD module Logon Script from remote IP'''
+- '''AD Module Search for a particular string in attributes (admin)'''
+- '''Adversaries may attempt to execute powershell script from known accessible location'''
+- '''allows all users to access all computers with a specified configuration'''
+- '''AppLocker Get AppLocker policy'''
+- '''Check local admin access for the current user where the targets are found'''
+- '''command aiming to hide a file.  It can be performed with  powershell on a WINDOWS
+  machine with command option =hidden'''
+- '''command aiming to hide a file. It can be performed with  powershell on a WINDOWS
+  machine with command option =hidden'''
+- '''command pattern used by crackmapexec by default A swiss army knife for pentesting
+  networks'''
+- '''Defense evasion technique In order to avoid detection at any point of the kill
+  chain. attackers use several ways to disable anti-virus. disable Microsoft firewall
+  and clear logs.'''
+- '''Delete powershell history'''
+- '''Deletes contents of recycle bin'''
+- '''Disable AMSI (set to 0 to enable)'''
+- '''Disable scanning all downloaded files and attachments'''
+- '''Enumerate shadow security principals mapped to a high priv group'''
+- '''Exclude powershell from defender detections'''
+- '''Find groups in the current domain (PowerView)'''
+- '''Find local admins on the domain machines'''
+- '''Find machine where the user has admin privs'''
+- '''impair the defenses of the targeted system by disabling ETW logging for PowerShell.
+  This can make it difficult for security teams to monitor and analyze PowerShell
+  activities on the system potentially allowing adversaries to perform malicious actions
+  without being detected'''
+- '''Jenkins Abuse Without admin access'''
+- '''method of dumping the MSOL service account (which allows a DCSync) used by Azure
+  AD Connect Sync'''
+- '''powershell obfuscations techniques observed by malwares - reversed c:\\'''
+- '''powershell obfuscations techniques observed by malwares - reversed HKLM:\'''
+- '''powershell obfuscations techniques observed by malwares - reversed http://'''
+- '''powershell obfuscations techniques observed by malwares - reversed https://'''
+- '''powershell obfuscations techniques observed by malwares - reversed net user'''
+- '''powershell obfuscations techniques observed by malwares - reversed powershell'''
+- '''powershell obfuscations techniques observed by malwares - reversed whoami'''
+- '''Powershell reverse shell'''
+- '''Powerview Enumerate users'''
+- '''PowerView Find users with SPN'''
+- '''PowerView get Locally logged users on a machine'''
+- '''redteam technique - import the ActiveDirectory module without the need to install
+  it on the current computer - the dll has been extracted from a Windows 10 x64 with
+  RSAT installed'''
+- '''the command is used to discover the members of a specific domain group DNSAdmins
+  which can provide an adversary with valuable information about the target environment.
+  The knowledge of group members can be exploited by attackers to identify potential
+  targets for privilege escalation or lateral movement within the network.'''
+references:
+- https://gist.github.com/analyticsearch/7453d22d737e46657eb57c44d5cf4cbb
+- https://github.com/byt3bl33d3r/CrackMapExec
+- https://github.com/hak5/omg-payloads/tree/master/payloads/library/credentials/-OMG-Credz-Plz
+- https://github.com/mthcht/Purpleteam/blob/main/Simulation/Windows/ActiveDirectory/Bruteforce.ps1
+- https://github.com/Porchetta-Industries/CrackMapExec
+- https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md
+- https://github.com/theyoge/AD-Pentesting-Tools/blob/main/Invoke-SDPropagator.ps1
+- https://hideandsec.sh/books/cheatsheets-82c/page/active-directory
+- N/A
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/08/02
+tags:
+- attack.N/A
+- attack.T1003
+- attack.T1003.006
+- attack.T1018
+- attack.T1021
+- attack.T1021.001
+- attack.T1021.002
+- attack.T1021.004
+- attack.T1024
+- attack.T1027
+- attack.T1035
+- attack.T1036
+- attack.T1037.001
+- attack.T1046
+- attack.T1053
+- attack.T1056.002
+- attack.T1057
+- attack.T1059
+- attack.T1059.001
+- attack.T1069.001
+- attack.T1069.002
+- attack.T1070
+- attack.T1070.004
+- attack.T1078.003
+- attack.T1087
+- attack.T1087.001
+- attack.T1087.002
+- attack.T1089
+- attack.T1105
+- attack.T1110.001
+- attack.T1110.003
+- attack.T1110.004
+- attack.T1136
+- 'attack.T1210  T1570 T1021 T1595 T1592 T1589 T1590 '
+- attack.T1210.002
+- attack.T1216
+- attack.T1222
+- attack.T1482
+- attack.T1562
+- attack.T1562.001
+- attack.T1562.002
+- attack.T1566.001
+- attack.T1567.002
+- attack.T1592
+- attack.TA0001
+- attack.TA0002
+- attack.TA0003
+- attack.TA0004
+- attack.TA0005
+- attack.TA0006
+- attack.TA0007
+- attack.TA0008
+- attack.TA0009
+- attack.TA0010
+- attack.TA0011
+- attack.TA0040
+- attack.TA0043
+logsource:
+  category:
+  - endpoint
+  - network
+falsepositives:
+- Unknown
+level:
+- critical
+- high
+- Unknown
+detection:
+  selection:
+    Image:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    OriginalFileName:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    CurrentDirectory:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    ParentImage:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    ParentCommandLine:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - '*Set-MpPreference -DisableRealtimeMonitoring $true*'
+    - Get-NetGroup -FullData*
+    - '*Add-PswaAuthorizationRule -UsernName \* -ComputerName \* -ConfigurationName
+      \*'
+    - '*Get-DomainUser -KerberosPreuthNotRequired -Verbose*'
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*New-Object System.Net.Sockets.TCPClient(*$stream = $client.GetStream()*[byte[]]$bytes
+      = 0..65535*'
+    - '* resu ten*'
+    - '*powershell.exe -noni -nop -w 1 -enc *'
+    - '*Set-MpPreference -DisableIOAVProtection $true*'
+    - '*Get-NetUser -SPN*'
+    - '*Get-LoggedonLocal -ComputerName *'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - Get-ADUser -Filter {DoesNotRequirePreAuth -eq $True} -Properties DoesNotRequirePreAuth
+    - Get-ADUser -Filter {TrustedForDelegation -eq $True}
+    - '*Get-AppLockerPolicy -Effective *'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*\powershell.exe* = hidden*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - Get-ADObject -SearchBase *CN=Shadow Principal Configuration*CN=Services* (Get-ADRootDSE).configurationNamingContext)
+      | select *msDS-ShadowPrincipalSid*
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - '*Get-ADComputer * -Properties PrincipalsAllowedToDelegateToAccount*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Set-MpPreference -DisableScriptScanning 1 *'
+    - cmd.exe /c PowerShell.exe -Exec ByPass -Nol -Enc *
+    - '*powershell New-ItemProperty -Path *HKLM:\SOFTWARE\Policies\Microsoft\Windows
+      Defender* -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*Get-NetGroupMember -GroupName *DNSAdmins*'
+    - '*llehsrewop*'
+    - '*Add-MpPreference -ExclusionProcess *\Windows\System32\WindowsPowerShell\v1.0\powershell.exe*'
+    - '*\\:C*'
+    - Get-ADGroup -Filter *Name -like *admin*
+    - Get-DomainUser -TrustedToAuth
+    - Get-ADComputer -Filter {TrustedForDelegation -eq $True}
+    - '*//:ptth*'
+    - '*Clear-RecycleBin -Force -ErrorAction SilentlyContinue*'
+    - Set-ADObject -SamAccountName * -PropertyName scriptpath -PropertyValue *\*.exe*
+    - '*powershell.exe -exec bypass -noni -nop -w 1 -C*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    - '*\powershell.exe* += hidden*'
+    - '*Powershell.exe  -windowstyle hidden -nop -ExecutionPolicy Bypass  -Commmand
+      *C:\Users\*\AppData\Roaming\*'
+    - Get-ADObject -Filter {msDS-AllowedToDelegateTo * -Properties msDS-AllowedToDelegateTo*
+    TargetFilename:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    Signature:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    signature:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    ImageLoaded:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    Company:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    Description:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    description:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    CommandLine:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - '*Set-MpPreference -DisableRealtimeMonitoring $true*'
+    - Get-NetGroup -FullData*
+    - '*Add-PswaAuthorizationRule -UsernName \* -ComputerName \* -ConfigurationName
+      \*'
+    - '*Get-DomainUser -KerberosPreuthNotRequired -Verbose*'
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*New-Object System.Net.Sockets.TCPClient(*$stream = $client.GetStream()*[byte[]]$bytes
+      = 0..65535*'
+    - '* resu ten*'
+    - '*powershell.exe -noni -nop -w 1 -enc *'
+    - '*Set-MpPreference -DisableIOAVProtection $true*'
+    - '*Get-NetUser -SPN*'
+    - '*Get-LoggedonLocal -ComputerName *'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - Get-ADUser -Filter {DoesNotRequirePreAuth -eq $True} -Properties DoesNotRequirePreAuth
+    - Get-ADUser -Filter {TrustedForDelegation -eq $True}
+    - '*Get-AppLockerPolicy -Effective *'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*\powershell.exe* = hidden*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - Get-ADObject -SearchBase *CN=Shadow Principal Configuration*CN=Services* (Get-ADRootDSE).configurationNamingContext)
+      | select *msDS-ShadowPrincipalSid*
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - '*Get-ADComputer * -Properties PrincipalsAllowedToDelegateToAccount*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Set-MpPreference -DisableScriptScanning 1 *'
+    - cmd.exe /c PowerShell.exe -Exec ByPass -Nol -Enc *
+    - '*powershell New-ItemProperty -Path *HKLM:\SOFTWARE\Policies\Microsoft\Windows
+      Defender* -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*Get-NetGroupMember -GroupName *DNSAdmins*'
+    - '*llehsrewop*'
+    - '*Add-MpPreference -ExclusionProcess *\Windows\System32\WindowsPowerShell\v1.0\powershell.exe*'
+    - '*\\:C*'
+    - Get-ADGroup -Filter *Name -like *admin*
+    - Get-DomainUser -TrustedToAuth
+    - Get-ADComputer -Filter {TrustedForDelegation -eq $True}
+    - '*//:ptth*'
+    - '*Clear-RecycleBin -Force -ErrorAction SilentlyContinue*'
+    - Set-ADObject -SamAccountName * -PropertyName scriptpath -PropertyValue *\*.exe*
+    - '*powershell.exe -exec bypass -noni -nop -w 1 -C*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    - '*\powershell.exe* += hidden*'
+    - '*Powershell.exe  -windowstyle hidden -nop -ExecutionPolicy Bypass  -Commmand
+      *C:\Users\*\AppData\Roaming\*'
+    - Get-ADObject -Filter {msDS-AllowedToDelegateTo * -Properties msDS-AllowedToDelegateTo*
+    SourceImage:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    TargetImage:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    CallTrace:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    TargetObject:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    Details:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - '*Set-MpPreference -DisableRealtimeMonitoring $true*'
+    - Get-NetGroup -FullData*
+    - '*Add-PswaAuthorizationRule -UsernName \* -ComputerName \* -ConfigurationName
+      \*'
+    - '*Get-DomainUser -KerberosPreuthNotRequired -Verbose*'
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*New-Object System.Net.Sockets.TCPClient(*$stream = $client.GetStream()*[byte[]]$bytes
+      = 0..65535*'
+    - '* resu ten*'
+    - '*powershell.exe -noni -nop -w 1 -enc *'
+    - '*Set-MpPreference -DisableIOAVProtection $true*'
+    - '*Get-NetUser -SPN*'
+    - '*Get-LoggedonLocal -ComputerName *'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - Get-ADUser -Filter {DoesNotRequirePreAuth -eq $True} -Properties DoesNotRequirePreAuth
+    - Get-ADUser -Filter {TrustedForDelegation -eq $True}
+    - '*Get-AppLockerPolicy -Effective *'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*\powershell.exe* = hidden*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - Get-ADObject -SearchBase *CN=Shadow Principal Configuration*CN=Services* (Get-ADRootDSE).configurationNamingContext)
+      | select *msDS-ShadowPrincipalSid*
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - '*Get-ADComputer * -Properties PrincipalsAllowedToDelegateToAccount*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Set-MpPreference -DisableScriptScanning 1 *'
+    - cmd.exe /c PowerShell.exe -Exec ByPass -Nol -Enc *
+    - '*powershell New-ItemProperty -Path *HKLM:\SOFTWARE\Policies\Microsoft\Windows
+      Defender* -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*Get-NetGroupMember -GroupName *DNSAdmins*'
+    - '*llehsrewop*'
+    - '*Add-MpPreference -ExclusionProcess *\Windows\System32\WindowsPowerShell\v1.0\powershell.exe*'
+    - '*\\:C*'
+    - Get-ADGroup -Filter *Name -like *admin*
+    - Get-DomainUser -TrustedToAuth
+    - Get-ADComputer -Filter {TrustedForDelegation -eq $True}
+    - '*//:ptth*'
+    - '*Clear-RecycleBin -Force -ErrorAction SilentlyContinue*'
+    - Set-ADObject -SamAccountName * -PropertyName scriptpath -PropertyValue *\*.exe*
+    - '*powershell.exe -exec bypass -noni -nop -w 1 -C*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    - '*\powershell.exe* += hidden*'
+    - '*Powershell.exe  -windowstyle hidden -nop -ExecutionPolicy Bypass  -Commmand
+      *C:\Users\*\AppData\Roaming\*'
+    - Get-ADObject -Filter {msDS-AllowedToDelegateTo * -Properties msDS-AllowedToDelegateTo*
+    PipeName:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    Consumer:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    Destination:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    Name:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    Query:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    NewName:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    StartAddress:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    StartModule:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    StartFunction:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    SourceHostname:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    Device:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    file_name:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    file_path:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    process:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    original_file_name:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    parent_process:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    process_path:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    service_path:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    registry_path:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    registry_value_data:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    registry_value_name:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    ContextInfo:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    Payload:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    ScriptBlockText:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    ServerName:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    TransportName:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    NewProcessName:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    ParentProcessName:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    Application:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    Product Name:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    Threat Name:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    Process Name:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    Path:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    ImagePath:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    ServiceName:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    ProcessPath:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    AppName:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    AppPath:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    ModulePath:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    registry.data.strings:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    registry.path:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    registry.value:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - '*Set-MpPreference -DisableRealtimeMonitoring $true*'
+    - Get-NetGroup -FullData*
+    - '*Add-PswaAuthorizationRule -UsernName \* -ComputerName \* -ConfigurationName
+      \*'
+    - '*Get-DomainUser -KerberosPreuthNotRequired -Verbose*'
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*New-Object System.Net.Sockets.TCPClient(*$stream = $client.GetStream()*[byte[]]$bytes
+      = 0..65535*'
+    - '* resu ten*'
+    - '*powershell.exe -noni -nop -w 1 -enc *'
+    - '*Set-MpPreference -DisableIOAVProtection $true*'
+    - '*Get-NetUser -SPN*'
+    - '*Get-LoggedonLocal -ComputerName *'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - Get-ADUser -Filter {DoesNotRequirePreAuth -eq $True} -Properties DoesNotRequirePreAuth
+    - Get-ADUser -Filter {TrustedForDelegation -eq $True}
+    - '*Get-AppLockerPolicy -Effective *'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*\powershell.exe* = hidden*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - Get-ADObject -SearchBase *CN=Shadow Principal Configuration*CN=Services* (Get-ADRootDSE).configurationNamingContext)
+      | select *msDS-ShadowPrincipalSid*
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - '*Get-ADComputer * -Properties PrincipalsAllowedToDelegateToAccount*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Set-MpPreference -DisableScriptScanning 1 *'
+    - cmd.exe /c PowerShell.exe -Exec ByPass -Nol -Enc *
+    - '*powershell New-ItemProperty -Path *HKLM:\SOFTWARE\Policies\Microsoft\Windows
+      Defender* -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*Get-NetGroupMember -GroupName *DNSAdmins*'
+    - '*llehsrewop*'
+    - '*Add-MpPreference -ExclusionProcess *\Windows\System32\WindowsPowerShell\v1.0\powershell.exe*'
+    - '*\\:C*'
+    - Get-ADGroup -Filter *Name -like *admin*
+    - Get-DomainUser -TrustedToAuth
+    - Get-ADComputer -Filter {TrustedForDelegation -eq $True}
+    - '*//:ptth*'
+    - '*Clear-RecycleBin -Force -ErrorAction SilentlyContinue*'
+    - Set-ADObject -SamAccountName * -PropertyName scriptpath -PropertyValue *\*.exe*
+    - '*powershell.exe -exec bypass -noni -nop -w 1 -C*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    - '*\powershell.exe* += hidden*'
+    - '*Powershell.exe  -windowstyle hidden -nop -ExecutionPolicy Bypass  -Commmand
+      *C:\Users\*\AppData\Roaming\*'
+    - Get-ADObject -Filter {msDS-AllowedToDelegateTo * -Properties msDS-AllowedToDelegateTo*
+    process.args:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - '*Set-MpPreference -DisableRealtimeMonitoring $true*'
+    - Get-NetGroup -FullData*
+    - '*Add-PswaAuthorizationRule -UsernName \* -ComputerName \* -ConfigurationName
+      \*'
+    - '*Get-DomainUser -KerberosPreuthNotRequired -Verbose*'
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*New-Object System.Net.Sockets.TCPClient(*$stream = $client.GetStream()*[byte[]]$bytes
+      = 0..65535*'
+    - '* resu ten*'
+    - '*powershell.exe -noni -nop -w 1 -enc *'
+    - '*Set-MpPreference -DisableIOAVProtection $true*'
+    - '*Get-NetUser -SPN*'
+    - '*Get-LoggedonLocal -ComputerName *'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - Get-ADUser -Filter {DoesNotRequirePreAuth -eq $True} -Properties DoesNotRequirePreAuth
+    - Get-ADUser -Filter {TrustedForDelegation -eq $True}
+    - '*Get-AppLockerPolicy -Effective *'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*\powershell.exe* = hidden*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - Get-ADObject -SearchBase *CN=Shadow Principal Configuration*CN=Services* (Get-ADRootDSE).configurationNamingContext)
+      | select *msDS-ShadowPrincipalSid*
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - '*Get-ADComputer * -Properties PrincipalsAllowedToDelegateToAccount*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Set-MpPreference -DisableScriptScanning 1 *'
+    - cmd.exe /c PowerShell.exe -Exec ByPass -Nol -Enc *
+    - '*powershell New-ItemProperty -Path *HKLM:\SOFTWARE\Policies\Microsoft\Windows
+      Defender* -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*Get-NetGroupMember -GroupName *DNSAdmins*'
+    - '*llehsrewop*'
+    - '*Add-MpPreference -ExclusionProcess *\Windows\System32\WindowsPowerShell\v1.0\powershell.exe*'
+    - '*\\:C*'
+    - Get-ADGroup -Filter *Name -like *admin*
+    - Get-DomainUser -TrustedToAuth
+    - Get-ADComputer -Filter {TrustedForDelegation -eq $True}
+    - '*//:ptth*'
+    - '*Clear-RecycleBin -Force -ErrorAction SilentlyContinue*'
+    - Set-ADObject -SamAccountName * -PropertyName scriptpath -PropertyValue *\*.exe*
+    - '*powershell.exe -exec bypass -noni -nop -w 1 -C*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    - '*\powershell.exe* += hidden*'
+    - '*Powershell.exe  -windowstyle hidden -nop -ExecutionPolicy Bypass  -Commmand
+      *C:\Users\*\AppData\Roaming\*'
+    - Get-ADObject -Filter {msDS-AllowedToDelegateTo * -Properties msDS-AllowedToDelegateTo*
+    process.command_line:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - '*Set-MpPreference -DisableRealtimeMonitoring $true*'
+    - Get-NetGroup -FullData*
+    - '*Add-PswaAuthorizationRule -UsernName \* -ComputerName \* -ConfigurationName
+      \*'
+    - '*Get-DomainUser -KerberosPreuthNotRequired -Verbose*'
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*New-Object System.Net.Sockets.TCPClient(*$stream = $client.GetStream()*[byte[]]$bytes
+      = 0..65535*'
+    - '* resu ten*'
+    - '*powershell.exe -noni -nop -w 1 -enc *'
+    - '*Set-MpPreference -DisableIOAVProtection $true*'
+    - '*Get-NetUser -SPN*'
+    - '*Get-LoggedonLocal -ComputerName *'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - Get-ADUser -Filter {DoesNotRequirePreAuth -eq $True} -Properties DoesNotRequirePreAuth
+    - Get-ADUser -Filter {TrustedForDelegation -eq $True}
+    - '*Get-AppLockerPolicy -Effective *'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*\powershell.exe* = hidden*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - Get-ADObject -SearchBase *CN=Shadow Principal Configuration*CN=Services* (Get-ADRootDSE).configurationNamingContext)
+      | select *msDS-ShadowPrincipalSid*
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - '*Get-ADComputer * -Properties PrincipalsAllowedToDelegateToAccount*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Set-MpPreference -DisableScriptScanning 1 *'
+    - cmd.exe /c PowerShell.exe -Exec ByPass -Nol -Enc *
+    - '*powershell New-ItemProperty -Path *HKLM:\SOFTWARE\Policies\Microsoft\Windows
+      Defender* -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*Get-NetGroupMember -GroupName *DNSAdmins*'
+    - '*llehsrewop*'
+    - '*Add-MpPreference -ExclusionProcess *\Windows\System32\WindowsPowerShell\v1.0\powershell.exe*'
+    - '*\\:C*'
+    - Get-ADGroup -Filter *Name -like *admin*
+    - Get-DomainUser -TrustedToAuth
+    - Get-ADComputer -Filter {TrustedForDelegation -eq $True}
+    - '*//:ptth*'
+    - '*Clear-RecycleBin -Force -ErrorAction SilentlyContinue*'
+    - Set-ADObject -SamAccountName * -PropertyName scriptpath -PropertyValue *\*.exe*
+    - '*powershell.exe -exec bypass -noni -nop -w 1 -C*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    - '*\powershell.exe* += hidden*'
+    - '*Powershell.exe  -windowstyle hidden -nop -ExecutionPolicy Bypass  -Commmand
+      *C:\Users\*\AppData\Roaming\*'
+    - Get-ADObject -Filter {msDS-AllowedToDelegateTo * -Properties msDS-AllowedToDelegateTo*
+    process.env_vars:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - '*Set-MpPreference -DisableRealtimeMonitoring $true*'
+    - Get-NetGroup -FullData*
+    - '*Add-PswaAuthorizationRule -UsernName \* -ComputerName \* -ConfigurationName
+      \*'
+    - '*Get-DomainUser -KerberosPreuthNotRequired -Verbose*'
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*New-Object System.Net.Sockets.TCPClient(*$stream = $client.GetStream()*[byte[]]$bytes
+      = 0..65535*'
+    - '* resu ten*'
+    - '*powershell.exe -noni -nop -w 1 -enc *'
+    - '*Set-MpPreference -DisableIOAVProtection $true*'
+    - '*Get-NetUser -SPN*'
+    - '*Get-LoggedonLocal -ComputerName *'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - Get-ADUser -Filter {DoesNotRequirePreAuth -eq $True} -Properties DoesNotRequirePreAuth
+    - Get-ADUser -Filter {TrustedForDelegation -eq $True}
+    - '*Get-AppLockerPolicy -Effective *'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*\powershell.exe* = hidden*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - Get-ADObject -SearchBase *CN=Shadow Principal Configuration*CN=Services* (Get-ADRootDSE).configurationNamingContext)
+      | select *msDS-ShadowPrincipalSid*
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - '*Get-ADComputer * -Properties PrincipalsAllowedToDelegateToAccount*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Set-MpPreference -DisableScriptScanning 1 *'
+    - cmd.exe /c PowerShell.exe -Exec ByPass -Nol -Enc *
+    - '*powershell New-ItemProperty -Path *HKLM:\SOFTWARE\Policies\Microsoft\Windows
+      Defender* -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*Get-NetGroupMember -GroupName *DNSAdmins*'
+    - '*llehsrewop*'
+    - '*Add-MpPreference -ExclusionProcess *\Windows\System32\WindowsPowerShell\v1.0\powershell.exe*'
+    - '*\\:C*'
+    - Get-ADGroup -Filter *Name -like *admin*
+    - Get-DomainUser -TrustedToAuth
+    - Get-ADComputer -Filter {TrustedForDelegation -eq $True}
+    - '*//:ptth*'
+    - '*Clear-RecycleBin -Force -ErrorAction SilentlyContinue*'
+    - Set-ADObject -SamAccountName * -PropertyName scriptpath -PropertyValue *\*.exe*
+    - '*powershell.exe -exec bypass -noni -nop -w 1 -C*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    - '*\powershell.exe* += hidden*'
+    - '*Powershell.exe  -windowstyle hidden -nop -ExecutionPolicy Bypass  -Commmand
+      *C:\Users\*\AppData\Roaming\*'
+    - Get-ADObject -Filter {msDS-AllowedToDelegateTo * -Properties msDS-AllowedToDelegateTo*
+    process.io.text:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - '*Set-MpPreference -DisableRealtimeMonitoring $true*'
+    - Get-NetGroup -FullData*
+    - '*Add-PswaAuthorizationRule -UsernName \* -ComputerName \* -ConfigurationName
+      \*'
+    - '*Get-DomainUser -KerberosPreuthNotRequired -Verbose*'
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*New-Object System.Net.Sockets.TCPClient(*$stream = $client.GetStream()*[byte[]]$bytes
+      = 0..65535*'
+    - '* resu ten*'
+    - '*powershell.exe -noni -nop -w 1 -enc *'
+    - '*Set-MpPreference -DisableIOAVProtection $true*'
+    - '*Get-NetUser -SPN*'
+    - '*Get-LoggedonLocal -ComputerName *'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - Get-ADUser -Filter {DoesNotRequirePreAuth -eq $True} -Properties DoesNotRequirePreAuth
+    - Get-ADUser -Filter {TrustedForDelegation -eq $True}
+    - '*Get-AppLockerPolicy -Effective *'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*\powershell.exe* = hidden*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - Get-ADObject -SearchBase *CN=Shadow Principal Configuration*CN=Services* (Get-ADRootDSE).configurationNamingContext)
+      | select *msDS-ShadowPrincipalSid*
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - '*Get-ADComputer * -Properties PrincipalsAllowedToDelegateToAccount*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Set-MpPreference -DisableScriptScanning 1 *'
+    - cmd.exe /c PowerShell.exe -Exec ByPass -Nol -Enc *
+    - '*powershell New-ItemProperty -Path *HKLM:\SOFTWARE\Policies\Microsoft\Windows
+      Defender* -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*Get-NetGroupMember -GroupName *DNSAdmins*'
+    - '*llehsrewop*'
+    - '*Add-MpPreference -ExclusionProcess *\Windows\System32\WindowsPowerShell\v1.0\powershell.exe*'
+    - '*\\:C*'
+    - Get-ADGroup -Filter *Name -like *admin*
+    - Get-DomainUser -TrustedToAuth
+    - Get-ADComputer -Filter {TrustedForDelegation -eq $True}
+    - '*//:ptth*'
+    - '*Clear-RecycleBin -Force -ErrorAction SilentlyContinue*'
+    - Set-ADObject -SamAccountName * -PropertyName scriptpath -PropertyValue *\*.exe*
+    - '*powershell.exe -exec bypass -noni -nop -w 1 -C*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    - '*\powershell.exe* += hidden*'
+    - '*Powershell.exe  -windowstyle hidden -nop -ExecutionPolicy Bypass  -Commmand
+      *C:\Users\*\AppData\Roaming\*'
+    - Get-ADObject -Filter {msDS-AllowedToDelegateTo * -Properties msDS-AllowedToDelegateTo*
+    process.executable:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    process.name:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    process.title:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - '*Set-MpPreference -DisableRealtimeMonitoring $true*'
+    - Get-NetGroup -FullData*
+    - '*Add-PswaAuthorizationRule -UsernName \* -ComputerName \* -ConfigurationName
+      \*'
+    - '*Get-DomainUser -KerberosPreuthNotRequired -Verbose*'
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*New-Object System.Net.Sockets.TCPClient(*$stream = $client.GetStream()*[byte[]]$bytes
+      = 0..65535*'
+    - '* resu ten*'
+    - '*powershell.exe -noni -nop -w 1 -enc *'
+    - '*Set-MpPreference -DisableIOAVProtection $true*'
+    - '*Get-NetUser -SPN*'
+    - '*Get-LoggedonLocal -ComputerName *'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - Get-ADUser -Filter {DoesNotRequirePreAuth -eq $True} -Properties DoesNotRequirePreAuth
+    - Get-ADUser -Filter {TrustedForDelegation -eq $True}
+    - '*Get-AppLockerPolicy -Effective *'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*\powershell.exe* = hidden*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - Get-ADObject -SearchBase *CN=Shadow Principal Configuration*CN=Services* (Get-ADRootDSE).configurationNamingContext)
+      | select *msDS-ShadowPrincipalSid*
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - '*Get-ADComputer * -Properties PrincipalsAllowedToDelegateToAccount*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Set-MpPreference -DisableScriptScanning 1 *'
+    - cmd.exe /c PowerShell.exe -Exec ByPass -Nol -Enc *
+    - '*powershell New-ItemProperty -Path *HKLM:\SOFTWARE\Policies\Microsoft\Windows
+      Defender* -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*Get-NetGroupMember -GroupName *DNSAdmins*'
+    - '*llehsrewop*'
+    - '*Add-MpPreference -ExclusionProcess *\Windows\System32\WindowsPowerShell\v1.0\powershell.exe*'
+    - '*\\:C*'
+    - Get-ADGroup -Filter *Name -like *admin*
+    - Get-DomainUser -TrustedToAuth
+    - Get-ADComputer -Filter {TrustedForDelegation -eq $True}
+    - '*//:ptth*'
+    - '*Clear-RecycleBin -Force -ErrorAction SilentlyContinue*'
+    - Set-ADObject -SamAccountName * -PropertyName scriptpath -PropertyValue *\*.exe*
+    - '*powershell.exe -exec bypass -noni -nop -w 1 -C*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    - '*\powershell.exe* += hidden*'
+    - '*Powershell.exe  -windowstyle hidden -nop -ExecutionPolicy Bypass  -Commmand
+      *C:\Users\*\AppData\Roaming\*'
+    - Get-ADObject -Filter {msDS-AllowedToDelegateTo * -Properties msDS-AllowedToDelegateTo*
+    pe.company:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - '*Set-MpPreference -DisableRealtimeMonitoring $true*'
+    - Get-NetGroup -FullData*
+    - '*Add-PswaAuthorizationRule -UsernName \* -ComputerName \* -ConfigurationName
+      \*'
+    - '*Get-DomainUser -KerberosPreuthNotRequired -Verbose*'
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*New-Object System.Net.Sockets.TCPClient(*$stream = $client.GetStream()*[byte[]]$bytes
+      = 0..65535*'
+    - '* resu ten*'
+    - '*powershell.exe -noni -nop -w 1 -enc *'
+    - '*Set-MpPreference -DisableIOAVProtection $true*'
+    - '*Get-NetUser -SPN*'
+    - '*Get-LoggedonLocal -ComputerName *'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - Get-ADUser -Filter {DoesNotRequirePreAuth -eq $True} -Properties DoesNotRequirePreAuth
+    - Get-ADUser -Filter {TrustedForDelegation -eq $True}
+    - '*Get-AppLockerPolicy -Effective *'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*\powershell.exe* = hidden*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - Get-ADObject -SearchBase *CN=Shadow Principal Configuration*CN=Services* (Get-ADRootDSE).configurationNamingContext)
+      | select *msDS-ShadowPrincipalSid*
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - '*Get-ADComputer * -Properties PrincipalsAllowedToDelegateToAccount*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Set-MpPreference -DisableScriptScanning 1 *'
+    - cmd.exe /c PowerShell.exe -Exec ByPass -Nol -Enc *
+    - '*powershell New-ItemProperty -Path *HKLM:\SOFTWARE\Policies\Microsoft\Windows
+      Defender* -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*Get-NetGroupMember -GroupName *DNSAdmins*'
+    - '*llehsrewop*'
+    - '*Add-MpPreference -ExclusionProcess *\Windows\System32\WindowsPowerShell\v1.0\powershell.exe*'
+    - '*\\:C*'
+    - Get-ADGroup -Filter *Name -like *admin*
+    - Get-DomainUser -TrustedToAuth
+    - Get-ADComputer -Filter {TrustedForDelegation -eq $True}
+    - '*//:ptth*'
+    - '*Clear-RecycleBin -Force -ErrorAction SilentlyContinue*'
+    - Set-ADObject -SamAccountName * -PropertyName scriptpath -PropertyValue *\*.exe*
+    - '*powershell.exe -exec bypass -noni -nop -w 1 -C*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    - '*\powershell.exe* += hidden*'
+    - '*Powershell.exe  -windowstyle hidden -nop -ExecutionPolicy Bypass  -Commmand
+      *C:\Users\*\AppData\Roaming\*'
+    - Get-ADObject -Filter {msDS-AllowedToDelegateTo * -Properties msDS-AllowedToDelegateTo*
+    pe.description:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - '*Set-MpPreference -DisableRealtimeMonitoring $true*'
+    - Get-NetGroup -FullData*
+    - '*Add-PswaAuthorizationRule -UsernName \* -ComputerName \* -ConfigurationName
+      \*'
+    - '*Get-DomainUser -KerberosPreuthNotRequired -Verbose*'
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*New-Object System.Net.Sockets.TCPClient(*$stream = $client.GetStream()*[byte[]]$bytes
+      = 0..65535*'
+    - '* resu ten*'
+    - '*powershell.exe -noni -nop -w 1 -enc *'
+    - '*Set-MpPreference -DisableIOAVProtection $true*'
+    - '*Get-NetUser -SPN*'
+    - '*Get-LoggedonLocal -ComputerName *'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - Get-ADUser -Filter {DoesNotRequirePreAuth -eq $True} -Properties DoesNotRequirePreAuth
+    - Get-ADUser -Filter {TrustedForDelegation -eq $True}
+    - '*Get-AppLockerPolicy -Effective *'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*\powershell.exe* = hidden*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - Get-ADObject -SearchBase *CN=Shadow Principal Configuration*CN=Services* (Get-ADRootDSE).configurationNamingContext)
+      | select *msDS-ShadowPrincipalSid*
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - '*Get-ADComputer * -Properties PrincipalsAllowedToDelegateToAccount*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Set-MpPreference -DisableScriptScanning 1 *'
+    - cmd.exe /c PowerShell.exe -Exec ByPass -Nol -Enc *
+    - '*powershell New-ItemProperty -Path *HKLM:\SOFTWARE\Policies\Microsoft\Windows
+      Defender* -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*Get-NetGroupMember -GroupName *DNSAdmins*'
+    - '*llehsrewop*'
+    - '*Add-MpPreference -ExclusionProcess *\Windows\System32\WindowsPowerShell\v1.0\powershell.exe*'
+    - '*\\:C*'
+    - Get-ADGroup -Filter *Name -like *admin*
+    - Get-DomainUser -TrustedToAuth
+    - Get-ADComputer -Filter {TrustedForDelegation -eq $True}
+    - '*//:ptth*'
+    - '*Clear-RecycleBin -Force -ErrorAction SilentlyContinue*'
+    - Set-ADObject -SamAccountName * -PropertyName scriptpath -PropertyValue *\*.exe*
+    - '*powershell.exe -exec bypass -noni -nop -w 1 -C*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    - '*\powershell.exe* += hidden*'
+    - '*Powershell.exe  -windowstyle hidden -nop -ExecutionPolicy Bypass  -Commmand
+      *C:\Users\*\AppData\Roaming\*'
+    - Get-ADObject -Filter {msDS-AllowedToDelegateTo * -Properties msDS-AllowedToDelegateTo*
+    pe.original_file_name:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    pe.product:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - '*Set-MpPreference -DisableRealtimeMonitoring $true*'
+    - Get-NetGroup -FullData*
+    - '*Add-PswaAuthorizationRule -UsernName \* -ComputerName \* -ConfigurationName
+      \*'
+    - '*Get-DomainUser -KerberosPreuthNotRequired -Verbose*'
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*New-Object System.Net.Sockets.TCPClient(*$stream = $client.GetStream()*[byte[]]$bytes
+      = 0..65535*'
+    - '* resu ten*'
+    - '*powershell.exe -noni -nop -w 1 -enc *'
+    - '*Set-MpPreference -DisableIOAVProtection $true*'
+    - '*Get-NetUser -SPN*'
+    - '*Get-LoggedonLocal -ComputerName *'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - Get-ADUser -Filter {DoesNotRequirePreAuth -eq $True} -Properties DoesNotRequirePreAuth
+    - Get-ADUser -Filter {TrustedForDelegation -eq $True}
+    - '*Get-AppLockerPolicy -Effective *'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*\powershell.exe* = hidden*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - Get-ADObject -SearchBase *CN=Shadow Principal Configuration*CN=Services* (Get-ADRootDSE).configurationNamingContext)
+      | select *msDS-ShadowPrincipalSid*
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - '*Get-ADComputer * -Properties PrincipalsAllowedToDelegateToAccount*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Set-MpPreference -DisableScriptScanning 1 *'
+    - cmd.exe /c PowerShell.exe -Exec ByPass -Nol -Enc *
+    - '*powershell New-ItemProperty -Path *HKLM:\SOFTWARE\Policies\Microsoft\Windows
+      Defender* -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*Get-NetGroupMember -GroupName *DNSAdmins*'
+    - '*llehsrewop*'
+    - '*Add-MpPreference -ExclusionProcess *\Windows\System32\WindowsPowerShell\v1.0\powershell.exe*'
+    - '*\\:C*'
+    - Get-ADGroup -Filter *Name -like *admin*
+    - Get-DomainUser -TrustedToAuth
+    - Get-ADComputer -Filter {TrustedForDelegation -eq $True}
+    - '*//:ptth*'
+    - '*Clear-RecycleBin -Force -ErrorAction SilentlyContinue*'
+    - Set-ADObject -SamAccountName * -PropertyName scriptpath -PropertyValue *\*.exe*
+    - '*powershell.exe -exec bypass -noni -nop -w 1 -C*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    - '*\powershell.exe* += hidden*'
+    - '*Powershell.exe  -windowstyle hidden -nop -ExecutionPolicy Bypass  -Commmand
+      *C:\Users\*\AppData\Roaming\*'
+    - Get-ADObject -Filter {msDS-AllowedToDelegateTo * -Properties msDS-AllowedToDelegateTo*
+    os.full:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - '*Set-MpPreference -DisableRealtimeMonitoring $true*'
+    - Get-NetGroup -FullData*
+    - '*Add-PswaAuthorizationRule -UsernName \* -ComputerName \* -ConfigurationName
+      \*'
+    - '*Get-DomainUser -KerberosPreuthNotRequired -Verbose*'
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*New-Object System.Net.Sockets.TCPClient(*$stream = $client.GetStream()*[byte[]]$bytes
+      = 0..65535*'
+    - '* resu ten*'
+    - '*powershell.exe -noni -nop -w 1 -enc *'
+    - '*Set-MpPreference -DisableIOAVProtection $true*'
+    - '*Get-NetUser -SPN*'
+    - '*Get-LoggedonLocal -ComputerName *'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - Get-ADUser -Filter {DoesNotRequirePreAuth -eq $True} -Properties DoesNotRequirePreAuth
+    - Get-ADUser -Filter {TrustedForDelegation -eq $True}
+    - '*Get-AppLockerPolicy -Effective *'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*\powershell.exe* = hidden*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - Get-ADObject -SearchBase *CN=Shadow Principal Configuration*CN=Services* (Get-ADRootDSE).configurationNamingContext)
+      | select *msDS-ShadowPrincipalSid*
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - '*Get-ADComputer * -Properties PrincipalsAllowedToDelegateToAccount*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Set-MpPreference -DisableScriptScanning 1 *'
+    - cmd.exe /c PowerShell.exe -Exec ByPass -Nol -Enc *
+    - '*powershell New-ItemProperty -Path *HKLM:\SOFTWARE\Policies\Microsoft\Windows
+      Defender* -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*Get-NetGroupMember -GroupName *DNSAdmins*'
+    - '*llehsrewop*'
+    - '*Add-MpPreference -ExclusionProcess *\Windows\System32\WindowsPowerShell\v1.0\powershell.exe*'
+    - '*\\:C*'
+    - Get-ADGroup -Filter *Name -like *admin*
+    - Get-DomainUser -TrustedToAuth
+    - Get-ADComputer -Filter {TrustedForDelegation -eq $True}
+    - '*//:ptth*'
+    - '*Clear-RecycleBin -Force -ErrorAction SilentlyContinue*'
+    - Set-ADObject -SamAccountName * -PropertyName scriptpath -PropertyValue *\*.exe*
+    - '*powershell.exe -exec bypass -noni -nop -w 1 -C*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    - '*\powershell.exe* += hidden*'
+    - '*Powershell.exe  -windowstyle hidden -nop -ExecutionPolicy Bypass  -Commmand
+      *C:\Users\*\AppData\Roaming\*'
+    - Get-ADObject -Filter {msDS-AllowedToDelegateTo * -Properties msDS-AllowedToDelegateTo*
+    host.hostname:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - '*Set-MpPreference -DisableRealtimeMonitoring $true*'
+    - Get-NetGroup -FullData*
+    - '*Add-PswaAuthorizationRule -UsernName \* -ComputerName \* -ConfigurationName
+      \*'
+    - '*Get-DomainUser -KerberosPreuthNotRequired -Verbose*'
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*New-Object System.Net.Sockets.TCPClient(*$stream = $client.GetStream()*[byte[]]$bytes
+      = 0..65535*'
+    - '* resu ten*'
+    - '*powershell.exe -noni -nop -w 1 -enc *'
+    - '*Set-MpPreference -DisableIOAVProtection $true*'
+    - '*Get-NetUser -SPN*'
+    - '*Get-LoggedonLocal -ComputerName *'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - Get-ADUser -Filter {DoesNotRequirePreAuth -eq $True} -Properties DoesNotRequirePreAuth
+    - Get-ADUser -Filter {TrustedForDelegation -eq $True}
+    - '*Get-AppLockerPolicy -Effective *'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*\powershell.exe* = hidden*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - Get-ADObject -SearchBase *CN=Shadow Principal Configuration*CN=Services* (Get-ADRootDSE).configurationNamingContext)
+      | select *msDS-ShadowPrincipalSid*
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - '*Get-ADComputer * -Properties PrincipalsAllowedToDelegateToAccount*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Set-MpPreference -DisableScriptScanning 1 *'
+    - cmd.exe /c PowerShell.exe -Exec ByPass -Nol -Enc *
+    - '*powershell New-ItemProperty -Path *HKLM:\SOFTWARE\Policies\Microsoft\Windows
+      Defender* -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*Get-NetGroupMember -GroupName *DNSAdmins*'
+    - '*llehsrewop*'
+    - '*Add-MpPreference -ExclusionProcess *\Windows\System32\WindowsPowerShell\v1.0\powershell.exe*'
+    - '*\\:C*'
+    - Get-ADGroup -Filter *Name -like *admin*
+    - Get-DomainUser -TrustedToAuth
+    - Get-ADComputer -Filter {TrustedForDelegation -eq $True}
+    - '*//:ptth*'
+    - '*Clear-RecycleBin -Force -ErrorAction SilentlyContinue*'
+    - Set-ADObject -SamAccountName * -PropertyName scriptpath -PropertyValue *\*.exe*
+    - '*powershell.exe -exec bypass -noni -nop -w 1 -C*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    - '*\powershell.exe* += hidden*'
+    - '*Powershell.exe  -windowstyle hidden -nop -ExecutionPolicy Bypass  -Commmand
+      *C:\Users\*\AppData\Roaming\*'
+    - Get-ADObject -Filter {msDS-AllowedToDelegateTo * -Properties msDS-AllowedToDelegateTo*
+    file.fork_name:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    file.name:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    file.path:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    file.target_path:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    email.attachments.file.name:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    email.subject:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - '*Set-MpPreference -DisableRealtimeMonitoring $true*'
+    - Get-NetGroup -FullData*
+    - '*Add-PswaAuthorizationRule -UsernName \* -ComputerName \* -ConfigurationName
+      \*'
+    - '*Get-DomainUser -KerberosPreuthNotRequired -Verbose*'
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*New-Object System.Net.Sockets.TCPClient(*$stream = $client.GetStream()*[byte[]]$bytes
+      = 0..65535*'
+    - '* resu ten*'
+    - '*powershell.exe -noni -nop -w 1 -enc *'
+    - '*Set-MpPreference -DisableIOAVProtection $true*'
+    - '*Get-NetUser -SPN*'
+    - '*Get-LoggedonLocal -ComputerName *'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - Get-ADUser -Filter {DoesNotRequirePreAuth -eq $True} -Properties DoesNotRequirePreAuth
+    - Get-ADUser -Filter {TrustedForDelegation -eq $True}
+    - '*Get-AppLockerPolicy -Effective *'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*\powershell.exe* = hidden*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - Get-ADObject -SearchBase *CN=Shadow Principal Configuration*CN=Services* (Get-ADRootDSE).configurationNamingContext)
+      | select *msDS-ShadowPrincipalSid*
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - '*Get-ADComputer * -Properties PrincipalsAllowedToDelegateToAccount*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Set-MpPreference -DisableScriptScanning 1 *'
+    - cmd.exe /c PowerShell.exe -Exec ByPass -Nol -Enc *
+    - '*powershell New-ItemProperty -Path *HKLM:\SOFTWARE\Policies\Microsoft\Windows
+      Defender* -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*Get-NetGroupMember -GroupName *DNSAdmins*'
+    - '*llehsrewop*'
+    - '*Add-MpPreference -ExclusionProcess *\Windows\System32\WindowsPowerShell\v1.0\powershell.exe*'
+    - '*\\:C*'
+    - Get-ADGroup -Filter *Name -like *admin*
+    - Get-DomainUser -TrustedToAuth
+    - Get-ADComputer -Filter {TrustedForDelegation -eq $True}
+    - '*//:ptth*'
+    - '*Clear-RecycleBin -Force -ErrorAction SilentlyContinue*'
+    - Set-ADObject -SamAccountName * -PropertyName scriptpath -PropertyValue *\*.exe*
+    - '*powershell.exe -exec bypass -noni -nop -w 1 -C*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    - '*\powershell.exe* += hidden*'
+    - '*Powershell.exe  -windowstyle hidden -nop -ExecutionPolicy Bypass  -Commmand
+      *C:\Users\*\AppData\Roaming\*'
+    - Get-ADObject -Filter {msDS-AllowedToDelegateTo * -Properties msDS-AllowedToDelegateTo*
+    dll.path:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    device.model.name:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - '*Set-MpPreference -DisableRealtimeMonitoring $true*'
+    - Get-NetGroup -FullData*
+    - '*Add-PswaAuthorizationRule -UsernName \* -ComputerName \* -ConfigurationName
+      \*'
+    - '*Get-DomainUser -KerberosPreuthNotRequired -Verbose*'
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*New-Object System.Net.Sockets.TCPClient(*$stream = $client.GetStream()*[byte[]]$bytes
+      = 0..65535*'
+    - '* resu ten*'
+    - '*powershell.exe -noni -nop -w 1 -enc *'
+    - '*Set-MpPreference -DisableIOAVProtection $true*'
+    - '*Get-NetUser -SPN*'
+    - '*Get-LoggedonLocal -ComputerName *'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - Get-ADUser -Filter {DoesNotRequirePreAuth -eq $True} -Properties DoesNotRequirePreAuth
+    - Get-ADUser -Filter {TrustedForDelegation -eq $True}
+    - '*Get-AppLockerPolicy -Effective *'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*\powershell.exe* = hidden*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - Get-ADObject -SearchBase *CN=Shadow Principal Configuration*CN=Services* (Get-ADRootDSE).configurationNamingContext)
+      | select *msDS-ShadowPrincipalSid*
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - '*Get-ADComputer * -Properties PrincipalsAllowedToDelegateToAccount*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Set-MpPreference -DisableScriptScanning 1 *'
+    - cmd.exe /c PowerShell.exe -Exec ByPass -Nol -Enc *
+    - '*powershell New-ItemProperty -Path *HKLM:\SOFTWARE\Policies\Microsoft\Windows
+      Defender* -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*Get-NetGroupMember -GroupName *DNSAdmins*'
+    - '*llehsrewop*'
+    - '*Add-MpPreference -ExclusionProcess *\Windows\System32\WindowsPowerShell\v1.0\powershell.exe*'
+    - '*\\:C*'
+    - Get-ADGroup -Filter *Name -like *admin*
+    - Get-DomainUser -TrustedToAuth
+    - Get-ADComputer -Filter {TrustedForDelegation -eq $True}
+    - '*//:ptth*'
+    - '*Clear-RecycleBin -Force -ErrorAction SilentlyContinue*'
+    - Set-ADObject -SamAccountName * -PropertyName scriptpath -PropertyValue *\*.exe*
+    - '*powershell.exe -exec bypass -noni -nop -w 1 -C*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    - '*\powershell.exe* += hidden*'
+    - '*Powershell.exe  -windowstyle hidden -nop -ExecutionPolicy Bypass  -Commmand
+      *C:\Users\*\AppData\Roaming\*'
+    - Get-ADObject -Filter {msDS-AllowedToDelegateTo * -Properties msDS-AllowedToDelegateTo*
+    container.image.name:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - '*Set-MpPreference -DisableRealtimeMonitoring $true*'
+    - Get-NetGroup -FullData*
+    - '*Add-PswaAuthorizationRule -UsernName \* -ComputerName \* -ConfigurationName
+      \*'
+    - '*Get-DomainUser -KerberosPreuthNotRequired -Verbose*'
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*New-Object System.Net.Sockets.TCPClient(*$stream = $client.GetStream()*[byte[]]$bytes
+      = 0..65535*'
+    - '* resu ten*'
+    - '*powershell.exe -noni -nop -w 1 -enc *'
+    - '*Set-MpPreference -DisableIOAVProtection $true*'
+    - '*Get-NetUser -SPN*'
+    - '*Get-LoggedonLocal -ComputerName *'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - Get-ADUser -Filter {DoesNotRequirePreAuth -eq $True} -Properties DoesNotRequirePreAuth
+    - Get-ADUser -Filter {TrustedForDelegation -eq $True}
+    - '*Get-AppLockerPolicy -Effective *'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*\powershell.exe* = hidden*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - Get-ADObject -SearchBase *CN=Shadow Principal Configuration*CN=Services* (Get-ADRootDSE).configurationNamingContext)
+      | select *msDS-ShadowPrincipalSid*
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - '*Get-ADComputer * -Properties PrincipalsAllowedToDelegateToAccount*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Set-MpPreference -DisableScriptScanning 1 *'
+    - cmd.exe /c PowerShell.exe -Exec ByPass -Nol -Enc *
+    - '*powershell New-ItemProperty -Path *HKLM:\SOFTWARE\Policies\Microsoft\Windows
+      Defender* -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*Get-NetGroupMember -GroupName *DNSAdmins*'
+    - '*llehsrewop*'
+    - '*Add-MpPreference -ExclusionProcess *\Windows\System32\WindowsPowerShell\v1.0\powershell.exe*'
+    - '*\\:C*'
+    - Get-ADGroup -Filter *Name -like *admin*
+    - Get-DomainUser -TrustedToAuth
+    - Get-ADComputer -Filter {TrustedForDelegation -eq $True}
+    - '*//:ptth*'
+    - '*Clear-RecycleBin -Force -ErrorAction SilentlyContinue*'
+    - Set-ADObject -SamAccountName * -PropertyName scriptpath -PropertyValue *\*.exe*
+    - '*powershell.exe -exec bypass -noni -nop -w 1 -C*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    - '*\powershell.exe* += hidden*'
+    - '*Powershell.exe  -windowstyle hidden -nop -ExecutionPolicy Bypass  -Commmand
+      *C:\Users\*\AppData\Roaming\*'
+    - Get-ADObject -Filter {msDS-AllowedToDelegateTo * -Properties msDS-AllowedToDelegateTo*
+    container.name:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - '*Set-MpPreference -DisableRealtimeMonitoring $true*'
+    - Get-NetGroup -FullData*
+    - '*Add-PswaAuthorizationRule -UsernName \* -ComputerName \* -ConfigurationName
+      \*'
+    - '*Get-DomainUser -KerberosPreuthNotRequired -Verbose*'
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*New-Object System.Net.Sockets.TCPClient(*$stream = $client.GetStream()*[byte[]]$bytes
+      = 0..65535*'
+    - '* resu ten*'
+    - '*powershell.exe -noni -nop -w 1 -enc *'
+    - '*Set-MpPreference -DisableIOAVProtection $true*'
+    - '*Get-NetUser -SPN*'
+    - '*Get-LoggedonLocal -ComputerName *'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - Get-ADUser -Filter {DoesNotRequirePreAuth -eq $True} -Properties DoesNotRequirePreAuth
+    - Get-ADUser -Filter {TrustedForDelegation -eq $True}
+    - '*Get-AppLockerPolicy -Effective *'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*\powershell.exe* = hidden*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - Get-ADObject -SearchBase *CN=Shadow Principal Configuration*CN=Services* (Get-ADRootDSE).configurationNamingContext)
+      | select *msDS-ShadowPrincipalSid*
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - '*Get-ADComputer * -Properties PrincipalsAllowedToDelegateToAccount*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Set-MpPreference -DisableScriptScanning 1 *'
+    - cmd.exe /c PowerShell.exe -Exec ByPass -Nol -Enc *
+    - '*powershell New-ItemProperty -Path *HKLM:\SOFTWARE\Policies\Microsoft\Windows
+      Defender* -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*Get-NetGroupMember -GroupName *DNSAdmins*'
+    - '*llehsrewop*'
+    - '*Add-MpPreference -ExclusionProcess *\Windows\System32\WindowsPowerShell\v1.0\powershell.exe*'
+    - '*\\:C*'
+    - Get-ADGroup -Filter *Name -like *admin*
+    - Get-DomainUser -TrustedToAuth
+    - Get-ADComputer -Filter {TrustedForDelegation -eq $True}
+    - '*//:ptth*'
+    - '*Clear-RecycleBin -Force -ErrorAction SilentlyContinue*'
+    - Set-ADObject -SamAccountName * -PropertyName scriptpath -PropertyValue *\*.exe*
+    - '*powershell.exe -exec bypass -noni -nop -w 1 -C*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    - '*\powershell.exe* += hidden*'
+    - '*Powershell.exe  -windowstyle hidden -nop -ExecutionPolicy Bypass  -Commmand
+      *C:\Users\*\AppData\Roaming\*'
+    - Get-ADObject -Filter {msDS-AllowedToDelegateTo * -Properties msDS-AllowedToDelegateTo*
+    object:
+    - '* imaohw*'
+    - '*\powershell.exe* +=hidden*'
+    - Get-NetGroup -FullData*
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\:MLKH*'
+    - '*Get-NetUser -SPN*'
+    - '*Invoke-SDPropagator*'
+    - '*Invoke-UserHunter -CheckAccess*'
+    - '*[Reflection.Assembly]::LoadWithPartialName(''System.Core'').GetType(''System.Diagnostics.Eventing.EventProvider'').GetField(''m_enabled''*''NonPublic*Instance'').SetValue([Ref].Assembly.GetType(''System.Management.Automation.Tracing.PSEtwLogProvider'').GetField(''etwProvider''*''NonPublic*Static'').GetValue($null)*0)*'
+    - '*=resu ten*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*\powershell.exe* =hidden*'
+    - '*Import-Module *Microsoft.ActiveDirectory.Management.dll*'
+    - Get-DomainComputer -TrustedToAuth
+    - '*//:sptth*'
+    - '*Remove-Item (Get-PSreadlineOption).HistorySavePath*'
+    - '*Find-LocalAdminAccess -Verbose*'
+    - '*Invoke-EnumerateLocalAdmin -Verbose*'
+    - '*llehsrewop*'
+    - '*\\:C*'
+    - Get-DomainUser -TrustedToAuth
+    - '*//:ptth*'
+    - Get-GPO -All
+    - '*=imaohw*'
+    event.original:
+    - '*Set-MpPreference -DisableRealtimeMonitoring $true*'
+    - '*Add-PswaAuthorizationRule -UsernName \* -ComputerName \* -ConfigurationName
+      \*'
+    - '*Get-DomainUser -KerberosPreuthNotRequired -Verbose*'
+    - '*New-Object System.Net.Sockets.TCPClient(*$stream = $client.GetStream()*[byte[]]$bytes
+      = 0..65535*'
+    - '* resu ten*'
+    - '*powershell.exe -noni -nop -w 1 -enc *'
+    - '*Set-MpPreference -DisableIOAVProtection $true*'
+    - '*Get-LoggedonLocal -ComputerName *'
+    - Get-ADUser -Filter {DoesNotRequirePreAuth -eq $True} -Properties DoesNotRequirePreAuth
+    - Get-ADUser -Filter {TrustedForDelegation -eq $True}
+    - '*Get-AppLockerPolicy -Effective *'
+    - '*\powershell.exe* = hidden*'
+    - Get-ADObject -SearchBase *CN=Shadow Principal Configuration*CN=Services* (Get-ADRootDSE).configurationNamingContext)
+      | select *msDS-ShadowPrincipalSid*
+    - '*Get-ADComputer * -Properties PrincipalsAllowedToDelegateToAccount*'
+    - '*Set-MpPreference -DisableScriptScanning 1 *'
+    - cmd.exe /c PowerShell.exe -Exec ByPass -Nol -Enc *
+    - '*powershell New-ItemProperty -Path *HKLM:\SOFTWARE\Policies\Microsoft\Windows
+      Defender* -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force*'
+    - '*Get-NetGroupMember -GroupName *DNSAdmins*'
+    - '*Add-MpPreference -ExclusionProcess *\Windows\System32\WindowsPowerShell\v1.0\powershell.exe*'
+    - Get-ADGroup -Filter *Name -like *admin*
+    - Get-ADComputer -Filter {TrustedForDelegation -eq $True}
+    - '*Clear-RecycleBin -Force -ErrorAction SilentlyContinue*'
+    - Set-ADObject -SamAccountName * -PropertyName scriptpath -PropertyValue *\*.exe*
+    - '*powershell.exe -exec bypass -noni -nop -w 1 -C*'
+    - '*\powershell.exe* += hidden*'
+    - '*Powershell.exe  -windowstyle hidden -nop -ExecutionPolicy Bypass  -Commmand
+      *C:\Users\*\AppData\Roaming\*'
+    - Get-ADObject -Filter {msDS-AllowedToDelegateTo * -Properties msDS-AllowedToDelegateTo*
+    url:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    dest_url:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    uri:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    uri_query:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    query:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    url_domain:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    uri_path:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    domain:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    QueryName:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    QueryResults:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    DestinationHostname:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    DestinationIp:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    http_referrer:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    http_referrer_domain:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    http_user_agent:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    dest_nt_host:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    sender:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    recipient:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    orig_recipient:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    subject:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    url.domain:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    url.full:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    url.original:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    url.query:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    user_agent.original:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    network.application:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    http.request.body.content:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    http.request.referrer:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    email.from.address:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    dns.question.name:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+    destination.domain:
+    - '*https://*Microsoft.ActiveDirectory.Management.dll*'
+    - '*Invoke-SDPropagator*'
+    - '*azuread_decrypt_msol_*.ps1*'
+    - '*http://*Microsoft.ActiveDirectory.Management.dll*'
+  condition: selection
+fields:
+- Image
+- OriginalFileName
+- CurrentDirectory
+- ParentImage
+- ParentCommandLine
+- TargetFilename
+- Signature
+- signature
+- ImageLoaded
+- Company
+- Description
+- description
+- CommandLine
+- SourceImage
+- TargetImage
+- CallTrace
+- TargetObject
+- Details
+- PipeName
+- Consumer
+- Destination
+- Name
+- Query
+- NewName
+- StartAddress
+- StartModule
+- StartFunction
+- SourceHostname
+- Device
+- file_name
+- file_path
+- process
+- original_file_name
+- parent_process
+- process_path
+- service_path
+- registry_path
+- registry_value_data
+- registry_value_name
+- ContextInfo
+- Payload
+- ScriptBlockText
+- ServerName
+- TransportName
+- NewProcessName
+- ParentProcessName
+- Application
+- Product Name
+- Threat Name
+- Process Name
+- Path
+- ImagePath
+- ServiceName
+- ProcessPath
+- AppName
+- AppPath
+- ModulePath
+- registry.data.strings
+- registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.executable
+- process.name
+- process.title
+- pe.company
+- pe.description
+- pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
+- file.fork_name
+- file.name
+- file.path
+- file.target_path
+- email.attachments.file.name
+- email.subject
+- dll.path
+- device.model.name
+- container.image.name
+- container.name
+- object
+- event.original
+- url
+- dest_url
+- uri
+- uri_query
+- query
+- url_domain
+- uri_path
+- domain
+- QueryName
+- QueryResults
+- DestinationHostname
+- DestinationIp
+- http_referrer
+- http_referrer_domain
+- http_user_agent
+- dest_nt_host
+- sender
+- recipient
+- orig_recipient
+- subject
+- url.domain
+- url.full
+- url.original
+- url.query
+- user_agent.original
+- network.application
+- http.request.body.content
+- http.request.referrer
+- email.from.address
+- dns.question.name
+- destination.domain
