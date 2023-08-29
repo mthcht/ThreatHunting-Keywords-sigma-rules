@@ -14,21 +14,7 @@
         "network_detection": false
     },
     {
-        "keyword": "*\\Users\\Public\\*ntds.jfm*",
-        "description": "Like the ntds.dit file it should not normally be found in this directory.",
-        "tool_name": "wmic",
-        "reference": "https://media.defense.gov/2023/May/24/2003229517/-1/-1/0/CSA_Living_off_the_Land.PDF",
-        "severity": "N/A",
-        "popularity": "N/A",
-        "keyword_type": "greyware_tool_keyword",
-        "comment": "N/A",
-        "tactics": "TA0002 - TA0003 - TA0007",
-        "techniques": "T1047 - T1005 - T1567.001",
-        "endpoint_detection": true,
-        "network_detection": false
-    },
-    {
-        "keyword": "*wmic process call create*ntdsutil *ac i ntds* ifm*create full*",
+        "keyword": "*ac i ntds*\\\\127.0.0.1\\ADMIN$\\*",
         "description": "The actor has executed WMIC commands [T1047] to create a copy of the ntds.dit file and SYSTEM registry hive using ntdsutil.exe",
         "tool_name": "wmic",
         "reference": "https://media.defense.gov/2023/May/24/2003229517/-1/-1/0/CSA_Living_off_the_Land.PDF",
@@ -56,34 +42,6 @@
         "network_detection": false
     },
     {
-        "keyword": "*ac i ntds*\\\\127.0.0.1\\ADMIN$\\*",
-        "description": "The actor has executed WMIC commands [T1047] to create a copy of the ntds.dit file and SYSTEM registry hive using ntdsutil.exe",
-        "tool_name": "wmic",
-        "reference": "https://media.defense.gov/2023/May/24/2003229517/-1/-1/0/CSA_Living_off_the_Land.PDF",
-        "severity": "N/A",
-        "popularity": "N/A",
-        "keyword_type": "greyware_tool_keyword",
-        "comment": "N/A",
-        "tactics": "TA0002 - TA0003 - TA0007",
-        "techniques": "T1047 - T1005 - T1567.001",
-        "endpoint_detection": true,
-        "network_detection": false
-    },
-    {
-        "keyword": "*wmic useraccount get /ALL /format:csv*",
-        "description": "User Enumeration",
-        "tool_name": "wmic",
-        "reference": "https://github.com/RoseSecurity/Red-Teaming-TTPs/blob/main/Anti-Forensics.md",
-        "severity": "N/A",
-        "popularity": "N/A",
-        "keyword_type": "greyware_tool_keyword",
-        "comment": "N/A",
-        "tactics": "TA0006",
-        "techniques": "T1087 - T1033",
-        "endpoint_detection": true,
-        "network_detection": false
-    },
-    {
         "keyword": "*wmic /* /user:administrator process call create *cmd.exe /c *",
         "description": "Lateral Movement with wmic",
         "tool_name": "wmic",
@@ -98,8 +56,8 @@
         "network_detection": false
     },
     {
-        "keyword": "*\\Users\\Public\\*ntds.dit*",
-        "description": "this file shouldn't be found in the Users\\Public directory. Its presence could be a sign of an ongoing or past attack.",
+        "keyword": "*\\Users\\Public\\*ntds.jfm*",
+        "description": "Like the ntds.dit file it should not normally be found in this directory.",
         "tool_name": "wmic",
         "reference": "https://media.defense.gov/2023/May/24/2003229517/-1/-1/0/CSA_Living_off_the_Land.PDF",
         "severity": "N/A",
@@ -112,8 +70,22 @@
         "network_detection": false
     },
     {
-        "keyword": "*\\Temp\\*\\ntds.jfm*",
-        "description": "Like the ntds.dit file it should not normally be found in the Temp directory.",
+        "keyword": "*start wmic /node:@C:\\*.txt /user:*/password:* process call create *cmd.exe /c bitsadmin /transfer *.exe *",
+        "description": "WMIC suspicious transfer ",
+        "tool_name": "wmic",
+        "reference": "N/A",
+        "severity": "N/A",
+        "popularity": "N/A",
+        "keyword_type": "greyware_tool_keyword",
+        "comment": "greyware tool - risks of False positive !",
+        "tactics": "TA0002 - TA0003 - TA0010",
+        "techniques": "T1105 - T1041 - T1048",
+        "endpoint_detection": true,
+        "network_detection": false
+    },
+    {
+        "keyword": "*\\Users\\Public\\*ntds.dit*",
+        "description": "this file shouldn't be found in the Users\\Public directory. Its presence could be a sign of an ongoing or past attack.",
         "tool_name": "wmic",
         "reference": "https://media.defense.gov/2023/May/24/2003229517/-1/-1/0/CSA_Living_off_the_Land.PDF",
         "severity": "N/A",
@@ -140,16 +112,44 @@
         "network_detection": false
     },
     {
-        "keyword": "*start wmic /node:@C:\\*.txt /user:*/password:* process call create *cmd.exe /c bitsadmin /transfer *.exe *",
-        "description": "WMIC suspicious transfer ",
+        "keyword": "*\\Temp\\*\\ntds.jfm*",
+        "description": "Like the ntds.dit file it should not normally be found in the Temp directory.",
         "tool_name": "wmic",
-        "reference": "N/A",
+        "reference": "https://media.defense.gov/2023/May/24/2003229517/-1/-1/0/CSA_Living_off_the_Land.PDF",
         "severity": "N/A",
         "popularity": "N/A",
         "keyword_type": "greyware_tool_keyword",
-        "comment": "greyware tool - risks of False positive !",
-        "tactics": "TA0002 - TA0003 - TA0010",
-        "techniques": "T1105 - T1041 - T1048",
+        "comment": "N/A",
+        "tactics": "TA0002 - TA0003 - TA0007",
+        "techniques": "T1047 - T1005 - T1567.001",
+        "endpoint_detection": true,
+        "network_detection": false
+    },
+    {
+        "keyword": "*wmic process call create*ntdsutil *ac i ntds* ifm*create full*",
+        "description": "The actor has executed WMIC commands [T1047] to create a copy of the ntds.dit file and SYSTEM registry hive using ntdsutil.exe",
+        "tool_name": "wmic",
+        "reference": "https://media.defense.gov/2023/May/24/2003229517/-1/-1/0/CSA_Living_off_the_Land.PDF",
+        "severity": "N/A",
+        "popularity": "N/A",
+        "keyword_type": "greyware_tool_keyword",
+        "comment": "N/A",
+        "tactics": "TA0002 - TA0003 - TA0007",
+        "techniques": "T1047 - T1005 - T1567.001",
+        "endpoint_detection": true,
+        "network_detection": false
+    },
+    {
+        "keyword": "*wmic useraccount get /ALL /format:csv*",
+        "description": "User Enumeration",
+        "tool_name": "wmic",
+        "reference": "https://github.com/RoseSecurity/Red-Teaming-TTPs/blob/main/Anti-Forensics.md",
+        "severity": "N/A",
+        "popularity": "N/A",
+        "keyword_type": "greyware_tool_keyword",
+        "comment": "N/A",
+        "tactics": "TA0006",
+        "techniques": "T1087 - T1033",
         "endpoint_detection": true,
         "network_detection": false
     }
