@@ -2,21 +2,30 @@ title: Simple keyword detection rule for takeown
 id: f5451fa7-d8e1-4c92-ad8b-2728b7d4162b
 status: experimental
 description:
+- '''commands from wmiexec2.0 -  is the same wmiexec that everyone knows and loves
+  (debatable). This 2.0 version is obfuscated to avoid well known signatures from
+  various AV engines.'''
 - '''Spartacus DLL/COM Hijacking Toolkit'''
 references:
+- https://github.com/ice-wzl/wmiexec2
 - https://www.pavel.gr/blog/neutralising-amsi-system-wide-as-an-admin
 author: '@mthcht'
 date: 2023/07/30
-modified: 2023/09/11
+modified: 2023/09/14
 tags:
+- attack.T1027
 - attack.T1027.002
+- attack.T1047
 - attack.T1055.001
+- attack.T1059
 - attack.T1574.001
+- attack.TA0002
 - attack.TA0005
 - attack.TA0040
 logsource:
   category:
   - endpoint
+  - network
 falsepositives:
 - Unknown
 level:
@@ -25,42 +34,123 @@ detection:
   selection:
     ParentCommandLine:
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
     CommandLine:
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
     Details:
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
     registry.value:
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
     process.args:
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
     process.command_line:
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
     process.env_vars:
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
     process.io.text:
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
     process.title:
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
     pe.company:
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
     pe.description:
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
     pe.product:
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
     os.full:
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
     host.hostname:
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
     event.original:
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
     email.subject:
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
     device.model.name:
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
     container.image.name:
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
     container.name:
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    url:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    dest_url:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    uri:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    uri_query:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    query:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    url_domain:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    uri_path:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    domain:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    QueryName:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    QueryResults:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    DestinationHostname:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    DestinationIp:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    http_referrer:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    http_referrer_domain:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    http_user_agent:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    dest_nt_host:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    sender:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    recipient:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    orig_recipient:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    subject:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    url.domain:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    url.full:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    url.original:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    url.query:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    user_agent.original:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    network.application:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    http.request.body.content:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    http.request.referrer:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    email.from.address:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    dns.question.name:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
+    destination.domain:
+    - '*takeown /f "C:\windows\system32\config\SAM"*'
   condition: selection
 fields:
 - ParentCommandLine
@@ -82,3 +172,34 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+- url
+- dest_url
+- uri
+- uri_query
+- query
+- url_domain
+- uri_path
+- domain
+- QueryName
+- QueryResults
+- DestinationHostname
+- DestinationIp
+- http_referrer
+- http_referrer_domain
+- http_user_agent
+- dest_nt_host
+- sender
+- recipient
+- orig_recipient
+- subject
+- url.domain
+- url.full
+- url.original
+- url.query
+- user_agent.original
+- network.application
+- http.request.body.content
+- http.request.referrer
+- email.from.address
+- dns.question.name
+- destination.domain
