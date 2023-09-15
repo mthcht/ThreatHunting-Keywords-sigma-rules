@@ -1,9 +1,7 @@
 title: Simple keyword detection rule for gMSADumper
 id: 4ddd5552-27b7-4003-860c-e37fd6d65628
 status: experimental
-description:
-- '''Lists who can read any gMSA password blobs and parses them if the current user
-  has access.'''
+description: Detects interesting keywords based on gMSADumper tool
 references:
 - https://github.com/micahvandeusen/gMSADumper
 author: '@mthcht'
@@ -17,489 +15,644 @@ logsource:
   category:
   - endpoint
   - network
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    CommandLine:
+  - CommandLine:
     - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    Details:
+  - Details:
     - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    registry.value:
+  - registry.value:
     - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    process.args:
+  - process.args:
     - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    process.command_line:
+  - process.command_line:
     - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    process.env_vars:
+  - process.env_vars:
     - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    process.io.text:
+  - process.io.text:
     - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    process.title:
+  - process.title:
     - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    pe.company:
+  - pe.company:
     - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    pe.description:
+  - pe.description:
     - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    pe.product:
+  - pe.product:
     - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    os.full:
+  - os.full:
     - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    host.hostname:
+  - host.hostname:
     - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    event.original:
-    - '* --domain * --kerberos*'
-    email.subject:
+  - event.original:
     - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    device.model.name:
+  - email.subject:
     - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    container.image.name:
+  - device.model.name:
     - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    container.name:
+  - container.image.name:
     - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    Image:
+  - container.name:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    OriginalFileName:
+  - Image:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    CurrentDirectory:
+  - OriginalFileName:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    ParentImage:
+  - CurrentDirectory:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    TargetFilename:
+  - ParentImage:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    Signature:
+  - ParentCommandLine:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    signature:
+  - TargetFilename:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    ImageLoaded:
+  - Signature:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    Company:
+  - signature:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    Description:
+  - ImageLoaded:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    description:
+  - Company:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    SourceImage:
+  - Description:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    TargetImage:
+  - description:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    CallTrace:
+  - CommandLine:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    TargetObject:
+  - SourceImage:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    PipeName:
+  - TargetImage:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    Consumer:
+  - CallTrace:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    Destination:
+  - TargetObject:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    Name:
+  - Details:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    Query:
+  - PipeName:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    NewName:
+  - Consumer:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    StartAddress:
+  - Destination:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    StartModule:
+  - Name:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    StartFunction:
+  - Query:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    SourceHostname:
+  - NewName:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    Device:
+  - StartAddress:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    file_name:
+  - StartModule:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    file_path:
+  - StartFunction:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    process:
+  - SourceHostname:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    original_file_name:
+  - Device:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    parent_process:
+  - file_name:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    process_path:
+  - file_path:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    service_path:
+  - process:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    registry_path:
+  - original_file_name:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    registry_value_data:
+  - parent_process:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    registry_value_name:
+  - process_path:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    ContextInfo:
+  - service_path:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    Payload:
+  - registry_path:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    ScriptBlockText:
+  - registry_value_data:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    ServerName:
+  - registry_value_name:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    TransportName:
+  - ContextInfo:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    NewProcessName:
+  - Payload:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    ParentProcessName:
+  - ScriptBlockText:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    Application:
+  - ServerName:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    Product Name:
+  - TransportName:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    Threat Name:
+  - NewProcessName:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    Process Name:
+  - ParentProcessName:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    Path:
+  - Application:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    ImagePath:
+  - Product Name:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    ServiceName:
+  - Threat Name:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    ProcessPath:
+  - Process Name:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    AppName:
+  - Path:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    AppPath:
+  - ImagePath:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    ModulePath:
+  - ServiceName:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    registry.data.strings:
+  - ProcessPath:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    registry.path:
+  - AppName:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    process.executable:
+  - AppPath:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    process.name:
+  - ModulePath:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    pe.original_file_name:
+  - registry.data.strings:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    file.fork_name:
+  - registry.path:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    file.name:
+  - registry.value:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    file.path:
+  - process.args:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    file.target_path:
+  - process.command_line:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    email.attachments.file.name:
+  - process.env_vars:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    dll.path:
+  - process.io.text:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    object:
+  - process.executable:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    url:
+  - process.name:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    dest_url:
+  - process.title:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    uri:
+  - pe.company:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    uri_query:
+  - pe.description:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    query:
+  - pe.original_file_name:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    url_domain:
+  - pe.product:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    uri_path:
+  - os.full:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    domain:
+  - host.hostname:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    QueryName:
+  - file.fork_name:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    QueryResults:
+  - file.name:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    DestinationHostname:
+  - file.path:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    DestinationIp:
+  - file.target_path:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    http_referrer:
+  - email.attachments.file.name:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    http_referrer_domain:
+  - email.subject:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    http_user_agent:
+  - dll.path:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    dest_nt_host:
+  - device.model.name:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    sender:
+  - container.image.name:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    recipient:
+  - container.name:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    orig_recipient:
+  - object:
+    - '* --domain * --kerberos*'
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    subject:
+  - url:
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    url.domain:
+  - dest_url:
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    url.full:
+  - uri:
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    url.original:
+  - uri_query:
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    url.query:
+  - query:
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    user_agent.original:
+  - url_domain:
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    network.application:
+  - uri_path:
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    http.request.body.content:
+  - domain:
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    http.request.referrer:
+  - QueryName:
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    email.from.address:
+  - QueryResults:
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    dns.question.name:
+  - DestinationHostname:
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
-    destination.domain:
+  - DestinationIp:
+    - '*micahvandeusen/gMSADumper*'
+    - '*gMSADumper.py*'
+    - '*/gMSADumper*'
+  - http_referrer:
+    - '*micahvandeusen/gMSADumper*'
+    - '*gMSADumper.py*'
+    - '*/gMSADumper*'
+  - http_referrer_domain:
+    - '*micahvandeusen/gMSADumper*'
+    - '*gMSADumper.py*'
+    - '*/gMSADumper*'
+  - http_user_agent:
+    - '*micahvandeusen/gMSADumper*'
+    - '*gMSADumper.py*'
+    - '*/gMSADumper*'
+  - dest_nt_host:
+    - '*micahvandeusen/gMSADumper*'
+    - '*gMSADumper.py*'
+    - '*/gMSADumper*'
+  - sender:
+    - '*micahvandeusen/gMSADumper*'
+    - '*gMSADumper.py*'
+    - '*/gMSADumper*'
+  - recipient:
+    - '*micahvandeusen/gMSADumper*'
+    - '*gMSADumper.py*'
+    - '*/gMSADumper*'
+  - orig_recipient:
+    - '*micahvandeusen/gMSADumper*'
+    - '*gMSADumper.py*'
+    - '*/gMSADumper*'
+  - subject:
+    - '*micahvandeusen/gMSADumper*'
+    - '*gMSADumper.py*'
+    - '*/gMSADumper*'
+  - url.domain:
+    - '*micahvandeusen/gMSADumper*'
+    - '*gMSADumper.py*'
+    - '*/gMSADumper*'
+  - url.full:
+    - '*micahvandeusen/gMSADumper*'
+    - '*gMSADumper.py*'
+    - '*/gMSADumper*'
+  - url.original:
+    - '*micahvandeusen/gMSADumper*'
+    - '*gMSADumper.py*'
+    - '*/gMSADumper*'
+  - url.query:
+    - '*micahvandeusen/gMSADumper*'
+    - '*gMSADumper.py*'
+    - '*/gMSADumper*'
+  - user_agent.original:
+    - '*micahvandeusen/gMSADumper*'
+    - '*gMSADumper.py*'
+    - '*/gMSADumper*'
+  - network.application:
+    - '*micahvandeusen/gMSADumper*'
+    - '*gMSADumper.py*'
+    - '*/gMSADumper*'
+  - http.request.body.content:
+    - '*micahvandeusen/gMSADumper*'
+    - '*gMSADumper.py*'
+    - '*/gMSADumper*'
+  - http.request.referrer:
+    - '*micahvandeusen/gMSADumper*'
+    - '*gMSADumper.py*'
+    - '*/gMSADumper*'
+  - email.from.address:
+    - '*micahvandeusen/gMSADumper*'
+    - '*gMSADumper.py*'
+    - '*/gMSADumper*'
+  - dns.question.name:
+    - '*micahvandeusen/gMSADumper*'
+    - '*gMSADumper.py*'
+    - '*/gMSADumper*'
+  - destination.domain:
     - '*micahvandeusen/gMSADumper*'
     - '*gMSADumper.py*'
     - '*/gMSADumper*'
@@ -528,6 +681,7 @@ fields:
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -535,10 +689,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -580,15 +736,30 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
 - url
 - dest_url
@@ -621,3 +792,6 @@ fields:
 - email.from.address
 - dns.question.name
 - destination.domain
+falsepositives:
+- unknown
+level: medium

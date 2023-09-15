@@ -1,9 +1,7 @@
 title: Simple keyword detection rule for EvtMute
 id: f6ece7a1-5824-4283-a1ec-6f9e38bb7007
 status: experimental
-description:
-- '''This is a tool that allows you to offensively use YARA to apply a filter to the
-  events being reported by windows event logging - mute the event log'''
+description: Detects interesting keywords based on EvtMute tool
 references:
 - https://github.com/bats3c/EvtMute
 author: '@mthcht'
@@ -20,13 +18,9 @@ logsource:
   category:
   - endpoint
   - network
-falsepositives:
-- Unknown
-level:
-- high
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
@@ -43,7 +37,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    CommandLine:
+  - CommandLine:
     - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
@@ -60,7 +54,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    Details:
+  - Details:
     - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
@@ -77,7 +71,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    registry.value:
+  - registry.value:
     - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
@@ -94,7 +88,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    process.args:
+  - process.args:
     - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
@@ -111,7 +105,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    process.command_line:
+  - process.command_line:
     - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
@@ -128,7 +122,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    process.env_vars:
+  - process.env_vars:
     - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
@@ -145,7 +139,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    process.io.text:
+  - process.io.text:
     - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
@@ -162,7 +156,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    process.title:
+  - process.title:
     - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
@@ -179,7 +173,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    pe.company:
+  - pe.company:
     - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
@@ -196,7 +190,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    pe.description:
+  - pe.description:
     - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
@@ -213,7 +207,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    pe.product:
+  - pe.product:
     - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
@@ -230,7 +224,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    os.full:
+  - os.full:
     - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
@@ -247,7 +241,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    host.hostname:
+  - host.hostname:
     - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
@@ -264,9 +258,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    event.original:
-    - '*.exe* --Filter *rule disable { condition: true }*'
-    email.subject:
+  - event.original:
     - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
@@ -283,7 +275,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    device.model.name:
+  - email.subject:
     - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
@@ -300,7 +292,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    container.image.name:
+  - device.model.name:
     - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
@@ -317,7 +309,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    container.name:
+  - container.image.name:
     - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
@@ -334,7 +326,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    Image:
+  - container.name:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -350,7 +343,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    OriginalFileName:
+  - Image:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -366,7 +360,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    CurrentDirectory:
+  - OriginalFileName:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -382,7 +377,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    ParentImage:
+  - CurrentDirectory:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -398,7 +394,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    TargetFilename:
+  - ParentImage:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -414,7 +411,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    Signature:
+  - ParentCommandLine:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -430,7 +428,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    signature:
+  - TargetFilename:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -446,7 +445,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    ImageLoaded:
+  - Signature:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -462,7 +462,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    Company:
+  - signature:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -478,7 +479,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    Description:
+  - ImageLoaded:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -494,7 +496,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    description:
+  - Company:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -510,7 +513,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    SourceImage:
+  - Description:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -526,7 +530,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    TargetImage:
+  - description:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -542,7 +547,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    CallTrace:
+  - CommandLine:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -558,7 +564,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    TargetObject:
+  - SourceImage:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -574,7 +581,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    PipeName:
+  - TargetImage:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -590,7 +598,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    Consumer:
+  - CallTrace:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -606,7 +615,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    Destination:
+  - TargetObject:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -622,7 +632,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    Name:
+  - Details:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -638,7 +649,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    Query:
+  - PipeName:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -654,7 +666,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    NewName:
+  - Consumer:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -670,7 +683,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    StartAddress:
+  - Destination:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -686,7 +700,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    StartModule:
+  - Name:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -702,7 +717,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    StartFunction:
+  - Query:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -718,7 +734,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    SourceHostname:
+  - NewName:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -734,7 +751,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    Device:
+  - StartAddress:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -750,7 +768,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    file_name:
+  - StartModule:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -766,7 +785,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    file_path:
+  - StartFunction:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -782,7 +802,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    process:
+  - SourceHostname:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -798,7 +819,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    original_file_name:
+  - Device:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -814,7 +836,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    parent_process:
+  - file_name:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -830,7 +853,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    process_path:
+  - file_path:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -846,7 +870,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    service_path:
+  - process:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -862,7 +887,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    registry_path:
+  - original_file_name:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -878,7 +904,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    registry_value_data:
+  - parent_process:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -894,7 +921,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    registry_value_name:
+  - process_path:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -910,7 +938,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    ContextInfo:
+  - service_path:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -926,7 +955,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    Payload:
+  - registry_path:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -942,7 +972,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    ScriptBlockText:
+  - registry_value_data:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -958,7 +989,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    ServerName:
+  - registry_value_name:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -974,7 +1006,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    TransportName:
+  - ContextInfo:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -990,7 +1023,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    NewProcessName:
+  - Payload:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1006,7 +1040,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    ParentProcessName:
+  - ScriptBlockText:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1022,7 +1057,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    Application:
+  - ServerName:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1038,7 +1074,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    Product Name:
+  - TransportName:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1054,7 +1091,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    Threat Name:
+  - NewProcessName:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1070,7 +1108,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    Process Name:
+  - ParentProcessName:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1086,7 +1125,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    Path:
+  - Application:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1102,7 +1142,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    ImagePath:
+  - Product Name:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1118,7 +1159,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    ServiceName:
+  - Threat Name:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1134,7 +1176,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    ProcessPath:
+  - Process Name:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1150,7 +1193,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    AppName:
+  - Path:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1166,7 +1210,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    AppPath:
+  - ImagePath:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1182,7 +1227,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    ModulePath:
+  - ServiceName:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1198,7 +1244,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    registry.data.strings:
+  - ProcessPath:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1214,7 +1261,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    registry.path:
+  - AppName:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1230,7 +1278,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    process.executable:
+  - AppPath:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1246,7 +1295,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    process.name:
+  - ModulePath:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1262,7 +1312,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    pe.original_file_name:
+  - registry.data.strings:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1278,7 +1329,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    file.fork_name:
+  - registry.path:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1294,7 +1346,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    file.name:
+  - registry.value:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1310,7 +1363,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    file.path:
+  - process.args:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1326,7 +1380,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    file.target_path:
+  - process.command_line:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1342,7 +1397,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    email.attachments.file.name:
+  - process.env_vars:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1358,7 +1414,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    dll.path:
+  - process.io.text:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1374,7 +1431,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    object:
+  - process.executable:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1390,7 +1448,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    url:
+  - process.name:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1406,7 +1465,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    dest_url:
+  - process.title:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1422,7 +1482,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    uri:
+  - pe.company:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1438,7 +1499,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    uri_query:
+  - pe.description:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1454,7 +1516,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    query:
+  - pe.original_file_name:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1470,7 +1533,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    url_domain:
+  - pe.product:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1486,7 +1550,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    uri_path:
+  - os.full:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1502,7 +1567,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    domain:
+  - host.hostname:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1518,7 +1584,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    QueryName:
+  - file.fork_name:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1534,7 +1601,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    QueryResults:
+  - file.name:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1550,7 +1618,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    DestinationHostname:
+  - file.path:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1566,7 +1635,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    DestinationIp:
+  - file.target_path:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1582,7 +1652,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    http_referrer:
+  - email.attachments.file.name:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1598,7 +1669,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    http_referrer_domain:
+  - email.subject:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1614,7 +1686,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    http_user_agent:
+  - dll.path:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1630,7 +1703,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    dest_nt_host:
+  - device.model.name:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1646,7 +1720,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    sender:
+  - container.image.name:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1662,7 +1737,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    recipient:
+  - container.name:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1678,7 +1754,8 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    orig_recipient:
+  - object:
+    - '*.exe* --Filter *rule disable { condition: true }*'
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1694,7 +1771,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    subject:
+  - url:
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1710,7 +1787,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    url.domain:
+  - dest_url:
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1726,7 +1803,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    url.full:
+  - uri:
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1742,7 +1819,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    url.original:
+  - uri_query:
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1758,7 +1835,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    url.query:
+  - query:
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1774,7 +1851,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    user_agent.original:
+  - url_domain:
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1790,7 +1867,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    network.application:
+  - uri_path:
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1806,7 +1883,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    http.request.body.content:
+  - domain:
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1822,7 +1899,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    http.request.referrer:
+  - QueryName:
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1838,7 +1915,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    email.from.address:
+  - QueryResults:
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1854,7 +1931,7 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    dns.question.name:
+  - DestinationHostname:
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1870,7 +1947,311 @@ detection:
     - '*SharpEvtMute.sln*'
     - '*SharpEvtMute.cs*'
     - '*EvtMute-master*'
-    destination.domain:
+  - DestinationIp:
+    - '*SharpEvtMute.pdb*'
+    - '*YaraFilters*lsassdump.yar*'
+    - '*bats3c/EvtMute*'
+    - '*EvtMuteHook.ipdb*'
+    - '*EvtMuteHook.pdb*'
+    - '*EvtMuteHook.dll*'
+    - '*EvtMuteHook.iobj*'
+    - '*/EvtMute.git*'
+    - '*EvtMuteHook.sln*'
+    - '*ShellcodeRDI.py*'
+    - '*SharpEvtMute.exe*'
+    - '*ConvertToShellcode.py*'
+    - '*SharpEvtMute.sln*'
+    - '*SharpEvtMute.cs*'
+    - '*EvtMute-master*'
+  - http_referrer:
+    - '*SharpEvtMute.pdb*'
+    - '*YaraFilters*lsassdump.yar*'
+    - '*bats3c/EvtMute*'
+    - '*EvtMuteHook.ipdb*'
+    - '*EvtMuteHook.pdb*'
+    - '*EvtMuteHook.dll*'
+    - '*EvtMuteHook.iobj*'
+    - '*/EvtMute.git*'
+    - '*EvtMuteHook.sln*'
+    - '*ShellcodeRDI.py*'
+    - '*SharpEvtMute.exe*'
+    - '*ConvertToShellcode.py*'
+    - '*SharpEvtMute.sln*'
+    - '*SharpEvtMute.cs*'
+    - '*EvtMute-master*'
+  - http_referrer_domain:
+    - '*SharpEvtMute.pdb*'
+    - '*YaraFilters*lsassdump.yar*'
+    - '*bats3c/EvtMute*'
+    - '*EvtMuteHook.ipdb*'
+    - '*EvtMuteHook.pdb*'
+    - '*EvtMuteHook.dll*'
+    - '*EvtMuteHook.iobj*'
+    - '*/EvtMute.git*'
+    - '*EvtMuteHook.sln*'
+    - '*ShellcodeRDI.py*'
+    - '*SharpEvtMute.exe*'
+    - '*ConvertToShellcode.py*'
+    - '*SharpEvtMute.sln*'
+    - '*SharpEvtMute.cs*'
+    - '*EvtMute-master*'
+  - http_user_agent:
+    - '*SharpEvtMute.pdb*'
+    - '*YaraFilters*lsassdump.yar*'
+    - '*bats3c/EvtMute*'
+    - '*EvtMuteHook.ipdb*'
+    - '*EvtMuteHook.pdb*'
+    - '*EvtMuteHook.dll*'
+    - '*EvtMuteHook.iobj*'
+    - '*/EvtMute.git*'
+    - '*EvtMuteHook.sln*'
+    - '*ShellcodeRDI.py*'
+    - '*SharpEvtMute.exe*'
+    - '*ConvertToShellcode.py*'
+    - '*SharpEvtMute.sln*'
+    - '*SharpEvtMute.cs*'
+    - '*EvtMute-master*'
+  - dest_nt_host:
+    - '*SharpEvtMute.pdb*'
+    - '*YaraFilters*lsassdump.yar*'
+    - '*bats3c/EvtMute*'
+    - '*EvtMuteHook.ipdb*'
+    - '*EvtMuteHook.pdb*'
+    - '*EvtMuteHook.dll*'
+    - '*EvtMuteHook.iobj*'
+    - '*/EvtMute.git*'
+    - '*EvtMuteHook.sln*'
+    - '*ShellcodeRDI.py*'
+    - '*SharpEvtMute.exe*'
+    - '*ConvertToShellcode.py*'
+    - '*SharpEvtMute.sln*'
+    - '*SharpEvtMute.cs*'
+    - '*EvtMute-master*'
+  - sender:
+    - '*SharpEvtMute.pdb*'
+    - '*YaraFilters*lsassdump.yar*'
+    - '*bats3c/EvtMute*'
+    - '*EvtMuteHook.ipdb*'
+    - '*EvtMuteHook.pdb*'
+    - '*EvtMuteHook.dll*'
+    - '*EvtMuteHook.iobj*'
+    - '*/EvtMute.git*'
+    - '*EvtMuteHook.sln*'
+    - '*ShellcodeRDI.py*'
+    - '*SharpEvtMute.exe*'
+    - '*ConvertToShellcode.py*'
+    - '*SharpEvtMute.sln*'
+    - '*SharpEvtMute.cs*'
+    - '*EvtMute-master*'
+  - recipient:
+    - '*SharpEvtMute.pdb*'
+    - '*YaraFilters*lsassdump.yar*'
+    - '*bats3c/EvtMute*'
+    - '*EvtMuteHook.ipdb*'
+    - '*EvtMuteHook.pdb*'
+    - '*EvtMuteHook.dll*'
+    - '*EvtMuteHook.iobj*'
+    - '*/EvtMute.git*'
+    - '*EvtMuteHook.sln*'
+    - '*ShellcodeRDI.py*'
+    - '*SharpEvtMute.exe*'
+    - '*ConvertToShellcode.py*'
+    - '*SharpEvtMute.sln*'
+    - '*SharpEvtMute.cs*'
+    - '*EvtMute-master*'
+  - orig_recipient:
+    - '*SharpEvtMute.pdb*'
+    - '*YaraFilters*lsassdump.yar*'
+    - '*bats3c/EvtMute*'
+    - '*EvtMuteHook.ipdb*'
+    - '*EvtMuteHook.pdb*'
+    - '*EvtMuteHook.dll*'
+    - '*EvtMuteHook.iobj*'
+    - '*/EvtMute.git*'
+    - '*EvtMuteHook.sln*'
+    - '*ShellcodeRDI.py*'
+    - '*SharpEvtMute.exe*'
+    - '*ConvertToShellcode.py*'
+    - '*SharpEvtMute.sln*'
+    - '*SharpEvtMute.cs*'
+    - '*EvtMute-master*'
+  - subject:
+    - '*SharpEvtMute.pdb*'
+    - '*YaraFilters*lsassdump.yar*'
+    - '*bats3c/EvtMute*'
+    - '*EvtMuteHook.ipdb*'
+    - '*EvtMuteHook.pdb*'
+    - '*EvtMuteHook.dll*'
+    - '*EvtMuteHook.iobj*'
+    - '*/EvtMute.git*'
+    - '*EvtMuteHook.sln*'
+    - '*ShellcodeRDI.py*'
+    - '*SharpEvtMute.exe*'
+    - '*ConvertToShellcode.py*'
+    - '*SharpEvtMute.sln*'
+    - '*SharpEvtMute.cs*'
+    - '*EvtMute-master*'
+  - url.domain:
+    - '*SharpEvtMute.pdb*'
+    - '*YaraFilters*lsassdump.yar*'
+    - '*bats3c/EvtMute*'
+    - '*EvtMuteHook.ipdb*'
+    - '*EvtMuteHook.pdb*'
+    - '*EvtMuteHook.dll*'
+    - '*EvtMuteHook.iobj*'
+    - '*/EvtMute.git*'
+    - '*EvtMuteHook.sln*'
+    - '*ShellcodeRDI.py*'
+    - '*SharpEvtMute.exe*'
+    - '*ConvertToShellcode.py*'
+    - '*SharpEvtMute.sln*'
+    - '*SharpEvtMute.cs*'
+    - '*EvtMute-master*'
+  - url.full:
+    - '*SharpEvtMute.pdb*'
+    - '*YaraFilters*lsassdump.yar*'
+    - '*bats3c/EvtMute*'
+    - '*EvtMuteHook.ipdb*'
+    - '*EvtMuteHook.pdb*'
+    - '*EvtMuteHook.dll*'
+    - '*EvtMuteHook.iobj*'
+    - '*/EvtMute.git*'
+    - '*EvtMuteHook.sln*'
+    - '*ShellcodeRDI.py*'
+    - '*SharpEvtMute.exe*'
+    - '*ConvertToShellcode.py*'
+    - '*SharpEvtMute.sln*'
+    - '*SharpEvtMute.cs*'
+    - '*EvtMute-master*'
+  - url.original:
+    - '*SharpEvtMute.pdb*'
+    - '*YaraFilters*lsassdump.yar*'
+    - '*bats3c/EvtMute*'
+    - '*EvtMuteHook.ipdb*'
+    - '*EvtMuteHook.pdb*'
+    - '*EvtMuteHook.dll*'
+    - '*EvtMuteHook.iobj*'
+    - '*/EvtMute.git*'
+    - '*EvtMuteHook.sln*'
+    - '*ShellcodeRDI.py*'
+    - '*SharpEvtMute.exe*'
+    - '*ConvertToShellcode.py*'
+    - '*SharpEvtMute.sln*'
+    - '*SharpEvtMute.cs*'
+    - '*EvtMute-master*'
+  - url.query:
+    - '*SharpEvtMute.pdb*'
+    - '*YaraFilters*lsassdump.yar*'
+    - '*bats3c/EvtMute*'
+    - '*EvtMuteHook.ipdb*'
+    - '*EvtMuteHook.pdb*'
+    - '*EvtMuteHook.dll*'
+    - '*EvtMuteHook.iobj*'
+    - '*/EvtMute.git*'
+    - '*EvtMuteHook.sln*'
+    - '*ShellcodeRDI.py*'
+    - '*SharpEvtMute.exe*'
+    - '*ConvertToShellcode.py*'
+    - '*SharpEvtMute.sln*'
+    - '*SharpEvtMute.cs*'
+    - '*EvtMute-master*'
+  - user_agent.original:
+    - '*SharpEvtMute.pdb*'
+    - '*YaraFilters*lsassdump.yar*'
+    - '*bats3c/EvtMute*'
+    - '*EvtMuteHook.ipdb*'
+    - '*EvtMuteHook.pdb*'
+    - '*EvtMuteHook.dll*'
+    - '*EvtMuteHook.iobj*'
+    - '*/EvtMute.git*'
+    - '*EvtMuteHook.sln*'
+    - '*ShellcodeRDI.py*'
+    - '*SharpEvtMute.exe*'
+    - '*ConvertToShellcode.py*'
+    - '*SharpEvtMute.sln*'
+    - '*SharpEvtMute.cs*'
+    - '*EvtMute-master*'
+  - network.application:
+    - '*SharpEvtMute.pdb*'
+    - '*YaraFilters*lsassdump.yar*'
+    - '*bats3c/EvtMute*'
+    - '*EvtMuteHook.ipdb*'
+    - '*EvtMuteHook.pdb*'
+    - '*EvtMuteHook.dll*'
+    - '*EvtMuteHook.iobj*'
+    - '*/EvtMute.git*'
+    - '*EvtMuteHook.sln*'
+    - '*ShellcodeRDI.py*'
+    - '*SharpEvtMute.exe*'
+    - '*ConvertToShellcode.py*'
+    - '*SharpEvtMute.sln*'
+    - '*SharpEvtMute.cs*'
+    - '*EvtMute-master*'
+  - http.request.body.content:
+    - '*SharpEvtMute.pdb*'
+    - '*YaraFilters*lsassdump.yar*'
+    - '*bats3c/EvtMute*'
+    - '*EvtMuteHook.ipdb*'
+    - '*EvtMuteHook.pdb*'
+    - '*EvtMuteHook.dll*'
+    - '*EvtMuteHook.iobj*'
+    - '*/EvtMute.git*'
+    - '*EvtMuteHook.sln*'
+    - '*ShellcodeRDI.py*'
+    - '*SharpEvtMute.exe*'
+    - '*ConvertToShellcode.py*'
+    - '*SharpEvtMute.sln*'
+    - '*SharpEvtMute.cs*'
+    - '*EvtMute-master*'
+  - http.request.referrer:
+    - '*SharpEvtMute.pdb*'
+    - '*YaraFilters*lsassdump.yar*'
+    - '*bats3c/EvtMute*'
+    - '*EvtMuteHook.ipdb*'
+    - '*EvtMuteHook.pdb*'
+    - '*EvtMuteHook.dll*'
+    - '*EvtMuteHook.iobj*'
+    - '*/EvtMute.git*'
+    - '*EvtMuteHook.sln*'
+    - '*ShellcodeRDI.py*'
+    - '*SharpEvtMute.exe*'
+    - '*ConvertToShellcode.py*'
+    - '*SharpEvtMute.sln*'
+    - '*SharpEvtMute.cs*'
+    - '*EvtMute-master*'
+  - email.from.address:
+    - '*SharpEvtMute.pdb*'
+    - '*YaraFilters*lsassdump.yar*'
+    - '*bats3c/EvtMute*'
+    - '*EvtMuteHook.ipdb*'
+    - '*EvtMuteHook.pdb*'
+    - '*EvtMuteHook.dll*'
+    - '*EvtMuteHook.iobj*'
+    - '*/EvtMute.git*'
+    - '*EvtMuteHook.sln*'
+    - '*ShellcodeRDI.py*'
+    - '*SharpEvtMute.exe*'
+    - '*ConvertToShellcode.py*'
+    - '*SharpEvtMute.sln*'
+    - '*SharpEvtMute.cs*'
+    - '*EvtMute-master*'
+  - dns.question.name:
+    - '*SharpEvtMute.pdb*'
+    - '*YaraFilters*lsassdump.yar*'
+    - '*bats3c/EvtMute*'
+    - '*EvtMuteHook.ipdb*'
+    - '*EvtMuteHook.pdb*'
+    - '*EvtMuteHook.dll*'
+    - '*EvtMuteHook.iobj*'
+    - '*/EvtMute.git*'
+    - '*EvtMuteHook.sln*'
+    - '*ShellcodeRDI.py*'
+    - '*SharpEvtMute.exe*'
+    - '*ConvertToShellcode.py*'
+    - '*SharpEvtMute.sln*'
+    - '*SharpEvtMute.cs*'
+    - '*EvtMute-master*'
+  - destination.domain:
     - '*SharpEvtMute.pdb*'
     - '*YaraFilters*lsassdump.yar*'
     - '*bats3c/EvtMute*'
@@ -1911,6 +2292,7 @@ fields:
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -1918,10 +2300,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -1963,15 +2347,30 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
 - url
 - dest_url
@@ -2004,3 +2403,6 @@ fields:
 - email.from.address
 - dns.question.name
 - destination.domain
+falsepositives:
+- unknown
+level: medium

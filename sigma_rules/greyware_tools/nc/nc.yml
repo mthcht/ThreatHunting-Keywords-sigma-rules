@@ -1,20 +1,10 @@
 title: Simple keyword detection rule for nc
 id: 18cf3ae7-cc2a-4818-9e63-107c09338c67
 status: experimental
-description:
-- '''linux commands abused by attackers'''
-- '''Linux Persistence Shell cron'''
-- '''Netcat Backdoor on Linux - create a relay that sends packets from the local port
-  to a netcat client connecte to the target ip on the targeted port'''
-- '''Netcat Backdoor on Windows - create a relay that sends packets from the local
-  port to a netcat client connecte to the target ip on the targeted port'''
-- '''Netcat Realy on windows - create a relay that sends packets from the local port
-  to a netcat client connecte to the target ip on the targeted port'''
-- '''Port scanner with netcat'''
+description: Detects interesting keywords based on nc tool
 references:
 - https://github.com/RoseSecurity/Red-Teaming-TTPs/blob/main/Linux.md
 - https://github.com/RoseSecurity/Red-Teaming-TTPs/blob/main/NetcatCheatSheet.pdf
-- N/A
 author: '@mthcht'
 date: 2023/07/30
 modified: 2023/09/15
@@ -53,13 +43,9 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
     - '*nc -l -p * -e cmd.exe*'
     - '*nc -l -p * -e *.bat*'
@@ -67,7 +53,7 @@ detection:
     - '* /bin/nc * -e /bin/bash*> * crontab cron*'
     - '*echo nc -l -p * > *.bat*'
     - '*nc -v -n -z -w1 *-*'
-    CommandLine:
+  - CommandLine:
     - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
     - '*nc -l -p * -e cmd.exe*'
     - '*nc -l -p * -e *.bat*'
@@ -75,7 +61,7 @@ detection:
     - '* /bin/nc * -e /bin/bash*> * crontab cron*'
     - '*echo nc -l -p * > *.bat*'
     - '*nc -v -n -z -w1 *-*'
-    Details:
+  - Details:
     - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
     - '*nc -l -p * -e cmd.exe*'
     - '*nc -l -p * -e *.bat*'
@@ -83,7 +69,7 @@ detection:
     - '* /bin/nc * -e /bin/bash*> * crontab cron*'
     - '*echo nc -l -p * > *.bat*'
     - '*nc -v -n -z -w1 *-*'
-    registry.value:
+  - registry.value:
     - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
     - '*nc -l -p * -e cmd.exe*'
     - '*nc -l -p * -e *.bat*'
@@ -91,7 +77,7 @@ detection:
     - '* /bin/nc * -e /bin/bash*> * crontab cron*'
     - '*echo nc -l -p * > *.bat*'
     - '*nc -v -n -z -w1 *-*'
-    process.args:
+  - process.args:
     - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
     - '*nc -l -p * -e cmd.exe*'
     - '*nc -l -p * -e *.bat*'
@@ -99,7 +85,7 @@ detection:
     - '* /bin/nc * -e /bin/bash*> * crontab cron*'
     - '*echo nc -l -p * > *.bat*'
     - '*nc -v -n -z -w1 *-*'
-    process.command_line:
+  - process.command_line:
     - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
     - '*nc -l -p * -e cmd.exe*'
     - '*nc -l -p * -e *.bat*'
@@ -107,7 +93,7 @@ detection:
     - '* /bin/nc * -e /bin/bash*> * crontab cron*'
     - '*echo nc -l -p * > *.bat*'
     - '*nc -v -n -z -w1 *-*'
-    process.env_vars:
+  - process.env_vars:
     - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
     - '*nc -l -p * -e cmd.exe*'
     - '*nc -l -p * -e *.bat*'
@@ -115,7 +101,7 @@ detection:
     - '* /bin/nc * -e /bin/bash*> * crontab cron*'
     - '*echo nc -l -p * > *.bat*'
     - '*nc -v -n -z -w1 *-*'
-    process.io.text:
+  - process.io.text:
     - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
     - '*nc -l -p * -e cmd.exe*'
     - '*nc -l -p * -e *.bat*'
@@ -123,7 +109,7 @@ detection:
     - '* /bin/nc * -e /bin/bash*> * crontab cron*'
     - '*echo nc -l -p * > *.bat*'
     - '*nc -v -n -z -w1 *-*'
-    process.title:
+  - process.title:
     - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
     - '*nc -l -p * -e cmd.exe*'
     - '*nc -l -p * -e *.bat*'
@@ -131,7 +117,7 @@ detection:
     - '* /bin/nc * -e /bin/bash*> * crontab cron*'
     - '*echo nc -l -p * > *.bat*'
     - '*nc -v -n -z -w1 *-*'
-    pe.company:
+  - pe.company:
     - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
     - '*nc -l -p * -e cmd.exe*'
     - '*nc -l -p * -e *.bat*'
@@ -139,7 +125,7 @@ detection:
     - '* /bin/nc * -e /bin/bash*> * crontab cron*'
     - '*echo nc -l -p * > *.bat*'
     - '*nc -v -n -z -w1 *-*'
-    pe.description:
+  - pe.description:
     - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
     - '*nc -l -p * -e cmd.exe*'
     - '*nc -l -p * -e *.bat*'
@@ -147,7 +133,7 @@ detection:
     - '* /bin/nc * -e /bin/bash*> * crontab cron*'
     - '*echo nc -l -p * > *.bat*'
     - '*nc -v -n -z -w1 *-*'
-    pe.product:
+  - pe.product:
     - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
     - '*nc -l -p * -e cmd.exe*'
     - '*nc -l -p * -e *.bat*'
@@ -155,7 +141,7 @@ detection:
     - '* /bin/nc * -e /bin/bash*> * crontab cron*'
     - '*echo nc -l -p * > *.bat*'
     - '*nc -v -n -z -w1 *-*'
-    os.full:
+  - os.full:
     - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
     - '*nc -l -p * -e cmd.exe*'
     - '*nc -l -p * -e *.bat*'
@@ -163,7 +149,7 @@ detection:
     - '* /bin/nc * -e /bin/bash*> * crontab cron*'
     - '*echo nc -l -p * > *.bat*'
     - '*nc -v -n -z -w1 *-*'
-    host.hostname:
+  - host.hostname:
     - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
     - '*nc -l -p * -e cmd.exe*'
     - '*nc -l -p * -e *.bat*'
@@ -171,7 +157,7 @@ detection:
     - '* /bin/nc * -e /bin/bash*> * crontab cron*'
     - '*echo nc -l -p * > *.bat*'
     - '*nc -v -n -z -w1 *-*'
-    event.original:
+  - event.original:
     - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
     - '*nc -l -p * -e cmd.exe*'
     - '*nc -l -p * -e *.bat*'
@@ -179,7 +165,7 @@ detection:
     - '* /bin/nc * -e /bin/bash*> * crontab cron*'
     - '*echo nc -l -p * > *.bat*'
     - '*nc -v -n -z -w1 *-*'
-    email.subject:
+  - email.subject:
     - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
     - '*nc -l -p * -e cmd.exe*'
     - '*nc -l -p * -e *.bat*'
@@ -187,7 +173,7 @@ detection:
     - '* /bin/nc * -e /bin/bash*> * crontab cron*'
     - '*echo nc -l -p * > *.bat*'
     - '*nc -v -n -z -w1 *-*'
-    device.model.name:
+  - device.model.name:
     - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
     - '*nc -l -p * -e cmd.exe*'
     - '*nc -l -p * -e *.bat*'
@@ -195,7 +181,7 @@ detection:
     - '* /bin/nc * -e /bin/bash*> * crontab cron*'
     - '*echo nc -l -p * > *.bat*'
     - '*nc -v -n -z -w1 *-*'
-    container.image.name:
+  - container.image.name:
     - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
     - '*nc -l -p * -e cmd.exe*'
     - '*nc -l -p * -e *.bat*'
@@ -203,7 +189,7 @@ detection:
     - '* /bin/nc * -e /bin/bash*> * crontab cron*'
     - '*echo nc -l -p * > *.bat*'
     - '*nc -v -n -z -w1 *-*'
-    container.name:
+  - container.name:
     - '* /bin/nc * -e /bin/bash* > cron && crontab cron*'
     - '*nc -l -p * -e cmd.exe*'
     - '*nc -l -p * -e *.bat*'
@@ -232,3 +218,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

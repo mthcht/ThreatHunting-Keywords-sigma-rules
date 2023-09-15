@@ -1,11 +1,7 @@
 title: Simple keyword detection rule for iptables
 id: 8fedf796-c20c-4cf9-8305-15a0c561c846
 status: experimental
-description:
-- '''Adversaries may disable security tools to avoid possible detection of their tools
-  and activities. This can take the form of killing security software or event logging
-  processes* deleting Registry keys so that tools do not start at run time* or other
-  methods to interfere with security tools scanning or reporting information.'''
+description: Detects interesting keywords based on iptables tool
 references:
 - https://attack.mitre.org/techniques/T1562/001/
 author: '@mthcht'
@@ -21,103 +17,99 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - service ip6tables stop
     - service iptables stop
     - chkconfig off iptables
     - chkconfig off ip6tables
-    CommandLine:
+  - CommandLine:
     - service ip6tables stop
     - service iptables stop
     - chkconfig off iptables
     - chkconfig off ip6tables
-    Details:
+  - Details:
     - service ip6tables stop
     - service iptables stop
     - chkconfig off iptables
     - chkconfig off ip6tables
-    registry.value:
+  - registry.value:
     - service ip6tables stop
     - service iptables stop
     - chkconfig off iptables
     - chkconfig off ip6tables
-    process.args:
+  - process.args:
     - service ip6tables stop
     - service iptables stop
     - chkconfig off iptables
     - chkconfig off ip6tables
-    process.command_line:
+  - process.command_line:
     - service ip6tables stop
     - service iptables stop
     - chkconfig off iptables
     - chkconfig off ip6tables
-    process.env_vars:
+  - process.env_vars:
     - service ip6tables stop
     - service iptables stop
     - chkconfig off iptables
     - chkconfig off ip6tables
-    process.io.text:
+  - process.io.text:
     - service ip6tables stop
     - service iptables stop
     - chkconfig off iptables
     - chkconfig off ip6tables
-    process.title:
+  - process.title:
     - service ip6tables stop
     - service iptables stop
     - chkconfig off iptables
     - chkconfig off ip6tables
-    pe.company:
+  - pe.company:
     - service ip6tables stop
     - service iptables stop
     - chkconfig off iptables
     - chkconfig off ip6tables
-    pe.description:
+  - pe.description:
     - service ip6tables stop
     - service iptables stop
     - chkconfig off iptables
     - chkconfig off ip6tables
-    pe.product:
+  - pe.product:
     - service ip6tables stop
     - service iptables stop
     - chkconfig off iptables
     - chkconfig off ip6tables
-    os.full:
+  - os.full:
     - service ip6tables stop
     - service iptables stop
     - chkconfig off iptables
     - chkconfig off ip6tables
-    host.hostname:
+  - host.hostname:
     - service ip6tables stop
     - service iptables stop
     - chkconfig off iptables
     - chkconfig off ip6tables
-    event.original:
+  - event.original:
     - service ip6tables stop
     - service iptables stop
     - chkconfig off iptables
     - chkconfig off ip6tables
-    email.subject:
+  - email.subject:
     - service ip6tables stop
     - service iptables stop
     - chkconfig off iptables
     - chkconfig off ip6tables
-    device.model.name:
+  - device.model.name:
     - service ip6tables stop
     - service iptables stop
     - chkconfig off iptables
     - chkconfig off ip6tables
-    container.image.name:
+  - container.image.name:
     - service ip6tables stop
     - service iptables stop
     - chkconfig off iptables
     - chkconfig off ip6tables
-    container.name:
+  - container.name:
     - service ip6tables stop
     - service iptables stop
     - chkconfig off iptables
@@ -143,3 +135,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

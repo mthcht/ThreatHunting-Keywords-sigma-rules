@@ -1,10 +1,7 @@
 title: Simple keyword detection rule for gost
 id: 25dc8953-0100-4bf4-b9b7-42e0fd5c9022
 status: experimental
-description:
-- '''Ransomware operators actively use Gost capabilities (<https://github.com/ginuerzh/gost>)
-  in order to communicate with their remote server. using the command below. To hide
-  the software in plain sight. they rename it to `System.exe` or `update.exe`.'''
+description: Detects interesting keywords based on gost tool
 references:
 - https://github.com/ginuerzh/gost
 author: '@mthcht'
@@ -21,13 +18,9 @@ logsource:
   category:
   - endpoint
   - network
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
@@ -38,7 +31,7 @@ detection:
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    CommandLine:
+  - CommandLine:
     - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
@@ -49,7 +42,7 @@ detection:
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    Details:
+  - Details:
     - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
@@ -60,7 +53,7 @@ detection:
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    registry.value:
+  - registry.value:
     - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
@@ -71,7 +64,7 @@ detection:
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    process.args:
+  - process.args:
     - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
@@ -82,7 +75,7 @@ detection:
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    process.command_line:
+  - process.command_line:
     - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
@@ -93,7 +86,7 @@ detection:
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    process.env_vars:
+  - process.env_vars:
     - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
@@ -104,7 +97,7 @@ detection:
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    process.io.text:
+  - process.io.text:
     - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
@@ -115,7 +108,7 @@ detection:
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    process.title:
+  - process.title:
     - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
@@ -126,7 +119,7 @@ detection:
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    pe.company:
+  - pe.company:
     - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
@@ -137,7 +130,7 @@ detection:
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    pe.description:
+  - pe.description:
     - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
@@ -148,7 +141,7 @@ detection:
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    pe.product:
+  - pe.product:
     - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
@@ -159,7 +152,7 @@ detection:
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    os.full:
+  - os.full:
     - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
@@ -170,7 +163,7 @@ detection:
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    host.hostname:
+  - host.hostname:
     - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
@@ -181,10 +174,7 @@ detection:
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    event.original:
-    - '*gost -L=:* -F=*:*'
-    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
-    email.subject:
+  - event.original:
     - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
@@ -195,7 +185,7 @@ detection:
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    device.model.name:
+  - email.subject:
     - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
@@ -206,7 +196,7 @@ detection:
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    container.image.name:
+  - device.model.name:
     - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
@@ -217,7 +207,7 @@ detection:
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    container.name:
+  - container.image.name:
     - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
@@ -228,661 +218,1002 @@ detection:
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    Image:
+  - container.name:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    OriginalFileName:
+  - Image:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    CurrentDirectory:
+  - OriginalFileName:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    ParentImage:
+  - CurrentDirectory:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    TargetFilename:
+  - ParentImage:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    Signature:
+  - ParentCommandLine:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    signature:
+  - TargetFilename:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    ImageLoaded:
+  - Signature:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    Company:
+  - signature:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    Description:
+  - ImageLoaded:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    description:
+  - Company:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    SourceImage:
+  - Description:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    TargetImage:
+  - description:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    CallTrace:
+  - CommandLine:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    TargetObject:
+  - SourceImage:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    PipeName:
+  - TargetImage:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    Consumer:
+  - CallTrace:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    Destination:
+  - TargetObject:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    Name:
+  - Details:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    Query:
+  - PipeName:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    NewName:
+  - Consumer:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    StartAddress:
+  - Destination:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    StartModule:
+  - Name:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    StartFunction:
+  - Query:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    SourceHostname:
+  - NewName:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    Device:
+  - StartAddress:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    file_name:
+  - StartModule:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    file_path:
+  - StartFunction:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    process:
+  - SourceHostname:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    original_file_name:
+  - Device:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    parent_process:
+  - file_name:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    process_path:
+  - file_path:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    service_path:
+  - process:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    registry_path:
+  - original_file_name:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    registry_value_data:
+  - parent_process:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    registry_value_name:
+  - process_path:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    ContextInfo:
+  - service_path:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    Payload:
+  - registry_path:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    ScriptBlockText:
+  - registry_value_data:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    ServerName:
+  - registry_value_name:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    TransportName:
+  - ContextInfo:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    NewProcessName:
+  - Payload:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    ParentProcessName:
+  - ScriptBlockText:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    Application:
+  - ServerName:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    Product Name:
+  - TransportName:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    Threat Name:
+  - NewProcessName:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    Process Name:
+  - ParentProcessName:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    Path:
+  - Application:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    ImagePath:
+  - Product Name:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    ServiceName:
+  - Threat Name:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    ProcessPath:
+  - Process Name:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    AppName:
+  - Path:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    AppPath:
+  - ImagePath:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    ModulePath:
+  - ServiceName:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    registry.data.strings:
+  - ProcessPath:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    registry.path:
+  - AppName:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    process.executable:
+  - AppPath:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    process.name:
+  - ModulePath:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    pe.original_file_name:
+  - registry.data.strings:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    file.fork_name:
+  - registry.path:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    file.name:
+  - registry.value:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    file.path:
+  - process.args:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    file.target_path:
+  - process.command_line:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    email.attachments.file.name:
+  - process.env_vars:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    dll.path:
+  - process.io.text:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    object:
+  - process.executable:
+    - '*gost -L=:* -F=*:*'
     - '*gost -L=admin:*@localhost:*'
     - '*gost -L=rtcp://*'
     - '*gost -L=udp://*'
     - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
     - '*gost -L=forward+ssh://:*'
     - '*ginuerzh/gost*'
     - '*gost -L=ssu://*'
     - '*gost -L=rudp://*'
-    url:
+  - process.name:
+    - '*gost -L=:* -F=*:*'
+    - '*gost -L=admin:*@localhost:*'
+    - '*gost -L=rtcp://*'
+    - '*gost -L=udp://*'
+    - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
+    - '*gost -L=forward+ssh://:*'
+    - '*ginuerzh/gost*'
+    - '*gost -L=ssu://*'
+    - '*gost -L=rudp://*'
+  - process.title:
+    - '*gost -L=:* -F=*:*'
+    - '*gost -L=admin:*@localhost:*'
+    - '*gost -L=rtcp://*'
+    - '*gost -L=udp://*'
+    - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
+    - '*gost -L=forward+ssh://:*'
+    - '*ginuerzh/gost*'
+    - '*gost -L=ssu://*'
+    - '*gost -L=rudp://*'
+  - pe.company:
+    - '*gost -L=:* -F=*:*'
+    - '*gost -L=admin:*@localhost:*'
+    - '*gost -L=rtcp://*'
+    - '*gost -L=udp://*'
+    - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
+    - '*gost -L=forward+ssh://:*'
+    - '*ginuerzh/gost*'
+    - '*gost -L=ssu://*'
+    - '*gost -L=rudp://*'
+  - pe.description:
+    - '*gost -L=:* -F=*:*'
+    - '*gost -L=admin:*@localhost:*'
+    - '*gost -L=rtcp://*'
+    - '*gost -L=udp://*'
+    - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
+    - '*gost -L=forward+ssh://:*'
+    - '*ginuerzh/gost*'
+    - '*gost -L=ssu://*'
+    - '*gost -L=rudp://*'
+  - pe.original_file_name:
+    - '*gost -L=:* -F=*:*'
+    - '*gost -L=admin:*@localhost:*'
+    - '*gost -L=rtcp://*'
+    - '*gost -L=udp://*'
+    - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
+    - '*gost -L=forward+ssh://:*'
+    - '*ginuerzh/gost*'
+    - '*gost -L=ssu://*'
+    - '*gost -L=rudp://*'
+  - pe.product:
+    - '*gost -L=:* -F=*:*'
+    - '*gost -L=admin:*@localhost:*'
+    - '*gost -L=rtcp://*'
+    - '*gost -L=udp://*'
+    - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
+    - '*gost -L=forward+ssh://:*'
+    - '*ginuerzh/gost*'
+    - '*gost -L=ssu://*'
+    - '*gost -L=rudp://*'
+  - os.full:
+    - '*gost -L=:* -F=*:*'
+    - '*gost -L=admin:*@localhost:*'
+    - '*gost -L=rtcp://*'
+    - '*gost -L=udp://*'
+    - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
+    - '*gost -L=forward+ssh://:*'
+    - '*ginuerzh/gost*'
+    - '*gost -L=ssu://*'
+    - '*gost -L=rudp://*'
+  - host.hostname:
+    - '*gost -L=:* -F=*:*'
+    - '*gost -L=admin:*@localhost:*'
+    - '*gost -L=rtcp://*'
+    - '*gost -L=udp://*'
+    - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
+    - '*gost -L=forward+ssh://:*'
+    - '*ginuerzh/gost*'
+    - '*gost -L=ssu://*'
+    - '*gost -L=rudp://*'
+  - file.fork_name:
+    - '*gost -L=:* -F=*:*'
+    - '*gost -L=admin:*@localhost:*'
+    - '*gost -L=rtcp://*'
+    - '*gost -L=udp://*'
+    - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
+    - '*gost -L=forward+ssh://:*'
+    - '*ginuerzh/gost*'
+    - '*gost -L=ssu://*'
+    - '*gost -L=rudp://*'
+  - file.name:
+    - '*gost -L=:* -F=*:*'
+    - '*gost -L=admin:*@localhost:*'
+    - '*gost -L=rtcp://*'
+    - '*gost -L=udp://*'
+    - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
+    - '*gost -L=forward+ssh://:*'
+    - '*ginuerzh/gost*'
+    - '*gost -L=ssu://*'
+    - '*gost -L=rudp://*'
+  - file.path:
+    - '*gost -L=:* -F=*:*'
+    - '*gost -L=admin:*@localhost:*'
+    - '*gost -L=rtcp://*'
+    - '*gost -L=udp://*'
+    - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
+    - '*gost -L=forward+ssh://:*'
+    - '*ginuerzh/gost*'
+    - '*gost -L=ssu://*'
+    - '*gost -L=rudp://*'
+  - file.target_path:
+    - '*gost -L=:* -F=*:*'
+    - '*gost -L=admin:*@localhost:*'
+    - '*gost -L=rtcp://*'
+    - '*gost -L=udp://*'
+    - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
+    - '*gost -L=forward+ssh://:*'
+    - '*ginuerzh/gost*'
+    - '*gost -L=ssu://*'
+    - '*gost -L=rudp://*'
+  - email.attachments.file.name:
+    - '*gost -L=:* -F=*:*'
+    - '*gost -L=admin:*@localhost:*'
+    - '*gost -L=rtcp://*'
+    - '*gost -L=udp://*'
+    - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
+    - '*gost -L=forward+ssh://:*'
+    - '*ginuerzh/gost*'
+    - '*gost -L=ssu://*'
+    - '*gost -L=rudp://*'
+  - email.subject:
+    - '*gost -L=:* -F=*:*'
+    - '*gost -L=admin:*@localhost:*'
+    - '*gost -L=rtcp://*'
+    - '*gost -L=udp://*'
+    - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
+    - '*gost -L=forward+ssh://:*'
+    - '*ginuerzh/gost*'
+    - '*gost -L=ssu://*'
+    - '*gost -L=rudp://*'
+  - dll.path:
+    - '*gost -L=:* -F=*:*'
+    - '*gost -L=admin:*@localhost:*'
+    - '*gost -L=rtcp://*'
+    - '*gost -L=udp://*'
+    - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
+    - '*gost -L=forward+ssh://:*'
+    - '*ginuerzh/gost*'
+    - '*gost -L=ssu://*'
+    - '*gost -L=rudp://*'
+  - device.model.name:
+    - '*gost -L=:* -F=*:*'
+    - '*gost -L=admin:*@localhost:*'
+    - '*gost -L=rtcp://*'
+    - '*gost -L=udp://*'
+    - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
+    - '*gost -L=forward+ssh://:*'
+    - '*ginuerzh/gost*'
+    - '*gost -L=ssu://*'
+    - '*gost -L=rudp://*'
+  - container.image.name:
+    - '*gost -L=:* -F=*:*'
+    - '*gost -L=admin:*@localhost:*'
+    - '*gost -L=rtcp://*'
+    - '*gost -L=udp://*'
+    - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
+    - '*gost -L=forward+ssh://:*'
+    - '*ginuerzh/gost*'
+    - '*gost -L=ssu://*'
+    - '*gost -L=rudp://*'
+  - container.name:
+    - '*gost -L=:* -F=*:*'
+    - '*gost -L=admin:*@localhost:*'
+    - '*gost -L=rtcp://*'
+    - '*gost -L=udp://*'
+    - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
+    - '*gost -L=forward+ssh://:*'
+    - '*ginuerzh/gost*'
+    - '*gost -L=ssu://*'
+    - '*gost -L=rudp://*'
+  - object:
+    - '*gost -L=:* -F=*:*'
+    - '*gost -L=admin:*@localhost:*'
+    - '*gost -L=rtcp://*'
+    - '*gost -L=udp://*'
+    - '*gost -L=ssh://:'
+    - '*C:\Windows\System.exe* -L rtcp://0.0.0.0:8087/127.0.0.1:4444 -F socks5://*:*@*:443*'
+    - '*gost -L=forward+ssh://:*'
+    - '*ginuerzh/gost*'
+    - '*gost -L=ssu://*'
+    - '*gost -L=rudp://*'
+  - url:
     - '*ginuerzh/gost*'
-    dest_url:
+  - dest_url:
     - '*ginuerzh/gost*'
-    uri:
+  - uri:
     - '*ginuerzh/gost*'
-    uri_query:
+  - uri_query:
     - '*ginuerzh/gost*'
-    query:
+  - query:
     - '*ginuerzh/gost*'
-    url_domain:
+  - url_domain:
     - '*ginuerzh/gost*'
-    uri_path:
+  - uri_path:
     - '*ginuerzh/gost*'
-    domain:
+  - domain:
     - '*ginuerzh/gost*'
-    QueryName:
+  - QueryName:
     - '*ginuerzh/gost*'
-    QueryResults:
+  - QueryResults:
     - '*ginuerzh/gost*'
-    DestinationHostname:
+  - DestinationHostname:
     - '*ginuerzh/gost*'
-    DestinationIp:
+  - DestinationIp:
     - '*ginuerzh/gost*'
-    http_referrer:
+  - http_referrer:
     - '*ginuerzh/gost*'
-    http_referrer_domain:
+  - http_referrer_domain:
     - '*ginuerzh/gost*'
-    http_user_agent:
+  - http_user_agent:
     - '*ginuerzh/gost*'
-    dest_nt_host:
+  - dest_nt_host:
     - '*ginuerzh/gost*'
-    sender:
+  - sender:
     - '*ginuerzh/gost*'
-    recipient:
+  - recipient:
     - '*ginuerzh/gost*'
-    orig_recipient:
+  - orig_recipient:
     - '*ginuerzh/gost*'
-    subject:
+  - subject:
     - '*ginuerzh/gost*'
-    url.domain:
+  - url.domain:
     - '*ginuerzh/gost*'
-    url.full:
+  - url.full:
     - '*ginuerzh/gost*'
-    url.original:
+  - url.original:
     - '*ginuerzh/gost*'
-    url.query:
+  - url.query:
     - '*ginuerzh/gost*'
-    user_agent.original:
+  - user_agent.original:
     - '*ginuerzh/gost*'
-    network.application:
+  - network.application:
     - '*ginuerzh/gost*'
-    http.request.body.content:
+  - http.request.body.content:
     - '*ginuerzh/gost*'
-    http.request.referrer:
+  - http.request.referrer:
     - '*ginuerzh/gost*'
-    email.from.address:
+  - email.from.address:
     - '*ginuerzh/gost*'
-    dns.question.name:
+  - dns.question.name:
     - '*ginuerzh/gost*'
-    destination.domain:
+  - destination.domain:
     - '*ginuerzh/gost*'
   condition: selection
 fields:
@@ -909,6 +1240,7 @@ fields:
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -916,10 +1248,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -961,15 +1295,30 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
 - url
 - dest_url
@@ -1002,3 +1351,6 @@ fields:
 - email.from.address
 - dns.question.name
 - destination.domain
+falsepositives:
+- unknown
+level: medium

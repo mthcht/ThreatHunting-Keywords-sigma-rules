@@ -1,10 +1,7 @@
 title: Simple keyword detection rule for UniversalDVC
 id: 840ec435-b80e-4a50-8378-11fa04228c09
 status: experimental
-description:
-- '''run an executable (UDVC-Server.exe) that sets up a communication channel for
-  redirecting an SSF port using a DVC server. This can be seen as a form of proxy
-  to evade detection or bypass network restrictions.'''
+description: Detects interesting keywords based on UniversalDVC tool
 references:
 - https://github.com/earthquake/UniversalDVC
 author: '@mthcht'
@@ -16,49 +13,45 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*UDVC-Server.exe -c * -i 127.0.0.1*'
-    CommandLine:
+  - CommandLine:
     - '*UDVC-Server.exe -c * -i 127.0.0.1*'
-    Details:
+  - Details:
     - '*UDVC-Server.exe -c * -i 127.0.0.1*'
-    registry.value:
+  - registry.value:
     - '*UDVC-Server.exe -c * -i 127.0.0.1*'
-    process.args:
+  - process.args:
     - '*UDVC-Server.exe -c * -i 127.0.0.1*'
-    process.command_line:
+  - process.command_line:
     - '*UDVC-Server.exe -c * -i 127.0.0.1*'
-    process.env_vars:
+  - process.env_vars:
     - '*UDVC-Server.exe -c * -i 127.0.0.1*'
-    process.io.text:
+  - process.io.text:
     - '*UDVC-Server.exe -c * -i 127.0.0.1*'
-    process.title:
+  - process.title:
     - '*UDVC-Server.exe -c * -i 127.0.0.1*'
-    pe.company:
+  - pe.company:
     - '*UDVC-Server.exe -c * -i 127.0.0.1*'
-    pe.description:
+  - pe.description:
     - '*UDVC-Server.exe -c * -i 127.0.0.1*'
-    pe.product:
+  - pe.product:
     - '*UDVC-Server.exe -c * -i 127.0.0.1*'
-    os.full:
+  - os.full:
     - '*UDVC-Server.exe -c * -i 127.0.0.1*'
-    host.hostname:
+  - host.hostname:
     - '*UDVC-Server.exe -c * -i 127.0.0.1*'
-    event.original:
+  - event.original:
     - '*UDVC-Server.exe -c * -i 127.0.0.1*'
-    email.subject:
+  - email.subject:
     - '*UDVC-Server.exe -c * -i 127.0.0.1*'
-    device.model.name:
+  - device.model.name:
     - '*UDVC-Server.exe -c * -i 127.0.0.1*'
-    container.image.name:
+  - container.image.name:
     - '*UDVC-Server.exe -c * -i 127.0.0.1*'
-    container.name:
+  - container.name:
     - '*UDVC-Server.exe -c * -i 127.0.0.1*'
   condition: selection
 fields:
@@ -81,3 +74,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

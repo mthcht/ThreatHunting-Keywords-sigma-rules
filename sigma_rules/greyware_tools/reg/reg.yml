@@ -1,38 +1,13 @@
 title: Simple keyword detection rule for reg
 id: ae25a62a-c187-4db6-b6f5-2d043056474b
 status: experimental
-description:
-- '''Allowing remote connections to this computer'''
-- '''Anti forensic - Disabling Prefetch'''
-- '''At the login screen press Windows Key+U and you get a cmd.exe window as SYSTEM.'''
-- '''Blind ETW Windows Defender: zero out registry values corresponding to its ETW
-  sessions'''
-- '''Check if LSASS is running in PPL'''
-- '''commands from wmiexec2.0 -  is the same wmiexec that everyone knows and loves
-  (debatable). This 2.0 version is obfuscated to avoid well known signatures from
-  various AV engines.'''
-- '''Defense evasion technique In order to avoid detection at any point of the kill
-  chain. attackers use several ways to disable anti-virus. disable Microsoft firewall
-  and clear logs.'''
-- '''Delete run box history'''
-- '''Disable Cortex: Change the DLL to a random value'''
-- '''Disable Real Time Protection'''
-- '''Disable Windows Defender Security Center'''
-- '''Hit F5 a bunch of times when you are at the RDP login screen'''
-- '''Query the Windows registry sensitive informations'''
-- '''saves a copy of the registry hive hklm\sam to a .dat file'''
-- '''saves a copy of the registry hive hklm\system to a .dat file'''
-- '''the commands are used to export the SAM and SYSTEM registry hives which contain
-  sensitive Windows security data including hashed passwords for local accounts. By
-  obtaining these hives an attacker can attempt to crack the hashes or use them in
-  pass-the-hash attacks for unauthorized access.'''
+description: Detects interesting keywords based on reg tool
 references:
 - https://github.com/hak5/omg-payloads/tree/master/payloads/library/credentials/-OMG-Credz-Plz
 - https://github.com/ice-wzl/wmiexec2
 - https://github.com/RoseSecurity/Red-Teaming-TTPs/blob/main/Anti-Forensics.md
 - https://media.defense.gov/2023/May/24/2003229517/-1/-1/0/CSA_Living_off_the_Land.PDF
 - https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/winPEAS/winPEASbat/winPEAS.bat
-- N/A
 author: '@mthcht'
 date: 2023/07/30
 modified: 2023/09/15
@@ -73,16 +48,9 @@ logsource:
   category:
   - endpoint
   - network
-falsepositives:
-- Unknown
-level:
-- critical
-- high
-- medium
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*reg query hklm\software\OpenSSH*'
     - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
       /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
@@ -131,7 +99,7 @@ detection:
       Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
     - '*reg save hklm\sam *.dat*'
     - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
-    CommandLine:
+  - CommandLine:
     - '*reg query hklm\software\OpenSSH*'
     - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
       /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
@@ -180,7 +148,7 @@ detection:
       Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
     - '*reg save hklm\sam *.dat*'
     - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
-    Details:
+  - Details:
     - '*reg query hklm\software\OpenSSH*'
     - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
       /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
@@ -229,7 +197,7 @@ detection:
       Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
     - '*reg save hklm\sam *.dat*'
     - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
-    registry.value:
+  - registry.value:
     - '*reg query hklm\software\OpenSSH*'
     - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
       /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
@@ -278,7 +246,7 @@ detection:
       Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
     - '*reg save hklm\sam *.dat*'
     - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
-    process.args:
+  - process.args:
     - '*reg query hklm\software\OpenSSH*'
     - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
       /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
@@ -327,7 +295,7 @@ detection:
       Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
     - '*reg save hklm\sam *.dat*'
     - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
-    process.command_line:
+  - process.command_line:
     - '*reg query hklm\software\OpenSSH*'
     - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
       /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
@@ -376,7 +344,7 @@ detection:
       Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
     - '*reg save hklm\sam *.dat*'
     - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
-    process.env_vars:
+  - process.env_vars:
     - '*reg query hklm\software\OpenSSH*'
     - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
       /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
@@ -425,7 +393,7 @@ detection:
       Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
     - '*reg save hklm\sam *.dat*'
     - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
-    process.io.text:
+  - process.io.text:
     - '*reg query hklm\software\OpenSSH*'
     - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
       /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
@@ -474,7 +442,7 @@ detection:
       Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
     - '*reg save hklm\sam *.dat*'
     - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
-    process.title:
+  - process.title:
     - '*reg query hklm\software\OpenSSH*'
     - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
       /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
@@ -523,7 +491,7 @@ detection:
       Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
     - '*reg save hklm\sam *.dat*'
     - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
-    pe.company:
+  - pe.company:
     - '*reg query hklm\software\OpenSSH*'
     - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
       /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
@@ -572,7 +540,7 @@ detection:
       Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
     - '*reg save hklm\sam *.dat*'
     - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
-    pe.description:
+  - pe.description:
     - '*reg query hklm\software\OpenSSH*'
     - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
       /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
@@ -621,7 +589,7 @@ detection:
       Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
     - '*reg save hklm\sam *.dat*'
     - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
-    pe.product:
+  - pe.product:
     - '*reg query hklm\software\OpenSSH*'
     - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
       /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
@@ -670,7 +638,7 @@ detection:
       Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
     - '*reg save hklm\sam *.dat*'
     - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
-    os.full:
+  - os.full:
     - '*reg query hklm\software\OpenSSH*'
     - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
       /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
@@ -719,7 +687,7 @@ detection:
       Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
     - '*reg save hklm\sam *.dat*'
     - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
-    host.hostname:
+  - host.hostname:
     - '*reg query hklm\software\OpenSSH*'
     - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
       /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
@@ -768,7 +736,7 @@ detection:
       Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
     - '*reg save hklm\sam *.dat*'
     - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
-    event.original:
+  - event.original:
     - '*reg query hklm\software\OpenSSH*'
     - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
       /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
@@ -817,7 +785,7 @@ detection:
       Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
     - '*reg save hklm\sam *.dat*'
     - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
-    email.subject:
+  - email.subject:
     - '*reg query hklm\software\OpenSSH*'
     - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
       /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
@@ -866,7 +834,7 @@ detection:
       Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
     - '*reg save hklm\sam *.dat*'
     - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
-    device.model.name:
+  - device.model.name:
     - '*reg query hklm\software\OpenSSH*'
     - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
       /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
@@ -915,7 +883,7 @@ detection:
       Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
     - '*reg save hklm\sam *.dat*'
     - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
-    container.image.name:
+  - container.image.name:
     - '*reg query hklm\software\OpenSSH*'
     - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
       /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
@@ -964,7 +932,7 @@ detection:
       Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
     - '*reg save hklm\sam *.dat*'
     - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
-    container.name:
+  - container.name:
     - '*reg query hklm\software\OpenSSH*'
     - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
       /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
@@ -1013,7 +981,7 @@ detection:
       Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
     - '*reg save hklm\sam *.dat*'
     - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
-    url:
+  - url:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1023,7 +991,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    dest_url:
+  - dest_url:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1033,7 +1001,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    uri:
+  - uri:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1043,7 +1011,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    uri_query:
+  - uri_query:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1053,7 +1021,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    query:
+  - query:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1063,7 +1031,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    url_domain:
+  - url_domain:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1073,7 +1041,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    uri_path:
+  - uri_path:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1083,7 +1051,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    domain:
+  - domain:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1093,7 +1061,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    QueryName:
+  - QueryName:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1103,7 +1071,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    QueryResults:
+  - QueryResults:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1113,7 +1081,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    DestinationHostname:
+  - DestinationHostname:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1123,7 +1091,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    DestinationIp:
+  - DestinationIp:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1133,7 +1101,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    http_referrer:
+  - http_referrer:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1143,7 +1111,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    http_referrer_domain:
+  - http_referrer_domain:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1153,7 +1121,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    http_user_agent:
+  - http_user_agent:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1163,7 +1131,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    dest_nt_host:
+  - dest_nt_host:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1173,7 +1141,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    sender:
+  - sender:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1183,7 +1151,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    recipient:
+  - recipient:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1193,7 +1161,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    orig_recipient:
+  - orig_recipient:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1203,7 +1171,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    subject:
+  - subject:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1213,7 +1181,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    url.domain:
+  - url.domain:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1223,7 +1191,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    url.full:
+  - url.full:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1233,7 +1201,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    url.original:
+  - url.original:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1243,7 +1211,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    url.query:
+  - url.query:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1253,7 +1221,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    user_agent.original:
+  - user_agent.original:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1263,7 +1231,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    network.application:
+  - network.application:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1273,7 +1241,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    http.request.body.content:
+  - http.request.body.content:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1283,7 +1251,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    http.request.referrer:
+  - http.request.referrer:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1293,7 +1261,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    email.from.address:
+  - email.from.address:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1303,7 +1271,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    dns.question.name:
+  - dns.question.name:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1313,7 +1281,7 @@ detection:
       /v CACHEDLOGONSCOUNT*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    destination.domain:
+  - destination.domain:
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
     - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
@@ -1375,3 +1343,6 @@ fields:
 - email.from.address
 - dns.question.name
 - destination.domain
+falsepositives:
+- unknown
+level: medium

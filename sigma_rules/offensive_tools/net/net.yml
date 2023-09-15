@@ -1,16 +1,10 @@
 title: Simple keyword detection rule for net
 id: 5e6b29c7-c415-48a1-aff5-2c4ed92fb638
 status: experimental
-description:
-- '''adding a user to a privileged group. This action can be used by adversaries to
-  maintain unauthorized access or escalate privileges within the targeted environment.'''
-- '''Conti Ransomware Proxyshell PowerShell command #9'''
-- '''Query Domain Comtrollers Computers in the current domain'''
-- '''Query users from domain admins in current domain'''
+description: Detects interesting keywords based on net tool
 references:
 - https://github.com/RoseSecurity/Red-Teaming-TTPs
 - https://news.sophos.com/en-us/2021/09/03/conti-affiliates-use-proxyshell-exchange-exploit-in-ransomware-attacks/
-- N/A
 author: '@mthcht'
 date: 2023/07/30
 modified: 2023/09/15
@@ -46,103 +40,99 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*net group /domain *Domain Admins*'
     - '*net* group Administrator* /add /domain*'
     - '*net group *domain admins* /domain*'
     - '*net group *Domain Controllers*/domain*'
-    CommandLine:
+  - CommandLine:
     - '*net group /domain *Domain Admins*'
     - '*net* group Administrator* /add /domain*'
     - '*net group *domain admins* /domain*'
     - '*net group *Domain Controllers*/domain*'
-    Details:
+  - Details:
     - '*net group /domain *Domain Admins*'
     - '*net* group Administrator* /add /domain*'
     - '*net group *domain admins* /domain*'
     - '*net group *Domain Controllers*/domain*'
-    registry.value:
+  - registry.value:
     - '*net group /domain *Domain Admins*'
     - '*net* group Administrator* /add /domain*'
     - '*net group *domain admins* /domain*'
     - '*net group *Domain Controllers*/domain*'
-    process.args:
+  - process.args:
     - '*net group /domain *Domain Admins*'
     - '*net* group Administrator* /add /domain*'
     - '*net group *domain admins* /domain*'
     - '*net group *Domain Controllers*/domain*'
-    process.command_line:
+  - process.command_line:
     - '*net group /domain *Domain Admins*'
     - '*net* group Administrator* /add /domain*'
     - '*net group *domain admins* /domain*'
     - '*net group *Domain Controllers*/domain*'
-    process.env_vars:
+  - process.env_vars:
     - '*net group /domain *Domain Admins*'
     - '*net* group Administrator* /add /domain*'
     - '*net group *domain admins* /domain*'
     - '*net group *Domain Controllers*/domain*'
-    process.io.text:
+  - process.io.text:
     - '*net group /domain *Domain Admins*'
     - '*net* group Administrator* /add /domain*'
     - '*net group *domain admins* /domain*'
     - '*net group *Domain Controllers*/domain*'
-    process.title:
+  - process.title:
     - '*net group /domain *Domain Admins*'
     - '*net* group Administrator* /add /domain*'
     - '*net group *domain admins* /domain*'
     - '*net group *Domain Controllers*/domain*'
-    pe.company:
+  - pe.company:
     - '*net group /domain *Domain Admins*'
     - '*net* group Administrator* /add /domain*'
     - '*net group *domain admins* /domain*'
     - '*net group *Domain Controllers*/domain*'
-    pe.description:
+  - pe.description:
     - '*net group /domain *Domain Admins*'
     - '*net* group Administrator* /add /domain*'
     - '*net group *domain admins* /domain*'
     - '*net group *Domain Controllers*/domain*'
-    pe.product:
+  - pe.product:
     - '*net group /domain *Domain Admins*'
     - '*net* group Administrator* /add /domain*'
     - '*net group *domain admins* /domain*'
     - '*net group *Domain Controllers*/domain*'
-    os.full:
+  - os.full:
     - '*net group /domain *Domain Admins*'
     - '*net* group Administrator* /add /domain*'
     - '*net group *domain admins* /domain*'
     - '*net group *Domain Controllers*/domain*'
-    host.hostname:
+  - host.hostname:
     - '*net group /domain *Domain Admins*'
     - '*net* group Administrator* /add /domain*'
     - '*net group *domain admins* /domain*'
     - '*net group *Domain Controllers*/domain*'
-    event.original:
+  - event.original:
     - '*net group /domain *Domain Admins*'
     - '*net* group Administrator* /add /domain*'
     - '*net group *domain admins* /domain*'
     - '*net group *Domain Controllers*/domain*'
-    email.subject:
+  - email.subject:
     - '*net group /domain *Domain Admins*'
     - '*net* group Administrator* /add /domain*'
     - '*net group *domain admins* /domain*'
     - '*net group *Domain Controllers*/domain*'
-    device.model.name:
+  - device.model.name:
     - '*net group /domain *Domain Admins*'
     - '*net* group Administrator* /add /domain*'
     - '*net group *domain admins* /domain*'
     - '*net group *Domain Controllers*/domain*'
-    container.image.name:
+  - container.image.name:
     - '*net group /domain *Domain Admins*'
     - '*net* group Administrator* /add /domain*'
     - '*net group *domain admins* /domain*'
     - '*net group *Domain Controllers*/domain*'
-    container.name:
+  - container.name:
     - '*net group /domain *Domain Admins*'
     - '*net* group Administrator* /add /domain*'
     - '*net group *domain admins* /domain*'
@@ -168,3 +158,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

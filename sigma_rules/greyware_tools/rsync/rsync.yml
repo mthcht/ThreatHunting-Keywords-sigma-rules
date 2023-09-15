@@ -1,8 +1,7 @@
 title: Simple keyword detection rule for rsync
 id: 67386283-062f-47a7-9dcd-8c0b7bde70b2
 status: experimental
-description:
-- '''Detects the use of tools that copy files from or to remote systems'''
+description: Detects interesting keywords based on rsync tool
 references:
 - https://attack.mitre.org/techniques/T1105/
 author: '@mthcht'
@@ -18,67 +17,63 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*rsync -r *@*:* *'
     - '*rsync -r * *@*:*'
-    CommandLine:
+  - CommandLine:
     - '*rsync -r *@*:* *'
     - '*rsync -r * *@*:*'
-    Details:
+  - Details:
     - '*rsync -r *@*:* *'
     - '*rsync -r * *@*:*'
-    registry.value:
+  - registry.value:
     - '*rsync -r *@*:* *'
     - '*rsync -r * *@*:*'
-    process.args:
+  - process.args:
     - '*rsync -r *@*:* *'
     - '*rsync -r * *@*:*'
-    process.command_line:
+  - process.command_line:
     - '*rsync -r *@*:* *'
     - '*rsync -r * *@*:*'
-    process.env_vars:
+  - process.env_vars:
     - '*rsync -r *@*:* *'
     - '*rsync -r * *@*:*'
-    process.io.text:
+  - process.io.text:
     - '*rsync -r *@*:* *'
     - '*rsync -r * *@*:*'
-    process.title:
+  - process.title:
     - '*rsync -r *@*:* *'
     - '*rsync -r * *@*:*'
-    pe.company:
+  - pe.company:
     - '*rsync -r *@*:* *'
     - '*rsync -r * *@*:*'
-    pe.description:
+  - pe.description:
     - '*rsync -r *@*:* *'
     - '*rsync -r * *@*:*'
-    pe.product:
+  - pe.product:
     - '*rsync -r *@*:* *'
     - '*rsync -r * *@*:*'
-    os.full:
+  - os.full:
     - '*rsync -r *@*:* *'
     - '*rsync -r * *@*:*'
-    host.hostname:
+  - host.hostname:
     - '*rsync -r *@*:* *'
     - '*rsync -r * *@*:*'
-    event.original:
+  - event.original:
     - '*rsync -r *@*:* *'
     - '*rsync -r * *@*:*'
-    email.subject:
+  - email.subject:
     - '*rsync -r *@*:* *'
     - '*rsync -r * *@*:*'
-    device.model.name:
+  - device.model.name:
     - '*rsync -r *@*:* *'
     - '*rsync -r * *@*:*'
-    container.image.name:
+  - container.image.name:
     - '*rsync -r *@*:* *'
     - '*rsync -r * *@*:*'
-    container.name:
+  - container.name:
     - '*rsync -r *@*:* *'
     - '*rsync -r * *@*:*'
   condition: selection
@@ -102,3 +97,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

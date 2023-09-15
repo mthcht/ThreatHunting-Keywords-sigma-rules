@@ -1,14 +1,8 @@
 title: Simple keyword detection rule for wevtutil
 id: 26c2e66d-c404-4b7c-9203-83056fcd9467
 status: experimental
-description:
-- '''adversaries can delete specific event logs or clear their contents. erasing potentially
-  valuable information that could aid in detection. incident response. or forensic
-  investigations. This tactic aims to hinder forensic analysis efforts and make it
-  more challenging for defenders to reconstruct the timeline of events or identify
-  malicious activities.'''
-references:
-- N/A
+description: Detects interesting keywords based on wevtutil tool
+references: []
 author: '@mthcht'
 date: 2023/07/30
 modified: 2023/09/15
@@ -20,67 +14,63 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- critical
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*wevtutil cl *'
     - '*cmd* wevtutil.exe cl *'
-    CommandLine:
+  - CommandLine:
     - '*wevtutil cl *'
     - '*cmd* wevtutil.exe cl *'
-    Details:
+  - Details:
     - '*wevtutil cl *'
     - '*cmd* wevtutil.exe cl *'
-    registry.value:
+  - registry.value:
     - '*wevtutil cl *'
     - '*cmd* wevtutil.exe cl *'
-    process.args:
+  - process.args:
     - '*wevtutil cl *'
     - '*cmd* wevtutil.exe cl *'
-    process.command_line:
+  - process.command_line:
     - '*wevtutil cl *'
     - '*cmd* wevtutil.exe cl *'
-    process.env_vars:
+  - process.env_vars:
     - '*wevtutil cl *'
     - '*cmd* wevtutil.exe cl *'
-    process.io.text:
+  - process.io.text:
     - '*wevtutil cl *'
     - '*cmd* wevtutil.exe cl *'
-    process.title:
+  - process.title:
     - '*wevtutil cl *'
     - '*cmd* wevtutil.exe cl *'
-    pe.company:
+  - pe.company:
     - '*wevtutil cl *'
     - '*cmd* wevtutil.exe cl *'
-    pe.description:
+  - pe.description:
     - '*wevtutil cl *'
     - '*cmd* wevtutil.exe cl *'
-    pe.product:
+  - pe.product:
     - '*wevtutil cl *'
     - '*cmd* wevtutil.exe cl *'
-    os.full:
+  - os.full:
     - '*wevtutil cl *'
     - '*cmd* wevtutil.exe cl *'
-    host.hostname:
+  - host.hostname:
     - '*wevtutil cl *'
     - '*cmd* wevtutil.exe cl *'
-    event.original:
+  - event.original:
     - '*wevtutil cl *'
     - '*cmd* wevtutil.exe cl *'
-    email.subject:
+  - email.subject:
     - '*wevtutil cl *'
     - '*cmd* wevtutil.exe cl *'
-    device.model.name:
+  - device.model.name:
     - '*wevtutil cl *'
     - '*cmd* wevtutil.exe cl *'
-    container.image.name:
+  - container.image.name:
     - '*wevtutil cl *'
     - '*cmd* wevtutil.exe cl *'
-    container.name:
+  - container.name:
     - '*wevtutil cl *'
     - '*cmd* wevtutil.exe cl *'
   condition: selection
@@ -104,3 +94,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

@@ -1,8 +1,7 @@
 title: Simple keyword detection rule for sysctl
 id: 36f75e15-6e2b-42f5-a645-bdbb8143214c
 status: experimental
-description:
-- '''Disable echo reply for icmpsh C2'''
+description: Detects interesting keywords based on sysctl tool
 references:
 - https://github.com/bdamele/icmpsh
 author: '@mthcht'
@@ -18,49 +17,45 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- medium
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
-    CommandLine:
+  - CommandLine:
     - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
-    Details:
+  - Details:
     - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
-    registry.value:
+  - registry.value:
     - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
-    process.args:
+  - process.args:
     - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
-    process.command_line:
+  - process.command_line:
     - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
-    process.env_vars:
+  - process.env_vars:
     - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
-    process.io.text:
+  - process.io.text:
     - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
-    process.title:
+  - process.title:
     - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
-    pe.company:
+  - pe.company:
     - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
-    pe.description:
+  - pe.description:
     - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
-    pe.product:
+  - pe.product:
     - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
-    os.full:
+  - os.full:
     - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
-    host.hostname:
+  - host.hostname:
     - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
-    event.original:
+  - event.original:
     - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
-    email.subject:
+  - email.subject:
     - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
-    device.model.name:
+  - device.model.name:
     - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
-    container.image.name:
+  - container.image.name:
     - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
-    container.name:
+  - container.name:
     - '*sysctl -w net.ipv4.icmp_echo_ignore_all=1*'
   condition: selection
 fields:
@@ -83,3 +78,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

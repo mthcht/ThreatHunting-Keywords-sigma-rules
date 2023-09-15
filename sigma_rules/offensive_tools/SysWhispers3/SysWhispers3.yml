@@ -1,15 +1,13 @@
 title: Simple keyword detection rule for SysWhispers3
 id: 121700e5-c90d-4c5e-9cf3-77f68dcf2cb4
 status: experimental
-description:
-- '''SysWhispers on Steroids - AV/EDR evasion via direct system calls.'''
+description: Detects interesting keywords based on SysWhispers3 tool
 references:
 - https://github.com/klezVirus/SysWhispers3
 author: '@mthcht'
 date: 2023/07/30
 modified: 2023/09/15
 tags:
-- attack.N/A
 - attack.T1059
 - attack.T1216
 - attack.T1218
@@ -22,13 +20,9 @@ logsource:
   category:
   - endpoint
   - network
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
     - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
@@ -36,7 +30,7 @@ detection:
     - '*syswhispers.py*'
     - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    CommandLine:
+  - CommandLine:
     - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
     - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
@@ -44,7 +38,7 @@ detection:
     - '*syswhispers.py*'
     - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    Details:
+  - Details:
     - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
     - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
@@ -52,7 +46,7 @@ detection:
     - '*syswhispers.py*'
     - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    registry.value:
+  - registry.value:
     - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
     - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
@@ -60,7 +54,7 @@ detection:
     - '*syswhispers.py*'
     - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    process.args:
+  - process.args:
     - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
     - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
@@ -68,7 +62,7 @@ detection:
     - '*syswhispers.py*'
     - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    process.command_line:
+  - process.command_line:
     - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
     - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
@@ -76,7 +70,7 @@ detection:
     - '*syswhispers.py*'
     - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    process.env_vars:
+  - process.env_vars:
     - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
     - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
@@ -84,7 +78,7 @@ detection:
     - '*syswhispers.py*'
     - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    process.io.text:
+  - process.io.text:
     - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
     - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
@@ -92,7 +86,7 @@ detection:
     - '*syswhispers.py*'
     - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    process.title:
+  - process.title:
     - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
     - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
@@ -100,7 +94,7 @@ detection:
     - '*syswhispers.py*'
     - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    pe.company:
+  - pe.company:
     - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
     - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
@@ -108,7 +102,7 @@ detection:
     - '*syswhispers.py*'
     - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    pe.description:
+  - pe.description:
     - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
     - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
@@ -116,7 +110,7 @@ detection:
     - '*syswhispers.py*'
     - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    pe.product:
+  - pe.product:
     - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
     - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
@@ -124,7 +118,7 @@ detection:
     - '*syswhispers.py*'
     - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    os.full:
+  - os.full:
     - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
     - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
@@ -132,7 +126,7 @@ detection:
     - '*syswhispers.py*'
     - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    host.hostname:
+  - host.hostname:
     - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
     - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
@@ -140,11 +134,7 @@ detection:
     - '*syswhispers.py*'
     - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    event.original:
-    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
-    - '* --preset all -o syscalls_all*'
-    - '* --preset common -o syscalls_common*'
-    email.subject:
+  - event.original:
     - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
     - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
@@ -152,7 +142,7 @@ detection:
     - '*syswhispers.py*'
     - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    device.model.name:
+  - email.subject:
     - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
     - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
@@ -160,7 +150,7 @@ detection:
     - '*syswhispers.py*'
     - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    container.image.name:
+  - device.model.name:
     - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
     - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
@@ -168,7 +158,7 @@ detection:
     - '*syswhispers.py*'
     - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    container.name:
+  - container.image.name:
     - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
     - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
@@ -176,487 +166,837 @@ detection:
     - '*syswhispers.py*'
     - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    Image:
+  - container.name:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    OriginalFileName:
+  - Image:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    CurrentDirectory:
+  - OriginalFileName:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    ParentImage:
+  - CurrentDirectory:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    TargetFilename:
+  - ParentImage:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    Signature:
+  - ParentCommandLine:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    signature:
+  - TargetFilename:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    ImageLoaded:
+  - Signature:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    Company:
+  - signature:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    Description:
+  - ImageLoaded:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    description:
+  - Company:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    SourceImage:
+  - Description:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    TargetImage:
+  - description:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    CallTrace:
+  - CommandLine:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    TargetObject:
+  - SourceImage:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    PipeName:
+  - TargetImage:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    Consumer:
+  - CallTrace:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    Destination:
+  - TargetObject:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    Name:
+  - Details:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    Query:
+  - PipeName:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    NewName:
+  - Consumer:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    StartAddress:
+  - Destination:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    StartModule:
+  - Name:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    StartFunction:
+  - Query:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    SourceHostname:
+  - NewName:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    Device:
+  - StartAddress:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    file_name:
+  - StartModule:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    file_path:
+  - StartFunction:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    process:
+  - SourceHostname:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    original_file_name:
+  - Device:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    parent_process:
+  - file_name:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    process_path:
+  - file_path:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    service_path:
+  - process:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    registry_path:
+  - original_file_name:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    registry_value_data:
+  - parent_process:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    registry_value_name:
+  - process_path:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    ContextInfo:
+  - service_path:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    Payload:
+  - registry_path:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    ScriptBlockText:
+  - registry_value_data:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    ServerName:
+  - registry_value_name:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    TransportName:
+  - ContextInfo:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    NewProcessName:
+  - Payload:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    ParentProcessName:
+  - ScriptBlockText:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    Application:
+  - ServerName:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    Product Name:
+  - TransportName:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    Threat Name:
+  - NewProcessName:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    Process Name:
+  - ParentProcessName:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    Path:
+  - Application:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    ImagePath:
+  - Product Name:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    ServiceName:
+  - Threat Name:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    ProcessPath:
+  - Process Name:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    AppName:
+  - Path:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    AppPath:
+  - ImagePath:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    ModulePath:
+  - ServiceName:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    registry.data.strings:
+  - ProcessPath:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    registry.path:
+  - AppName:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    process.executable:
+  - AppPath:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    process.name:
+  - ModulePath:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    pe.original_file_name:
+  - registry.data.strings:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    file.fork_name:
+  - registry.path:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    file.name:
+  - registry.value:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    file.path:
+  - process.args:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    file.target_path:
+  - process.command_line:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    email.attachments.file.name:
+  - process.env_vars:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    dll.path:
+  - process.io.text:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    object:
+  - process.executable:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    url:
+  - process.name:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    dest_url:
+  - process.title:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    uri:
+  - pe.company:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    uri_query:
+  - pe.description:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    query:
+  - pe.original_file_name:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    url_domain:
+  - pe.product:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    uri_path:
+  - os.full:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    domain:
+  - host.hostname:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    QueryName:
+  - file.fork_name:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    QueryResults:
+  - file.name:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    DestinationHostname:
+  - file.path:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    DestinationIp:
+  - file.target_path:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    http_referrer:
+  - email.attachments.file.name:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    http_referrer_domain:
+  - email.subject:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    http_user_agent:
+  - dll.path:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    dest_nt_host:
+  - device.model.name:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    sender:
+  - container.image.name:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    recipient:
+  - container.name:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    orig_recipient:
+  - object:
+    - '* --functions NtProtectVirtualMemory*NtWriteVirtualMemory -o syscalls_mem*'
+    - '* --preset all -o syscalls_all*'
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
+    - '* --preset common -o syscalls_common*'
     - '*/SysWhispers3.git*'
-    subject:
+  - url:
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
     - '*/SysWhispers3.git*'
-    url.domain:
+  - dest_url:
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
     - '*/SysWhispers3.git*'
-    url.full:
+  - uri:
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
     - '*/SysWhispers3.git*'
-    url.original:
+  - uri_query:
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
     - '*/SysWhispers3.git*'
-    url.query:
+  - query:
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
     - '*/SysWhispers3.git*'
-    user_agent.original:
+  - url_domain:
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
     - '*/SysWhispers3.git*'
-    network.application:
+  - uri_path:
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
     - '*/SysWhispers3.git*'
-    http.request.body.content:
+  - domain:
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
     - '*/SysWhispers3.git*'
-    http.request.referrer:
+  - QueryName:
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
     - '*/SysWhispers3.git*'
-    email.from.address:
+  - QueryResults:
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
     - '*/SysWhispers3.git*'
-    dns.question.name:
+  - DestinationHostname:
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
     - '*/SysWhispers3.git*'
-    destination.domain:
+  - DestinationIp:
+    - '*/SysWhispers2*'
+    - '*/SysWhispers3*'
+    - '*syswhispers.py*'
+    - '*/SysWhispers3.git*'
+  - http_referrer:
+    - '*/SysWhispers2*'
+    - '*/SysWhispers3*'
+    - '*syswhispers.py*'
+    - '*/SysWhispers3.git*'
+  - http_referrer_domain:
+    - '*/SysWhispers2*'
+    - '*/SysWhispers3*'
+    - '*syswhispers.py*'
+    - '*/SysWhispers3.git*'
+  - http_user_agent:
+    - '*/SysWhispers2*'
+    - '*/SysWhispers3*'
+    - '*syswhispers.py*'
+    - '*/SysWhispers3.git*'
+  - dest_nt_host:
+    - '*/SysWhispers2*'
+    - '*/SysWhispers3*'
+    - '*syswhispers.py*'
+    - '*/SysWhispers3.git*'
+  - sender:
+    - '*/SysWhispers2*'
+    - '*/SysWhispers3*'
+    - '*syswhispers.py*'
+    - '*/SysWhispers3.git*'
+  - recipient:
+    - '*/SysWhispers2*'
+    - '*/SysWhispers3*'
+    - '*syswhispers.py*'
+    - '*/SysWhispers3.git*'
+  - orig_recipient:
+    - '*/SysWhispers2*'
+    - '*/SysWhispers3*'
+    - '*syswhispers.py*'
+    - '*/SysWhispers3.git*'
+  - subject:
+    - '*/SysWhispers2*'
+    - '*/SysWhispers3*'
+    - '*syswhispers.py*'
+    - '*/SysWhispers3.git*'
+  - url.domain:
+    - '*/SysWhispers2*'
+    - '*/SysWhispers3*'
+    - '*syswhispers.py*'
+    - '*/SysWhispers3.git*'
+  - url.full:
+    - '*/SysWhispers2*'
+    - '*/SysWhispers3*'
+    - '*syswhispers.py*'
+    - '*/SysWhispers3.git*'
+  - url.original:
+    - '*/SysWhispers2*'
+    - '*/SysWhispers3*'
+    - '*syswhispers.py*'
+    - '*/SysWhispers3.git*'
+  - url.query:
+    - '*/SysWhispers2*'
+    - '*/SysWhispers3*'
+    - '*syswhispers.py*'
+    - '*/SysWhispers3.git*'
+  - user_agent.original:
+    - '*/SysWhispers2*'
+    - '*/SysWhispers3*'
+    - '*syswhispers.py*'
+    - '*/SysWhispers3.git*'
+  - network.application:
+    - '*/SysWhispers2*'
+    - '*/SysWhispers3*'
+    - '*syswhispers.py*'
+    - '*/SysWhispers3.git*'
+  - http.request.body.content:
+    - '*/SysWhispers2*'
+    - '*/SysWhispers3*'
+    - '*syswhispers.py*'
+    - '*/SysWhispers3.git*'
+  - http.request.referrer:
+    - '*/SysWhispers2*'
+    - '*/SysWhispers3*'
+    - '*syswhispers.py*'
+    - '*/SysWhispers3.git*'
+  - email.from.address:
+    - '*/SysWhispers2*'
+    - '*/SysWhispers3*'
+    - '*syswhispers.py*'
+    - '*/SysWhispers3.git*'
+  - dns.question.name:
+    - '*/SysWhispers2*'
+    - '*/SysWhispers3*'
+    - '*syswhispers.py*'
+    - '*/SysWhispers3.git*'
+  - destination.domain:
     - '*/SysWhispers2*'
     - '*/SysWhispers3*'
     - '*syswhispers.py*'
@@ -686,6 +1026,7 @@ fields:
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -693,10 +1034,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -738,15 +1081,30 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
 - url
 - dest_url
@@ -779,3 +1137,6 @@ fields:
 - email.from.address
 - dns.question.name
 - destination.domain
+falsepositives:
+- unknown
+level: medium

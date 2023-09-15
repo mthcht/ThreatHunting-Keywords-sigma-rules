@@ -1,12 +1,7 @@
 title: Simple keyword detection rule for smbmap
 id: a4885575-8061-442d-b6a3-c531229cab0f
 status: experimental
-description:
-- '''SMBMap allows users to enumerate samba share drives across an entire domain.
-  List share drives. drive permissions. share contents. upload/download functionality.
-  file name auto-download pattern matching. and even execute remote commands. This
-  tool was designed with pen testing in mind. and is intended to simplify searching
-  for potentially sensitive data across large networks.'''
+description: Detects interesting keywords based on smbmap tool
 references:
 - https://github.com/ShawnDEvans/smbmap
 author: '@mthcht'
@@ -25,13 +20,9 @@ logsource:
   category:
   - endpoint
   - network
-falsepositives:
-- Unknown
-level:
-- critical
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
     - '* -H * -u * -p * -r *C$/Users*'
@@ -44,7 +35,7 @@ detection:
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
     - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    CommandLine:
+  - CommandLine:
     - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
     - '* -H * -u * -p * -r *C$/Users*'
@@ -57,7 +48,7 @@ detection:
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
     - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    Details:
+  - Details:
     - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
     - '* -H * -u * -p * -r *C$/Users*'
@@ -70,7 +61,7 @@ detection:
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
     - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    registry.value:
+  - registry.value:
     - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
     - '* -H * -u * -p * -r *C$/Users*'
@@ -83,7 +74,7 @@ detection:
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
     - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    process.args:
+  - process.args:
     - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
     - '* -H * -u * -p * -r *C$/Users*'
@@ -96,7 +87,7 @@ detection:
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
     - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    process.command_line:
+  - process.command_line:
     - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
     - '* -H * -u * -p * -r *C$/Users*'
@@ -109,7 +100,7 @@ detection:
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
     - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    process.env_vars:
+  - process.env_vars:
     - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
     - '* -H * -u * -p * -r *C$/Users*'
@@ -122,7 +113,7 @@ detection:
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
     - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    process.io.text:
+  - process.io.text:
     - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
     - '* -H * -u * -p * -r *C$/Users*'
@@ -135,7 +126,7 @@ detection:
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
     - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    process.title:
+  - process.title:
     - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
     - '* -H * -u * -p * -r *C$/Users*'
@@ -148,7 +139,7 @@ detection:
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
     - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    pe.company:
+  - pe.company:
     - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
     - '* -H * -u * -p * -r *C$/Users*'
@@ -161,7 +152,7 @@ detection:
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
     - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    pe.description:
+  - pe.description:
     - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
     - '* -H * -u * -p * -r *C$/Users*'
@@ -174,7 +165,7 @@ detection:
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
     - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    pe.product:
+  - pe.product:
     - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
     - '* -H * -u * -p * -r *C$/Users*'
@@ -187,7 +178,7 @@ detection:
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
     - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    os.full:
+  - os.full:
     - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
     - '* -H * -u * -p * -r *C$/Users*'
@@ -200,7 +191,7 @@ detection:
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
     - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    host.hostname:
+  - host.hostname:
     - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
     - '* -H * -u * -p * -r *C$/Users*'
@@ -213,12 +204,7 @@ detection:
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
     - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    event.original:
-    - '*-x *net group *Domain Admins* /domain*'
-    - '* -H * -u * -p * -r *C$/Users*'
-    - '*cmd /c *if exist *.txt echo ImHere*'
-    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
-    email.subject:
+  - event.original:
     - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
     - '* -H * -u * -p * -r *C$/Users*'
@@ -231,7 +217,7 @@ detection:
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
     - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    device.model.name:
+  - email.subject:
     - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
     - '* -H * -u * -p * -r *C$/Users*'
@@ -244,7 +230,7 @@ detection:
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
     - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    container.image.name:
+  - device.model.name:
     - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
     - '* -H * -u * -p * -r *C$/Users*'
@@ -257,7 +243,7 @@ detection:
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
     - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    container.name:
+  - container.image.name:
     - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
     - '* -H * -u * -p * -r *C$/Users*'
@@ -270,751 +256,1262 @@ detection:
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
     - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    Image:
+  - container.name:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    OriginalFileName:
+  - Image:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    CurrentDirectory:
+  - OriginalFileName:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    ParentImage:
+  - CurrentDirectory:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    TargetFilename:
+  - ParentImage:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    Signature:
+  - ParentCommandLine:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    signature:
+  - TargetFilename:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    ImageLoaded:
+  - Signature:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    Company:
+  - signature:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    Description:
+  - ImageLoaded:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    description:
+  - Company:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    SourceImage:
+  - Description:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    TargetImage:
+  - description:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    CallTrace:
+  - CommandLine:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    TargetObject:
+  - SourceImage:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    PipeName:
+  - TargetImage:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    Consumer:
+  - CallTrace:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    Destination:
+  - TargetObject:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    Name:
+  - Details:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    Query:
+  - PipeName:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    NewName:
+  - Consumer:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    StartAddress:
+  - Destination:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    StartModule:
+  - Name:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    StartFunction:
+  - Query:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    SourceHostname:
+  - NewName:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    Device:
+  - StartAddress:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    file_name:
+  - StartModule:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    file_path:
+  - StartFunction:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    process:
+  - SourceHostname:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    original_file_name:
+  - Device:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    parent_process:
+  - file_name:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    process_path:
+  - file_path:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    service_path:
+  - process:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    registry_path:
+  - original_file_name:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    registry_value_data:
+  - parent_process:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    registry_value_name:
+  - process_path:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    ContextInfo:
+  - service_path:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    Payload:
+  - registry_path:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    ScriptBlockText:
+  - registry_value_data:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    ServerName:
+  - registry_value_name:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    TransportName:
+  - ContextInfo:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    NewProcessName:
+  - Payload:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    ParentProcessName:
+  - ScriptBlockText:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    Application:
+  - ServerName:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    Product Name:
+  - TransportName:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    Threat Name:
+  - NewProcessName:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    Process Name:
+  - ParentProcessName:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    Path:
+  - Application:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    ImagePath:
+  - Product Name:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    ServiceName:
+  - Threat Name:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    ProcessPath:
+  - Process Name:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    AppName:
+  - Path:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    AppPath:
+  - ImagePath:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    ModulePath:
+  - ServiceName:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    registry.data.strings:
+  - ProcessPath:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    registry.path:
+  - AppName:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    process.executable:
+  - AppPath:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    process.name:
+  - ModulePath:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    pe.original_file_name:
+  - registry.data.strings:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    file.fork_name:
+  - registry.path:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    file.name:
+  - registry.value:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    file.path:
+  - process.args:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    file.target_path:
+  - process.command_line:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    email.attachments.file.name:
+  - process.env_vars:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    dll.path:
+  - process.io.text:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    object:
+  - process.executable:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
     - '*smbmap.smbmap*'
     - '*/smbmap.git*'
     - '*install smbmap*'
     - '*smbmap.py *'
     - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
     - '*smbmap -*'
-    url:
+  - process.name:
+    - '*-x *net group *Domain Admins* /domain*'
     - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
     - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
+    - '*smbmap.smbmap*'
+    - '*/smbmap.git*'
+    - '*install smbmap*'
+    - '*smbmap.py *'
+    - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
+    - '*smbmap -*'
+  - process.title:
+    - '*-x *net group *Domain Admins* /domain*'
+    - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
+    - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
+    - '*smbmap.smbmap*'
+    - '*/smbmap.git*'
+    - '*install smbmap*'
+    - '*smbmap.py *'
+    - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
+    - '*smbmap -*'
+  - pe.company:
+    - '*-x *net group *Domain Admins* /domain*'
+    - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
+    - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
+    - '*smbmap.smbmap*'
+    - '*/smbmap.git*'
+    - '*install smbmap*'
+    - '*smbmap.py *'
+    - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
+    - '*smbmap -*'
+  - pe.description:
+    - '*-x *net group *Domain Admins* /domain*'
+    - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
+    - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
+    - '*smbmap.smbmap*'
+    - '*/smbmap.git*'
+    - '*install smbmap*'
+    - '*smbmap.py *'
+    - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
+    - '*smbmap -*'
+  - pe.original_file_name:
+    - '*-x *net group *Domain Admins* /domain*'
+    - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
+    - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
+    - '*smbmap.smbmap*'
+    - '*/smbmap.git*'
+    - '*install smbmap*'
+    - '*smbmap.py *'
+    - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
+    - '*smbmap -*'
+  - pe.product:
+    - '*-x *net group *Domain Admins* /domain*'
+    - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
+    - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
+    - '*smbmap.smbmap*'
+    - '*/smbmap.git*'
+    - '*install smbmap*'
+    - '*smbmap.py *'
+    - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
+    - '*smbmap -*'
+  - os.full:
+    - '*-x *net group *Domain Admins* /domain*'
+    - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
+    - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
+    - '*smbmap.smbmap*'
+    - '*/smbmap.git*'
+    - '*install smbmap*'
+    - '*smbmap.py *'
+    - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
+    - '*smbmap -*'
+  - host.hostname:
+    - '*-x *net group *Domain Admins* /domain*'
+    - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
+    - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
+    - '*smbmap.smbmap*'
+    - '*/smbmap.git*'
+    - '*install smbmap*'
+    - '*smbmap.py *'
+    - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
+    - '*smbmap -*'
+  - file.fork_name:
+    - '*-x *net group *Domain Admins* /domain*'
+    - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
+    - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
+    - '*smbmap.smbmap*'
+    - '*/smbmap.git*'
+    - '*install smbmap*'
+    - '*smbmap.py *'
+    - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
+    - '*smbmap -*'
+  - file.name:
+    - '*-x *net group *Domain Admins* /domain*'
+    - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
+    - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
+    - '*smbmap.smbmap*'
+    - '*/smbmap.git*'
+    - '*install smbmap*'
+    - '*smbmap.py *'
+    - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
+    - '*smbmap -*'
+  - file.path:
+    - '*-x *net group *Domain Admins* /domain*'
+    - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
+    - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
+    - '*smbmap.smbmap*'
+    - '*/smbmap.git*'
+    - '*install smbmap*'
+    - '*smbmap.py *'
+    - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
+    - '*smbmap -*'
+  - file.target_path:
+    - '*-x *net group *Domain Admins* /domain*'
+    - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
+    - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
+    - '*smbmap.smbmap*'
+    - '*/smbmap.git*'
+    - '*install smbmap*'
+    - '*smbmap.py *'
+    - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
+    - '*smbmap -*'
+  - email.attachments.file.name:
+    - '*-x *net group *Domain Admins* /domain*'
+    - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
+    - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
+    - '*smbmap.smbmap*'
+    - '*/smbmap.git*'
+    - '*install smbmap*'
+    - '*smbmap.py *'
+    - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
+    - '*smbmap -*'
+  - email.subject:
+    - '*-x *net group *Domain Admins* /domain*'
+    - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
+    - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
+    - '*smbmap.smbmap*'
+    - '*/smbmap.git*'
+    - '*install smbmap*'
+    - '*smbmap.py *'
+    - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
+    - '*smbmap -*'
+  - dll.path:
+    - '*-x *net group *Domain Admins* /domain*'
+    - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
+    - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
+    - '*smbmap.smbmap*'
+    - '*/smbmap.git*'
+    - '*install smbmap*'
+    - '*smbmap.py *'
+    - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
+    - '*smbmap -*'
+  - device.model.name:
+    - '*-x *net group *Domain Admins* /domain*'
+    - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
+    - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
+    - '*smbmap.smbmap*'
+    - '*/smbmap.git*'
+    - '*install smbmap*'
+    - '*smbmap.py *'
+    - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
+    - '*smbmap -*'
+  - container.image.name:
+    - '*-x *net group *Domain Admins* /domain*'
+    - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
+    - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
+    - '*smbmap.smbmap*'
+    - '*/smbmap.git*'
+    - '*install smbmap*'
+    - '*smbmap.py *'
+    - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
+    - '*smbmap -*'
+  - container.name:
+    - '*-x *net group *Domain Admins* /domain*'
+    - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
+    - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
+    - '*smbmap.smbmap*'
+    - '*/smbmap.git*'
+    - '*install smbmap*'
+    - '*smbmap.py *'
+    - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
+    - '*smbmap -*'
+  - object:
+    - '*-x *net group *Domain Admins* /domain*'
+    - '*smbmap-master*'
+    - '* -H * -u * -p * -r *C$/Users*'
+    - '*ShawnDEvans/smbmap*'
+    - '*cmd /c *if exist *.txt echo ImHere*'
+    - '*smbmap.smbmap*'
+    - '*/smbmap.git*'
+    - '*install smbmap*'
+    - '*smbmap.py *'
+    - '*\\\\*\\*\\Get-FileLockProcess.ps1*'
+    - '* --host-file *.txt -u * --prompt --admin --no-banner*'
+    - '*smbmap -*'
+  - url:
+    - '*smbmap-master*'
+    - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    dest_url:
+  - dest_url:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    uri:
+  - uri:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    uri_query:
+  - uri_query:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    query:
+  - query:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    url_domain:
+  - url_domain:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    uri_path:
+  - uri_path:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    domain:
+  - domain:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    QueryName:
+  - QueryName:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    QueryResults:
+  - QueryResults:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    DestinationHostname:
+  - DestinationHostname:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    DestinationIp:
+  - DestinationIp:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    http_referrer:
+  - http_referrer:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    http_referrer_domain:
+  - http_referrer_domain:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    http_user_agent:
+  - http_user_agent:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    dest_nt_host:
+  - dest_nt_host:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    sender:
+  - sender:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    recipient:
+  - recipient:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    orig_recipient:
+  - orig_recipient:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    subject:
+  - subject:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    url.domain:
+  - url.domain:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    url.full:
+  - url.full:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    url.original:
+  - url.original:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    url.query:
+  - url.query:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    user_agent.original:
+  - user_agent.original:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    network.application:
+  - network.application:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    http.request.body.content:
+  - http.request.body.content:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    http.request.referrer:
+  - http.request.referrer:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    email.from.address:
+  - email.from.address:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    dns.question.name:
+  - dns.question.name:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
     - '*smbmap.py *'
-    destination.domain:
+  - destination.domain:
     - '*smbmap-master*'
     - '*ShawnDEvans/smbmap*'
     - '*/smbmap.git*'
@@ -1044,6 +1541,7 @@ fields:
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -1051,10 +1549,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -1096,15 +1596,30 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
 - url
 - dest_url
@@ -1137,3 +1652,6 @@ fields:
 - email.from.address
 - dns.question.name
 - destination.domain
+falsepositives:
+- unknown
+level: medium

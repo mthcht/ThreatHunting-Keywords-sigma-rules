@@ -1,8 +1,7 @@
 title: Simple keyword detection rule for php
 id: 295f7dbe-b790-4187-b863-7d173fa8bbaf
 status: experimental
-description:
-- '''php reverse shell'''
+description: Detects interesting keywords based on php tool
 references:
 - https://github.com/RoseSecurity/Red-Teaming-TTPs/blob/main/Linux.md
 author: '@mthcht'
@@ -17,49 +16,45 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- critical
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*php -r *$sock=fsockopen(*exec(*/bin/sh -i <&3 >&3 2>&3*'
-    CommandLine:
+  - CommandLine:
     - '*php -r *$sock=fsockopen(*exec(*/bin/sh -i <&3 >&3 2>&3*'
-    Details:
+  - Details:
     - '*php -r *$sock=fsockopen(*exec(*/bin/sh -i <&3 >&3 2>&3*'
-    registry.value:
+  - registry.value:
     - '*php -r *$sock=fsockopen(*exec(*/bin/sh -i <&3 >&3 2>&3*'
-    process.args:
+  - process.args:
     - '*php -r *$sock=fsockopen(*exec(*/bin/sh -i <&3 >&3 2>&3*'
-    process.command_line:
+  - process.command_line:
     - '*php -r *$sock=fsockopen(*exec(*/bin/sh -i <&3 >&3 2>&3*'
-    process.env_vars:
+  - process.env_vars:
     - '*php -r *$sock=fsockopen(*exec(*/bin/sh -i <&3 >&3 2>&3*'
-    process.io.text:
+  - process.io.text:
     - '*php -r *$sock=fsockopen(*exec(*/bin/sh -i <&3 >&3 2>&3*'
-    process.title:
+  - process.title:
     - '*php -r *$sock=fsockopen(*exec(*/bin/sh -i <&3 >&3 2>&3*'
-    pe.company:
+  - pe.company:
     - '*php -r *$sock=fsockopen(*exec(*/bin/sh -i <&3 >&3 2>&3*'
-    pe.description:
+  - pe.description:
     - '*php -r *$sock=fsockopen(*exec(*/bin/sh -i <&3 >&3 2>&3*'
-    pe.product:
+  - pe.product:
     - '*php -r *$sock=fsockopen(*exec(*/bin/sh -i <&3 >&3 2>&3*'
-    os.full:
+  - os.full:
     - '*php -r *$sock=fsockopen(*exec(*/bin/sh -i <&3 >&3 2>&3*'
-    host.hostname:
+  - host.hostname:
     - '*php -r *$sock=fsockopen(*exec(*/bin/sh -i <&3 >&3 2>&3*'
-    event.original:
+  - event.original:
     - '*php -r *$sock=fsockopen(*exec(*/bin/sh -i <&3 >&3 2>&3*'
-    email.subject:
+  - email.subject:
     - '*php -r *$sock=fsockopen(*exec(*/bin/sh -i <&3 >&3 2>&3*'
-    device.model.name:
+  - device.model.name:
     - '*php -r *$sock=fsockopen(*exec(*/bin/sh -i <&3 >&3 2>&3*'
-    container.image.name:
+  - container.image.name:
     - '*php -r *$sock=fsockopen(*exec(*/bin/sh -i <&3 >&3 2>&3*'
-    container.name:
+  - container.name:
     - '*php -r *$sock=fsockopen(*exec(*/bin/sh -i <&3 >&3 2>&3*'
   condition: selection
 fields:
@@ -82,3 +77,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

@@ -1,14 +1,7 @@
 title: Simple keyword detection rule for psexec
 id: bf4d81e9-bca1-49ef-9219-dc6fcfd3833f
 status: experimental
-description:
-- '''Adversaries may place the PsExec executable in the temp directory and execute
-  it from there as part of their offensive activities. By doing so. they can leverage
-  PsExec to execute commands or launch processes on remote systems. enabling lateral
-  movement. privilege escalation. or the execution of malicious payloads.'''
-- '''PsExec is a legitimate Microsoft tool for remote administration. However. attackers
-  can misuse it to execute malicious commands or software on other network machines.
-  install persistent threats. and evade some security systems. '''
+description: Detects interesting keywords based on psexec tool
 references:
 - https://learn.microsoft.com/fr-fr/sysinternals/downloads/psexec
 author: '@mthcht'
@@ -24,365 +17,520 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    CommandLine:
+  - CommandLine:
     - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    Details:
+  - Details:
     - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    registry.value:
+  - registry.value:
     - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    process.args:
+  - process.args:
     - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    process.command_line:
+  - process.command_line:
     - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    process.env_vars:
+  - process.env_vars:
     - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    process.io.text:
+  - process.io.text:
     - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    process.title:
+  - process.title:
     - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    pe.company:
+  - pe.company:
     - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    pe.description:
+  - pe.description:
     - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    pe.product:
+  - pe.product:
     - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    os.full:
+  - os.full:
     - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    host.hostname:
+  - host.hostname:
     - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    event.original:
-    - '* -accepteula -nobanner -d cmd.exe /c *'
-    email.subject:
+  - event.original:
     - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    device.model.name:
+  - email.subject:
     - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    container.image.name:
+  - device.model.name:
     - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    container.name:
+  - container.image.name:
     - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    Image:
+  - container.name:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    OriginalFileName:
+  - Image:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    CurrentDirectory:
+  - OriginalFileName:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    ParentImage:
+  - CurrentDirectory:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    TargetFilename:
+  - ParentImage:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    Signature:
+  - ParentCommandLine:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    signature:
+  - TargetFilename:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    ImageLoaded:
+  - Signature:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    Company:
+  - signature:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    Description:
+  - ImageLoaded:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    description:
+  - Company:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    SourceImage:
+  - Description:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    TargetImage:
+  - description:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    CallTrace:
+  - CommandLine:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    TargetObject:
+  - SourceImage:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    PipeName:
+  - TargetImage:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    Consumer:
+  - CallTrace:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    Destination:
+  - TargetObject:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    Name:
+  - Details:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    Query:
+  - PipeName:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    NewName:
+  - Consumer:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    StartAddress:
+  - Destination:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    StartModule:
+  - Name:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    StartFunction:
+  - Query:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    SourceHostname:
+  - NewName:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    Device:
+  - StartAddress:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    file_name:
+  - StartModule:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    file_path:
+  - StartFunction:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    process:
+  - SourceHostname:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    original_file_name:
+  - Device:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    parent_process:
+  - file_name:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    process_path:
+  - file_path:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    service_path:
+  - process:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    registry_path:
+  - original_file_name:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    registry_value_data:
+  - parent_process:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    registry_value_name:
+  - process_path:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    ContextInfo:
+  - service_path:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    Payload:
+  - registry_path:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    ScriptBlockText:
+  - registry_value_data:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    ServerName:
+  - registry_value_name:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    TransportName:
+  - ContextInfo:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    NewProcessName:
+  - Payload:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    ParentProcessName:
+  - ScriptBlockText:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    Application:
+  - ServerName:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    Product Name:
+  - TransportName:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    Threat Name:
+  - NewProcessName:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    Process Name:
+  - ParentProcessName:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    Path:
+  - Application:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    ImagePath:
+  - Product Name:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    ServiceName:
+  - Threat Name:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    ProcessPath:
+  - Process Name:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    AppName:
+  - Path:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    AppPath:
+  - ImagePath:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    ModulePath:
+  - ServiceName:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    registry.data.strings:
+  - ProcessPath:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    registry.path:
+  - AppName:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    process.executable:
+  - AppPath:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    process.name:
+  - ModulePath:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    pe.original_file_name:
+  - registry.data.strings:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    file.fork_name:
+  - registry.path:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    file.name:
+  - registry.value:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    file.path:
+  - process.args:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    file.target_path:
+  - process.command_line:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    email.attachments.file.name:
+  - process.env_vars:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    dll.path:
+  - process.io.text:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
-    object:
+  - process.executable:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
+    - '*PsExec[1].exe*'
+    - '*PSEXECSVC*'
+    - '*PsExec64*'
+  - process.name:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
+    - '*PsExec[1].exe*'
+    - '*PSEXECSVC*'
+    - '*PsExec64*'
+  - process.title:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
+    - '*PsExec[1].exe*'
+    - '*PSEXECSVC*'
+    - '*PsExec64*'
+  - pe.company:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
+    - '*PsExec[1].exe*'
+    - '*PSEXECSVC*'
+    - '*PsExec64*'
+  - pe.description:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
+    - '*PsExec[1].exe*'
+    - '*PSEXECSVC*'
+    - '*PsExec64*'
+  - pe.original_file_name:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
+    - '*PsExec[1].exe*'
+    - '*PSEXECSVC*'
+    - '*PsExec64*'
+  - pe.product:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
+    - '*PsExec[1].exe*'
+    - '*PSEXECSVC*'
+    - '*PsExec64*'
+  - os.full:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
+    - '*PsExec[1].exe*'
+    - '*PSEXECSVC*'
+    - '*PsExec64*'
+  - host.hostname:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
+    - '*PsExec[1].exe*'
+    - '*PSEXECSVC*'
+    - '*PsExec64*'
+  - file.fork_name:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
+    - '*PsExec[1].exe*'
+    - '*PSEXECSVC*'
+    - '*PsExec64*'
+  - file.name:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
+    - '*PsExec[1].exe*'
+    - '*PSEXECSVC*'
+    - '*PsExec64*'
+  - file.path:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
+    - '*PsExec[1].exe*'
+    - '*PSEXECSVC*'
+    - '*PsExec64*'
+  - file.target_path:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
+    - '*PsExec[1].exe*'
+    - '*PSEXECSVC*'
+    - '*PsExec64*'
+  - email.attachments.file.name:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
+    - '*PsExec[1].exe*'
+    - '*PSEXECSVC*'
+    - '*PsExec64*'
+  - email.subject:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
+    - '*PsExec[1].exe*'
+    - '*PSEXECSVC*'
+    - '*PsExec64*'
+  - dll.path:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
+    - '*PsExec[1].exe*'
+    - '*PSEXECSVC*'
+    - '*PsExec64*'
+  - device.model.name:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
+    - '*PsExec[1].exe*'
+    - '*PSEXECSVC*'
+    - '*PsExec64*'
+  - container.image.name:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
+    - '*PsExec[1].exe*'
+    - '*PSEXECSVC*'
+    - '*PsExec64*'
+  - container.name:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
+    - '*PsExec[1].exe*'
+    - '*PSEXECSVC*'
+    - '*PsExec64*'
+  - object:
+    - '* -accepteula -nobanner -d cmd.exe /c *'
     - '*PsExec[1].exe*'
     - '*PSEXECSVC*'
     - '*PsExec64*'
@@ -411,6 +559,7 @@ fields:
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -418,10 +567,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -463,13 +614,31 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
+falsepositives:
+- unknown
+level: medium

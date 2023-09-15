@@ -1,8 +1,7 @@
 title: Simple keyword detection rule for fileless-elf-exec
 id: 3d899cf4-88e2-4739-8804-8a62f5c85ca4
 status: experimental
-description:
-- '''Execute ELF files without dropping them on disk'''
+description: Detects interesting keywords based on fileless-elf-exec tool
 references:
 - https://github.com/nnsee/fileless-elf-exec
 author: '@mthcht'
@@ -18,13 +17,9 @@ logsource:
   category:
   - endpoint
   - network
-falsepositives:
-- Unknown
-level:
-- medium
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -35,7 +30,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    CommandLine:
+  - CommandLine:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -46,7 +41,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    Details:
+  - Details:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -57,7 +52,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    registry.value:
+  - registry.value:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -68,7 +63,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    process.args:
+  - process.args:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -79,7 +74,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    process.command_line:
+  - process.command_line:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -90,7 +85,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    process.env_vars:
+  - process.env_vars:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -101,7 +96,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    process.io.text:
+  - process.io.text:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -112,7 +107,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    process.title:
+  - process.title:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -123,7 +118,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    pe.company:
+  - pe.company:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -134,7 +129,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    pe.description:
+  - pe.description:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -145,7 +140,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    pe.product:
+  - pe.product:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -156,7 +151,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    os.full:
+  - os.full:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -167,7 +162,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    host.hostname:
+  - host.hostname:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -178,15 +173,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    event.original:
-    - '*pip install --user fee'
-    - '*fee -a *killall sshd* *busybox*'
-    - '*fee */* -l pl | ruby*'
-    - '*pipx install fee'
-    - '*fee -c */* -w 64 | *'
-    - '*fee */* -l pl | perl*'
-    - '*fee -c */* | ssh *@*'
-    email.subject:
+  - event.original:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -197,7 +184,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    device.model.name:
+  - email.subject:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -208,7 +195,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    container.image.name:
+  - device.model.name:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -219,7 +206,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    container.name:
+  - container.image.name:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -230,7 +217,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    url:
+  - container.name:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -241,7 +228,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    dest_url:
+  - Image:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -252,7 +239,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    uri:
+  - OriginalFileName:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -263,7 +250,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    uri_query:
+  - CurrentDirectory:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -274,7 +261,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    query:
+  - ParentImage:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -285,7 +272,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    url_domain:
+  - ParentCommandLine:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -296,7 +283,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    uri_path:
+  - TargetFilename:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -307,7 +294,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    domain:
+  - Signature:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -318,7 +305,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    QueryName:
+  - signature:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -329,7 +316,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    QueryResults:
+  - ImageLoaded:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -340,7 +327,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    DestinationHostname:
+  - Company:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -351,7 +338,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    DestinationIp:
+  - Description:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -362,7 +349,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    http_referrer:
+  - description:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -373,7 +360,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    http_referrer_domain:
+  - CommandLine:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -384,7 +371,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    http_user_agent:
+  - SourceImage:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -395,7 +382,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    dest_nt_host:
+  - TargetImage:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -406,7 +393,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    sender:
+  - CallTrace:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -417,7 +404,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    recipient:
+  - TargetObject:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -428,7 +415,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    orig_recipient:
+  - Details:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -439,7 +426,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    subject:
+  - PipeName:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -450,7 +437,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    url.domain:
+  - Consumer:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -461,7 +448,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    url.full:
+  - Destination:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -472,7 +459,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    url.original:
+  - Name:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -483,7 +470,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    url.query:
+  - Query:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -494,7 +481,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    user_agent.original:
+  - NewName:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -505,7 +492,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    network.application:
+  - StartAddress:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -516,7 +503,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    http.request.body.content:
+  - StartModule:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -527,7 +514,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    http.request.referrer:
+  - StartFunction:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -538,7 +525,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    email.from.address:
+  - SourceHostname:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -549,7 +536,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    dns.question.name:
+  - Device:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -560,7 +547,7 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    destination.domain:
+  - file_name:
     - '*pip install --user fee'
     - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
@@ -571,270 +558,941 @@ detection:
     - '*python3 fee.py*'
     - '*./fee.py*'
     - '*fee -c */* | ssh *@*'
-    Image:
+  - file_path:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    OriginalFileName:
+    - '*fee -c */* | ssh *@*'
+  - process:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    CurrentDirectory:
+    - '*fee -c */* | ssh *@*'
+  - original_file_name:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    ParentImage:
+    - '*fee -c */* | ssh *@*'
+  - parent_process:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    TargetFilename:
+    - '*fee -c */* | ssh *@*'
+  - process_path:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    Signature:
+    - '*fee -c */* | ssh *@*'
+  - service_path:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    signature:
+    - '*fee -c */* | ssh *@*'
+  - registry_path:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    ImageLoaded:
+    - '*fee -c */* | ssh *@*'
+  - registry_value_data:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    Company:
+    - '*fee -c */* | ssh *@*'
+  - registry_value_name:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    Description:
+    - '*fee -c */* | ssh *@*'
+  - ContextInfo:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    description:
+    - '*fee -c */* | ssh *@*'
+  - Payload:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    SourceImage:
+    - '*fee -c */* | ssh *@*'
+  - ScriptBlockText:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    TargetImage:
+    - '*fee -c */* | ssh *@*'
+  - ServerName:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    CallTrace:
+    - '*fee -c */* | ssh *@*'
+  - TransportName:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    TargetObject:
+    - '*fee -c */* | ssh *@*'
+  - NewProcessName:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    PipeName:
+    - '*fee -c */* | ssh *@*'
+  - ParentProcessName:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    Consumer:
+    - '*fee -c */* | ssh *@*'
+  - Application:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    Destination:
+    - '*fee -c */* | ssh *@*'
+  - Product Name:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    Name:
+    - '*fee -c */* | ssh *@*'
+  - Threat Name:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    Query:
+    - '*fee -c */* | ssh *@*'
+  - Process Name:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    NewName:
+    - '*fee -c */* | ssh *@*'
+  - Path:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    StartAddress:
+    - '*fee -c */* | ssh *@*'
+  - ImagePath:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    StartModule:
+    - '*fee -c */* | ssh *@*'
+  - ServiceName:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    StartFunction:
+    - '*fee -c */* | ssh *@*'
+  - ProcessPath:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    SourceHostname:
+    - '*fee -c */* | ssh *@*'
+  - AppName:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    Device:
+    - '*fee -c */* | ssh *@*'
+  - AppPath:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    file_name:
+    - '*fee -c */* | ssh *@*'
+  - ModulePath:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    file_path:
+    - '*fee -c */* | ssh *@*'
+  - registry.data.strings:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    process:
+    - '*fee -c */* | ssh *@*'
+  - registry.path:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    original_file_name:
+    - '*fee -c */* | ssh *@*'
+  - registry.value:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    parent_process:
+    - '*fee -c */* | ssh *@*'
+  - process.args:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    process_path:
+    - '*fee -c */* | ssh *@*'
+  - process.command_line:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    service_path:
+    - '*fee -c */* | ssh *@*'
+  - process.env_vars:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    registry_path:
+    - '*fee -c */* | ssh *@*'
+  - process.io.text:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    registry_value_data:
+    - '*fee -c */* | ssh *@*'
+  - process.executable:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    registry_value_name:
+    - '*fee -c */* | ssh *@*'
+  - process.name:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    ContextInfo:
+    - '*fee -c */* | ssh *@*'
+  - process.title:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    Payload:
+    - '*fee -c */* | ssh *@*'
+  - pe.company:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    ScriptBlockText:
+    - '*fee -c */* | ssh *@*'
+  - pe.description:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    ServerName:
+    - '*fee -c */* | ssh *@*'
+  - pe.original_file_name:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    TransportName:
+    - '*fee -c */* | ssh *@*'
+  - pe.product:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    NewProcessName:
+    - '*fee -c */* | ssh *@*'
+  - os.full:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    ParentProcessName:
+    - '*fee -c */* | ssh *@*'
+  - host.hostname:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    Application:
+    - '*fee -c */* | ssh *@*'
+  - file.fork_name:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    Product Name:
+    - '*fee -c */* | ssh *@*'
+  - file.name:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    Threat Name:
+    - '*fee -c */* | ssh *@*'
+  - file.path:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    Process Name:
+    - '*fee -c */* | ssh *@*'
+  - file.target_path:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    Path:
+    - '*fee -c */* | ssh *@*'
+  - email.attachments.file.name:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    ImagePath:
+    - '*fee -c */* | ssh *@*'
+  - email.subject:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    ServiceName:
+    - '*fee -c */* | ssh *@*'
+  - dll.path:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    ProcessPath:
+    - '*fee -c */* | ssh *@*'
+  - device.model.name:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    AppName:
+    - '*fee -c */* | ssh *@*'
+  - container.image.name:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    AppPath:
+    - '*fee -c */* | ssh *@*'
+  - container.name:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    ModulePath:
+    - '*fee -c */* | ssh *@*'
+  - object:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    registry.data.strings:
+    - '*fee -c */* | ssh *@*'
+  - url:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    registry.path:
+    - '*fee -c */* | ssh *@*'
+  - dest_url:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    process.executable:
+    - '*fee -c */* | ssh *@*'
+  - uri:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    process.name:
+    - '*fee -c */* | ssh *@*'
+  - uri_query:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    pe.original_file_name:
+    - '*fee -c */* | ssh *@*'
+  - query:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    file.fork_name:
+    - '*fee -c */* | ssh *@*'
+  - url_domain:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    file.name:
+    - '*fee -c */* | ssh *@*'
+  - uri_path:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    file.path:
+    - '*fee -c */* | ssh *@*'
+  - domain:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    file.target_path:
+    - '*fee -c */* | ssh *@*'
+  - QueryName:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    email.attachments.file.name:
+    - '*fee -c */* | ssh *@*'
+  - QueryResults:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    dll.path:
+    - '*fee -c */* | ssh *@*'
+  - DestinationHostname:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
-    object:
+    - '*fee -c */* | ssh *@*'
+  - DestinationIp:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
     - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
     - '*python3 fee.py*'
     - '*./fee.py*'
+    - '*fee -c */* | ssh *@*'
+  - http_referrer:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
+    - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
+    - '*python3 fee.py*'
+    - '*./fee.py*'
+    - '*fee -c */* | ssh *@*'
+  - http_referrer_domain:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
+    - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
+    - '*python3 fee.py*'
+    - '*./fee.py*'
+    - '*fee -c */* | ssh *@*'
+  - http_user_agent:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
+    - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
+    - '*python3 fee.py*'
+    - '*./fee.py*'
+    - '*fee -c */* | ssh *@*'
+  - dest_nt_host:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
+    - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
+    - '*python3 fee.py*'
+    - '*./fee.py*'
+    - '*fee -c */* | ssh *@*'
+  - sender:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
+    - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
+    - '*python3 fee.py*'
+    - '*./fee.py*'
+    - '*fee -c */* | ssh *@*'
+  - recipient:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
+    - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
+    - '*python3 fee.py*'
+    - '*./fee.py*'
+    - '*fee -c */* | ssh *@*'
+  - orig_recipient:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
+    - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
+    - '*python3 fee.py*'
+    - '*./fee.py*'
+    - '*fee -c */* | ssh *@*'
+  - subject:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
+    - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
+    - '*python3 fee.py*'
+    - '*./fee.py*'
+    - '*fee -c */* | ssh *@*'
+  - url.domain:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
+    - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
+    - '*python3 fee.py*'
+    - '*./fee.py*'
+    - '*fee -c */* | ssh *@*'
+  - url.full:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
+    - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
+    - '*python3 fee.py*'
+    - '*./fee.py*'
+    - '*fee -c */* | ssh *@*'
+  - url.original:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
+    - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
+    - '*python3 fee.py*'
+    - '*./fee.py*'
+    - '*fee -c */* | ssh *@*'
+  - url.query:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
+    - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
+    - '*python3 fee.py*'
+    - '*./fee.py*'
+    - '*fee -c */* | ssh *@*'
+  - user_agent.original:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
+    - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
+    - '*python3 fee.py*'
+    - '*./fee.py*'
+    - '*fee -c */* | ssh *@*'
+  - network.application:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
+    - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
+    - '*python3 fee.py*'
+    - '*./fee.py*'
+    - '*fee -c */* | ssh *@*'
+  - http.request.body.content:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
+    - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
+    - '*python3 fee.py*'
+    - '*./fee.py*'
+    - '*fee -c */* | ssh *@*'
+  - http.request.referrer:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
+    - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
+    - '*python3 fee.py*'
+    - '*./fee.py*'
+    - '*fee -c */* | ssh *@*'
+  - email.from.address:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
+    - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
+    - '*python3 fee.py*'
+    - '*./fee.py*'
+    - '*fee -c */* | ssh *@*'
+  - dns.question.name:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
+    - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
+    - '*python3 fee.py*'
+    - '*./fee.py*'
+    - '*fee -c */* | ssh *@*'
+  - destination.domain:
+    - '*pip install --user fee'
+    - '*fee -a *killall sshd* *busybox*'
+    - '*fileless-elf-exec*'
+    - '*fee */* -l pl | ruby*'
+    - '*pipx install fee'
+    - '*fee -c */* -w 64 | *'
+    - '*fee */* -l pl | perl*'
+    - '*python3 fee.py*'
+    - '*./fee.py*'
+    - '*fee -c */* | ssh *@*'
   condition: selection
 fields:
 - ParentCommandLine
@@ -856,41 +1514,11 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
-- url
-- dest_url
-- uri
-- uri_query
-- query
-- url_domain
-- uri_path
-- domain
-- QueryName
-- QueryResults
-- DestinationHostname
-- DestinationIp
-- http_referrer
-- http_referrer_domain
-- http_user_agent
-- dest_nt_host
-- sender
-- recipient
-- orig_recipient
-- subject
-- url.domain
-- url.full
-- url.original
-- url.query
-- user_agent.original
-- network.application
-- http.request.body.content
-- http.request.referrer
-- email.from.address
-- dns.question.name
-- destination.domain
 - Image
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -898,10 +1526,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -943,13 +1573,62 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
+- url
+- dest_url
+- uri
+- uri_query
+- query
+- url_domain
+- uri_path
+- domain
+- QueryName
+- QueryResults
+- DestinationHostname
+- DestinationIp
+- http_referrer
+- http_referrer_domain
+- http_user_agent
+- dest_nt_host
+- sender
+- recipient
+- orig_recipient
+- subject
+- url.domain
+- url.full
+- url.original
+- url.query
+- user_agent.original
+- network.application
+- http.request.body.content
+- http.request.referrer
+- email.from.address
+- dns.question.name
+- destination.domain
+falsepositives:
+- unknown
+level: medium

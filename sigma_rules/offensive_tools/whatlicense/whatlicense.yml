@@ -1,8 +1,7 @@
 title: Simple keyword detection rule for whatlicense
 id: abc89d7b-e923-4792-b46b-10d269a496dd
 status: experimental
-description:
-- '''WinLicense key extraction via Intel PIN'''
+description: Detects interesting keywords based on whatlicense tool
 references:
 - https://github.com/charlesnathansmith/whatlicense
 author: '@mthcht'
@@ -19,13 +18,9 @@ logsource:
   category:
   - endpoint
   - network
-falsepositives:
-- Unknown
-level:
-- low
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
@@ -38,7 +33,7 @@ detection:
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    CommandLine:
+  - CommandLine:
     - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
@@ -51,7 +46,7 @@ detection:
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    Details:
+  - Details:
     - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
@@ -64,7 +59,7 @@ detection:
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    registry.value:
+  - registry.value:
     - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
@@ -77,7 +72,7 @@ detection:
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    process.args:
+  - process.args:
     - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
@@ -90,7 +85,7 @@ detection:
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    process.command_line:
+  - process.command_line:
     - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
@@ -103,7 +98,7 @@ detection:
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    process.env_vars:
+  - process.env_vars:
     - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
@@ -116,7 +111,7 @@ detection:
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    process.io.text:
+  - process.io.text:
     - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
@@ -129,7 +124,7 @@ detection:
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    process.title:
+  - process.title:
     - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
@@ -142,7 +137,7 @@ detection:
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    pe.company:
+  - pe.company:
     - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
@@ -155,7 +150,7 @@ detection:
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    pe.description:
+  - pe.description:
     - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
@@ -168,7 +163,7 @@ detection:
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    pe.product:
+  - pe.product:
     - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
@@ -181,7 +176,7 @@ detection:
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    os.full:
+  - os.full:
     - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
@@ -194,7 +189,7 @@ detection:
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    host.hostname:
+  - host.hostname:
     - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
@@ -207,11 +202,7 @@ detection:
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    event.original:
-    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
-    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
-    - '*wl-lic -d *.dat -r *.rsa*'
-    email.subject:
+  - event.original:
     - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
@@ -224,7 +215,7 @@ detection:
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    device.model.name:
+  - email.subject:
     - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
@@ -237,7 +228,7 @@ detection:
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    container.image.name:
+  - device.model.name:
     - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
@@ -250,7 +241,7 @@ detection:
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    container.name:
+  - container.image.name:
     - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
@@ -263,787 +254,1232 @@ detection:
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    Image:
+  - container.name:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    OriginalFileName:
+  - Image:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    CurrentDirectory:
+  - OriginalFileName:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    ParentImage:
+  - CurrentDirectory:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    TargetFilename:
+  - ParentImage:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    Signature:
+  - ParentCommandLine:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    signature:
+  - TargetFilename:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    ImageLoaded:
+  - Signature:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    Company:
+  - signature:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    Description:
+  - ImageLoaded:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    description:
+  - Company:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    SourceImage:
+  - Description:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    TargetImage:
+  - description:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    CallTrace:
+  - CommandLine:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    TargetObject:
+  - SourceImage:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    PipeName:
+  - TargetImage:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    Consumer:
+  - CallTrace:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    Destination:
+  - TargetObject:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    Name:
+  - Details:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    Query:
+  - PipeName:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    NewName:
+  - Consumer:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    StartAddress:
+  - Destination:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    StartModule:
+  - Name:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    StartFunction:
+  - Query:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    SourceHostname:
+  - NewName:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    Device:
+  - StartAddress:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    file_name:
+  - StartModule:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    file_path:
+  - StartFunction:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    process:
+  - SourceHostname:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    original_file_name:
+  - Device:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    parent_process:
+  - file_name:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    process_path:
+  - file_path:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    service_path:
+  - process:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    registry_path:
+  - original_file_name:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    registry_value_data:
+  - parent_process:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    registry_value_name:
+  - process_path:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    ContextInfo:
+  - service_path:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    Payload:
+  - registry_path:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    ScriptBlockText:
+  - registry_value_data:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    ServerName:
+  - registry_value_name:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    TransportName:
+  - ContextInfo:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    NewProcessName:
+  - Payload:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    ParentProcessName:
+  - ScriptBlockText:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    Application:
+  - ServerName:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    Product Name:
+  - TransportName:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    Threat Name:
+  - NewProcessName:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    Process Name:
+  - ParentProcessName:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    Path:
+  - Application:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    ImagePath:
+  - Product Name:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    ServiceName:
+  - Threat Name:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    ProcessPath:
+  - Process Name:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    AppName:
+  - Path:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    AppPath:
+  - ImagePath:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    ModulePath:
+  - ServiceName:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    registry.data.strings:
+  - ProcessPath:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    registry.path:
+  - AppName:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    process.executable:
+  - AppPath:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    process.name:
+  - ModulePath:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    pe.original_file_name:
+  - registry.data.strings:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    file.fork_name:
+  - registry.path:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    file.name:
+  - registry.value:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    file.path:
+  - process.args:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    file.target_path:
+  - process.command_line:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    email.attachments.file.name:
+  - process.env_vars:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    dll.path:
+  - process.io.text:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    object:
+  - process.executable:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
     - '*\whatlicense-main\*'
     - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
     - '*CC127443-2519-4E04-8865-A6887658CDE5*'
     - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
     - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
     - '*\wl_log.txt*'
     - '*whatlicense-main.zip*'
     - '*\wl-lic.exe*'
-    url:
+  - process.name:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
     - '*/whatlicense.git*'
+    - '*\whatlicense-main\*'
+    - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
+    - '*CC127443-2519-4E04-8865-A6887658CDE5*'
+    - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
+    - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
+    - '*\wl_log.txt*'
+    - '*whatlicense-main.zip*'
+    - '*\wl-lic.exe*'
+  - process.title:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
+    - '*/whatlicense.git*'
+    - '*\whatlicense-main\*'
+    - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
+    - '*CC127443-2519-4E04-8865-A6887658CDE5*'
+    - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
+    - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
+    - '*\wl_log.txt*'
+    - '*whatlicense-main.zip*'
+    - '*\wl-lic.exe*'
+  - pe.company:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
+    - '*/whatlicense.git*'
+    - '*\whatlicense-main\*'
+    - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
+    - '*CC127443-2519-4E04-8865-A6887658CDE5*'
+    - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
+    - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
+    - '*\wl_log.txt*'
+    - '*whatlicense-main.zip*'
+    - '*\wl-lic.exe*'
+  - pe.description:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
+    - '*/whatlicense.git*'
+    - '*\whatlicense-main\*'
+    - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
+    - '*CC127443-2519-4E04-8865-A6887658CDE5*'
+    - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
+    - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
+    - '*\wl_log.txt*'
+    - '*whatlicense-main.zip*'
+    - '*\wl-lic.exe*'
+  - pe.original_file_name:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
+    - '*/whatlicense.git*'
+    - '*\whatlicense-main\*'
+    - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
+    - '*CC127443-2519-4E04-8865-A6887658CDE5*'
+    - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
+    - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
+    - '*\wl_log.txt*'
+    - '*whatlicense-main.zip*'
+    - '*\wl-lic.exe*'
+  - pe.product:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
+    - '*/whatlicense.git*'
+    - '*\whatlicense-main\*'
+    - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
+    - '*CC127443-2519-4E04-8865-A6887658CDE5*'
+    - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
+    - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
+    - '*\wl_log.txt*'
+    - '*whatlicense-main.zip*'
+    - '*\wl-lic.exe*'
+  - os.full:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
+    - '*/whatlicense.git*'
+    - '*\whatlicense-main\*'
+    - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
+    - '*CC127443-2519-4E04-8865-A6887658CDE5*'
+    - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
+    - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
+    - '*\wl_log.txt*'
+    - '*whatlicense-main.zip*'
+    - '*\wl-lic.exe*'
+  - host.hostname:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
+    - '*/whatlicense.git*'
+    - '*\whatlicense-main\*'
+    - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
+    - '*CC127443-2519-4E04-8865-A6887658CDE5*'
+    - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
+    - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
+    - '*\wl_log.txt*'
+    - '*whatlicense-main.zip*'
+    - '*\wl-lic.exe*'
+  - file.fork_name:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
+    - '*/whatlicense.git*'
+    - '*\whatlicense-main\*'
+    - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
+    - '*CC127443-2519-4E04-8865-A6887658CDE5*'
+    - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
+    - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
+    - '*\wl_log.txt*'
+    - '*whatlicense-main.zip*'
+    - '*\wl-lic.exe*'
+  - file.name:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
+    - '*/whatlicense.git*'
+    - '*\whatlicense-main\*'
+    - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
+    - '*CC127443-2519-4E04-8865-A6887658CDE5*'
+    - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
+    - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
+    - '*\wl_log.txt*'
+    - '*whatlicense-main.zip*'
+    - '*\wl-lic.exe*'
+  - file.path:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
+    - '*/whatlicense.git*'
+    - '*\whatlicense-main\*'
+    - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
+    - '*CC127443-2519-4E04-8865-A6887658CDE5*'
+    - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
+    - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
+    - '*\wl_log.txt*'
+    - '*whatlicense-main.zip*'
+    - '*\wl-lic.exe*'
+  - file.target_path:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
+    - '*/whatlicense.git*'
+    - '*\whatlicense-main\*'
+    - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
+    - '*CC127443-2519-4E04-8865-A6887658CDE5*'
+    - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
+    - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
+    - '*\wl_log.txt*'
+    - '*whatlicense-main.zip*'
+    - '*\wl-lic.exe*'
+  - email.attachments.file.name:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
+    - '*/whatlicense.git*'
+    - '*\whatlicense-main\*'
+    - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
+    - '*CC127443-2519-4E04-8865-A6887658CDE5*'
+    - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
+    - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
+    - '*\wl_log.txt*'
+    - '*whatlicense-main.zip*'
+    - '*\wl-lic.exe*'
+  - email.subject:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
+    - '*/whatlicense.git*'
+    - '*\whatlicense-main\*'
+    - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
+    - '*CC127443-2519-4E04-8865-A6887658CDE5*'
+    - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
+    - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
+    - '*\wl_log.txt*'
+    - '*whatlicense-main.zip*'
+    - '*\wl-lic.exe*'
+  - dll.path:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
+    - '*/whatlicense.git*'
+    - '*\whatlicense-main\*'
+    - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
+    - '*CC127443-2519-4E04-8865-A6887658CDE5*'
+    - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
+    - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
+    - '*\wl_log.txt*'
+    - '*whatlicense-main.zip*'
+    - '*\wl-lic.exe*'
+  - device.model.name:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
+    - '*/whatlicense.git*'
+    - '*\whatlicense-main\*'
+    - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
+    - '*CC127443-2519-4E04-8865-A6887658CDE5*'
+    - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
+    - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
+    - '*\wl_log.txt*'
+    - '*whatlicense-main.zip*'
+    - '*\wl-lic.exe*'
+  - container.image.name:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
+    - '*/whatlicense.git*'
+    - '*\whatlicense-main\*'
+    - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
+    - '*CC127443-2519-4E04-8865-A6887658CDE5*'
+    - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
+    - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
+    - '*\wl_log.txt*'
+    - '*whatlicense-main.zip*'
+    - '*\wl-lic.exe*'
+  - container.name:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
+    - '*/whatlicense.git*'
+    - '*\whatlicense-main\*'
+    - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
+    - '*CC127443-2519-4E04-8865-A6887658CDE5*'
+    - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
+    - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
+    - '*\wl_log.txt*'
+    - '*whatlicense-main.zip*'
+    - '*\wl-lic.exe*'
+  - object:
+    - '*.exe -t wl-extract.dll -d *.dat -r *.rsa -*.exe*'
+    - '*/whatlicense.git*'
+    - '*\whatlicense-main\*'
+    - '*\wl-lic.pdb*'
+    - '*wl-lic -h HWID -m main_hash -d regkey2.dat -r regkey2.rsa*'
+    - '*CC127443-2519-4E04-8865-A6887658CDE5*'
+    - '*639EF517-FCFC-408E-9500-71F0DC0458DB*'
+    - '*charlesnathansmith/whatlicense*'
+    - '*wl-lic -d *.dat -r *.rsa*'
+    - '*\wl_log.txt*'
+    - '*whatlicense-main.zip*'
+    - '*\wl-lic.exe*'
+  - url:
+    - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    dest_url:
+  - dest_url:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    uri:
+  - uri:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    uri_query:
+  - uri_query:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    query:
+  - query:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    url_domain:
+  - url_domain:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    uri_path:
+  - uri_path:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    domain:
+  - domain:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    QueryName:
+  - QueryName:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    QueryResults:
+  - QueryResults:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    DestinationHostname:
+  - DestinationHostname:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    DestinationIp:
+  - DestinationIp:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    http_referrer:
+  - http_referrer:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    http_referrer_domain:
+  - http_referrer_domain:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    http_user_agent:
+  - http_user_agent:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    dest_nt_host:
+  - dest_nt_host:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    sender:
+  - sender:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    recipient:
+  - recipient:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    orig_recipient:
+  - orig_recipient:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    subject:
+  - subject:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    url.domain:
+  - url.domain:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    url.full:
+  - url.full:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    url.original:
+  - url.original:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    url.query:
+  - url.query:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    user_agent.original:
+  - user_agent.original:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    network.application:
+  - network.application:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    http.request.body.content:
+  - http.request.body.content:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    http.request.referrer:
+  - http.request.referrer:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    email.from.address:
+  - email.from.address:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    dns.question.name:
+  - dns.question.name:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
-    destination.domain:
+  - destination.domain:
     - '*/whatlicense.git*'
     - '*charlesnathansmith/whatlicense*'
     - '*whatlicense-main.zip*'
@@ -1072,6 +1508,7 @@ fields:
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -1079,10 +1516,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -1124,15 +1563,30 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
 - url
 - dest_url
@@ -1165,3 +1619,6 @@ fields:
 - email.from.address
 - dns.question.name
 - destination.domain
+falsepositives:
+- unknown
+level: medium

@@ -1,10 +1,7 @@
 title: Simple keyword detection rule for 7zip
 id: ae5807bc-e292-4a4d-b95e-0aa2e9f64bb2
 status: experimental
-description:
-- '''7zip command to zip results from adfind scans. attackers perform Active Directory
-  collection using AdFind in batch scriptsfrom C:\Windows\Temp\adf\ or C:\temp\ and
-  store output in CSV files'''
+description: Detects interesting keywords based on 7zip tool
 references:
 - http://www.joeware.net/freetools/tools/adfind/index.htm
 author: '@mthcht'
@@ -21,49 +18,45 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*7.exe a -mx3 ad.7z ad_*.txt*'
-    CommandLine:
+  - CommandLine:
     - '*7.exe a -mx3 ad.7z ad_*.txt*'
-    Details:
+  - Details:
     - '*7.exe a -mx3 ad.7z ad_*.txt*'
-    registry.value:
+  - registry.value:
     - '*7.exe a -mx3 ad.7z ad_*.txt*'
-    process.args:
+  - process.args:
     - '*7.exe a -mx3 ad.7z ad_*.txt*'
-    process.command_line:
+  - process.command_line:
     - '*7.exe a -mx3 ad.7z ad_*.txt*'
-    process.env_vars:
+  - process.env_vars:
     - '*7.exe a -mx3 ad.7z ad_*.txt*'
-    process.io.text:
+  - process.io.text:
     - '*7.exe a -mx3 ad.7z ad_*.txt*'
-    process.title:
+  - process.title:
     - '*7.exe a -mx3 ad.7z ad_*.txt*'
-    pe.company:
+  - pe.company:
     - '*7.exe a -mx3 ad.7z ad_*.txt*'
-    pe.description:
+  - pe.description:
     - '*7.exe a -mx3 ad.7z ad_*.txt*'
-    pe.product:
+  - pe.product:
     - '*7.exe a -mx3 ad.7z ad_*.txt*'
-    os.full:
+  - os.full:
     - '*7.exe a -mx3 ad.7z ad_*.txt*'
-    host.hostname:
+  - host.hostname:
     - '*7.exe a -mx3 ad.7z ad_*.txt*'
-    event.original:
+  - event.original:
     - '*7.exe a -mx3 ad.7z ad_*.txt*'
-    email.subject:
+  - email.subject:
     - '*7.exe a -mx3 ad.7z ad_*.txt*'
-    device.model.name:
+  - device.model.name:
     - '*7.exe a -mx3 ad.7z ad_*.txt*'
-    container.image.name:
+  - container.image.name:
     - '*7.exe a -mx3 ad.7z ad_*.txt*'
-    container.name:
+  - container.name:
     - '*7.exe a -mx3 ad.7z ad_*.txt*'
   condition: selection
 fields:
@@ -86,3 +79,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

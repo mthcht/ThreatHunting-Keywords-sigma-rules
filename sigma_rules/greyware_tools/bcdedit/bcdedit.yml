@@ -1,15 +1,8 @@
 title: Simple keyword detection rule for bcdedit
 id: 556e6f20-1d36-4c55-81ac-fc01e1f0c70e
 status: experimental
-description:
-- '''Bcdedit is a command-line tool that enables users to view and make changes to
-  boot configuration data (BCD) settings in Windows systems. Adversaries may leverage
-  bcdedit to modify boot settings. such as enabling debug mode or disabling code integrity
-  checks. as a means to bypass security mechanisms and gain persistence on the compromised
-  system. By modifying the boot configuration. adversaries can evade detection and
-  potentially maintain access to the system even after reboots.'''
-references:
-- N/A
+description: Detects interesting keywords based on bcdedit tool
+references: []
 author: '@mthcht'
 date: 2023/07/30
 modified: 2023/09/15
@@ -21,67 +14,63 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*bcdedit /set {default} bootstatuspolicy ignoreallfailures*'
     - '*bcdedit /set {default} recoveryenabled No*'
-    CommandLine:
+  - CommandLine:
     - '*bcdedit /set {default} bootstatuspolicy ignoreallfailures*'
     - '*bcdedit /set {default} recoveryenabled No*'
-    Details:
+  - Details:
     - '*bcdedit /set {default} bootstatuspolicy ignoreallfailures*'
     - '*bcdedit /set {default} recoveryenabled No*'
-    registry.value:
+  - registry.value:
     - '*bcdedit /set {default} bootstatuspolicy ignoreallfailures*'
     - '*bcdedit /set {default} recoveryenabled No*'
-    process.args:
+  - process.args:
     - '*bcdedit /set {default} bootstatuspolicy ignoreallfailures*'
     - '*bcdedit /set {default} recoveryenabled No*'
-    process.command_line:
+  - process.command_line:
     - '*bcdedit /set {default} bootstatuspolicy ignoreallfailures*'
     - '*bcdedit /set {default} recoveryenabled No*'
-    process.env_vars:
+  - process.env_vars:
     - '*bcdedit /set {default} bootstatuspolicy ignoreallfailures*'
     - '*bcdedit /set {default} recoveryenabled No*'
-    process.io.text:
+  - process.io.text:
     - '*bcdedit /set {default} bootstatuspolicy ignoreallfailures*'
     - '*bcdedit /set {default} recoveryenabled No*'
-    process.title:
+  - process.title:
     - '*bcdedit /set {default} bootstatuspolicy ignoreallfailures*'
     - '*bcdedit /set {default} recoveryenabled No*'
-    pe.company:
+  - pe.company:
     - '*bcdedit /set {default} bootstatuspolicy ignoreallfailures*'
     - '*bcdedit /set {default} recoveryenabled No*'
-    pe.description:
+  - pe.description:
     - '*bcdedit /set {default} bootstatuspolicy ignoreallfailures*'
     - '*bcdedit /set {default} recoveryenabled No*'
-    pe.product:
+  - pe.product:
     - '*bcdedit /set {default} bootstatuspolicy ignoreallfailures*'
     - '*bcdedit /set {default} recoveryenabled No*'
-    os.full:
+  - os.full:
     - '*bcdedit /set {default} bootstatuspolicy ignoreallfailures*'
     - '*bcdedit /set {default} recoveryenabled No*'
-    host.hostname:
+  - host.hostname:
     - '*bcdedit /set {default} bootstatuspolicy ignoreallfailures*'
     - '*bcdedit /set {default} recoveryenabled No*'
-    event.original:
+  - event.original:
     - '*bcdedit /set {default} bootstatuspolicy ignoreallfailures*'
     - '*bcdedit /set {default} recoveryenabled No*'
-    email.subject:
+  - email.subject:
     - '*bcdedit /set {default} bootstatuspolicy ignoreallfailures*'
     - '*bcdedit /set {default} recoveryenabled No*'
-    device.model.name:
+  - device.model.name:
     - '*bcdedit /set {default} bootstatuspolicy ignoreallfailures*'
     - '*bcdedit /set {default} recoveryenabled No*'
-    container.image.name:
+  - container.image.name:
     - '*bcdedit /set {default} bootstatuspolicy ignoreallfailures*'
     - '*bcdedit /set {default} recoveryenabled No*'
-    container.name:
+  - container.name:
     - '*bcdedit /set {default} bootstatuspolicy ignoreallfailures*'
     - '*bcdedit /set {default} recoveryenabled No*'
   condition: selection
@@ -105,3 +94,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

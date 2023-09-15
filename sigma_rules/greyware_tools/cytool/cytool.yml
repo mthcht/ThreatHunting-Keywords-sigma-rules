@@ -1,13 +1,8 @@
 title: Simple keyword detection rule for cytool
 id: 714b537e-63f2-45f1-97ed-831121969123
 status: experimental
-description:
-- '''Disables Cortex XDR (Even with tamper protection enabled)'''
-- '''Disables event collection'''
-- '''Disables protection on Cortex XDR files processes registry and services'''
-- '''Disables the cortex agent on startup'''
-references:
-- N/A
+description: Detects interesting keywords based on cytool tool
+references: []
 author: '@mthcht'
 date: 2023/07/30
 modified: 2023/09/15
@@ -19,103 +14,99 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- medium
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*cytool.exe event_collection disable*'
     - '*cytool.exe protect disable*'
     - '*cytool.exe startup disable*'
     - '*cytool.exe runtime disable*'
-    CommandLine:
+  - CommandLine:
     - '*cytool.exe event_collection disable*'
     - '*cytool.exe protect disable*'
     - '*cytool.exe startup disable*'
     - '*cytool.exe runtime disable*'
-    Details:
+  - Details:
     - '*cytool.exe event_collection disable*'
     - '*cytool.exe protect disable*'
     - '*cytool.exe startup disable*'
     - '*cytool.exe runtime disable*'
-    registry.value:
+  - registry.value:
     - '*cytool.exe event_collection disable*'
     - '*cytool.exe protect disable*'
     - '*cytool.exe startup disable*'
     - '*cytool.exe runtime disable*'
-    process.args:
+  - process.args:
     - '*cytool.exe event_collection disable*'
     - '*cytool.exe protect disable*'
     - '*cytool.exe startup disable*'
     - '*cytool.exe runtime disable*'
-    process.command_line:
+  - process.command_line:
     - '*cytool.exe event_collection disable*'
     - '*cytool.exe protect disable*'
     - '*cytool.exe startup disable*'
     - '*cytool.exe runtime disable*'
-    process.env_vars:
+  - process.env_vars:
     - '*cytool.exe event_collection disable*'
     - '*cytool.exe protect disable*'
     - '*cytool.exe startup disable*'
     - '*cytool.exe runtime disable*'
-    process.io.text:
+  - process.io.text:
     - '*cytool.exe event_collection disable*'
     - '*cytool.exe protect disable*'
     - '*cytool.exe startup disable*'
     - '*cytool.exe runtime disable*'
-    process.title:
+  - process.title:
     - '*cytool.exe event_collection disable*'
     - '*cytool.exe protect disable*'
     - '*cytool.exe startup disable*'
     - '*cytool.exe runtime disable*'
-    pe.company:
+  - pe.company:
     - '*cytool.exe event_collection disable*'
     - '*cytool.exe protect disable*'
     - '*cytool.exe startup disable*'
     - '*cytool.exe runtime disable*'
-    pe.description:
+  - pe.description:
     - '*cytool.exe event_collection disable*'
     - '*cytool.exe protect disable*'
     - '*cytool.exe startup disable*'
     - '*cytool.exe runtime disable*'
-    pe.product:
+  - pe.product:
     - '*cytool.exe event_collection disable*'
     - '*cytool.exe protect disable*'
     - '*cytool.exe startup disable*'
     - '*cytool.exe runtime disable*'
-    os.full:
+  - os.full:
     - '*cytool.exe event_collection disable*'
     - '*cytool.exe protect disable*'
     - '*cytool.exe startup disable*'
     - '*cytool.exe runtime disable*'
-    host.hostname:
+  - host.hostname:
     - '*cytool.exe event_collection disable*'
     - '*cytool.exe protect disable*'
     - '*cytool.exe startup disable*'
     - '*cytool.exe runtime disable*'
-    event.original:
+  - event.original:
     - '*cytool.exe event_collection disable*'
     - '*cytool.exe protect disable*'
     - '*cytool.exe startup disable*'
     - '*cytool.exe runtime disable*'
-    email.subject:
+  - email.subject:
     - '*cytool.exe event_collection disable*'
     - '*cytool.exe protect disable*'
     - '*cytool.exe startup disable*'
     - '*cytool.exe runtime disable*'
-    device.model.name:
+  - device.model.name:
     - '*cytool.exe event_collection disable*'
     - '*cytool.exe protect disable*'
     - '*cytool.exe startup disable*'
     - '*cytool.exe runtime disable*'
-    container.image.name:
+  - container.image.name:
     - '*cytool.exe event_collection disable*'
     - '*cytool.exe protect disable*'
     - '*cytool.exe startup disable*'
     - '*cytool.exe runtime disable*'
-    container.name:
+  - container.name:
     - '*cytool.exe event_collection disable*'
     - '*cytool.exe protect disable*'
     - '*cytool.exe startup disable*'
@@ -141,3 +132,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

@@ -1,9 +1,7 @@
 title: Simple keyword detection rule for ssh
 id: b3fb90ff-657c-44cf-90e5-71fcfc27d92b
 status: experimental
-description:
-- '''Detects suspicious SSH / SSHD error messages that indicate a fatal or suspicious
-  error that could be caused by exploiting attempts'''
+description: Detects interesting keywords based on ssh tool
 references:
 - https://github.com/ossec/ossec-hids/blob/master/etc/rules/sshd_rules.xml
 author: '@mthcht'
@@ -17,13 +15,9 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*unexpected internal error*'
     - '*bad client public DH value*'
     - '*fatal: buffer_get_string: bad string*'
@@ -35,7 +29,7 @@ detection:
     - '*Local: crc32 compensation attack*'
     - '*invalid certificate signing key*'
     - '*invalid elliptic curve value*'
-    CommandLine:
+  - CommandLine:
     - '*unexpected internal error*'
     - '*bad client public DH value*'
     - '*fatal: buffer_get_string: bad string*'
@@ -47,7 +41,7 @@ detection:
     - '*Local: crc32 compensation attack*'
     - '*invalid certificate signing key*'
     - '*invalid elliptic curve value*'
-    Details:
+  - Details:
     - '*unexpected internal error*'
     - '*bad client public DH value*'
     - '*fatal: buffer_get_string: bad string*'
@@ -59,7 +53,7 @@ detection:
     - '*Local: crc32 compensation attack*'
     - '*invalid certificate signing key*'
     - '*invalid elliptic curve value*'
-    registry.value:
+  - registry.value:
     - '*unexpected internal error*'
     - '*bad client public DH value*'
     - '*fatal: buffer_get_string: bad string*'
@@ -71,7 +65,7 @@ detection:
     - '*Local: crc32 compensation attack*'
     - '*invalid certificate signing key*'
     - '*invalid elliptic curve value*'
-    process.args:
+  - process.args:
     - '*unexpected internal error*'
     - '*bad client public DH value*'
     - '*fatal: buffer_get_string: bad string*'
@@ -83,7 +77,7 @@ detection:
     - '*Local: crc32 compensation attack*'
     - '*invalid certificate signing key*'
     - '*invalid elliptic curve value*'
-    process.command_line:
+  - process.command_line:
     - '*unexpected internal error*'
     - '*bad client public DH value*'
     - '*fatal: buffer_get_string: bad string*'
@@ -95,7 +89,7 @@ detection:
     - '*Local: crc32 compensation attack*'
     - '*invalid certificate signing key*'
     - '*invalid elliptic curve value*'
-    process.env_vars:
+  - process.env_vars:
     - '*unexpected internal error*'
     - '*bad client public DH value*'
     - '*fatal: buffer_get_string: bad string*'
@@ -107,7 +101,7 @@ detection:
     - '*Local: crc32 compensation attack*'
     - '*invalid certificate signing key*'
     - '*invalid elliptic curve value*'
-    process.io.text:
+  - process.io.text:
     - '*unexpected internal error*'
     - '*bad client public DH value*'
     - '*fatal: buffer_get_string: bad string*'
@@ -119,7 +113,7 @@ detection:
     - '*Local: crc32 compensation attack*'
     - '*invalid certificate signing key*'
     - '*invalid elliptic curve value*'
-    process.title:
+  - process.title:
     - '*unexpected internal error*'
     - '*bad client public DH value*'
     - '*fatal: buffer_get_string: bad string*'
@@ -131,7 +125,7 @@ detection:
     - '*Local: crc32 compensation attack*'
     - '*invalid certificate signing key*'
     - '*invalid elliptic curve value*'
-    pe.company:
+  - pe.company:
     - '*unexpected internal error*'
     - '*bad client public DH value*'
     - '*fatal: buffer_get_string: bad string*'
@@ -143,7 +137,7 @@ detection:
     - '*Local: crc32 compensation attack*'
     - '*invalid certificate signing key*'
     - '*invalid elliptic curve value*'
-    pe.description:
+  - pe.description:
     - '*unexpected internal error*'
     - '*bad client public DH value*'
     - '*fatal: buffer_get_string: bad string*'
@@ -155,7 +149,7 @@ detection:
     - '*Local: crc32 compensation attack*'
     - '*invalid certificate signing key*'
     - '*invalid elliptic curve value*'
-    pe.product:
+  - pe.product:
     - '*unexpected internal error*'
     - '*bad client public DH value*'
     - '*fatal: buffer_get_string: bad string*'
@@ -167,7 +161,7 @@ detection:
     - '*Local: crc32 compensation attack*'
     - '*invalid certificate signing key*'
     - '*invalid elliptic curve value*'
-    os.full:
+  - os.full:
     - '*unexpected internal error*'
     - '*bad client public DH value*'
     - '*fatal: buffer_get_string: bad string*'
@@ -179,7 +173,7 @@ detection:
     - '*Local: crc32 compensation attack*'
     - '*invalid certificate signing key*'
     - '*invalid elliptic curve value*'
-    host.hostname:
+  - host.hostname:
     - '*unexpected internal error*'
     - '*bad client public DH value*'
     - '*fatal: buffer_get_string: bad string*'
@@ -191,18 +185,7 @@ detection:
     - '*Local: crc32 compensation attack*'
     - '*invalid certificate signing key*'
     - '*invalid elliptic curve value*'
-    event.original:
-    - '*unexpected internal error*'
-    - '*bad client public DH value*'
-    - '*fatal: buffer_get_string: bad string*'
-    - '*Corrupted MAC on input*'
-    - '*error in libcrypto*'
-    - '*unexpected bytes remain after decoding*'
-    - '*unknown or unsupported key type*'
-    - '*Local: crc32 compensation attack*'
-    - '*invalid certificate signing key*'
-    - '*invalid elliptic curve value*'
-    email.subject:
+  - event.original:
     - '*unexpected internal error*'
     - '*bad client public DH value*'
     - '*fatal: buffer_get_string: bad string*'
@@ -214,7 +197,7 @@ detection:
     - '*Local: crc32 compensation attack*'
     - '*invalid certificate signing key*'
     - '*invalid elliptic curve value*'
-    device.model.name:
+  - email.subject:
     - '*unexpected internal error*'
     - '*bad client public DH value*'
     - '*fatal: buffer_get_string: bad string*'
@@ -226,7 +209,7 @@ detection:
     - '*Local: crc32 compensation attack*'
     - '*invalid certificate signing key*'
     - '*invalid elliptic curve value*'
-    container.image.name:
+  - device.model.name:
     - '*unexpected internal error*'
     - '*bad client public DH value*'
     - '*fatal: buffer_get_string: bad string*'
@@ -238,7 +221,7 @@ detection:
     - '*Local: crc32 compensation attack*'
     - '*invalid certificate signing key*'
     - '*invalid elliptic curve value*'
-    container.name:
+  - container.image.name:
     - '*unexpected internal error*'
     - '*bad client public DH value*'
     - '*fatal: buffer_get_string: bad string*'
@@ -250,138 +233,1026 @@ detection:
     - '*Local: crc32 compensation attack*'
     - '*invalid certificate signing key*'
     - '*invalid elliptic curve value*'
-    Image:
-    - '*incorrect signature*'
-    OriginalFileName:
-    - '*incorrect signature*'
-    CurrentDirectory:
-    - '*incorrect signature*'
-    ParentImage:
-    - '*incorrect signature*'
-    TargetFilename:
-    - '*incorrect signature*'
-    Signature:
-    - '*incorrect signature*'
-    signature:
-    - '*incorrect signature*'
-    ImageLoaded:
-    - '*incorrect signature*'
-    Company:
-    - '*incorrect signature*'
-    Description:
-    - '*incorrect signature*'
-    description:
-    - '*incorrect signature*'
-    SourceImage:
-    - '*incorrect signature*'
-    TargetImage:
-    - '*incorrect signature*'
-    CallTrace:
-    - '*incorrect signature*'
-    TargetObject:
-    - '*incorrect signature*'
-    PipeName:
-    - '*incorrect signature*'
-    Consumer:
-    - '*incorrect signature*'
-    Destination:
-    - '*incorrect signature*'
-    Name:
-    - '*incorrect signature*'
-    Query:
-    - '*incorrect signature*'
-    NewName:
-    - '*incorrect signature*'
-    StartAddress:
-    - '*incorrect signature*'
-    StartModule:
-    - '*incorrect signature*'
-    StartFunction:
-    - '*incorrect signature*'
-    SourceHostname:
-    - '*incorrect signature*'
-    Device:
-    - '*incorrect signature*'
-    file_name:
-    - '*incorrect signature*'
-    file_path:
-    - '*incorrect signature*'
-    process:
-    - '*incorrect signature*'
-    original_file_name:
-    - '*incorrect signature*'
-    parent_process:
-    - '*incorrect signature*'
-    process_path:
-    - '*incorrect signature*'
-    service_path:
-    - '*incorrect signature*'
-    registry_path:
-    - '*incorrect signature*'
-    registry_value_data:
-    - '*incorrect signature*'
-    registry_value_name:
-    - '*incorrect signature*'
-    ContextInfo:
-    - '*incorrect signature*'
-    Payload:
-    - '*incorrect signature*'
-    ScriptBlockText:
-    - '*incorrect signature*'
-    ServerName:
-    - '*incorrect signature*'
-    TransportName:
-    - '*incorrect signature*'
-    NewProcessName:
-    - '*incorrect signature*'
-    ParentProcessName:
-    - '*incorrect signature*'
-    Application:
-    - '*incorrect signature*'
-    Product Name:
-    - '*incorrect signature*'
-    Threat Name:
-    - '*incorrect signature*'
-    Process Name:
-    - '*incorrect signature*'
-    Path:
-    - '*incorrect signature*'
-    ImagePath:
-    - '*incorrect signature*'
-    ServiceName:
-    - '*incorrect signature*'
-    ProcessPath:
-    - '*incorrect signature*'
-    AppName:
-    - '*incorrect signature*'
-    AppPath:
-    - '*incorrect signature*'
-    ModulePath:
-    - '*incorrect signature*'
-    registry.data.strings:
-    - '*incorrect signature*'
-    registry.path:
-    - '*incorrect signature*'
-    process.executable:
-    - '*incorrect signature*'
-    process.name:
-    - '*incorrect signature*'
-    pe.original_file_name:
-    - '*incorrect signature*'
-    file.fork_name:
-    - '*incorrect signature*'
-    file.name:
-    - '*incorrect signature*'
-    file.path:
-    - '*incorrect signature*'
-    file.target_path:
-    - '*incorrect signature*'
-    email.attachments.file.name:
-    - '*incorrect signature*'
-    dll.path:
-    - '*incorrect signature*'
-    object:
-    - '*incorrect signature*'
+  - container.name:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - Image:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - OriginalFileName:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - CurrentDirectory:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - ParentImage:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - ParentCommandLine:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - TargetFilename:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - Signature:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - signature:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - ImageLoaded:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - Company:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - Description:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - description:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - CommandLine:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - SourceImage:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - TargetImage:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - CallTrace:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - TargetObject:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - Details:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - PipeName:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - Consumer:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - Destination:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - Name:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - Query:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - NewName:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - StartAddress:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - StartModule:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - StartFunction:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - SourceHostname:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - Device:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - file_name:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - file_path:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - process:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - original_file_name:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - parent_process:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - process_path:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - service_path:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - registry_path:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - registry_value_data:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - registry_value_name:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - ContextInfo:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - Payload:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - ScriptBlockText:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - ServerName:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - TransportName:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - NewProcessName:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - ParentProcessName:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - Application:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - Product Name:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - Threat Name:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - Process Name:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - Path:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - ImagePath:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - ServiceName:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - ProcessPath:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - AppName:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - AppPath:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - ModulePath:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - registry.data.strings:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - registry.path:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - registry.value:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - process.args:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - process.command_line:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - process.env_vars:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - process.io.text:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - process.executable:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - process.name:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - process.title:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - pe.company:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - pe.description:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - pe.original_file_name:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - pe.product:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - os.full:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - host.hostname:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - file.fork_name:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - file.name:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - file.path:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - file.target_path:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - email.attachments.file.name:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - email.subject:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - dll.path:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - device.model.name:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - container.image.name:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - container.name:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
+  - object:
+    - '*unexpected internal error*'
+    - '*bad client public DH value*'
+    - '*fatal: buffer_get_string: bad string*'
+    - '*incorrect signature*'
+    - '*Corrupted MAC on input*'
+    - '*error in libcrypto*'
+    - '*unexpected bytes remain after decoding*'
+    - '*unknown or unsupported key type*'
+    - '*Local: crc32 compensation attack*'
+    - '*invalid certificate signing key*'
+    - '*invalid elliptic curve value*'
   condition: selection
 fields:
 - ParentCommandLine
@@ -407,6 +1278,7 @@ fields:
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -414,10 +1286,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -459,13 +1333,31 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
+falsepositives:
+- unknown
+level: medium

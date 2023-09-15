@@ -1,10 +1,8 @@
 title: Simple keyword detection rule for gpg
 id: b1f79e67-ecf4-4137-bf26-51abce45dc1d
 status: experimental
-description:
-- '''List gpg keys for privilege escalation'''
-references:
-- N/A
+description: Detects interesting keywords based on gpg tool
+references: []
 author: '@mthcht'
 date: 2023/07/30
 modified: 2023/09/15
@@ -14,49 +12,45 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- low
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*gpg --list-keys*'
-    CommandLine:
+  - CommandLine:
     - '*gpg --list-keys*'
-    Details:
+  - Details:
     - '*gpg --list-keys*'
-    registry.value:
+  - registry.value:
     - '*gpg --list-keys*'
-    process.args:
+  - process.args:
     - '*gpg --list-keys*'
-    process.command_line:
+  - process.command_line:
     - '*gpg --list-keys*'
-    process.env_vars:
+  - process.env_vars:
     - '*gpg --list-keys*'
-    process.io.text:
+  - process.io.text:
     - '*gpg --list-keys*'
-    process.title:
+  - process.title:
     - '*gpg --list-keys*'
-    pe.company:
+  - pe.company:
     - '*gpg --list-keys*'
-    pe.description:
+  - pe.description:
     - '*gpg --list-keys*'
-    pe.product:
+  - pe.product:
     - '*gpg --list-keys*'
-    os.full:
+  - os.full:
     - '*gpg --list-keys*'
-    host.hostname:
+  - host.hostname:
     - '*gpg --list-keys*'
-    event.original:
+  - event.original:
     - '*gpg --list-keys*'
-    email.subject:
+  - email.subject:
     - '*gpg --list-keys*'
-    device.model.name:
+  - device.model.name:
     - '*gpg --list-keys*'
-    container.image.name:
+  - container.image.name:
     - '*gpg --list-keys*'
-    container.name:
+  - container.name:
     - '*gpg --list-keys*'
   condition: selection
 fields:
@@ -79,3 +73,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

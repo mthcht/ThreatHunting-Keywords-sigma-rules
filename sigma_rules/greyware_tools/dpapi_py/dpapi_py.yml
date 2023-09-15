@@ -1,15 +1,8 @@
 title: Simple keyword detection rule for dpapi.py
 id: 91dc4519-89e4-48d4-8f43-9027f8183d60
 status: experimental
-description:
-- '''the command is used to extract the Data Protection API (DPAPI) backup keys from
-  a target system. DPAPI is a Windows API that provides data protection services to
-  secure sensitive data. such as private keys. passwords. and other secrets. By obtaining
-  the DPAPI backup keys. an attacker can potentially decrypt sensitive data stored
-  on the target system or impersonate users. gaining unauthorized access to other
-  systems and resources.'''
-references:
-- N/A
+description: Detects interesting keywords based on dpapi.py tool
+references: []
 author: '@mthcht'
 date: 2023/07/30
 modified: 2023/09/15
@@ -19,49 +12,45 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*dpapi.py backupkeys -t */*@*'
-    CommandLine:
+  - CommandLine:
     - '*dpapi.py backupkeys -t */*@*'
-    Details:
+  - Details:
     - '*dpapi.py backupkeys -t */*@*'
-    registry.value:
+  - registry.value:
     - '*dpapi.py backupkeys -t */*@*'
-    process.args:
+  - process.args:
     - '*dpapi.py backupkeys -t */*@*'
-    process.command_line:
+  - process.command_line:
     - '*dpapi.py backupkeys -t */*@*'
-    process.env_vars:
+  - process.env_vars:
     - '*dpapi.py backupkeys -t */*@*'
-    process.io.text:
+  - process.io.text:
     - '*dpapi.py backupkeys -t */*@*'
-    process.title:
+  - process.title:
     - '*dpapi.py backupkeys -t */*@*'
-    pe.company:
+  - pe.company:
     - '*dpapi.py backupkeys -t */*@*'
-    pe.description:
+  - pe.description:
     - '*dpapi.py backupkeys -t */*@*'
-    pe.product:
+  - pe.product:
     - '*dpapi.py backupkeys -t */*@*'
-    os.full:
+  - os.full:
     - '*dpapi.py backupkeys -t */*@*'
-    host.hostname:
+  - host.hostname:
     - '*dpapi.py backupkeys -t */*@*'
-    event.original:
+  - event.original:
     - '*dpapi.py backupkeys -t */*@*'
-    email.subject:
+  - email.subject:
     - '*dpapi.py backupkeys -t */*@*'
-    device.model.name:
+  - device.model.name:
     - '*dpapi.py backupkeys -t */*@*'
-    container.image.name:
+  - container.image.name:
     - '*dpapi.py backupkeys -t */*@*'
-    container.name:
+  - container.name:
     - '*dpapi.py backupkeys -t */*@*'
   condition: selection
 fields:
@@ -84,3 +73,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

@@ -1,16 +1,9 @@
 title: Simple keyword detection rule for vssadmin
 id: 6c9de5a7-c459-4cf6-a72e-e595c681ba5a
 status: experimental
-description:
-- '''Deletes all Volume Shadow Copies from the system quietly (without prompts).'''
-- '''List shadow copies using vssadmin'''
-- '''the actor creating a Shadow Copy and then extracting a copy of the ntds.dit file
-  from it.'''
-- '''the command is used to create a new Volume Shadow Copy for a specific volume
-  which can be utilized by an attacker to collect data from the local system'''
+description: Detects interesting keywords based on vssadmin tool
 references:
 - https://media.defense.gov/2023/May/24/2003229517/-1/-1/0/CSA_Living_off_the_Land.PDF
-- N/A
 author: '@mthcht'
 date: 2023/07/30
 modified: 2023/09/15
@@ -32,103 +25,99 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*vssadmin create shadow /for=C:*'
     - '*vssadmin Delete Shadows /All /Quiet*'
     - '*vssadmin list shadows*'
     - '*vssadmin create shadow /for=C:* \Temp\*.tmp*'
-    CommandLine:
+  - CommandLine:
     - '*vssadmin create shadow /for=C:*'
     - '*vssadmin Delete Shadows /All /Quiet*'
     - '*vssadmin list shadows*'
     - '*vssadmin create shadow /for=C:* \Temp\*.tmp*'
-    Details:
+  - Details:
     - '*vssadmin create shadow /for=C:*'
     - '*vssadmin Delete Shadows /All /Quiet*'
     - '*vssadmin list shadows*'
     - '*vssadmin create shadow /for=C:* \Temp\*.tmp*'
-    registry.value:
+  - registry.value:
     - '*vssadmin create shadow /for=C:*'
     - '*vssadmin Delete Shadows /All /Quiet*'
     - '*vssadmin list shadows*'
     - '*vssadmin create shadow /for=C:* \Temp\*.tmp*'
-    process.args:
+  - process.args:
     - '*vssadmin create shadow /for=C:*'
     - '*vssadmin Delete Shadows /All /Quiet*'
     - '*vssadmin list shadows*'
     - '*vssadmin create shadow /for=C:* \Temp\*.tmp*'
-    process.command_line:
+  - process.command_line:
     - '*vssadmin create shadow /for=C:*'
     - '*vssadmin Delete Shadows /All /Quiet*'
     - '*vssadmin list shadows*'
     - '*vssadmin create shadow /for=C:* \Temp\*.tmp*'
-    process.env_vars:
+  - process.env_vars:
     - '*vssadmin create shadow /for=C:*'
     - '*vssadmin Delete Shadows /All /Quiet*'
     - '*vssadmin list shadows*'
     - '*vssadmin create shadow /for=C:* \Temp\*.tmp*'
-    process.io.text:
+  - process.io.text:
     - '*vssadmin create shadow /for=C:*'
     - '*vssadmin Delete Shadows /All /Quiet*'
     - '*vssadmin list shadows*'
     - '*vssadmin create shadow /for=C:* \Temp\*.tmp*'
-    process.title:
+  - process.title:
     - '*vssadmin create shadow /for=C:*'
     - '*vssadmin Delete Shadows /All /Quiet*'
     - '*vssadmin list shadows*'
     - '*vssadmin create shadow /for=C:* \Temp\*.tmp*'
-    pe.company:
+  - pe.company:
     - '*vssadmin create shadow /for=C:*'
     - '*vssadmin Delete Shadows /All /Quiet*'
     - '*vssadmin list shadows*'
     - '*vssadmin create shadow /for=C:* \Temp\*.tmp*'
-    pe.description:
+  - pe.description:
     - '*vssadmin create shadow /for=C:*'
     - '*vssadmin Delete Shadows /All /Quiet*'
     - '*vssadmin list shadows*'
     - '*vssadmin create shadow /for=C:* \Temp\*.tmp*'
-    pe.product:
+  - pe.product:
     - '*vssadmin create shadow /for=C:*'
     - '*vssadmin Delete Shadows /All /Quiet*'
     - '*vssadmin list shadows*'
     - '*vssadmin create shadow /for=C:* \Temp\*.tmp*'
-    os.full:
+  - os.full:
     - '*vssadmin create shadow /for=C:*'
     - '*vssadmin Delete Shadows /All /Quiet*'
     - '*vssadmin list shadows*'
     - '*vssadmin create shadow /for=C:* \Temp\*.tmp*'
-    host.hostname:
+  - host.hostname:
     - '*vssadmin create shadow /for=C:*'
     - '*vssadmin Delete Shadows /All /Quiet*'
     - '*vssadmin list shadows*'
     - '*vssadmin create shadow /for=C:* \Temp\*.tmp*'
-    event.original:
+  - event.original:
     - '*vssadmin create shadow /for=C:*'
     - '*vssadmin Delete Shadows /All /Quiet*'
     - '*vssadmin list shadows*'
     - '*vssadmin create shadow /for=C:* \Temp\*.tmp*'
-    email.subject:
+  - email.subject:
     - '*vssadmin create shadow /for=C:*'
     - '*vssadmin Delete Shadows /All /Quiet*'
     - '*vssadmin list shadows*'
     - '*vssadmin create shadow /for=C:* \Temp\*.tmp*'
-    device.model.name:
+  - device.model.name:
     - '*vssadmin create shadow /for=C:*'
     - '*vssadmin Delete Shadows /All /Quiet*'
     - '*vssadmin list shadows*'
     - '*vssadmin create shadow /for=C:* \Temp\*.tmp*'
-    container.image.name:
+  - container.image.name:
     - '*vssadmin create shadow /for=C:*'
     - '*vssadmin Delete Shadows /All /Quiet*'
     - '*vssadmin list shadows*'
     - '*vssadmin create shadow /for=C:* \Temp\*.tmp*'
-    container.name:
+  - container.name:
     - '*vssadmin create shadow /for=C:*'
     - '*vssadmin Delete Shadows /All /Quiet*'
     - '*vssadmin list shadows*'
@@ -154,3 +143,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

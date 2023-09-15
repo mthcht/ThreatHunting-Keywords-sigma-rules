@@ -1,9 +1,7 @@
 title: Simple keyword detection rule for fltMC
 id: 7f3f8c8c-d6b8-4b5b-89ce-f57bd7e5fa97
 status: experimental
-description:
-- '''Unload Sysmon driver. allow the attacker to bypass sysmon detections (most of
-  it. network monitoring will still be effective)'''
+description: Detects interesting keywords based on fltMC tool
 references:
 - https://github.com/mthcht/Purpleteam/blob/main/Simulation/Windows/System/unload_sysmon_driver_with_fltmc.ps1
 author: '@mthcht'
@@ -17,49 +15,45 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*fltMC* unload SysmonDrv*'
-    CommandLine:
+  - CommandLine:
     - '*fltMC* unload SysmonDrv*'
-    Details:
+  - Details:
     - '*fltMC* unload SysmonDrv*'
-    registry.value:
+  - registry.value:
     - '*fltMC* unload SysmonDrv*'
-    process.args:
+  - process.args:
     - '*fltMC* unload SysmonDrv*'
-    process.command_line:
+  - process.command_line:
     - '*fltMC* unload SysmonDrv*'
-    process.env_vars:
+  - process.env_vars:
     - '*fltMC* unload SysmonDrv*'
-    process.io.text:
+  - process.io.text:
     - '*fltMC* unload SysmonDrv*'
-    process.title:
+  - process.title:
     - '*fltMC* unload SysmonDrv*'
-    pe.company:
+  - pe.company:
     - '*fltMC* unload SysmonDrv*'
-    pe.description:
+  - pe.description:
     - '*fltMC* unload SysmonDrv*'
-    pe.product:
+  - pe.product:
     - '*fltMC* unload SysmonDrv*'
-    os.full:
+  - os.full:
     - '*fltMC* unload SysmonDrv*'
-    host.hostname:
+  - host.hostname:
     - '*fltMC* unload SysmonDrv*'
-    event.original:
+  - event.original:
     - '*fltMC* unload SysmonDrv*'
-    email.subject:
+  - email.subject:
     - '*fltMC* unload SysmonDrv*'
-    device.model.name:
+  - device.model.name:
     - '*fltMC* unload SysmonDrv*'
-    container.image.name:
+  - container.image.name:
     - '*fltMC* unload SysmonDrv*'
-    container.name:
+  - container.name:
     - '*fltMC* unload SysmonDrv*'
   condition: selection
 fields:
@@ -82,3 +76,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

@@ -1,8 +1,7 @@
 title: Simple keyword detection rule for mars stealer
 id: c01b23ab-f168-454e-923f-a497c936dd38
 status: experimental
-description:
-- '''Self-removal ''mars stealer'' command'''
+description: Detects interesting keywords based on mars stealer tool
 references:
 - https://3xp0rt.com/posts/mars-stealer
 author: '@mthcht'
@@ -14,49 +13,45 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*cmd.exe /c timeout /t 5 & del /f /q *%s* & exit*'
-    CommandLine:
+  - CommandLine:
     - '*cmd.exe /c timeout /t 5 & del /f /q *%s* & exit*'
-    Details:
+  - Details:
     - '*cmd.exe /c timeout /t 5 & del /f /q *%s* & exit*'
-    registry.value:
+  - registry.value:
     - '*cmd.exe /c timeout /t 5 & del /f /q *%s* & exit*'
-    process.args:
+  - process.args:
     - '*cmd.exe /c timeout /t 5 & del /f /q *%s* & exit*'
-    process.command_line:
+  - process.command_line:
     - '*cmd.exe /c timeout /t 5 & del /f /q *%s* & exit*'
-    process.env_vars:
+  - process.env_vars:
     - '*cmd.exe /c timeout /t 5 & del /f /q *%s* & exit*'
-    process.io.text:
+  - process.io.text:
     - '*cmd.exe /c timeout /t 5 & del /f /q *%s* & exit*'
-    process.title:
+  - process.title:
     - '*cmd.exe /c timeout /t 5 & del /f /q *%s* & exit*'
-    pe.company:
+  - pe.company:
     - '*cmd.exe /c timeout /t 5 & del /f /q *%s* & exit*'
-    pe.description:
+  - pe.description:
     - '*cmd.exe /c timeout /t 5 & del /f /q *%s* & exit*'
-    pe.product:
+  - pe.product:
     - '*cmd.exe /c timeout /t 5 & del /f /q *%s* & exit*'
-    os.full:
+  - os.full:
     - '*cmd.exe /c timeout /t 5 & del /f /q *%s* & exit*'
-    host.hostname:
+  - host.hostname:
     - '*cmd.exe /c timeout /t 5 & del /f /q *%s* & exit*'
-    event.original:
+  - event.original:
     - '*cmd.exe /c timeout /t 5 & del /f /q *%s* & exit*'
-    email.subject:
+  - email.subject:
     - '*cmd.exe /c timeout /t 5 & del /f /q *%s* & exit*'
-    device.model.name:
+  - device.model.name:
     - '*cmd.exe /c timeout /t 5 & del /f /q *%s* & exit*'
-    container.image.name:
+  - container.image.name:
     - '*cmd.exe /c timeout /t 5 & del /f /q *%s* & exit*'
-    container.name:
+  - container.name:
     - '*cmd.exe /c timeout /t 5 & del /f /q *%s* & exit*'
   condition: selection
 fields:
@@ -79,3 +74,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

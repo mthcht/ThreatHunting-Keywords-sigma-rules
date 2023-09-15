@@ -1,10 +1,8 @@
 title: Simple keyword detection rule for sudoers
 id: 9cf20d26-5aed-4d43-a184-805390888800
 status: experimental
-description:
-- '''use SUDO without password'''
-references:
-- N/A
+description: Detects interesting keywords based on sudoers tool
+references: []
 author: '@mthcht'
 date: 2023/07/30
 modified: 2023/09/15
@@ -18,67 +16,63 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- medium
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*echo * ALL=(ALL) NOPASSWD: ALL* >>/etc/sudoers*'
     - '*echo * ALL=NOPASSWD: /bin/bash* >>/etc/sudoers*'
-    CommandLine:
+  - CommandLine:
     - '*echo * ALL=(ALL) NOPASSWD: ALL* >>/etc/sudoers*'
     - '*echo * ALL=NOPASSWD: /bin/bash* >>/etc/sudoers*'
-    Details:
+  - Details:
     - '*echo * ALL=(ALL) NOPASSWD: ALL* >>/etc/sudoers*'
     - '*echo * ALL=NOPASSWD: /bin/bash* >>/etc/sudoers*'
-    registry.value:
+  - registry.value:
     - '*echo * ALL=(ALL) NOPASSWD: ALL* >>/etc/sudoers*'
     - '*echo * ALL=NOPASSWD: /bin/bash* >>/etc/sudoers*'
-    process.args:
+  - process.args:
     - '*echo * ALL=(ALL) NOPASSWD: ALL* >>/etc/sudoers*'
     - '*echo * ALL=NOPASSWD: /bin/bash* >>/etc/sudoers*'
-    process.command_line:
+  - process.command_line:
     - '*echo * ALL=(ALL) NOPASSWD: ALL* >>/etc/sudoers*'
     - '*echo * ALL=NOPASSWD: /bin/bash* >>/etc/sudoers*'
-    process.env_vars:
+  - process.env_vars:
     - '*echo * ALL=(ALL) NOPASSWD: ALL* >>/etc/sudoers*'
     - '*echo * ALL=NOPASSWD: /bin/bash* >>/etc/sudoers*'
-    process.io.text:
+  - process.io.text:
     - '*echo * ALL=(ALL) NOPASSWD: ALL* >>/etc/sudoers*'
     - '*echo * ALL=NOPASSWD: /bin/bash* >>/etc/sudoers*'
-    process.title:
+  - process.title:
     - '*echo * ALL=(ALL) NOPASSWD: ALL* >>/etc/sudoers*'
     - '*echo * ALL=NOPASSWD: /bin/bash* >>/etc/sudoers*'
-    pe.company:
+  - pe.company:
     - '*echo * ALL=(ALL) NOPASSWD: ALL* >>/etc/sudoers*'
     - '*echo * ALL=NOPASSWD: /bin/bash* >>/etc/sudoers*'
-    pe.description:
+  - pe.description:
     - '*echo * ALL=(ALL) NOPASSWD: ALL* >>/etc/sudoers*'
     - '*echo * ALL=NOPASSWD: /bin/bash* >>/etc/sudoers*'
-    pe.product:
+  - pe.product:
     - '*echo * ALL=(ALL) NOPASSWD: ALL* >>/etc/sudoers*'
     - '*echo * ALL=NOPASSWD: /bin/bash* >>/etc/sudoers*'
-    os.full:
+  - os.full:
     - '*echo * ALL=(ALL) NOPASSWD: ALL* >>/etc/sudoers*'
     - '*echo * ALL=NOPASSWD: /bin/bash* >>/etc/sudoers*'
-    host.hostname:
+  - host.hostname:
     - '*echo * ALL=(ALL) NOPASSWD: ALL* >>/etc/sudoers*'
     - '*echo * ALL=NOPASSWD: /bin/bash* >>/etc/sudoers*'
-    event.original:
+  - event.original:
     - '*echo * ALL=(ALL) NOPASSWD: ALL* >>/etc/sudoers*'
     - '*echo * ALL=NOPASSWD: /bin/bash* >>/etc/sudoers*'
-    email.subject:
+  - email.subject:
     - '*echo * ALL=(ALL) NOPASSWD: ALL* >>/etc/sudoers*'
     - '*echo * ALL=NOPASSWD: /bin/bash* >>/etc/sudoers*'
-    device.model.name:
+  - device.model.name:
     - '*echo * ALL=(ALL) NOPASSWD: ALL* >>/etc/sudoers*'
     - '*echo * ALL=NOPASSWD: /bin/bash* >>/etc/sudoers*'
-    container.image.name:
+  - container.image.name:
     - '*echo * ALL=(ALL) NOPASSWD: ALL* >>/etc/sudoers*'
     - '*echo * ALL=NOPASSWD: /bin/bash* >>/etc/sudoers*'
-    container.name:
+  - container.name:
     - '*echo * ALL=(ALL) NOPASSWD: ALL* >>/etc/sudoers*'
     - '*echo * ALL=NOPASSWD: /bin/bash* >>/etc/sudoers*'
   condition: selection
@@ -102,3 +96,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

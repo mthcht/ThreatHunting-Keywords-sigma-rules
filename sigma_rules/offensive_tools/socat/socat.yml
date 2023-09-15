@@ -1,20 +1,12 @@
 title: Simple keyword detection rule for socat
 id: 47bdf317-4b48-4f9d-8f01-f5d0c1dd1295
 status: experimental
-description:
-- '''linux commands abused by attackers'''
-- '''listening on port 1337 -observed in variousmalware and poc explitation tools'''
-- '''Shell spawning socat usage '''
-- '''socat bind shell'''
-- '''socat is a relay for bidirectional data transfer between two independent data
-  channels. Each of these data channels may be a file. pipe. device'''
-- '''socat reverse shell'''
+description: Detects interesting keywords based on socat tool
 references:
 - https://github.com/craSH/socat
 - https://github.com/RoseSecurity/Red-Teaming-TTPs/blob/main/Linux.md
 - https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md
 - https://linuxfr.org/news/socat-un-outil-en-ligne-de-commande-pour-maitriser-vos-sockets
-- N/A
 author: '@mthcht'
 date: 2023/07/30
 modified: 2023/09/15
@@ -59,15 +51,9 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- critical
-- medium
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
     - '*socat file:*tty*raw*echo=0 tcp-listen:*'
     - '*socat FILE:*tty*raw*echo=0 TCP*:*'
@@ -79,7 +65,7 @@ detection:
     - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
     - '*socat -O /tmp/*'
-    CommandLine:
+  - CommandLine:
     - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
     - '*socat file:*tty*raw*echo=0 tcp-listen:*'
     - '*socat FILE:*tty*raw*echo=0 TCP*:*'
@@ -91,7 +77,7 @@ detection:
     - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
     - '*socat -O /tmp/*'
-    Details:
+  - Details:
     - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
     - '*socat file:*tty*raw*echo=0 tcp-listen:*'
     - '*socat FILE:*tty*raw*echo=0 TCP*:*'
@@ -103,7 +89,7 @@ detection:
     - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
     - '*socat -O /tmp/*'
-    registry.value:
+  - registry.value:
     - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
     - '*socat file:*tty*raw*echo=0 tcp-listen:*'
     - '*socat FILE:*tty*raw*echo=0 TCP*:*'
@@ -115,7 +101,7 @@ detection:
     - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
     - '*socat -O /tmp/*'
-    process.args:
+  - process.args:
     - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
     - '*socat file:*tty*raw*echo=0 tcp-listen:*'
     - '*socat FILE:*tty*raw*echo=0 TCP*:*'
@@ -127,7 +113,7 @@ detection:
     - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
     - '*socat -O /tmp/*'
-    process.command_line:
+  - process.command_line:
     - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
     - '*socat file:*tty*raw*echo=0 tcp-listen:*'
     - '*socat FILE:*tty*raw*echo=0 TCP*:*'
@@ -139,7 +125,7 @@ detection:
     - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
     - '*socat -O /tmp/*'
-    process.env_vars:
+  - process.env_vars:
     - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
     - '*socat file:*tty*raw*echo=0 tcp-listen:*'
     - '*socat FILE:*tty*raw*echo=0 TCP*:*'
@@ -151,7 +137,7 @@ detection:
     - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
     - '*socat -O /tmp/*'
-    process.io.text:
+  - process.io.text:
     - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
     - '*socat file:*tty*raw*echo=0 tcp-listen:*'
     - '*socat FILE:*tty*raw*echo=0 TCP*:*'
@@ -163,7 +149,7 @@ detection:
     - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
     - '*socat -O /tmp/*'
-    process.title:
+  - process.title:
     - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
     - '*socat file:*tty*raw*echo=0 tcp-listen:*'
     - '*socat FILE:*tty*raw*echo=0 TCP*:*'
@@ -175,7 +161,7 @@ detection:
     - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
     - '*socat -O /tmp/*'
-    pe.company:
+  - pe.company:
     - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
     - '*socat file:*tty*raw*echo=0 tcp-listen:*'
     - '*socat FILE:*tty*raw*echo=0 TCP*:*'
@@ -187,7 +173,7 @@ detection:
     - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
     - '*socat -O /tmp/*'
-    pe.description:
+  - pe.description:
     - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
     - '*socat file:*tty*raw*echo=0 tcp-listen:*'
     - '*socat FILE:*tty*raw*echo=0 TCP*:*'
@@ -199,7 +185,7 @@ detection:
     - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
     - '*socat -O /tmp/*'
-    pe.product:
+  - pe.product:
     - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
     - '*socat file:*tty*raw*echo=0 tcp-listen:*'
     - '*socat FILE:*tty*raw*echo=0 TCP*:*'
@@ -211,7 +197,7 @@ detection:
     - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
     - '*socat -O /tmp/*'
-    os.full:
+  - os.full:
     - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
     - '*socat file:*tty*raw*echo=0 tcp-listen:*'
     - '*socat FILE:*tty*raw*echo=0 TCP*:*'
@@ -223,7 +209,7 @@ detection:
     - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
     - '*socat -O /tmp/*'
-    host.hostname:
+  - host.hostname:
     - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
     - '*socat file:*tty*raw*echo=0 tcp-listen:*'
     - '*socat FILE:*tty*raw*echo=0 TCP*:*'
@@ -235,15 +221,7 @@ detection:
     - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
     - '*socat -O /tmp/*'
-    event.original:
-    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
-    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
-    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
-    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
-    - '*socat tcp-connect:*:* exec:/bin/sh*'
-    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
-    - '*socat -O /tmp/*'
-    email.subject:
+  - event.original:
     - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
     - '*socat file:*tty*raw*echo=0 tcp-listen:*'
     - '*socat FILE:*tty*raw*echo=0 TCP*:*'
@@ -255,7 +233,7 @@ detection:
     - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
     - '*socat -O /tmp/*'
-    device.model.name:
+  - email.subject:
     - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
     - '*socat file:*tty*raw*echo=0 tcp-listen:*'
     - '*socat FILE:*tty*raw*echo=0 TCP*:*'
@@ -267,7 +245,7 @@ detection:
     - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
     - '*socat -O /tmp/*'
-    container.image.name:
+  - device.model.name:
     - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
     - '*socat file:*tty*raw*echo=0 tcp-listen:*'
     - '*socat FILE:*tty*raw*echo=0 TCP*:*'
@@ -279,7 +257,7 @@ detection:
     - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
     - '*socat -O /tmp/*'
-    container.name:
+  - container.image.name:
     - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
     - '*socat file:*tty*raw*echo=0 tcp-listen:*'
     - '*socat FILE:*tty*raw*echo=0 TCP*:*'
@@ -291,336 +269,1026 @@ detection:
     - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
     - '*socat -O /tmp/*'
-    Image:
+  - container.name:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    OriginalFileName:
+    - '*socat -O /tmp/*'
+  - Image:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    CurrentDirectory:
+    - '*socat -O /tmp/*'
+  - OriginalFileName:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    ParentImage:
+    - '*socat -O /tmp/*'
+  - CurrentDirectory:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    TargetFilename:
+    - '*socat -O /tmp/*'
+  - ParentImage:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    Signature:
+    - '*socat -O /tmp/*'
+  - ParentCommandLine:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    signature:
+    - '*socat -O /tmp/*'
+  - TargetFilename:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    ImageLoaded:
+    - '*socat -O /tmp/*'
+  - Signature:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    Company:
+    - '*socat -O /tmp/*'
+  - signature:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    Description:
+    - '*socat -O /tmp/*'
+  - ImageLoaded:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    description:
+    - '*socat -O /tmp/*'
+  - Company:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    SourceImage:
+    - '*socat -O /tmp/*'
+  - Description:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    TargetImage:
+    - '*socat -O /tmp/*'
+  - description:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    CallTrace:
+    - '*socat -O /tmp/*'
+  - CommandLine:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    TargetObject:
+    - '*socat -O /tmp/*'
+  - SourceImage:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    PipeName:
+    - '*socat -O /tmp/*'
+  - TargetImage:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    Consumer:
+    - '*socat -O /tmp/*'
+  - CallTrace:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    Destination:
+    - '*socat -O /tmp/*'
+  - TargetObject:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    Name:
+    - '*socat -O /tmp/*'
+  - Details:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    Query:
+    - '*socat -O /tmp/*'
+  - PipeName:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    NewName:
+    - '*socat -O /tmp/*'
+  - Consumer:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    StartAddress:
+    - '*socat -O /tmp/*'
+  - Destination:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    StartModule:
+    - '*socat -O /tmp/*'
+  - Name:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    StartFunction:
+    - '*socat -O /tmp/*'
+  - Query:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    SourceHostname:
+    - '*socat -O /tmp/*'
+  - NewName:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    Device:
+    - '*socat -O /tmp/*'
+  - StartAddress:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    file_name:
+    - '*socat -O /tmp/*'
+  - StartModule:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    file_path:
+    - '*socat -O /tmp/*'
+  - StartFunction:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    process:
+    - '*socat -O /tmp/*'
+  - SourceHostname:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    original_file_name:
+    - '*socat -O /tmp/*'
+  - Device:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    parent_process:
+    - '*socat -O /tmp/*'
+  - file_name:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    process_path:
+    - '*socat -O /tmp/*'
+  - file_path:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    service_path:
+    - '*socat -O /tmp/*'
+  - process:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    registry_path:
+    - '*socat -O /tmp/*'
+  - original_file_name:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    registry_value_data:
+    - '*socat -O /tmp/*'
+  - parent_process:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    registry_value_name:
+    - '*socat -O /tmp/*'
+  - process_path:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    ContextInfo:
+    - '*socat -O /tmp/*'
+  - service_path:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    Payload:
+    - '*socat -O /tmp/*'
+  - registry_path:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    ScriptBlockText:
+    - '*socat -O /tmp/*'
+  - registry_value_data:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    ServerName:
+    - '*socat -O /tmp/*'
+  - registry_value_name:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    TransportName:
+    - '*socat -O /tmp/*'
+  - ContextInfo:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    NewProcessName:
+    - '*socat -O /tmp/*'
+  - Payload:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    ParentProcessName:
+    - '*socat -O /tmp/*'
+  - ScriptBlockText:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    Application:
+    - '*socat -O /tmp/*'
+  - ServerName:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    Product Name:
+    - '*socat -O /tmp/*'
+  - TransportName:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    Threat Name:
+    - '*socat -O /tmp/*'
+  - NewProcessName:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    Process Name:
+    - '*socat -O /tmp/*'
+  - ParentProcessName:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    Path:
+    - '*socat -O /tmp/*'
+  - Application:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    ImagePath:
+    - '*socat -O /tmp/*'
+  - Product Name:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    ServiceName:
+    - '*socat -O /tmp/*'
+  - Threat Name:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    ProcessPath:
+    - '*socat -O /tmp/*'
+  - Process Name:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    AppName:
+    - '*socat -O /tmp/*'
+  - Path:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    AppPath:
+    - '*socat -O /tmp/*'
+  - ImagePath:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    ModulePath:
+    - '*socat -O /tmp/*'
+  - ServiceName:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    registry.data.strings:
+    - '*socat -O /tmp/*'
+  - ProcessPath:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    registry.path:
+    - '*socat -O /tmp/*'
+  - AppName:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    process.executable:
+    - '*socat -O /tmp/*'
+  - AppPath:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    process.name:
+    - '*socat -O /tmp/*'
+  - ModulePath:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    pe.original_file_name:
+    - '*socat -O /tmp/*'
+  - registry.data.strings:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    file.fork_name:
+    - '*socat -O /tmp/*'
+  - registry.path:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    file.name:
+    - '*socat -O /tmp/*'
+  - registry.value:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    file.path:
+    - '*socat -O /tmp/*'
+  - process.args:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    file.target_path:
+    - '*socat -O /tmp/*'
+  - process.command_line:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    email.attachments.file.name:
+    - '*socat -O /tmp/*'
+  - process.env_vars:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    dll.path:
+    - '*socat -O /tmp/*'
+  - process.io.text:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
-    object:
+    - '*socat -O /tmp/*'
+  - process.executable:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
     - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
     - '*socat tcp-connect*'
     - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
     - '*socat *'
+    - '*socat -O /tmp/*'
+  - process.name:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
+    - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
+    - '*socat tcp-connect*'
+    - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
+    - '*socat *'
+    - '*socat -O /tmp/*'
+  - process.title:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
+    - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
+    - '*socat tcp-connect*'
+    - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
+    - '*socat *'
+    - '*socat -O /tmp/*'
+  - pe.company:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
+    - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
+    - '*socat tcp-connect*'
+    - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
+    - '*socat *'
+    - '*socat -O /tmp/*'
+  - pe.description:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
+    - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
+    - '*socat tcp-connect*'
+    - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
+    - '*socat *'
+    - '*socat -O /tmp/*'
+  - pe.original_file_name:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
+    - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
+    - '*socat tcp-connect*'
+    - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
+    - '*socat *'
+    - '*socat -O /tmp/*'
+  - pe.product:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
+    - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
+    - '*socat tcp-connect*'
+    - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
+    - '*socat *'
+    - '*socat -O /tmp/*'
+  - os.full:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
+    - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
+    - '*socat tcp-connect*'
+    - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
+    - '*socat *'
+    - '*socat -O /tmp/*'
+  - host.hostname:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
+    - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
+    - '*socat tcp-connect*'
+    - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
+    - '*socat *'
+    - '*socat -O /tmp/*'
+  - file.fork_name:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
+    - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
+    - '*socat tcp-connect*'
+    - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
+    - '*socat *'
+    - '*socat -O /tmp/*'
+  - file.name:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
+    - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
+    - '*socat tcp-connect*'
+    - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
+    - '*socat *'
+    - '*socat -O /tmp/*'
+  - file.path:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
+    - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
+    - '*socat tcp-connect*'
+    - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
+    - '*socat *'
+    - '*socat -O /tmp/*'
+  - file.target_path:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
+    - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
+    - '*socat tcp-connect*'
+    - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
+    - '*socat *'
+    - '*socat -O /tmp/*'
+  - email.attachments.file.name:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
+    - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
+    - '*socat tcp-connect*'
+    - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
+    - '*socat *'
+    - '*socat -O /tmp/*'
+  - email.subject:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
+    - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
+    - '*socat tcp-connect*'
+    - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
+    - '*socat *'
+    - '*socat -O /tmp/*'
+  - dll.path:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
+    - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
+    - '*socat tcp-connect*'
+    - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
+    - '*socat *'
+    - '*socat -O /tmp/*'
+  - device.model.name:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
+    - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
+    - '*socat tcp-connect*'
+    - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
+    - '*socat *'
+    - '*socat -O /tmp/*'
+  - container.image.name:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
+    - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
+    - '*socat tcp-connect*'
+    - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
+    - '*socat *'
+    - '*socat -O /tmp/*'
+  - container.name:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
+    - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
+    - '*socat tcp-connect*'
+    - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
+    - '*socat *'
+    - '*socat -O /tmp/*'
+  - object:
+    - '*socat tcp-connect:*:* exec:*bash -li**pty*stderr*setsid*sigint*sane*'
+    - '*socat file:*tty*raw*echo=0 tcp-listen:*'
+    - '*socat FILE:*tty*raw*echo=0 TCP*:*'
+    - '*socat exec:*'
+    - '*socat TCP4-LISTEN:* fork TCP4:*:*'
+    - '*socat tcp-connect*'
+    - '*socat tcp4-listen:1337*'
+    - '*socat tcp-connect:*:* exec:/bin/sh*'
+    - '*socat TCP-LISTEN:**reuseaddr*fork EXEC:/bin/sh*'
+    - '*socat *'
+    - '*socat -O /tmp/*'
   condition: selection
 fields:
 - ParentCommandLine
@@ -646,6 +1314,7 @@ fields:
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -653,10 +1322,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -698,13 +1369,31 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
+falsepositives:
+- unknown
+level: medium

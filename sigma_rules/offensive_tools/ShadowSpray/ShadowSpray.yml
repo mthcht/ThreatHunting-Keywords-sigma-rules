@@ -1,9 +1,7 @@
 title: Simple keyword detection rule for ShadowSpray
 id: 94a701ea-c430-4b77-b865-70070d768294
 status: experimental
-description:
-- '''A tool to spray Shadow Credentials across an entire domain in hopes of abusing
-  long forgotten GenericWrite/GenericAll DACLs over other objects in the domain.'''
+description: Detects interesting keywords based on ShadowSpray tool
 references:
 - https://github.com/ShorSec/ShadowSpray
 author: '@mthcht'
@@ -21,13 +19,9 @@ logsource:
   category:
   - endpoint
   - network
-falsepositives:
-- Unknown
-level:
-- medium
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '* - ShadowSpray*'
     - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
@@ -43,7 +37,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    CommandLine:
+  - CommandLine:
     - '* - ShadowSpray*'
     - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
@@ -59,7 +53,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    Details:
+  - Details:
     - '* - ShadowSpray*'
     - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
@@ -75,7 +69,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    registry.value:
+  - registry.value:
     - '* - ShadowSpray*'
     - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
@@ -91,7 +85,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    process.args:
+  - process.args:
     - '* - ShadowSpray*'
     - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
@@ -107,7 +101,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    process.command_line:
+  - process.command_line:
     - '* - ShadowSpray*'
     - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
@@ -123,7 +117,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    process.env_vars:
+  - process.env_vars:
     - '* - ShadowSpray*'
     - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
@@ -139,7 +133,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    process.io.text:
+  - process.io.text:
     - '* - ShadowSpray*'
     - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
@@ -155,7 +149,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    process.title:
+  - process.title:
     - '* - ShadowSpray*'
     - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
@@ -171,7 +165,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    pe.company:
+  - pe.company:
     - '* - ShadowSpray*'
     - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
@@ -187,7 +181,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    pe.description:
+  - pe.description:
     - '* - ShadowSpray*'
     - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
@@ -203,7 +197,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    pe.product:
+  - pe.product:
     - '* - ShadowSpray*'
     - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
@@ -219,7 +213,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    os.full:
+  - os.full:
     - '* - ShadowSpray*'
     - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
@@ -235,7 +229,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    host.hostname:
+  - host.hostname:
     - '* - ShadowSpray*'
     - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
@@ -251,11 +245,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    event.original:
-    - '* - ShadowSpray*'
-    - '*[+] Attack aborted. Exiting*'
-    - '*Performing recursive ShadowSpray attack*'
-    email.subject:
+  - event.original:
     - '* - ShadowSpray*'
     - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
@@ -271,7 +261,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    device.model.name:
+  - email.subject:
     - '* - ShadowSpray*'
     - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
@@ -287,7 +277,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    container.image.name:
+  - device.model.name:
     - '* - ShadowSpray*'
     - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
@@ -303,7 +293,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    container.name:
+  - container.image.name:
     - '* - ShadowSpray*'
     - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
@@ -319,7 +309,9 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    Image:
+  - container.name:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -327,12 +319,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    OriginalFileName:
+  - Image:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -340,12 +335,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    CurrentDirectory:
+  - OriginalFileName:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -353,12 +351,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    ParentImage:
+  - CurrentDirectory:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -366,12 +367,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    TargetFilename:
+  - ParentImage:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -379,12 +383,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    Signature:
+  - ParentCommandLine:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -392,12 +399,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    signature:
+  - TargetFilename:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -405,12 +415,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    ImageLoaded:
+  - Signature:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -418,12 +431,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    Company:
+  - signature:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -431,12 +447,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    Description:
+  - ImageLoaded:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -444,12 +463,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    description:
+  - Company:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -457,12 +479,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    SourceImage:
+  - Description:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -470,12 +495,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    TargetImage:
+  - description:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -483,12 +511,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    CallTrace:
+  - CommandLine:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -496,12 +527,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    TargetObject:
+  - SourceImage:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -509,12 +543,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    PipeName:
+  - TargetImage:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -522,12 +559,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    Consumer:
+  - CallTrace:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -535,12 +575,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    Destination:
+  - TargetObject:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -548,12 +591,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    Name:
+  - Details:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -561,12 +607,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    Query:
+  - PipeName:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -574,12 +623,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    NewName:
+  - Consumer:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -587,12 +639,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    StartAddress:
+  - Destination:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -600,12 +655,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    StartModule:
+  - Name:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -613,12 +671,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    StartFunction:
+  - Query:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -626,12 +687,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    SourceHostname:
+  - NewName:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -639,12 +703,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    Device:
+  - StartAddress:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -652,12 +719,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    file_name:
+  - StartModule:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -665,12 +735,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    file_path:
+  - StartFunction:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -678,12 +751,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    process:
+  - SourceHostname:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -691,12 +767,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    original_file_name:
+  - Device:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -704,12 +783,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    parent_process:
+  - file_name:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -717,12 +799,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    process_path:
+  - file_path:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -730,12 +815,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    service_path:
+  - process:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -743,12 +831,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    registry_path:
+  - original_file_name:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -756,12 +847,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    registry_value_data:
+  - parent_process:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -769,12 +863,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    registry_value_name:
+  - process_path:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -782,12 +879,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    ContextInfo:
+  - service_path:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -795,12 +895,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    Payload:
+  - registry_path:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -808,12 +911,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    ScriptBlockText:
+  - registry_value_data:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -821,12 +927,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    ServerName:
+  - registry_value_name:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -834,12 +943,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    TransportName:
+  - ContextInfo:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -847,12 +959,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    NewProcessName:
+  - Payload:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -860,12 +975,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    ParentProcessName:
+  - ScriptBlockText:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -873,12 +991,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    Application:
+  - ServerName:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -886,12 +1007,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    Product Name:
+  - TransportName:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -899,12 +1023,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    Threat Name:
+  - NewProcessName:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -912,12 +1039,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    Process Name:
+  - ParentProcessName:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -925,12 +1055,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    Path:
+  - Application:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -938,12 +1071,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    ImagePath:
+  - Product Name:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -951,12 +1087,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    ServiceName:
+  - Threat Name:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -964,12 +1103,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    ProcessPath:
+  - Process Name:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -977,12 +1119,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    AppName:
+  - Path:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -990,12 +1135,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    AppPath:
+  - ImagePath:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -1003,12 +1151,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    ModulePath:
+  - ServiceName:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -1016,12 +1167,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    registry.data.strings:
+  - ProcessPath:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -1029,12 +1183,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    registry.path:
+  - AppName:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -1042,12 +1199,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    process.executable:
+  - AppPath:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -1055,12 +1215,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    process.name:
+  - ModulePath:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -1068,12 +1231,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    pe.original_file_name:
+  - registry.data.strings:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -1081,12 +1247,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    file.fork_name:
+  - registry.path:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -1094,12 +1263,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    file.name:
+  - registry.value:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -1107,12 +1279,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    file.path:
+  - process.args:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -1120,12 +1295,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    file.target_path:
+  - process.command_line:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -1133,12 +1311,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    email.attachments.file.name:
+  - process.env_vars:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -1146,12 +1327,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    dll.path:
+  - process.io.text:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -1159,12 +1343,15 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    object:
+  - process.executable:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
     - '*ShadowSpray.Kerb*'
     - '*ShadowSpray recovered*'
@@ -1172,20 +1359,325 @@ detection:
     - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
     - '*/ShadowSpray.git*'
     - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
     - '*\ShadowSpray\*.cs*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    url:
+  - process.name:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
     - '*ShadowSpray.exe*'
+    - '*ShadowSpray.Kerb*'
+    - '*ShadowSpray recovered*'
+    - '*ShadowSpray-master*'
+    - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
+    - '*/ShadowSpray.git*'
+    - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
+    - '*\ShadowSpray\*.cs*'
+    - '*ShadowSpray.Asn1*'
+    - '*ShadowSpray.sln*'
+    - '*ShorSec/ShadowSpray*'
+    - '*/ShadowSpray/*.cs*'
+  - process.title:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
+    - '*ShadowSpray.exe*'
+    - '*ShadowSpray.Kerb*'
+    - '*ShadowSpray recovered*'
+    - '*ShadowSpray-master*'
+    - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
+    - '*/ShadowSpray.git*'
+    - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
+    - '*\ShadowSpray\*.cs*'
+    - '*ShadowSpray.Asn1*'
+    - '*ShadowSpray.sln*'
+    - '*ShorSec/ShadowSpray*'
+    - '*/ShadowSpray/*.cs*'
+  - pe.company:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
+    - '*ShadowSpray.exe*'
+    - '*ShadowSpray.Kerb*'
+    - '*ShadowSpray recovered*'
+    - '*ShadowSpray-master*'
+    - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
+    - '*/ShadowSpray.git*'
+    - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
+    - '*\ShadowSpray\*.cs*'
+    - '*ShadowSpray.Asn1*'
+    - '*ShadowSpray.sln*'
+    - '*ShorSec/ShadowSpray*'
+    - '*/ShadowSpray/*.cs*'
+  - pe.description:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
+    - '*ShadowSpray.exe*'
+    - '*ShadowSpray.Kerb*'
+    - '*ShadowSpray recovered*'
+    - '*ShadowSpray-master*'
+    - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
+    - '*/ShadowSpray.git*'
+    - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
+    - '*\ShadowSpray\*.cs*'
+    - '*ShadowSpray.Asn1*'
+    - '*ShadowSpray.sln*'
+    - '*ShorSec/ShadowSpray*'
+    - '*/ShadowSpray/*.cs*'
+  - pe.original_file_name:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
+    - '*ShadowSpray.exe*'
+    - '*ShadowSpray.Kerb*'
+    - '*ShadowSpray recovered*'
+    - '*ShadowSpray-master*'
+    - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
+    - '*/ShadowSpray.git*'
+    - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
+    - '*\ShadowSpray\*.cs*'
+    - '*ShadowSpray.Asn1*'
+    - '*ShadowSpray.sln*'
+    - '*ShorSec/ShadowSpray*'
+    - '*/ShadowSpray/*.cs*'
+  - pe.product:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
+    - '*ShadowSpray.exe*'
+    - '*ShadowSpray.Kerb*'
+    - '*ShadowSpray recovered*'
+    - '*ShadowSpray-master*'
+    - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
+    - '*/ShadowSpray.git*'
+    - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
+    - '*\ShadowSpray\*.cs*'
+    - '*ShadowSpray.Asn1*'
+    - '*ShadowSpray.sln*'
+    - '*ShorSec/ShadowSpray*'
+    - '*/ShadowSpray/*.cs*'
+  - os.full:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
+    - '*ShadowSpray.exe*'
+    - '*ShadowSpray.Kerb*'
+    - '*ShadowSpray recovered*'
+    - '*ShadowSpray-master*'
+    - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
+    - '*/ShadowSpray.git*'
+    - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
+    - '*\ShadowSpray\*.cs*'
+    - '*ShadowSpray.Asn1*'
+    - '*ShadowSpray.sln*'
+    - '*ShorSec/ShadowSpray*'
+    - '*/ShadowSpray/*.cs*'
+  - host.hostname:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
+    - '*ShadowSpray.exe*'
+    - '*ShadowSpray.Kerb*'
+    - '*ShadowSpray recovered*'
+    - '*ShadowSpray-master*'
+    - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
+    - '*/ShadowSpray.git*'
+    - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
+    - '*\ShadowSpray\*.cs*'
+    - '*ShadowSpray.Asn1*'
+    - '*ShadowSpray.sln*'
+    - '*ShorSec/ShadowSpray*'
+    - '*/ShadowSpray/*.cs*'
+  - file.fork_name:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
+    - '*ShadowSpray.exe*'
+    - '*ShadowSpray.Kerb*'
+    - '*ShadowSpray recovered*'
+    - '*ShadowSpray-master*'
+    - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
+    - '*/ShadowSpray.git*'
+    - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
+    - '*\ShadowSpray\*.cs*'
+    - '*ShadowSpray.Asn1*'
+    - '*ShadowSpray.sln*'
+    - '*ShorSec/ShadowSpray*'
+    - '*/ShadowSpray/*.cs*'
+  - file.name:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
+    - '*ShadowSpray.exe*'
+    - '*ShadowSpray.Kerb*'
+    - '*ShadowSpray recovered*'
+    - '*ShadowSpray-master*'
+    - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
+    - '*/ShadowSpray.git*'
+    - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
+    - '*\ShadowSpray\*.cs*'
+    - '*ShadowSpray.Asn1*'
+    - '*ShadowSpray.sln*'
+    - '*ShorSec/ShadowSpray*'
+    - '*/ShadowSpray/*.cs*'
+  - file.path:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
+    - '*ShadowSpray.exe*'
+    - '*ShadowSpray.Kerb*'
+    - '*ShadowSpray recovered*'
+    - '*ShadowSpray-master*'
+    - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
+    - '*/ShadowSpray.git*'
+    - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
+    - '*\ShadowSpray\*.cs*'
+    - '*ShadowSpray.Asn1*'
+    - '*ShadowSpray.sln*'
+    - '*ShorSec/ShadowSpray*'
+    - '*/ShadowSpray/*.cs*'
+  - file.target_path:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
+    - '*ShadowSpray.exe*'
+    - '*ShadowSpray.Kerb*'
+    - '*ShadowSpray recovered*'
+    - '*ShadowSpray-master*'
+    - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
+    - '*/ShadowSpray.git*'
+    - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
+    - '*\ShadowSpray\*.cs*'
+    - '*ShadowSpray.Asn1*'
+    - '*ShadowSpray.sln*'
+    - '*ShorSec/ShadowSpray*'
+    - '*/ShadowSpray/*.cs*'
+  - email.attachments.file.name:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
+    - '*ShadowSpray.exe*'
+    - '*ShadowSpray.Kerb*'
+    - '*ShadowSpray recovered*'
+    - '*ShadowSpray-master*'
+    - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
+    - '*/ShadowSpray.git*'
+    - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
+    - '*\ShadowSpray\*.cs*'
+    - '*ShadowSpray.Asn1*'
+    - '*ShadowSpray.sln*'
+    - '*ShorSec/ShadowSpray*'
+    - '*/ShadowSpray/*.cs*'
+  - email.subject:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
+    - '*ShadowSpray.exe*'
+    - '*ShadowSpray.Kerb*'
+    - '*ShadowSpray recovered*'
+    - '*ShadowSpray-master*'
+    - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
+    - '*/ShadowSpray.git*'
+    - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
+    - '*\ShadowSpray\*.cs*'
+    - '*ShadowSpray.Asn1*'
+    - '*ShadowSpray.sln*'
+    - '*ShorSec/ShadowSpray*'
+    - '*/ShadowSpray/*.cs*'
+  - dll.path:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
+    - '*ShadowSpray.exe*'
+    - '*ShadowSpray.Kerb*'
+    - '*ShadowSpray recovered*'
+    - '*ShadowSpray-master*'
+    - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
+    - '*/ShadowSpray.git*'
+    - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
+    - '*\ShadowSpray\*.cs*'
+    - '*ShadowSpray.Asn1*'
+    - '*ShadowSpray.sln*'
+    - '*ShorSec/ShadowSpray*'
+    - '*/ShadowSpray/*.cs*'
+  - device.model.name:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
+    - '*ShadowSpray.exe*'
+    - '*ShadowSpray.Kerb*'
+    - '*ShadowSpray recovered*'
+    - '*ShadowSpray-master*'
+    - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
+    - '*/ShadowSpray.git*'
+    - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
+    - '*\ShadowSpray\*.cs*'
+    - '*ShadowSpray.Asn1*'
+    - '*ShadowSpray.sln*'
+    - '*ShorSec/ShadowSpray*'
+    - '*/ShadowSpray/*.cs*'
+  - container.image.name:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
+    - '*ShadowSpray.exe*'
+    - '*ShadowSpray.Kerb*'
+    - '*ShadowSpray recovered*'
+    - '*ShadowSpray-master*'
+    - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
+    - '*/ShadowSpray.git*'
+    - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
+    - '*\ShadowSpray\*.cs*'
+    - '*ShadowSpray.Asn1*'
+    - '*ShadowSpray.sln*'
+    - '*ShorSec/ShadowSpray*'
+    - '*/ShadowSpray/*.cs*'
+  - container.name:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
+    - '*ShadowSpray.exe*'
+    - '*ShadowSpray.Kerb*'
+    - '*ShadowSpray recovered*'
+    - '*ShadowSpray-master*'
+    - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
+    - '*/ShadowSpray.git*'
+    - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
+    - '*\ShadowSpray\*.cs*'
+    - '*ShadowSpray.Asn1*'
+    - '*ShadowSpray.sln*'
+    - '*ShorSec/ShadowSpray*'
+    - '*/ShadowSpray/*.cs*'
+  - object:
+    - '* - ShadowSpray*'
+    - '*[+] Attack aborted. Exiting*'
+    - '*ShadowSpray.exe*'
+    - '*ShadowSpray.Kerb*'
+    - '*ShadowSpray recovered*'
+    - '*ShadowSpray-master*'
+    - '*7E47D586-DDC6-4382-848C-5CF0798084E1*'
+    - '*/ShadowSpray.git*'
+    - '*CN=ShadowSpray*'
+    - '*Performing recursive ShadowSpray attack*'
+    - '*\ShadowSpray\*.cs*'
+    - '*ShadowSpray.Asn1*'
+    - '*ShadowSpray.sln*'
+    - '*ShorSec/ShadowSpray*'
+    - '*/ShadowSpray/*.cs*'
+  - url:
+    - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
     - '*ShadowSpray.Asn1*'
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    dest_url:
+  - dest_url:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1193,7 +1685,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    uri:
+  - uri:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1201,7 +1693,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    uri_query:
+  - uri_query:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1209,7 +1701,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    query:
+  - query:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1217,7 +1709,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    url_domain:
+  - url_domain:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1225,7 +1717,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    uri_path:
+  - uri_path:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1233,7 +1725,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    domain:
+  - domain:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1241,7 +1733,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    QueryName:
+  - QueryName:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1249,7 +1741,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    QueryResults:
+  - QueryResults:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1257,7 +1749,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    DestinationHostname:
+  - DestinationHostname:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1265,7 +1757,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    DestinationIp:
+  - DestinationIp:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1273,7 +1765,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    http_referrer:
+  - http_referrer:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1281,7 +1773,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    http_referrer_domain:
+  - http_referrer_domain:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1289,7 +1781,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    http_user_agent:
+  - http_user_agent:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1297,7 +1789,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    dest_nt_host:
+  - dest_nt_host:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1305,7 +1797,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    sender:
+  - sender:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1313,7 +1805,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    recipient:
+  - recipient:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1321,7 +1813,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    orig_recipient:
+  - orig_recipient:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1329,7 +1821,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    subject:
+  - subject:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1337,7 +1829,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    url.domain:
+  - url.domain:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1345,7 +1837,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    url.full:
+  - url.full:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1353,7 +1845,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    url.original:
+  - url.original:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1361,7 +1853,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    url.query:
+  - url.query:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1369,7 +1861,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    user_agent.original:
+  - user_agent.original:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1377,7 +1869,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    network.application:
+  - network.application:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1385,7 +1877,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    http.request.body.content:
+  - http.request.body.content:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1393,7 +1885,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    http.request.referrer:
+  - http.request.referrer:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1401,7 +1893,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    email.from.address:
+  - email.from.address:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1409,7 +1901,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    dns.question.name:
+  - dns.question.name:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1417,7 +1909,7 @@ detection:
     - '*ShadowSpray.sln*'
     - '*ShorSec/ShadowSpray*'
     - '*/ShadowSpray/*.cs*'
-    destination.domain:
+  - destination.domain:
     - '*ShadowSpray.exe*'
     - '*ShadowSpray-master*'
     - '*/ShadowSpray.git*'
@@ -1450,6 +1942,7 @@ fields:
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -1457,10 +1950,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -1502,15 +1997,30 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
 - url
 - dest_url
@@ -1543,3 +2053,6 @@ fields:
 - email.from.address
 - dns.question.name
 - destination.domain
+falsepositives:
+- unknown
+level: medium

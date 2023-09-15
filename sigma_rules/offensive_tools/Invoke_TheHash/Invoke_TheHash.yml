@@ -1,11 +1,7 @@
 title: Simple keyword detection rule for Invoke-TheHash
 id: c7b8bc5b-aeca-42fb-96ad-1b6092e1427a
 status: experimental
-description:
-- '''Invoke-TheHash contains PowerShell functions for performing pass the hash WMI
-  and SMB tasks. WMI and SMB connections are accessed through the .NET TCPClient.
-  Authentication is performed by passing an NTLM hash into the NTLMv2 authentication
-  protocol. Local administrator privilege is not required client-side.'''
+description: Detects interesting keywords based on Invoke-TheHash tool
 references:
 - https://github.com/Kevin-Robertson/Invoke-TheHash
 author: '@mthcht'
@@ -23,33 +19,9 @@ logsource:
   category:
   - endpoint
   - network
-falsepositives:
-- Unknown
-level:
-- critical
 detection:
   selection:
-    Image:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    OriginalFileName:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    CurrentDirectory:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    ParentImage:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    ParentCommandLine:
+  - Image:
     - '*Invoke-TheHash*'
     - '*Invoke-TheHash.ps1*'
     - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
@@ -58,42 +30,7 @@ detection:
     - '*Invoke-TheHash.psd1*'
     - '*Invoke-TheHash.psm1*'
     - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
-    TargetFilename:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    Signature:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    signature:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    ImageLoaded:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    Company:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    Description:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    description:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    CommandLine:
+  - OriginalFileName:
     - '*Invoke-TheHash*'
     - '*Invoke-TheHash.ps1*'
     - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
@@ -102,27 +39,7 @@ detection:
     - '*Invoke-TheHash.psd1*'
     - '*Invoke-TheHash.psm1*'
     - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
-    SourceImage:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    TargetImage:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    CallTrace:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    TargetObject:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    Details:
+  - CurrentDirectory:
     - '*Invoke-TheHash*'
     - '*Invoke-TheHash.ps1*'
     - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
@@ -131,212 +48,7 @@ detection:
     - '*Invoke-TheHash.psd1*'
     - '*Invoke-TheHash.psm1*'
     - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
-    PipeName:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    Consumer:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    Destination:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    Name:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    Query:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    NewName:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    StartAddress:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    StartModule:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    StartFunction:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    SourceHostname:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    Device:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    file_name:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    file_path:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    process:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    original_file_name:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    parent_process:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    process_path:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    service_path:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    registry_path:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    registry_value_data:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    registry_value_name:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    ContextInfo:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    Payload:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    ScriptBlockText:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    ServerName:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    TransportName:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    NewProcessName:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    ParentProcessName:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    Application:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    Product Name:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    Threat Name:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    Process Name:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    Path:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    ImagePath:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    ServiceName:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    ProcessPath:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    AppName:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    AppPath:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    ModulePath:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    registry.data.strings:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    registry.path:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    registry.value:
+  - ParentImage:
     - '*Invoke-TheHash*'
     - '*Invoke-TheHash.ps1*'
     - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
@@ -345,7 +57,7 @@ detection:
     - '*Invoke-TheHash.psd1*'
     - '*Invoke-TheHash.psm1*'
     - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
-    process.args:
+  - ParentCommandLine:
     - '*Invoke-TheHash*'
     - '*Invoke-TheHash.ps1*'
     - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
@@ -354,7 +66,7 @@ detection:
     - '*Invoke-TheHash.psd1*'
     - '*Invoke-TheHash.psm1*'
     - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
-    process.command_line:
+  - TargetFilename:
     - '*Invoke-TheHash*'
     - '*Invoke-TheHash.ps1*'
     - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
@@ -363,7 +75,7 @@ detection:
     - '*Invoke-TheHash.psd1*'
     - '*Invoke-TheHash.psm1*'
     - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
-    process.env_vars:
+  - Signature:
     - '*Invoke-TheHash*'
     - '*Invoke-TheHash.ps1*'
     - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
@@ -372,7 +84,7 @@ detection:
     - '*Invoke-TheHash.psd1*'
     - '*Invoke-TheHash.psm1*'
     - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
-    process.io.text:
+  - signature:
     - '*Invoke-TheHash*'
     - '*Invoke-TheHash.ps1*'
     - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
@@ -381,17 +93,7 @@ detection:
     - '*Invoke-TheHash.psd1*'
     - '*Invoke-TheHash.psm1*'
     - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
-    process.executable:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    process.name:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    process.title:
+  - ImageLoaded:
     - '*Invoke-TheHash*'
     - '*Invoke-TheHash.ps1*'
     - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
@@ -400,7 +102,7 @@ detection:
     - '*Invoke-TheHash.psd1*'
     - '*Invoke-TheHash.psm1*'
     - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
-    pe.company:
+  - Company:
     - '*Invoke-TheHash*'
     - '*Invoke-TheHash.ps1*'
     - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
@@ -409,7 +111,7 @@ detection:
     - '*Invoke-TheHash.psd1*'
     - '*Invoke-TheHash.psm1*'
     - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
-    pe.description:
+  - Description:
     - '*Invoke-TheHash*'
     - '*Invoke-TheHash.ps1*'
     - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
@@ -418,12 +120,7 @@ detection:
     - '*Invoke-TheHash.psd1*'
     - '*Invoke-TheHash.psm1*'
     - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
-    pe.original_file_name:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    pe.product:
+  - description:
     - '*Invoke-TheHash*'
     - '*Invoke-TheHash.ps1*'
     - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
@@ -432,7 +129,7 @@ detection:
     - '*Invoke-TheHash.psd1*'
     - '*Invoke-TheHash.psm1*'
     - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
-    os.full:
+  - CommandLine:
     - '*Invoke-TheHash*'
     - '*Invoke-TheHash.ps1*'
     - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
@@ -441,7 +138,7 @@ detection:
     - '*Invoke-TheHash.psd1*'
     - '*Invoke-TheHash.psm1*'
     - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
-    host.hostname:
+  - SourceImage:
     - '*Invoke-TheHash*'
     - '*Invoke-TheHash.ps1*'
     - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
@@ -450,32 +147,7 @@ detection:
     - '*Invoke-TheHash.psd1*'
     - '*Invoke-TheHash.psm1*'
     - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
-    file.fork_name:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    file.name:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    file.path:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    file.target_path:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    email.attachments.file.name:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    email.subject:
+  - TargetImage:
     - '*Invoke-TheHash*'
     - '*Invoke-TheHash.ps1*'
     - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
@@ -484,12 +156,7 @@ detection:
     - '*Invoke-TheHash.psd1*'
     - '*Invoke-TheHash.psm1*'
     - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
-    dll.path:
-    - '*Invoke-TheHash*'
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    device.model.name:
+  - CallTrace:
     - '*Invoke-TheHash*'
     - '*Invoke-TheHash.ps1*'
     - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
@@ -498,7 +165,7 @@ detection:
     - '*Invoke-TheHash.psd1*'
     - '*Invoke-TheHash.psm1*'
     - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
-    container.image.name:
+  - TargetObject:
     - '*Invoke-TheHash*'
     - '*Invoke-TheHash.ps1*'
     - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
@@ -507,7 +174,7 @@ detection:
     - '*Invoke-TheHash.psd1*'
     - '*Invoke-TheHash.psm1*'
     - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
-    container.name:
+  - Details:
     - '*Invoke-TheHash*'
     - '*Invoke-TheHash.ps1*'
     - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
@@ -516,140 +183,895 @@ detection:
     - '*Invoke-TheHash.psd1*'
     - '*Invoke-TheHash.psm1*'
     - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
-    object:
+  - PipeName:
     - '*Invoke-TheHash*'
     - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    url:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    dest_url:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    uri:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    uri_query:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    query:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    url_domain:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    uri_path:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    domain:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    QueryName:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    QueryResults:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    DestinationHostname:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    DestinationIp:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    http_referrer:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    http_referrer_domain:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    http_user_agent:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    dest_nt_host:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    sender:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    recipient:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    orig_recipient:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    subject:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    url.domain:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    url.full:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    url.original:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    url.query:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    user_agent.original:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    network.application:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    http.request.body.content:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    http.request.referrer:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    email.from.address:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    dns.question.name:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    destination.domain:
-    - '*Invoke-TheHash.ps1*'
-    - '*Invoke-TheHash.psd1*'
-    - '*Invoke-TheHash.psm1*'
-    event.original:
     - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
     - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
     - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
     - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - Consumer:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - Destination:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - Name:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - Query:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - NewName:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - StartAddress:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - StartModule:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - StartFunction:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - SourceHostname:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - Device:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - file_name:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - file_path:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - process:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - original_file_name:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - parent_process:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - process_path:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - service_path:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - registry_path:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - registry_value_data:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - registry_value_name:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - ContextInfo:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - Payload:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - ScriptBlockText:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - ServerName:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - TransportName:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - NewProcessName:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - ParentProcessName:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - Application:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - Product Name:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - Threat Name:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - Process Name:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - Path:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - ImagePath:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - ServiceName:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - ProcessPath:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - AppName:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - AppPath:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - ModulePath:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - registry.data.strings:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - registry.path:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - registry.value:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - process.args:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - process.command_line:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - process.env_vars:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - process.io.text:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - process.executable:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - process.name:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - process.title:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - pe.company:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - pe.description:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - pe.original_file_name:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - pe.product:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - os.full:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - host.hostname:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - file.fork_name:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - file.name:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - file.path:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - file.target_path:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - email.attachments.file.name:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - email.subject:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - dll.path:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - device.model.name:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - container.image.name:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - container.name:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - object:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - ParentCommandLine:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - CommandLine:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - Details:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - registry.value:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - process.args:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - process.command_line:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - process.env_vars:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - process.io.text:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - process.title:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - pe.company:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - pe.description:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - pe.product:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - os.full:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - host.hostname:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - event.original:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - email.subject:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - device.model.name:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - container.image.name:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - container.name:
+    - '*Invoke-TheHash*'
+    - '*Invoke-TheHash.ps1*'
+    - '* -Type WMIExec -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBEnum -Target * -TargetExclude * -Username * -Hash *'
+    - '* -Type SMBExec -Target * -TargetExclude * -Username * -Hash *'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+    - '* -Type SMBClient -Target * -TargetExclude * -Username * -Hash *'
+  - url:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - dest_url:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - uri:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - uri_query:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - query:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - url_domain:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - uri_path:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - domain:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - QueryName:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - QueryResults:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - DestinationHostname:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - DestinationIp:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - http_referrer:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - http_referrer_domain:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - http_user_agent:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - dest_nt_host:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - sender:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - recipient:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - orig_recipient:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - subject:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - url.domain:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - url.full:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - url.original:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - url.query:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - user_agent.original:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - network.application:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - http.request.body.content:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - http.request.referrer:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - email.from.address:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - dns.question.name:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
+  - destination.domain:
+    - '*Invoke-TheHash.ps1*'
+    - '*Invoke-TheHash.psd1*'
+    - '*Invoke-TheHash.psm1*'
   condition: selection
 fields:
 - Image
@@ -736,6 +1158,25 @@ fields:
 - container.image.name
 - container.name
 - object
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
 - url
 - dest_url
 - uri
@@ -767,4 +1208,6 @@ fields:
 - email.from.address
 - dns.question.name
 - destination.domain
-- event.original
+falsepositives:
+- unknown
+level: medium

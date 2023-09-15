@@ -1,14 +1,9 @@
 title: Simple keyword detection rule for findstr
 id: 89c97ea9-a465-4620-8556-b6b9a38e0f42
 status: experimental
-description:
-- '''findstr used to find credentials'''
-- '''findstr used to find lsass pid in order to dump lsass process'''
-- '''linux commands abused by attackers - gpp finder'''
-- '''linux commands abused by attackers'''
+description: Detects interesting keywords based on findstr tool
 references:
 - https://github.com/gabriellandau/PPLFault
-- N/A
 author: '@mthcht'
 date: 2023/07/30
 modified: 2023/09/15
@@ -47,13 +42,9 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
@@ -62,7 +53,7 @@ detection:
     - '*findstr *password*'
     - '*findstr lsass*'
     - '*findstr *BEGIN CERTIFICATE*'
-    CommandLine:
+  - CommandLine:
     - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
@@ -71,7 +62,7 @@ detection:
     - '*findstr *password*'
     - '*findstr lsass*'
     - '*findstr *BEGIN CERTIFICATE*'
-    Details:
+  - Details:
     - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
@@ -80,7 +71,7 @@ detection:
     - '*findstr *password*'
     - '*findstr lsass*'
     - '*findstr *BEGIN CERTIFICATE*'
-    registry.value:
+  - registry.value:
     - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
@@ -89,7 +80,7 @@ detection:
     - '*findstr *password*'
     - '*findstr lsass*'
     - '*findstr *BEGIN CERTIFICATE*'
-    process.args:
+  - process.args:
     - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
@@ -98,7 +89,7 @@ detection:
     - '*findstr *password*'
     - '*findstr lsass*'
     - '*findstr *BEGIN CERTIFICATE*'
-    process.command_line:
+  - process.command_line:
     - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
@@ -107,7 +98,7 @@ detection:
     - '*findstr *password*'
     - '*findstr lsass*'
     - '*findstr *BEGIN CERTIFICATE*'
-    process.env_vars:
+  - process.env_vars:
     - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
@@ -116,7 +107,7 @@ detection:
     - '*findstr *password*'
     - '*findstr lsass*'
     - '*findstr *BEGIN CERTIFICATE*'
-    process.io.text:
+  - process.io.text:
     - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
@@ -125,7 +116,7 @@ detection:
     - '*findstr *password*'
     - '*findstr lsass*'
     - '*findstr *BEGIN CERTIFICATE*'
-    process.title:
+  - process.title:
     - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
@@ -134,7 +125,7 @@ detection:
     - '*findstr *password*'
     - '*findstr lsass*'
     - '*findstr *BEGIN CERTIFICATE*'
-    pe.company:
+  - pe.company:
     - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
@@ -143,7 +134,7 @@ detection:
     - '*findstr *password*'
     - '*findstr lsass*'
     - '*findstr *BEGIN CERTIFICATE*'
-    pe.description:
+  - pe.description:
     - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
@@ -152,7 +143,7 @@ detection:
     - '*findstr *password*'
     - '*findstr lsass*'
     - '*findstr *BEGIN CERTIFICATE*'
-    pe.product:
+  - pe.product:
     - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
@@ -161,7 +152,7 @@ detection:
     - '*findstr *password*'
     - '*findstr lsass*'
     - '*findstr *BEGIN CERTIFICATE*'
-    os.full:
+  - os.full:
     - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
@@ -170,7 +161,7 @@ detection:
     - '*findstr *password*'
     - '*findstr lsass*'
     - '*findstr *BEGIN CERTIFICATE*'
-    host.hostname:
+  - host.hostname:
     - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
@@ -179,12 +170,7 @@ detection:
     - '*findstr *password*'
     - '*findstr lsass*'
     - '*findstr *BEGIN CERTIFICATE*'
-    event.original:
-    - '*findstr *net use*'
-    - '*findstr /si secret *.docx*'
-    - '*findstr *cpassword *\sysvol\*.xml*'
-    - '*findstr *BEGIN CERTIFICATE*'
-    email.subject:
+  - event.original:
     - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
@@ -193,7 +179,7 @@ detection:
     - '*findstr *password*'
     - '*findstr lsass*'
     - '*findstr *BEGIN CERTIFICATE*'
-    device.model.name:
+  - email.subject:
     - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
@@ -202,7 +188,7 @@ detection:
     - '*findstr *password*'
     - '*findstr lsass*'
     - '*findstr *BEGIN CERTIFICATE*'
-    container.image.name:
+  - device.model.name:
     - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
@@ -211,7 +197,7 @@ detection:
     - '*findstr *password*'
     - '*findstr lsass*'
     - '*findstr *BEGIN CERTIFICATE*'
-    container.name:
+  - container.image.name:
     - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
@@ -220,336 +206,771 @@ detection:
     - '*findstr *password*'
     - '*findstr lsass*'
     - '*findstr *BEGIN CERTIFICATE*'
-    Image:
+  - container.name:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    OriginalFileName:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - Image:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    CurrentDirectory:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - OriginalFileName:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    ParentImage:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - CurrentDirectory:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    TargetFilename:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - ParentImage:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    Signature:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - ParentCommandLine:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    signature:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - TargetFilename:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    ImageLoaded:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - Signature:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    Company:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - signature:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    Description:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - ImageLoaded:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    description:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - Company:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    SourceImage:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - Description:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    TargetImage:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - description:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    CallTrace:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - CommandLine:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    TargetObject:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - SourceImage:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    PipeName:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - TargetImage:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    Consumer:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - CallTrace:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    Destination:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - TargetObject:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    Name:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - Details:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    Query:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - PipeName:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    NewName:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - Consumer:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    StartAddress:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - Destination:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    StartModule:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - Name:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    StartFunction:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - Query:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    SourceHostname:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - NewName:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    Device:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - StartAddress:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    file_name:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - StartModule:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    file_path:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - StartFunction:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    process:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - SourceHostname:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    original_file_name:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - Device:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    parent_process:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - file_name:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    process_path:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - file_path:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    service_path:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - process:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    registry_path:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - original_file_name:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    registry_value_data:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - parent_process:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    registry_value_name:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - process_path:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    ContextInfo:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - service_path:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    Payload:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - registry_path:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    ScriptBlockText:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - registry_value_data:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    ServerName:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - registry_value_name:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    TransportName:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - ContextInfo:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    NewProcessName:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - Payload:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    ParentProcessName:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - ScriptBlockText:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    Application:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - ServerName:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    Product Name:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - TransportName:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    Threat Name:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - NewProcessName:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    Process Name:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - ParentProcessName:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    Path:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - Application:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    ImagePath:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - Product Name:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    ServiceName:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - Threat Name:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    ProcessPath:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - Process Name:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    AppName:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - Path:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    AppPath:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - ImagePath:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    ModulePath:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - ServiceName:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    registry.data.strings:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - ProcessPath:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    registry.path:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - AppName:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    process.executable:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - AppPath:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    process.name:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - ModulePath:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    pe.original_file_name:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - registry.data.strings:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    file.fork_name:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - registry.path:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    file.name:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - registry.value:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    file.path:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - process.args:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    file.target_path:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - process.command_line:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    email.attachments.file.name:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - process.env_vars:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    dll.path:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - process.io.text:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
-    object:
+    - '*findstr *BEGIN CERTIFICATE*'
+  - process.executable:
+    - '*findstr *net use*'
     - '*findstr *confidential*'
     - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
     - '*findstr *password*'
     - '*findstr lsass*'
+    - '*findstr *BEGIN CERTIFICATE*'
+  - process.name:
+    - '*findstr *net use*'
+    - '*findstr *confidential*'
+    - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
+    - '*findstr *password*'
+    - '*findstr lsass*'
+    - '*findstr *BEGIN CERTIFICATE*'
+  - process.title:
+    - '*findstr *net use*'
+    - '*findstr *confidential*'
+    - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
+    - '*findstr *password*'
+    - '*findstr lsass*'
+    - '*findstr *BEGIN CERTIFICATE*'
+  - pe.company:
+    - '*findstr *net use*'
+    - '*findstr *confidential*'
+    - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
+    - '*findstr *password*'
+    - '*findstr lsass*'
+    - '*findstr *BEGIN CERTIFICATE*'
+  - pe.description:
+    - '*findstr *net use*'
+    - '*findstr *confidential*'
+    - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
+    - '*findstr *password*'
+    - '*findstr lsass*'
+    - '*findstr *BEGIN CERTIFICATE*'
+  - pe.original_file_name:
+    - '*findstr *net use*'
+    - '*findstr *confidential*'
+    - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
+    - '*findstr *password*'
+    - '*findstr lsass*'
+    - '*findstr *BEGIN CERTIFICATE*'
+  - pe.product:
+    - '*findstr *net use*'
+    - '*findstr *confidential*'
+    - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
+    - '*findstr *password*'
+    - '*findstr lsass*'
+    - '*findstr *BEGIN CERTIFICATE*'
+  - os.full:
+    - '*findstr *net use*'
+    - '*findstr *confidential*'
+    - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
+    - '*findstr *password*'
+    - '*findstr lsass*'
+    - '*findstr *BEGIN CERTIFICATE*'
+  - host.hostname:
+    - '*findstr *net use*'
+    - '*findstr *confidential*'
+    - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
+    - '*findstr *password*'
+    - '*findstr lsass*'
+    - '*findstr *BEGIN CERTIFICATE*'
+  - file.fork_name:
+    - '*findstr *net use*'
+    - '*findstr *confidential*'
+    - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
+    - '*findstr *password*'
+    - '*findstr lsass*'
+    - '*findstr *BEGIN CERTIFICATE*'
+  - file.name:
+    - '*findstr *net use*'
+    - '*findstr *confidential*'
+    - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
+    - '*findstr *password*'
+    - '*findstr lsass*'
+    - '*findstr *BEGIN CERTIFICATE*'
+  - file.path:
+    - '*findstr *net use*'
+    - '*findstr *confidential*'
+    - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
+    - '*findstr *password*'
+    - '*findstr lsass*'
+    - '*findstr *BEGIN CERTIFICATE*'
+  - file.target_path:
+    - '*findstr *net use*'
+    - '*findstr *confidential*'
+    - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
+    - '*findstr *password*'
+    - '*findstr lsass*'
+    - '*findstr *BEGIN CERTIFICATE*'
+  - email.attachments.file.name:
+    - '*findstr *net use*'
+    - '*findstr *confidential*'
+    - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
+    - '*findstr *password*'
+    - '*findstr lsass*'
+    - '*findstr *BEGIN CERTIFICATE*'
+  - email.subject:
+    - '*findstr *net use*'
+    - '*findstr *confidential*'
+    - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
+    - '*findstr *password*'
+    - '*findstr lsass*'
+    - '*findstr *BEGIN CERTIFICATE*'
+  - dll.path:
+    - '*findstr *net use*'
+    - '*findstr *confidential*'
+    - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
+    - '*findstr *password*'
+    - '*findstr lsass*'
+    - '*findstr *BEGIN CERTIFICATE*'
+  - device.model.name:
+    - '*findstr *net use*'
+    - '*findstr *confidential*'
+    - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
+    - '*findstr *password*'
+    - '*findstr lsass*'
+    - '*findstr *BEGIN CERTIFICATE*'
+  - container.image.name:
+    - '*findstr *net use*'
+    - '*findstr *confidential*'
+    - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
+    - '*findstr *password*'
+    - '*findstr lsass*'
+    - '*findstr *BEGIN CERTIFICATE*'
+  - container.name:
+    - '*findstr *net use*'
+    - '*findstr *confidential*'
+    - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
+    - '*findstr *password*'
+    - '*findstr lsass*'
+    - '*findstr *BEGIN CERTIFICATE*'
+  - object:
+    - '*findstr *net use*'
+    - '*findstr *confidential*'
+    - '*findstr *vnc.ini*'
+    - '*findstr /si secret *.docx*'
+    - '*findstr *cpassword *\sysvol\*.xml*'
+    - '*findstr *password*'
+    - '*findstr lsass*'
+    - '*findstr *BEGIN CERTIFICATE*'
   condition: selection
 fields:
 - ParentCommandLine
@@ -575,6 +996,7 @@ fields:
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -582,10 +1004,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -627,13 +1051,31 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
+falsepositives:
+- unknown
+level: medium

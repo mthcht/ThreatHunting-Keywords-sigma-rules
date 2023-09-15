@@ -1,12 +1,9 @@
 title: Simple keyword detection rule for unset
 id: a8e6c72d-f475-4c9c-99a6-aa9c3ce93b5d
 status: experimental
-description:
-- '''disable history logging'''
-- '''linux commands abused by attackers'''
+description: Detects interesting keywords based on unset tool
 references:
 - https://github.com/hak5/omg-payloads/tree/master/payloads/library/credentials/OMGLogger
-- N/A
 author: '@mthcht'
 date: 2023/07/30
 modified: 2023/09/15
@@ -42,263 +39,379 @@ logsource:
   category:
   - endpoint
   - network
-falsepositives:
-- Unknown
-level:
-- high
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    CommandLine:
+  - CommandLine:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    Details:
+  - Details:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    registry.value:
+  - registry.value:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    process.args:
+  - process.args:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    process.command_line:
+  - process.command_line:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    process.env_vars:
+  - process.env_vars:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    process.io.text:
+  - process.io.text:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    process.title:
+  - process.title:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    pe.company:
+  - pe.company:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    pe.description:
+  - pe.description:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    pe.product:
+  - pe.product:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    os.full:
+  - os.full:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    host.hostname:
+  - host.hostname:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    event.original:
-    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    email.subject:
+  - event.original:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    device.model.name:
+  - email.subject:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    container.image.name:
+  - device.model.name:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    container.name:
+  - container.image.name:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    url:
+  - container.name:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    dest_url:
+    - '*unset HISTFILE*'
+  - Image:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    uri:
+    - '*unset HISTFILE*'
+  - OriginalFileName:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    uri_query:
+    - '*unset HISTFILE*'
+  - CurrentDirectory:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    query:
+    - '*unset HISTFILE*'
+  - ParentImage:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    url_domain:
+    - '*unset HISTFILE*'
+  - ParentCommandLine:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    uri_path:
+    - '*unset HISTFILE*'
+  - TargetFilename:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    domain:
+    - '*unset HISTFILE*'
+  - Signature:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    QueryName:
+    - '*unset HISTFILE*'
+  - signature:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    QueryResults:
+    - '*unset HISTFILE*'
+  - ImageLoaded:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    DestinationHostname:
+    - '*unset HISTFILE*'
+  - Company:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    DestinationIp:
+    - '*unset HISTFILE*'
+  - Description:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    http_referrer:
+    - '*unset HISTFILE*'
+  - description:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    http_referrer_domain:
+    - '*unset HISTFILE*'
+  - CommandLine:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    http_user_agent:
+    - '*unset HISTFILE*'
+  - SourceImage:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    dest_nt_host:
+    - '*unset HISTFILE*'
+  - TargetImage:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    sender:
+    - '*unset HISTFILE*'
+  - CallTrace:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    recipient:
+    - '*unset HISTFILE*'
+  - TargetObject:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    orig_recipient:
+    - '*unset HISTFILE*'
+  - Details:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    subject:
+    - '*unset HISTFILE*'
+  - PipeName:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    url.domain:
+    - '*unset HISTFILE*'
+  - Consumer:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    url.full:
+    - '*unset HISTFILE*'
+  - Destination:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    url.original:
+    - '*unset HISTFILE*'
+  - Name:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    url.query:
+    - '*unset HISTFILE*'
+  - Query:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    user_agent.original:
+    - '*unset HISTFILE*'
+  - NewName:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    network.application:
+    - '*unset HISTFILE*'
+  - StartAddress:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    http.request.body.content:
+    - '*unset HISTFILE*'
+  - StartModule:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    http.request.referrer:
+    - '*unset HISTFILE*'
+  - StartFunction:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    email.from.address:
+    - '*unset HISTFILE*'
+  - SourceHostname:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    dns.question.name:
+    - '*unset HISTFILE*'
+  - Device:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    destination.domain:
+    - '*unset HISTFILE*'
+  - file_name:
     - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
-    Image:
     - '*unset HISTFILE*'
-    OriginalFileName:
+  - file_path:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    CurrentDirectory:
+  - process:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    ParentImage:
+  - original_file_name:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    TargetFilename:
+  - parent_process:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    Signature:
+  - process_path:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    signature:
+  - service_path:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    ImageLoaded:
+  - registry_path:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    Company:
+  - registry_value_data:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    Description:
+  - registry_value_name:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    description:
+  - ContextInfo:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    SourceImage:
+  - Payload:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    TargetImage:
+  - ScriptBlockText:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    CallTrace:
+  - ServerName:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    TargetObject:
+  - TransportName:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    PipeName:
+  - NewProcessName:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    Consumer:
+  - ParentProcessName:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    Destination:
+  - Application:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    Name:
+  - Product Name:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    Query:
+  - Threat Name:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    NewName:
+  - Process Name:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    StartAddress:
+  - Path:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    StartModule:
+  - ImagePath:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    StartFunction:
+  - ServiceName:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    SourceHostname:
+  - ProcessPath:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    Device:
+  - AppName:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    file_name:
+  - AppPath:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    file_path:
+  - ModulePath:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    process:
+  - registry.data.strings:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    original_file_name:
+  - registry.path:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    parent_process:
+  - registry.value:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    process_path:
+  - process.args:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    service_path:
+  - process.command_line:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    registry_path:
+  - process.env_vars:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
     - '*unset HISTFILE*'
-    registry_value_data:
-    - '*unset HISTFILE*'
-    registry_value_name:
-    - '*unset HISTFILE*'
-    ContextInfo:
-    - '*unset HISTFILE*'
-    Payload:
-    - '*unset HISTFILE*'
-    ScriptBlockText:
-    - '*unset HISTFILE*'
-    ServerName:
-    - '*unset HISTFILE*'
-    TransportName:
-    - '*unset HISTFILE*'
-    NewProcessName:
-    - '*unset HISTFILE*'
-    ParentProcessName:
-    - '*unset HISTFILE*'
-    Application:
-    - '*unset HISTFILE*'
-    Product Name:
-    - '*unset HISTFILE*'
-    Threat Name:
-    - '*unset HISTFILE*'
-    Process Name:
-    - '*unset HISTFILE*'
-    Path:
-    - '*unset HISTFILE*'
-    ImagePath:
-    - '*unset HISTFILE*'
-    ServiceName:
-    - '*unset HISTFILE*'
-    ProcessPath:
-    - '*unset HISTFILE*'
-    AppName:
-    - '*unset HISTFILE*'
-    AppPath:
-    - '*unset HISTFILE*'
-    ModulePath:
-    - '*unset HISTFILE*'
-    registry.data.strings:
-    - '*unset HISTFILE*'
-    registry.path:
-    - '*unset HISTFILE*'
-    process.executable:
-    - '*unset HISTFILE*'
-    process.name:
-    - '*unset HISTFILE*'
-    pe.original_file_name:
-    - '*unset HISTFILE*'
-    file.fork_name:
-    - '*unset HISTFILE*'
-    file.name:
-    - '*unset HISTFILE*'
-    file.path:
-    - '*unset HISTFILE*'
-    file.target_path:
-    - '*unset HISTFILE*'
-    email.attachments.file.name:
-    - '*unset HISTFILE*'
-    dll.path:
-    - '*unset HISTFILE*'
-    object:
-    - '*unset HISTFILE*'
+  - process.io.text:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - process.executable:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - process.name:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - process.title:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - pe.company:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - pe.description:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - pe.original_file_name:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - pe.product:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - os.full:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - host.hostname:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - file.fork_name:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - file.name:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - file.path:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - file.target_path:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - email.attachments.file.name:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - email.subject:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - dll.path:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - device.model.name:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - container.image.name:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - container.name:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - object:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+    - '*unset HISTFILE*'
+  - url:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - dest_url:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - uri:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - uri_query:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - query:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - url_domain:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - uri_path:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - domain:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - QueryName:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - QueryResults:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - DestinationHostname:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - DestinationIp:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - http_referrer:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - http_referrer_domain:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - http_user_agent:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - dest_nt_host:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - sender:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - recipient:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - orig_recipient:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - subject:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - url.domain:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - url.full:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - url.original:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - url.query:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - user_agent.original:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - network.application:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - http.request.body.content:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - http.request.referrer:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - email.from.address:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - dns.question.name:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
+  - destination.domain:
+    - '*unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE*'
   condition: selection
 fields:
 - ParentCommandLine
@@ -320,41 +433,11 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
-- url
-- dest_url
-- uri
-- uri_query
-- query
-- url_domain
-- uri_path
-- domain
-- QueryName
-- QueryResults
-- DestinationHostname
-- DestinationIp
-- http_referrer
-- http_referrer_domain
-- http_user_agent
-- dest_nt_host
-- sender
-- recipient
-- orig_recipient
-- subject
-- url.domain
-- url.full
-- url.original
-- url.query
-- user_agent.original
-- network.application
-- http.request.body.content
-- http.request.referrer
-- email.from.address
-- dns.question.name
-- destination.domain
 - Image
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -362,10 +445,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -407,13 +492,62 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
+- url
+- dest_url
+- uri
+- uri_query
+- query
+- url_domain
+- uri_path
+- domain
+- QueryName
+- QueryResults
+- DestinationHostname
+- DestinationIp
+- http_referrer
+- http_referrer_domain
+- http_user_agent
+- dest_nt_host
+- sender
+- recipient
+- orig_recipient
+- subject
+- url.domain
+- url.full
+- url.original
+- url.query
+- user_agent.original
+- network.application
+- http.request.body.content
+- http.request.referrer
+- email.from.address
+- dns.question.name
+- destination.domain
+falsepositives:
+- unknown
+level: medium

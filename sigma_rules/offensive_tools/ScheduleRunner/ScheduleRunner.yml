@@ -1,9 +1,7 @@
 title: Simple keyword detection rule for ScheduleRunner
 id: 91f006d8-2317-4794-9061-605b0e1ba481
 status: experimental
-description:
-- '''A C# tool with more flexibility to customize scheduled task for both persistence
-  and lateral movement in red team operation'''
+description: Detects interesting keywords based on ScheduleRunner tool
 references:
 - https://github.com/netero1010/ScheduleRunner
 author: '@mthcht'
@@ -16,622 +14,880 @@ logsource:
   category:
   - endpoint
   - network
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
       /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    CommandLine:
+  - CommandLine:
     - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
       /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    Details:
+  - Details:
     - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
       /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    registry.value:
+  - registry.value:
     - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
       /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    process.args:
+  - process.args:
     - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
       /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    process.command_line:
+  - process.command_line:
     - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
       /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    process.env_vars:
+  - process.env_vars:
     - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
       /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    process.io.text:
+  - process.io.text:
     - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
       /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    process.title:
+  - process.title:
     - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
       /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    pe.company:
+  - pe.company:
     - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
       /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    pe.description:
+  - pe.description:
     - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
       /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    pe.product:
+  - pe.product:
     - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
       /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    os.full:
+  - os.full:
     - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
       /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    host.hostname:
+  - host.hostname:
     - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
       /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    event.original:
-    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
-      /remoteserver:*'
-    email.subject:
+  - event.original:
     - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
       /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    device.model.name:
+  - email.subject:
     - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
       /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    container.image.name:
+  - device.model.name:
     - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
       /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    container.name:
+  - container.image.name:
     - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
       /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    Image:
+  - container.name:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    OriginalFileName:
+  - Image:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    CurrentDirectory:
+  - OriginalFileName:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    ParentImage:
+  - CurrentDirectory:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    TargetFilename:
+  - ParentImage:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    Signature:
+  - ParentCommandLine:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    signature:
+  - TargetFilename:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    ImageLoaded:
+  - Signature:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    Company:
+  - signature:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    Description:
+  - ImageLoaded:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    description:
+  - Company:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    SourceImage:
+  - Description:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    TargetImage:
+  - description:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    CallTrace:
+  - CommandLine:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    TargetObject:
+  - SourceImage:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    PipeName:
+  - TargetImage:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    Consumer:
+  - CallTrace:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    Destination:
+  - TargetObject:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    Name:
+  - Details:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    Query:
+  - PipeName:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    NewName:
+  - Consumer:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    StartAddress:
+  - Destination:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    StartModule:
+  - Name:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    StartFunction:
+  - Query:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    SourceHostname:
+  - NewName:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    Device:
+  - StartAddress:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    file_name:
+  - StartModule:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    file_path:
+  - StartFunction:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    process:
+  - SourceHostname:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    original_file_name:
+  - Device:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    parent_process:
+  - file_name:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    process_path:
+  - file_path:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    service_path:
+  - process:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    registry_path:
+  - original_file_name:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    registry_value_data:
+  - parent_process:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    registry_value_name:
+  - process_path:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    ContextInfo:
+  - service_path:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    Payload:
+  - registry_path:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    ScriptBlockText:
+  - registry_value_data:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    ServerName:
+  - registry_value_name:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    TransportName:
+  - ContextInfo:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    NewProcessName:
+  - Payload:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    ParentProcessName:
+  - ScriptBlockText:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    Application:
+  - ServerName:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    Product Name:
+  - TransportName:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    Threat Name:
+  - NewProcessName:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    Process Name:
+  - ParentProcessName:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    Path:
+  - Application:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    ImagePath:
+  - Product Name:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    ServiceName:
+  - Threat Name:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    ProcessPath:
+  - Process Name:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    AppName:
+  - Path:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    AppPath:
+  - ImagePath:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    ModulePath:
+  - ServiceName:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    registry.data.strings:
+  - ProcessPath:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    registry.path:
+  - AppName:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    process.executable:
+  - AppPath:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    process.name:
+  - ModulePath:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    pe.original_file_name:
+  - registry.data.strings:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    file.fork_name:
+  - registry.path:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    file.name:
+  - registry.value:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    file.path:
+  - process.args:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    file.target_path:
+  - process.command_line:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    email.attachments.file.name:
+  - process.env_vars:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    dll.path:
+  - process.io.text:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    object:
+  - process.executable:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    url:
+  - process.name:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    dest_url:
+  - process.title:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    uri:
+  - pe.company:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    uri_query:
+  - pe.description:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    query:
+  - pe.original_file_name:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    url_domain:
+  - pe.product:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    uri_path:
+  - os.full:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    domain:
+  - host.hostname:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    QueryName:
+  - file.fork_name:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    QueryResults:
+  - file.name:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    DestinationHostname:
+  - file.path:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    DestinationIp:
+  - file.target_path:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    http_referrer:
+  - email.attachments.file.name:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    http_referrer_domain:
+  - email.subject:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    http_user_agent:
+  - dll.path:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    dest_nt_host:
+  - device.model.name:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    sender:
+  - container.image.name:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    recipient:
+  - container.name:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    orig_recipient:
+  - object:
+    - '*.exe /method:create /taskname:* /trigger:* /modifier:* /program:* /argument:*.dll
+      /remoteserver:*'
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    subject:
+  - url:
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    url.domain:
+  - dest_url:
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    url.full:
+  - uri:
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    url.original:
+  - uri_query:
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    url.query:
+  - query:
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    user_agent.original:
+  - url_domain:
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    network.application:
+  - uri_path:
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    http.request.body.content:
+  - domain:
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    http.request.referrer:
+  - QueryName:
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    email.from.address:
+  - QueryResults:
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    dns.question.name:
+  - DestinationHostname:
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
     - '*ScheduleRunner.csproj*'
-    destination.domain:
+  - DestinationIp:
+    - '*ScheduleRunner.sln*'
+    - '*ScheduleRunner.exe*'
+    - '*netero1010/ScheduleRunner*'
+    - '*ScheduleRunner.csproj*'
+  - http_referrer:
+    - '*ScheduleRunner.sln*'
+    - '*ScheduleRunner.exe*'
+    - '*netero1010/ScheduleRunner*'
+    - '*ScheduleRunner.csproj*'
+  - http_referrer_domain:
+    - '*ScheduleRunner.sln*'
+    - '*ScheduleRunner.exe*'
+    - '*netero1010/ScheduleRunner*'
+    - '*ScheduleRunner.csproj*'
+  - http_user_agent:
+    - '*ScheduleRunner.sln*'
+    - '*ScheduleRunner.exe*'
+    - '*netero1010/ScheduleRunner*'
+    - '*ScheduleRunner.csproj*'
+  - dest_nt_host:
+    - '*ScheduleRunner.sln*'
+    - '*ScheduleRunner.exe*'
+    - '*netero1010/ScheduleRunner*'
+    - '*ScheduleRunner.csproj*'
+  - sender:
+    - '*ScheduleRunner.sln*'
+    - '*ScheduleRunner.exe*'
+    - '*netero1010/ScheduleRunner*'
+    - '*ScheduleRunner.csproj*'
+  - recipient:
+    - '*ScheduleRunner.sln*'
+    - '*ScheduleRunner.exe*'
+    - '*netero1010/ScheduleRunner*'
+    - '*ScheduleRunner.csproj*'
+  - orig_recipient:
+    - '*ScheduleRunner.sln*'
+    - '*ScheduleRunner.exe*'
+    - '*netero1010/ScheduleRunner*'
+    - '*ScheduleRunner.csproj*'
+  - subject:
+    - '*ScheduleRunner.sln*'
+    - '*ScheduleRunner.exe*'
+    - '*netero1010/ScheduleRunner*'
+    - '*ScheduleRunner.csproj*'
+  - url.domain:
+    - '*ScheduleRunner.sln*'
+    - '*ScheduleRunner.exe*'
+    - '*netero1010/ScheduleRunner*'
+    - '*ScheduleRunner.csproj*'
+  - url.full:
+    - '*ScheduleRunner.sln*'
+    - '*ScheduleRunner.exe*'
+    - '*netero1010/ScheduleRunner*'
+    - '*ScheduleRunner.csproj*'
+  - url.original:
+    - '*ScheduleRunner.sln*'
+    - '*ScheduleRunner.exe*'
+    - '*netero1010/ScheduleRunner*'
+    - '*ScheduleRunner.csproj*'
+  - url.query:
+    - '*ScheduleRunner.sln*'
+    - '*ScheduleRunner.exe*'
+    - '*netero1010/ScheduleRunner*'
+    - '*ScheduleRunner.csproj*'
+  - user_agent.original:
+    - '*ScheduleRunner.sln*'
+    - '*ScheduleRunner.exe*'
+    - '*netero1010/ScheduleRunner*'
+    - '*ScheduleRunner.csproj*'
+  - network.application:
+    - '*ScheduleRunner.sln*'
+    - '*ScheduleRunner.exe*'
+    - '*netero1010/ScheduleRunner*'
+    - '*ScheduleRunner.csproj*'
+  - http.request.body.content:
+    - '*ScheduleRunner.sln*'
+    - '*ScheduleRunner.exe*'
+    - '*netero1010/ScheduleRunner*'
+    - '*ScheduleRunner.csproj*'
+  - http.request.referrer:
+    - '*ScheduleRunner.sln*'
+    - '*ScheduleRunner.exe*'
+    - '*netero1010/ScheduleRunner*'
+    - '*ScheduleRunner.csproj*'
+  - email.from.address:
+    - '*ScheduleRunner.sln*'
+    - '*ScheduleRunner.exe*'
+    - '*netero1010/ScheduleRunner*'
+    - '*ScheduleRunner.csproj*'
+  - dns.question.name:
+    - '*ScheduleRunner.sln*'
+    - '*ScheduleRunner.exe*'
+    - '*netero1010/ScheduleRunner*'
+    - '*ScheduleRunner.csproj*'
+  - destination.domain:
     - '*ScheduleRunner.sln*'
     - '*ScheduleRunner.exe*'
     - '*netero1010/ScheduleRunner*'
@@ -661,6 +917,7 @@ fields:
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -668,10 +925,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -713,15 +972,30 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
 - url
 - dest_url
@@ -754,3 +1028,6 @@ fields:
 - email.from.address
 - dns.question.name
 - destination.domain
+falsepositives:
+- unknown
+level: medium

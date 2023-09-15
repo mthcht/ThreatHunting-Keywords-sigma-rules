@@ -1,17 +1,10 @@
 title: Simple keyword detection rule for netsh
 id: 2b2bdd52-8a23-40a3-8dc8-88458eac9f41
 status: experimental
-description:
-- '''commands from wmiexec2.0 -  is the same wmiexec that everyone knows and loves
-  (debatable). This 2.0 version is obfuscated to avoid well known signatures from
-  various AV engines.'''
-- '''Disable Windows Firewall'''
-- '''The actor has used the following commands to enable port forwarding [T1090] on
-  the host'''
+description: Detects interesting keywords based on netsh tool
 references:
 - https://github.com/ice-wzl/wmiexec2
 - https://media.defense.gov/2023/May/24/2003229517/-1/-1/0/CSA_Living_off_the_Land.PDF
-- N/A
 author: '@mthcht'
 date: 2023/07/30
 modified: 2023/09/15
@@ -29,248 +22,243 @@ logsource:
   category:
   - endpoint
   - network
-falsepositives:
-- Unknown
-level:
-- high
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*NetSh Advfirewall set allprofiles state off*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    CommandLine:
+  - CommandLine:
     - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*NetSh Advfirewall set allprofiles state off*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    Details:
+  - Details:
     - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*NetSh Advfirewall set allprofiles state off*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    registry.value:
+  - registry.value:
     - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*NetSh Advfirewall set allprofiles state off*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    process.args:
+  - process.args:
     - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*NetSh Advfirewall set allprofiles state off*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    process.command_line:
+  - process.command_line:
     - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*NetSh Advfirewall set allprofiles state off*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    process.env_vars:
+  - process.env_vars:
     - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*NetSh Advfirewall set allprofiles state off*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    process.io.text:
+  - process.io.text:
     - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*NetSh Advfirewall set allprofiles state off*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    process.title:
+  - process.title:
     - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*NetSh Advfirewall set allprofiles state off*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    pe.company:
+  - pe.company:
     - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*NetSh Advfirewall set allprofiles state off*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    pe.description:
+  - pe.description:
     - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*NetSh Advfirewall set allprofiles state off*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    pe.product:
+  - pe.product:
     - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*NetSh Advfirewall set allprofiles state off*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    os.full:
+  - os.full:
     - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*NetSh Advfirewall set allprofiles state off*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    host.hostname:
+  - host.hostname:
     - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*NetSh Advfirewall set allprofiles state off*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    event.original:
+  - event.original:
     - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*NetSh Advfirewall set allprofiles state off*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    email.subject:
+  - email.subject:
     - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*NetSh Advfirewall set allprofiles state off*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    device.model.name:
+  - device.model.name:
     - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*NetSh Advfirewall set allprofiles state off*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    container.image.name:
+  - container.image.name:
     - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*NetSh Advfirewall set allprofiles state off*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    container.name:
+  - container.name:
     - '*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*'
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*NetSh Advfirewall set allprofiles state off*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    url:
+  - url:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    dest_url:
+  - dest_url:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    uri:
+  - uri:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    uri_query:
+  - uri_query:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    query:
+  - query:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    url_domain:
+  - url_domain:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    uri_path:
+  - uri_path:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    domain:
+  - domain:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    QueryName:
+  - QueryName:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    QueryResults:
+  - QueryResults:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    DestinationHostname:
+  - DestinationHostname:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    DestinationIp:
+  - DestinationIp:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    http_referrer:
+  - http_referrer:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    http_referrer_domain:
+  - http_referrer_domain:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    http_user_agent:
+  - http_user_agent:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    dest_nt_host:
+  - dest_nt_host:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    sender:
+  - sender:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    recipient:
+  - recipient:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    orig_recipient:
+  - orig_recipient:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    subject:
+  - subject:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    url.domain:
+  - url.domain:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    url.full:
+  - url.full:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    url.original:
+  - url.original:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    url.query:
+  - url.query:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    user_agent.original:
+  - user_agent.original:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    network.application:
+  - network.application:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    http.request.body.content:
+  - http.request.body.content:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    http.request.referrer:
+  - http.request.referrer:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    email.from.address:
+  - email.from.address:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    dns.question.name:
+  - dns.question.name:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
-    destination.domain:
+  - destination.domain:
     - '*netsh interface portproxy delete v4tov4 listenport=*'
     - '*netsh interface portproxy show v4tov4*'
     - '*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*'
@@ -326,3 +314,6 @@ fields:
 - email.from.address
 - dns.question.name
 - destination.domain
+falsepositives:
+- unknown
+level: medium

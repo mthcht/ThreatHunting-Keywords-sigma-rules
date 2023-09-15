@@ -1,9 +1,7 @@
 title: Simple keyword detection rule for EvilLsassTwin
 id: 5e0dbfd0-2eef-499c-8dc9-e56b1c2ac936
 status: experimental
-description:
-- '''attempt to duplicate open handles to LSASS. If this fails it will obtain a handle
-  to LSASS through the NtGetNextProcess function instead of OpenProcess/NtOpenProcess.'''
+description: Detects interesting keywords based on EvilLsassTwin tool
 references:
 - https://github.com/RePRGM/Nimperiments/tree/main/EvilLsassTwin
 author: '@mthcht'
@@ -20,13 +18,9 @@ logsource:
   category:
   - endpoint
   - network
-falsepositives:
-- Unknown
-level:
-- high
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
@@ -35,7 +29,7 @@ detection:
     - '*/EvilTwinServer*'
     - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    CommandLine:
+  - CommandLine:
     - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
@@ -44,7 +38,7 @@ detection:
     - '*/EvilTwinServer*'
     - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    Details:
+  - Details:
     - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
@@ -53,7 +47,7 @@ detection:
     - '*/EvilTwinServer*'
     - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    registry.value:
+  - registry.value:
     - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
@@ -62,7 +56,7 @@ detection:
     - '*/EvilTwinServer*'
     - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    process.args:
+  - process.args:
     - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
@@ -71,7 +65,7 @@ detection:
     - '*/EvilTwinServer*'
     - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    process.command_line:
+  - process.command_line:
     - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
@@ -80,7 +74,7 @@ detection:
     - '*/EvilTwinServer*'
     - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    process.env_vars:
+  - process.env_vars:
     - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
@@ -89,7 +83,7 @@ detection:
     - '*/EvilTwinServer*'
     - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    process.io.text:
+  - process.io.text:
     - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
@@ -98,7 +92,7 @@ detection:
     - '*/EvilTwinServer*'
     - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    process.title:
+  - process.title:
     - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
@@ -107,7 +101,7 @@ detection:
     - '*/EvilTwinServer*'
     - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    pe.company:
+  - pe.company:
     - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
@@ -116,7 +110,7 @@ detection:
     - '*/EvilTwinServer*'
     - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    pe.description:
+  - pe.description:
     - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
@@ -125,7 +119,7 @@ detection:
     - '*/EvilTwinServer*'
     - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    pe.product:
+  - pe.product:
     - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
@@ -134,7 +128,7 @@ detection:
     - '*/EvilTwinServer*'
     - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    os.full:
+  - os.full:
     - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
@@ -143,7 +137,7 @@ detection:
     - '*/EvilTwinServer*'
     - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    host.hostname:
+  - host.hostname:
     - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
@@ -152,10 +146,7 @@ detection:
     - '*/EvilTwinServer*'
     - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    event.original:
-    - '* EvilTwinServer *'
-    - '*Lsass Dump File Created*'
-    email.subject:
+  - event.original:
     - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
@@ -164,7 +155,7 @@ detection:
     - '*/EvilTwinServer*'
     - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    device.model.name:
+  - email.subject:
     - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
@@ -173,7 +164,7 @@ detection:
     - '*/EvilTwinServer*'
     - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    container.image.name:
+  - device.model.name:
     - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
@@ -182,7 +173,7 @@ detection:
     - '*/EvilTwinServer*'
     - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    container.name:
+  - container.image.name:
     - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
@@ -191,679 +182,982 @@ detection:
     - '*/EvilTwinServer*'
     - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    Image:
+  - container.name:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    OriginalFileName:
+  - Image:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    CurrentDirectory:
+  - OriginalFileName:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    ParentImage:
+  - CurrentDirectory:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    TargetFilename:
+  - ParentImage:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    Signature:
+  - ParentCommandLine:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    signature:
+  - TargetFilename:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    ImageLoaded:
+  - Signature:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    Company:
+  - signature:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    Description:
+  - ImageLoaded:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    description:
+  - Company:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    SourceImage:
+  - Description:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    TargetImage:
+  - description:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    CallTrace:
+  - CommandLine:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    TargetObject:
+  - SourceImage:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    PipeName:
+  - TargetImage:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    Consumer:
+  - CallTrace:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    Destination:
+  - TargetObject:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    Name:
+  - Details:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    Query:
+  - PipeName:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    NewName:
+  - Consumer:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    StartAddress:
+  - Destination:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    StartModule:
+  - Name:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    StartFunction:
+  - Query:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    SourceHostname:
+  - NewName:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    Device:
+  - StartAddress:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    file_name:
+  - StartModule:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    file_path:
+  - StartFunction:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    process:
+  - SourceHostname:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    original_file_name:
+  - Device:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    parent_process:
+  - file_name:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    process_path:
+  - file_path:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    service_path:
+  - process:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    registry_path:
+  - original_file_name:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    registry_value_data:
+  - parent_process:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    registry_value_name:
+  - process_path:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    ContextInfo:
+  - service_path:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    Payload:
+  - registry_path:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    ScriptBlockText:
+  - registry_value_data:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    ServerName:
+  - registry_value_name:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    TransportName:
+  - ContextInfo:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    NewProcessName:
+  - Payload:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    ParentProcessName:
+  - ScriptBlockText:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    Application:
+  - ServerName:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    Product Name:
+  - TransportName:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    Threat Name:
+  - NewProcessName:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    Process Name:
+  - ParentProcessName:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    Path:
+  - Application:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    ImagePath:
+  - Product Name:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    ServiceName:
+  - Threat Name:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    ProcessPath:
+  - Process Name:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    AppName:
+  - Path:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    AppPath:
+  - ImagePath:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    ModulePath:
+  - ServiceName:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    registry.data.strings:
+  - ProcessPath:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    registry.path:
+  - AppName:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    process.executable:
+  - AppPath:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    process.name:
+  - ModulePath:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    pe.original_file_name:
+  - registry.data.strings:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    file.fork_name:
+  - registry.path:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    file.name:
+  - registry.value:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    file.path:
+  - process.args:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    file.target_path:
+  - process.command_line:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    email.attachments.file.name:
+  - process.env_vars:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    dll.path:
+  - process.io.text:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    object:
+  - process.executable:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    url:
+  - process.name:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    dest_url:
+  - process.title:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    uri:
+  - pe.company:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    uri_query:
+  - pe.description:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    query:
+  - pe.original_file_name:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    url_domain:
+  - pe.product:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    uri_path:
+  - os.full:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    domain:
+  - host.hostname:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    QueryName:
+  - file.fork_name:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    QueryResults:
+  - file.name:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    DestinationHostname:
+  - file.path:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    DestinationIp:
+  - file.target_path:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    http_referrer:
+  - email.attachments.file.name:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    http_referrer_domain:
+  - email.subject:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    http_user_agent:
+  - dll.path:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    dest_nt_host:
+  - device.model.name:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    sender:
+  - container.image.name:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    recipient:
+  - container.name:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    orig_recipient:
+  - object:
+    - '* EvilTwinServer *'
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
+    - '*Lsass Dump File Created*'
     - '*EvilLsassTwin.nim*'
-    subject:
+  - url:
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
     - '*EvilLsassTwin.nim*'
-    url.domain:
+  - dest_url:
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
     - '*EvilLsassTwin.nim*'
-    url.full:
+  - uri:
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
     - '*EvilLsassTwin.nim*'
-    url.original:
+  - uri_query:
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
     - '*EvilLsassTwin.nim*'
-    url.query:
+  - query:
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
     - '*EvilLsassTwin.nim*'
-    user_agent.original:
+  - url_domain:
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
     - '*EvilLsassTwin.nim*'
-    network.application:
+  - uri_path:
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
     - '*EvilLsassTwin.nim*'
-    http.request.body.content:
+  - domain:
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
     - '*EvilLsassTwin.nim*'
-    http.request.referrer:
+  - QueryName:
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
     - '*EvilLsassTwin.nim*'
-    email.from.address:
+  - QueryResults:
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
     - '*EvilLsassTwin.nim*'
-    dns.question.name:
+  - DestinationHostname:
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
     - '*/EvilLsassTwin/*'
     - '*/EvilTwinServer*'
     - '*EvilLsassTwin.nim*'
-    destination.domain:
+  - DestinationIp:
+    - '*EvilTwinServer.nim*'
+    - '*EvilTwin.dmp*'
+    - '*EvilLsassTwin.exe*'
+    - '*/EvilLsassTwin/*'
+    - '*/EvilTwinServer*'
+    - '*EvilLsassTwin.nim*'
+  - http_referrer:
+    - '*EvilTwinServer.nim*'
+    - '*EvilTwin.dmp*'
+    - '*EvilLsassTwin.exe*'
+    - '*/EvilLsassTwin/*'
+    - '*/EvilTwinServer*'
+    - '*EvilLsassTwin.nim*'
+  - http_referrer_domain:
+    - '*EvilTwinServer.nim*'
+    - '*EvilTwin.dmp*'
+    - '*EvilLsassTwin.exe*'
+    - '*/EvilLsassTwin/*'
+    - '*/EvilTwinServer*'
+    - '*EvilLsassTwin.nim*'
+  - http_user_agent:
+    - '*EvilTwinServer.nim*'
+    - '*EvilTwin.dmp*'
+    - '*EvilLsassTwin.exe*'
+    - '*/EvilLsassTwin/*'
+    - '*/EvilTwinServer*'
+    - '*EvilLsassTwin.nim*'
+  - dest_nt_host:
+    - '*EvilTwinServer.nim*'
+    - '*EvilTwin.dmp*'
+    - '*EvilLsassTwin.exe*'
+    - '*/EvilLsassTwin/*'
+    - '*/EvilTwinServer*'
+    - '*EvilLsassTwin.nim*'
+  - sender:
+    - '*EvilTwinServer.nim*'
+    - '*EvilTwin.dmp*'
+    - '*EvilLsassTwin.exe*'
+    - '*/EvilLsassTwin/*'
+    - '*/EvilTwinServer*'
+    - '*EvilLsassTwin.nim*'
+  - recipient:
+    - '*EvilTwinServer.nim*'
+    - '*EvilTwin.dmp*'
+    - '*EvilLsassTwin.exe*'
+    - '*/EvilLsassTwin/*'
+    - '*/EvilTwinServer*'
+    - '*EvilLsassTwin.nim*'
+  - orig_recipient:
+    - '*EvilTwinServer.nim*'
+    - '*EvilTwin.dmp*'
+    - '*EvilLsassTwin.exe*'
+    - '*/EvilLsassTwin/*'
+    - '*/EvilTwinServer*'
+    - '*EvilLsassTwin.nim*'
+  - subject:
+    - '*EvilTwinServer.nim*'
+    - '*EvilTwin.dmp*'
+    - '*EvilLsassTwin.exe*'
+    - '*/EvilLsassTwin/*'
+    - '*/EvilTwinServer*'
+    - '*EvilLsassTwin.nim*'
+  - url.domain:
+    - '*EvilTwinServer.nim*'
+    - '*EvilTwin.dmp*'
+    - '*EvilLsassTwin.exe*'
+    - '*/EvilLsassTwin/*'
+    - '*/EvilTwinServer*'
+    - '*EvilLsassTwin.nim*'
+  - url.full:
+    - '*EvilTwinServer.nim*'
+    - '*EvilTwin.dmp*'
+    - '*EvilLsassTwin.exe*'
+    - '*/EvilLsassTwin/*'
+    - '*/EvilTwinServer*'
+    - '*EvilLsassTwin.nim*'
+  - url.original:
+    - '*EvilTwinServer.nim*'
+    - '*EvilTwin.dmp*'
+    - '*EvilLsassTwin.exe*'
+    - '*/EvilLsassTwin/*'
+    - '*/EvilTwinServer*'
+    - '*EvilLsassTwin.nim*'
+  - url.query:
+    - '*EvilTwinServer.nim*'
+    - '*EvilTwin.dmp*'
+    - '*EvilLsassTwin.exe*'
+    - '*/EvilLsassTwin/*'
+    - '*/EvilTwinServer*'
+    - '*EvilLsassTwin.nim*'
+  - user_agent.original:
+    - '*EvilTwinServer.nim*'
+    - '*EvilTwin.dmp*'
+    - '*EvilLsassTwin.exe*'
+    - '*/EvilLsassTwin/*'
+    - '*/EvilTwinServer*'
+    - '*EvilLsassTwin.nim*'
+  - network.application:
+    - '*EvilTwinServer.nim*'
+    - '*EvilTwin.dmp*'
+    - '*EvilLsassTwin.exe*'
+    - '*/EvilLsassTwin/*'
+    - '*/EvilTwinServer*'
+    - '*EvilLsassTwin.nim*'
+  - http.request.body.content:
+    - '*EvilTwinServer.nim*'
+    - '*EvilTwin.dmp*'
+    - '*EvilLsassTwin.exe*'
+    - '*/EvilLsassTwin/*'
+    - '*/EvilTwinServer*'
+    - '*EvilLsassTwin.nim*'
+  - http.request.referrer:
+    - '*EvilTwinServer.nim*'
+    - '*EvilTwin.dmp*'
+    - '*EvilLsassTwin.exe*'
+    - '*/EvilLsassTwin/*'
+    - '*/EvilTwinServer*'
+    - '*EvilLsassTwin.nim*'
+  - email.from.address:
+    - '*EvilTwinServer.nim*'
+    - '*EvilTwin.dmp*'
+    - '*EvilLsassTwin.exe*'
+    - '*/EvilLsassTwin/*'
+    - '*/EvilTwinServer*'
+    - '*EvilLsassTwin.nim*'
+  - dns.question.name:
+    - '*EvilTwinServer.nim*'
+    - '*EvilTwin.dmp*'
+    - '*EvilLsassTwin.exe*'
+    - '*/EvilLsassTwin/*'
+    - '*/EvilTwinServer*'
+    - '*EvilLsassTwin.nim*'
+  - destination.domain:
     - '*EvilTwinServer.nim*'
     - '*EvilTwin.dmp*'
     - '*EvilLsassTwin.exe*'
@@ -895,6 +1189,7 @@ fields:
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -902,10 +1197,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -947,15 +1244,30 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
 - url
 - dest_url
@@ -988,3 +1300,6 @@ fields:
 - email.from.address
 - dns.question.name
 - destination.domain
+falsepositives:
+- unknown
+level: medium

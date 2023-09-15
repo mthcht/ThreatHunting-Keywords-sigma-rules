@@ -5,6 +5,8 @@ import oyaml as yaml
 import datetime
 import re
 
+yaml.Dumper.ignore_aliases = lambda *args : True
+
 # Fields (add or modify the fields variables with your fields)
 endpoint_detection_fields = ['Image', 'OriginalFileName','CurrentDirectory','ParentImage','ParentCommandLine','TargetFilename','Signature','signature','ImageLoaded','Company','Description','description','CommandLine','SourceImage','TargetImage','CallTrace','TargetObject','Details','PipeName','Consumer','Destination','Name','Query','NewName','StartAddress','StartModule','StartFunction','SourceHostname','Device','file_name','file_path','process','original_file_name','parent_process','process_path','service_path','registry_path','registry_value_data','registry_value_name','ContextInfo','Payload','ScriptBlockText','ServerName','TransportName','NewProcessName','ParentProcessName','Application','Product Name','Threat Name','Process Name','Path','ImagePath','ServiceName','ProcessPath','AppName','AppPath','ModulePath','registry.data.strings','registry.path','registry.value','process.args','process.command_line','process.env_vars','process.io.text','process.executable','process.name','process.title','pe.company','pe.description','pe.original_file_name','pe.product','os.full','host.hostname','file.fork_name','file.name','file.path','file.target_path','email.attachments.file.name','email.subject','dll.path','device.model.name','container.image.name','container.name','object']
 endpoint_detection_fields_space = ['ParentCommandLine','CommandLine','Details','registry.value','process.args','process.command_line','process.env_vars','process.io.text','process.title','pe.company','pe.description','pe.product','os.full','host.hostname','event.original','email.subject','device.model.name','container.image.name','container.name']
@@ -74,7 +76,7 @@ for subdir, dirs, files in os.walk(parent_directory):
                     "title": "Simple keyword detection rule for {}".format(data[0]['tool_name']),
                     "id": id,
                     "status": "experimental",
-                    "description": [],
+                    "description": "Detects interesting keywords based on {} tool".format(data[0]['tool_name']),
                     "references": [],
                     "author": "@mthcht",
                     "date": "2023/07/30",
@@ -83,68 +85,114 @@ for subdir, dirs, files in os.walk(parent_directory):
                     "logsource": {
                         "category": []
                     },
-                    "falsepositives": ["Unknown"],
-                    "level": [],
                     "detection": {
-                        "selection": {}
+                        "selection": []
                     },
-                    "fields": []
+                    "fields": [],
+                    "falsepositives": ["unknown"],
+                    "level": 'medium'
                 }
+                # setting medium level for all the hunting rules instead of using get_level function
+
+                # We use these bools to avoid duplication when choosing the fields
+                endpoint_hash_fields_bool = False
+                endpoint_detection_fields_space_bool = False
+                endpoint_detection_fields_bool = False
+                network_detection_fields_bool = False
+                
+                # We use these bools to assign category only once
+                endpoint_rule = False
+                network_rule = False
+
+                endpoint_keywords_list = []
+                network_keywords_list = []
+
+                network_fields = []
+                endpoint_fields = []
 
                 for item in data:
-                    fields =[]
 
                     # Add techniques and tactics
-                    sigma_rule['tags'].extend(["attack." + tactic for tactic in item['tactics'].split(' - ')])
-                    sigma_rule['tags'].extend(["attack." + technique for technique in item['techniques'].split(' - ')])
+                    tactic = ["attack." + tactic for tactic in item['tactics'].split(' - ')]
+                    technique = ["attack." + technique for technique in item['techniques'].split(' - ')]
 
-                    # Add descriptions
-                    sigma_rule['description'].append("\'" + item['description'] + "\'")
+                    if tactic not in sigma_rule['tags'] and tactic != "N/A":
+                        sigma_rule['tags'].extend(tactic)
+
+                    if technique not in sigma_rule['tags'] and technique != "N/A":
+                        sigma_rule['tags'].extend(technique)
                     
                     # Add links
-                    sigma_rule['references'].append(item['reference'])
+                    if item['reference'] != "N/A":
+                        sigma_rule['references'].append(item['reference'])
                     
-                    # Add severity
-                    sigma_rule['level'].append(get_level(item['severity'],item['popularity']))
-                    
+                    # Assign the fields
                     if item['endpoint_detection']:
+
+                        endpoint_keywords_list.append(item['keyword'])
+
                         if identify_hash(item['keyword']) == "yes":
-                            fields += endpoint_hash_fields
+                            if not endpoint_hash_fields_bool:
+                                endpoint_fields += endpoint_hash_fields
+                                endpoint_hash_fields_bool = True
+                            if not endpoint_rule:
+                                sigma_rule['logsource']['category'].append('endpoint')
+                                endpoint_rule = True
                         else:
                             if any(substring in item['keyword'] for substring in [' --', ' ../',' ..\\']) or item['keyword'].count(' ') > 1:
-                                fields += endpoint_detection_fields_space # endpoint fields allowing spaces
-                                sigma_rule['logsource']['category'].append('endpoint')
+                                if not endpoint_detection_fields_space_bool:
+                                    endpoint_fields += endpoint_detection_fields_space # endpoint fields allowing spaces
+                                    endpoint_detection_fields_space_bool = True
+                                if not endpoint_rule:
+                                    sigma_rule['logsource']['category'].append('endpoint')
+                                    endpoint_rule = True
                             else:
-                                fields += endpoint_detection_fields # add all endpoint fields
-                                sigma_rule['logsource']['category'].append('endpoint')
+                                if not endpoint_detection_fields_bool:
+                                    endpoint_fields += endpoint_detection_fields # add all endpoint fields
+                                    endpoint_detection_fields_bool = True
+                                if not endpoint_rule:
+                                    sigma_rule['logsource']['category'].append('endpoint')
+                                    endpoint_rule = True
 
                     if item['network_detection']:
-                        fields += network_detection_fields
-                        sigma_rule['logsource']['category'].append('network')
 
-                    for field in fields:
-                        if field not in sigma_rule['detection']['selection']:
-                            sigma_rule['detection']['selection'][field] = []
-                        sigma_rule['detection']['selection'][field].append(item['keyword'])
-                        if field not in sigma_rule['fields']:
-                            sigma_rule['fields'].append(field)
+                        network_keywords_list.append(item['keyword'])
 
-
+                        if not network_detection_fields_bool:
+                            network_fields += network_detection_fields
+                            network_detection_fields_bool = True
+                        if not network_rule:
+                            sigma_rule['logsource']['category'].append('network')
+                            network_rule = True
+                    
+                    
+                # Add Keywords to SIGMA rule
+                if endpoint_keywords_list:
+                    for epf in endpoint_fields:
+                        final_detection = {}
+                        final_detection[epf] = endpoint_keywords_list
+                        sigma_rule['detection']['selection'].append(final_detection)
+                
+                if network_keywords_list:
+                    for nf in network_fields:
+                        final_detection = {}
+                        final_detection[nf] = network_keywords_list
+                        sigma_rule['detection']['selection'].append(final_detection)
+                    
+                sigma_rule['fields'] = endpoint_fields + network_fields
                 sigma_rule['detection']['condition'] = 'selection'
                 
-                # remove duplicates
-                sigma_rule['logsource']['category'] = list(set(sigma_rule['logsource']['category']))
-                sigma_rule['description'] = list(set(sigma_rule['description']))
-                sigma_rule['references'] = list(set(sigma_rule['references']))
-                sigma_rule['level'] = list(set(sigma_rule['level']))
+                # remove duplicate
                 sigma_rule['tags'] = list(set(sigma_rule['tags']))
+                if 'attack.N/A' in sigma_rule['tags']:
+                    sigma_rule['tags'].remove('attack.N/A')
                 # sort
                 sigma_rule['tags'].sort(key=lambda s: s.lower())
-                sigma_rule['description'].sort(key=lambda s: s.lower())
+                # remove duplicate
+                sigma_rule['references'] = list(set(sigma_rule['references']))
                 sigma_rule['references'].sort(key=lambda s: s.lower())
-                sigma_rule['level'].sort(key=lambda s: s.lower())
+                
                 sigma_rule['logsource']['category'].sort(key=lambda s: s.lower())
-
 
                 # Save the sigma_rule to a .yml file in the same directory as the JSON file
                 with open(os.path.join(subdir, file.replace(".json", ".yml")), 'w') as yaml_file:

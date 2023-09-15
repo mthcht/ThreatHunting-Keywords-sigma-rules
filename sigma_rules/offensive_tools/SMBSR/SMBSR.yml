@@ -1,8 +1,7 @@
 title: Simple keyword detection rule for SMBSR
 id: 794a6635-d06e-48d1-aa8b-c26016e890a9
 status: experimental
-description:
-- '''Lookup for interesting stuff in SMB shares'''
+description: Detects interesting keywords based on SMBSR tool
 references:
 - https://github.com/oldboy21/SMBSR
 author: '@mthcht'
@@ -24,13 +23,9 @@ logsource:
   category:
   - endpoint
   - network
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
@@ -38,7 +33,7 @@ detection:
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    CommandLine:
+  - CommandLine:
     - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
@@ -46,7 +41,7 @@ detection:
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    Details:
+  - Details:
     - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
@@ -54,7 +49,7 @@ detection:
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    registry.value:
+  - registry.value:
     - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
@@ -62,7 +57,7 @@ detection:
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    process.args:
+  - process.args:
     - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
@@ -70,7 +65,7 @@ detection:
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    process.command_line:
+  - process.command_line:
     - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
@@ -78,7 +73,7 @@ detection:
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    process.env_vars:
+  - process.env_vars:
     - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
@@ -86,7 +81,7 @@ detection:
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    process.io.text:
+  - process.io.text:
     - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
@@ -94,7 +89,7 @@ detection:
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    process.title:
+  - process.title:
     - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
@@ -102,7 +97,7 @@ detection:
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    pe.company:
+  - pe.company:
     - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
@@ -110,7 +105,7 @@ detection:
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    pe.description:
+  - pe.description:
     - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
@@ -118,7 +113,7 @@ detection:
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    pe.product:
+  - pe.product:
     - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
@@ -126,7 +121,7 @@ detection:
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    os.full:
+  - os.full:
     - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
@@ -134,7 +129,7 @@ detection:
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    host.hostname:
+  - host.hostname:
     - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
@@ -142,9 +137,7 @@ detection:
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    event.original:
-    - '* -word-list-path * -file-extensions *'
-    email.subject:
+  - event.original:
     - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
@@ -152,7 +145,7 @@ detection:
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    device.model.name:
+  - email.subject:
     - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
@@ -160,7 +153,7 @@ detection:
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    container.image.name:
+  - device.model.name:
     - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
@@ -168,7 +161,7 @@ detection:
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    container.name:
+  - container.image.name:
     - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
@@ -176,619 +169,837 @@ detection:
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    Image:
+  - container.name:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    OriginalFileName:
+  - Image:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    CurrentDirectory:
+  - OriginalFileName:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    ParentImage:
+  - CurrentDirectory:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    TargetFilename:
+  - ParentImage:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    Signature:
+  - ParentCommandLine:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    signature:
+  - TargetFilename:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    ImageLoaded:
+  - Signature:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    Company:
+  - signature:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    Description:
+  - ImageLoaded:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    description:
+  - Company:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    SourceImage:
+  - Description:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    TargetImage:
+  - description:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    CallTrace:
+  - CommandLine:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    TargetObject:
+  - SourceImage:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    PipeName:
+  - TargetImage:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    Consumer:
+  - CallTrace:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    Destination:
+  - TargetObject:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    Name:
+  - Details:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    Query:
+  - PipeName:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    NewName:
+  - Consumer:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    StartAddress:
+  - Destination:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    StartModule:
+  - Name:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    StartFunction:
+  - Query:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    SourceHostname:
+  - NewName:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    Device:
+  - StartAddress:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    file_name:
+  - StartModule:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    file_path:
+  - StartFunction:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    process:
+  - SourceHostname:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    original_file_name:
+  - Device:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    parent_process:
+  - file_name:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    process_path:
+  - file_path:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    service_path:
+  - process:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    registry_path:
+  - original_file_name:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    registry_value_data:
+  - parent_process:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    registry_value_name:
+  - process_path:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    ContextInfo:
+  - service_path:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    Payload:
+  - registry_path:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    ScriptBlockText:
+  - registry_value_data:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    ServerName:
+  - registry_value_name:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    TransportName:
+  - ContextInfo:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    NewProcessName:
+  - Payload:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    ParentProcessName:
+  - ScriptBlockText:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    Application:
+  - ServerName:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    Product Name:
+  - TransportName:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    Threat Name:
+  - NewProcessName:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    Process Name:
+  - ParentProcessName:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    Path:
+  - Application:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    ImagePath:
+  - Product Name:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    ServiceName:
+  - Threat Name:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    ProcessPath:
+  - Process Name:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    AppName:
+  - Path:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    AppPath:
+  - ImagePath:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    ModulePath:
+  - ServiceName:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    registry.data.strings:
+  - ProcessPath:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    registry.path:
+  - AppName:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    process.executable:
+  - AppPath:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    process.name:
+  - ModulePath:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    pe.original_file_name:
+  - registry.data.strings:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    file.fork_name:
+  - registry.path:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    file.name:
+  - registry.value:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    file.path:
+  - process.args:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    file.target_path:
+  - process.command_line:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    email.attachments.file.name:
+  - process.env_vars:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    dll.path:
+  - process.io.text:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    object:
+  - process.executable:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '* smbsr.log*'
     - '* smbsr.db*'
     - '*smbsr.py*'
-    url:
+  - process.name:
+    - '* -word-list-path * -file-extensions *'
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
+    - '* smbsr.log*'
+    - '* smbsr.db*'
+    - '*smbsr.py*'
+  - process.title:
+    - '* -word-list-path * -file-extensions *'
+    - '*/smbsr.log*'
+    - '*/smbsr.db*'
+    - '*/SMBSR.git*'
+    - '* smbsr.log*'
+    - '* smbsr.db*'
+    - '*smbsr.py*'
+  - pe.company:
+    - '* -word-list-path * -file-extensions *'
+    - '*/smbsr.log*'
+    - '*/smbsr.db*'
+    - '*/SMBSR.git*'
+    - '* smbsr.log*'
+    - '* smbsr.db*'
+    - '*smbsr.py*'
+  - pe.description:
+    - '* -word-list-path * -file-extensions *'
+    - '*/smbsr.log*'
+    - '*/smbsr.db*'
+    - '*/SMBSR.git*'
+    - '* smbsr.log*'
+    - '* smbsr.db*'
+    - '*smbsr.py*'
+  - pe.original_file_name:
+    - '* -word-list-path * -file-extensions *'
+    - '*/smbsr.log*'
+    - '*/smbsr.db*'
+    - '*/SMBSR.git*'
+    - '* smbsr.log*'
+    - '* smbsr.db*'
+    - '*smbsr.py*'
+  - pe.product:
+    - '* -word-list-path * -file-extensions *'
+    - '*/smbsr.log*'
+    - '*/smbsr.db*'
+    - '*/SMBSR.git*'
+    - '* smbsr.log*'
+    - '* smbsr.db*'
+    - '*smbsr.py*'
+  - os.full:
+    - '* -word-list-path * -file-extensions *'
+    - '*/smbsr.log*'
+    - '*/smbsr.db*'
+    - '*/SMBSR.git*'
+    - '* smbsr.log*'
+    - '* smbsr.db*'
+    - '*smbsr.py*'
+  - host.hostname:
+    - '* -word-list-path * -file-extensions *'
+    - '*/smbsr.log*'
+    - '*/smbsr.db*'
+    - '*/SMBSR.git*'
+    - '* smbsr.log*'
+    - '* smbsr.db*'
+    - '*smbsr.py*'
+  - file.fork_name:
+    - '* -word-list-path * -file-extensions *'
+    - '*/smbsr.log*'
+    - '*/smbsr.db*'
+    - '*/SMBSR.git*'
+    - '* smbsr.log*'
+    - '* smbsr.db*'
+    - '*smbsr.py*'
+  - file.name:
+    - '* -word-list-path * -file-extensions *'
+    - '*/smbsr.log*'
+    - '*/smbsr.db*'
+    - '*/SMBSR.git*'
+    - '* smbsr.log*'
+    - '* smbsr.db*'
+    - '*smbsr.py*'
+  - file.path:
+    - '* -word-list-path * -file-extensions *'
+    - '*/smbsr.log*'
+    - '*/smbsr.db*'
+    - '*/SMBSR.git*'
+    - '* smbsr.log*'
+    - '* smbsr.db*'
+    - '*smbsr.py*'
+  - file.target_path:
+    - '* -word-list-path * -file-extensions *'
+    - '*/smbsr.log*'
+    - '*/smbsr.db*'
+    - '*/SMBSR.git*'
+    - '* smbsr.log*'
+    - '* smbsr.db*'
+    - '*smbsr.py*'
+  - email.attachments.file.name:
+    - '* -word-list-path * -file-extensions *'
+    - '*/smbsr.log*'
+    - '*/smbsr.db*'
+    - '*/SMBSR.git*'
+    - '* smbsr.log*'
+    - '* smbsr.db*'
+    - '*smbsr.py*'
+  - email.subject:
+    - '* -word-list-path * -file-extensions *'
+    - '*/smbsr.log*'
+    - '*/smbsr.db*'
+    - '*/SMBSR.git*'
+    - '* smbsr.log*'
+    - '* smbsr.db*'
+    - '*smbsr.py*'
+  - dll.path:
+    - '* -word-list-path * -file-extensions *'
+    - '*/smbsr.log*'
+    - '*/smbsr.db*'
+    - '*/SMBSR.git*'
+    - '* smbsr.log*'
+    - '* smbsr.db*'
+    - '*smbsr.py*'
+  - device.model.name:
+    - '* -word-list-path * -file-extensions *'
+    - '*/smbsr.log*'
+    - '*/smbsr.db*'
+    - '*/SMBSR.git*'
+    - '* smbsr.log*'
+    - '* smbsr.db*'
+    - '*smbsr.py*'
+  - container.image.name:
+    - '* -word-list-path * -file-extensions *'
+    - '*/smbsr.log*'
+    - '*/smbsr.db*'
+    - '*/SMBSR.git*'
+    - '* smbsr.log*'
+    - '* smbsr.db*'
+    - '*smbsr.py*'
+  - container.name:
+    - '* -word-list-path * -file-extensions *'
+    - '*/smbsr.log*'
+    - '*/smbsr.db*'
+    - '*/SMBSR.git*'
+    - '* smbsr.log*'
+    - '* smbsr.db*'
+    - '*smbsr.py*'
+  - object:
+    - '* -word-list-path * -file-extensions *'
+    - '*/smbsr.log*'
+    - '*/smbsr.db*'
+    - '*/SMBSR.git*'
+    - '* smbsr.log*'
+    - '* smbsr.db*'
+    - '*smbsr.py*'
+  - url:
+    - '*/smbsr.log*'
+    - '*/smbsr.db*'
+    - '*/SMBSR.git*'
     - '*smbsr.py*'
-    dest_url:
+  - dest_url:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    uri:
+  - uri:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    uri_query:
+  - uri_query:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    query:
+  - query:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    url_domain:
+  - url_domain:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    uri_path:
+  - uri_path:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    domain:
+  - domain:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    QueryName:
+  - QueryName:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    QueryResults:
+  - QueryResults:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    DestinationHostname:
+  - DestinationHostname:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    DestinationIp:
+  - DestinationIp:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    http_referrer:
+  - http_referrer:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    http_referrer_domain:
+  - http_referrer_domain:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    http_user_agent:
+  - http_user_agent:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    dest_nt_host:
+  - dest_nt_host:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    sender:
+  - sender:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    recipient:
+  - recipient:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    orig_recipient:
+  - orig_recipient:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    subject:
+  - subject:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    url.domain:
+  - url.domain:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    url.full:
+  - url.full:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    url.original:
+  - url.original:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    url.query:
+  - url.query:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    user_agent.original:
+  - user_agent.original:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    network.application:
+  - network.application:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    http.request.body.content:
+  - http.request.body.content:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    http.request.referrer:
+  - http.request.referrer:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    email.from.address:
+  - email.from.address:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    dns.question.name:
+  - dns.question.name:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
     - '*smbsr.py*'
-    destination.domain:
+  - destination.domain:
     - '*/smbsr.log*'
     - '*/smbsr.db*'
     - '*/SMBSR.git*'
@@ -818,6 +1029,7 @@ fields:
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -825,10 +1037,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -870,15 +1084,30 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
 - url
 - dest_url
@@ -911,3 +1140,6 @@ fields:
 - email.from.address
 - dns.question.name
 - destination.domain
+falsepositives:
+- unknown
+level: medium

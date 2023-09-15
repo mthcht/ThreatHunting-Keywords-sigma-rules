@@ -1,10 +1,7 @@
 title: Simple keyword detection rule for Excel
 id: 738b0150-eee8-482a-8566-6d8e60beae88
 status: experimental
-description:
-- "'prevent any warnings or alerts when Python functions are about to be executed.\
-  \ Threat actors could run malicious code through the new \n  Microsoft Excel feature\
-  \ that allows Python to run within the spreadsheet'"
+description: Detects interesting keywords based on Excel tool
 references:
 - https://github.com/tsale/Sigma_rules/blob/main/MISC/pythonfunctionwarnings_disabled.yml
 author: '@mthcht'
@@ -19,218 +16,419 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- low
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
       /t REG_DWORD /d 0 /f?*'
     - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    CommandLine:
+  - CommandLine:
     - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
       /t REG_DWORD /d 0 /f?*'
     - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    Details:
+  - Details:
     - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
       /t REG_DWORD /d 0 /f?*'
     - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    registry.value:
+  - registry.value:
     - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
       /t REG_DWORD /d 0 /f?*'
     - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    process.args:
+  - process.args:
     - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
       /t REG_DWORD /d 0 /f?*'
     - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    process.command_line:
+  - process.command_line:
     - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
       /t REG_DWORD /d 0 /f?*'
     - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    process.env_vars:
+  - process.env_vars:
     - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
       /t REG_DWORD /d 0 /f?*'
     - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    process.io.text:
+  - process.io.text:
     - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
       /t REG_DWORD /d 0 /f?*'
     - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    process.title:
+  - process.title:
     - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
       /t REG_DWORD /d 0 /f?*'
     - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    pe.company:
+  - pe.company:
     - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
       /t REG_DWORD /d 0 /f?*'
     - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    pe.description:
+  - pe.description:
     - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
       /t REG_DWORD /d 0 /f?*'
     - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    pe.product:
+  - pe.product:
     - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
       /t REG_DWORD /d 0 /f?*'
     - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    os.full:
+  - os.full:
     - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
       /t REG_DWORD /d 0 /f?*'
     - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    host.hostname:
+  - host.hostname:
     - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
       /t REG_DWORD /d 0 /f?*'
     - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    event.original:
-    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
-      /t REG_DWORD /d 0 /f?*'
-    email.subject:
+  - event.original:
     - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
       /t REG_DWORD /d 0 /f?*'
     - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    device.model.name:
+  - email.subject:
     - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
       /t REG_DWORD /d 0 /f?*'
     - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    container.image.name:
+  - device.model.name:
     - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
       /t REG_DWORD /d 0 /f?*'
     - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    container.name:
+  - container.image.name:
     - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
       /t REG_DWORD /d 0 /f?*'
     - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    Image:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    OriginalFileName:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    CurrentDirectory:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    ParentImage:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    TargetFilename:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    Signature:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    signature:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    ImageLoaded:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    Company:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    Description:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    description:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    SourceImage:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    TargetImage:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    CallTrace:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    TargetObject:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    PipeName:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    Consumer:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    Destination:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    Name:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    Query:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    NewName:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    StartAddress:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    StartModule:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    StartFunction:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    SourceHostname:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    Device:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    file_name:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    file_path:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    process:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    original_file_name:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    parent_process:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    process_path:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    service_path:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    registry_path:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    registry_value_data:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    registry_value_name:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    ContextInfo:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    Payload:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    ScriptBlockText:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    ServerName:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    TransportName:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    NewProcessName:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    ParentProcessName:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    Application:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    Product Name:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    Threat Name:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    Process Name:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    Path:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    ImagePath:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    ServiceName:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    ProcessPath:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    AppName:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    AppPath:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    ModulePath:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    registry.data.strings:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    registry.path:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    process.executable:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    process.name:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    pe.original_file_name:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    file.fork_name:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    file.name:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    file.path:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    file.target_path:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    email.attachments.file.name:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    dll.path:
-    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
-    object:
+  - container.name:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - Image:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - OriginalFileName:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - CurrentDirectory:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - ParentImage:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - ParentCommandLine:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - TargetFilename:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - Signature:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - signature:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - ImageLoaded:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - Company:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - Description:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - description:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - CommandLine:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - SourceImage:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - TargetImage:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - CallTrace:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - TargetObject:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - Details:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - PipeName:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - Consumer:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - Destination:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - Name:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - Query:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - NewName:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - StartAddress:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - StartModule:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - StartFunction:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - SourceHostname:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - Device:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - file_name:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - file_path:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - process:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - original_file_name:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - parent_process:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - process_path:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - service_path:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - registry_path:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - registry_value_data:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - registry_value_name:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - ContextInfo:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - Payload:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - ScriptBlockText:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - ServerName:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - TransportName:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - NewProcessName:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - ParentProcessName:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - Application:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - Product Name:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - Threat Name:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - Process Name:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - Path:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - ImagePath:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - ServiceName:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - ProcessPath:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - AppName:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - AppPath:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - ModulePath:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - registry.data.strings:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - registry.path:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - registry.value:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - process.args:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - process.command_line:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - process.env_vars:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - process.io.text:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - process.executable:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - process.name:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - process.title:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - pe.company:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - pe.description:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - pe.original_file_name:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - pe.product:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - os.full:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - host.hostname:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - file.fork_name:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - file.name:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - file.path:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - file.target_path:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - email.attachments.file.name:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - email.subject:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - dll.path:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - device.model.name:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - container.image.name:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - container.name:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
+    - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
+  - object:
+    - '*reg add HKCU\software\policies\microsoft\office\16.0\excel\security /v PythonFunctionWarnings
+      /t REG_DWORD /d 0 /f?*'
     - '*Set-ItemProperty *\excel\security*pythonfunctionwarnings*0*'
   condition: selection
 fields:
@@ -257,6 +455,7 @@ fields:
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -264,10 +463,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -309,13 +510,31 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
+falsepositives:
+- unknown
+level: medium

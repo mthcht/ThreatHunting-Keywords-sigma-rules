@@ -1,10 +1,7 @@
 title: Simple keyword detection rule for dev-tunnels
 id: 6ecb74f5-a450-4183-90d8-2c12ac30b9c9
 status: experimental
-description:
-- '''Dev tunnels allow developers to securely share local web services across the
-  internet. Enabling you to connect your local development environment with cloud
-  services and share work in progress with colleagues or aid in building webhooks'''
+description: Detects interesting keywords based on dev-tunnels tool
 references:
 - https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/overview
 author: '@mthcht'
@@ -21,13 +18,9 @@ logsource:
   category:
   - endpoint
   - network
-falsepositives:
-- Unknown
-level:
-- medium
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
     - '*devtunnel host -p *'
@@ -40,7 +33,7 @@ detection:
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '* host -p * --allow-anonymous --protocol https*'
-    CommandLine:
+  - CommandLine:
     - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
     - '*devtunnel host -p *'
@@ -53,7 +46,7 @@ detection:
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '* host -p * --allow-anonymous --protocol https*'
-    Details:
+  - Details:
     - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
     - '*devtunnel host -p *'
@@ -66,7 +59,7 @@ detection:
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '* host -p * --allow-anonymous --protocol https*'
-    registry.value:
+  - registry.value:
     - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
     - '*devtunnel host -p *'
@@ -79,7 +72,7 @@ detection:
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '* host -p * --allow-anonymous --protocol https*'
-    process.args:
+  - process.args:
     - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
     - '*devtunnel host -p *'
@@ -92,7 +85,7 @@ detection:
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '* host -p * --allow-anonymous --protocol https*'
-    process.command_line:
+  - process.command_line:
     - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
     - '*devtunnel host -p *'
@@ -105,7 +98,7 @@ detection:
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '* host -p * --allow-anonymous --protocol https*'
-    process.env_vars:
+  - process.env_vars:
     - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
     - '*devtunnel host -p *'
@@ -118,7 +111,7 @@ detection:
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '* host -p * --allow-anonymous --protocol https*'
-    process.io.text:
+  - process.io.text:
     - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
     - '*devtunnel host -p *'
@@ -131,7 +124,7 @@ detection:
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '* host -p * --allow-anonymous --protocol https*'
-    process.title:
+  - process.title:
     - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
     - '*devtunnel host -p *'
@@ -144,7 +137,7 @@ detection:
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '* host -p * --allow-anonymous --protocol https*'
-    pe.company:
+  - pe.company:
     - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
     - '*devtunnel host -p *'
@@ -157,7 +150,7 @@ detection:
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '* host -p * --allow-anonymous --protocol https*'
-    pe.description:
+  - pe.description:
     - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
     - '*devtunnel host -p *'
@@ -170,7 +163,7 @@ detection:
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '* host -p * --allow-anonymous --protocol https*'
-    pe.product:
+  - pe.product:
     - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
     - '*devtunnel host -p *'
@@ -183,7 +176,7 @@ detection:
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '* host -p * --allow-anonymous --protocol https*'
-    os.full:
+  - os.full:
     - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
     - '*devtunnel host -p *'
@@ -196,7 +189,7 @@ detection:
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '* host -p * --allow-anonymous --protocol https*'
-    host.hostname:
+  - host.hostname:
     - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
     - '*devtunnel host -p *'
@@ -209,12 +202,7 @@ detection:
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '* host -p * --allow-anonymous --protocol https*'
-    event.original:
-    - '*devtunnel create *'
-    - '*devtunnel host -p *'
-    - '*devtunnel* user login -d*'
-    - '* host -p * --allow-anonymous --protocol https*'
-    email.subject:
+  - event.original:
     - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
     - '*devtunnel host -p *'
@@ -227,7 +215,7 @@ detection:
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '* host -p * --allow-anonymous --protocol https*'
-    device.model.name:
+  - email.subject:
     - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
     - '*devtunnel host -p *'
@@ -240,7 +228,7 @@ detection:
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '* host -p * --allow-anonymous --protocol https*'
-    container.image.name:
+  - device.model.name:
     - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
     - '*devtunnel host -p *'
@@ -253,7 +241,7 @@ detection:
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '* host -p * --allow-anonymous --protocol https*'
-    container.name:
+  - container.image.name:
     - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
     - '*devtunnel host -p *'
@@ -266,601 +254,1112 @@ detection:
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '* host -p * --allow-anonymous --protocol https*'
-    Image:
+  - container.name:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    OriginalFileName:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - Image:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    CurrentDirectory:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - OriginalFileName:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    ParentImage:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - CurrentDirectory:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    TargetFilename:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - ParentImage:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    Signature:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - ParentCommandLine:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    signature:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - TargetFilename:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    ImageLoaded:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - Signature:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    Company:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - signature:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    Description:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - ImageLoaded:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    description:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - Company:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    SourceImage:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - Description:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    TargetImage:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - description:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    CallTrace:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - CommandLine:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    TargetObject:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - SourceImage:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    PipeName:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - TargetImage:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    Consumer:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - CallTrace:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    Destination:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - TargetObject:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    Name:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - Details:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    Query:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - PipeName:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    NewName:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - Consumer:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    StartAddress:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - Destination:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    StartModule:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - Name:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    StartFunction:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - Query:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    SourceHostname:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - NewName:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    Device:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - StartAddress:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    file_name:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - StartModule:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    file_path:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - StartFunction:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    process:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - SourceHostname:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    original_file_name:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - Device:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    parent_process:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - file_name:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    process_path:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - file_path:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    service_path:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - process:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    registry_path:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - original_file_name:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    registry_value_data:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - parent_process:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    registry_value_name:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - process_path:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    ContextInfo:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - service_path:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    Payload:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - registry_path:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    ScriptBlockText:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - registry_value_data:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    ServerName:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - registry_value_name:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    TransportName:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - ContextInfo:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    NewProcessName:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - Payload:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    ParentProcessName:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - ScriptBlockText:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    Application:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - ServerName:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    Product Name:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - TransportName:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    Threat Name:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - NewProcessName:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    Process Name:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - ParentProcessName:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    Path:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - Application:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    ImagePath:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - Product Name:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    ServiceName:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - Threat Name:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    ProcessPath:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - Process Name:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    AppName:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - Path:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    AppPath:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - ImagePath:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    ModulePath:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - ServiceName:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    registry.data.strings:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - ProcessPath:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    registry.path:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - AppName:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    process.executable:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - AppPath:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    process.name:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - ModulePath:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    pe.original_file_name:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - registry.data.strings:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    file.fork_name:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - registry.path:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    file.name:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - registry.value:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    file.path:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - process.args:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    file.target_path:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - process.command_line:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    email.attachments.file.name:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - process.env_vars:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    dll.path:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - process.io.text:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    object:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - process.executable:
+    - '*devtunnel create *'
     - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
     - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*devtunnel.exe *'
     - '*tunnels-prod-rel-tm.trafficmanager.net*'
     - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
     - '*ssh @ssh.*.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
-    url:
+    - '* host -p * --allow-anonymous --protocol https*'
+  - process.name:
+    - '*devtunnel create *'
+    - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
+    - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
+    - '*global.rel.tunnels.api.visualstudio.com*'
+    - '*devtunnel.exe *'
+    - '*tunnels-prod-rel-tm.trafficmanager.net*'
+    - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
+    - '*ssh @ssh.*.devtunnels.ms*'
+    - '*https://*.*.devtunnels.ms*'
+    - '* host -p * --allow-anonymous --protocol https*'
+  - process.title:
+    - '*devtunnel create *'
+    - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
+    - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
+    - '*global.rel.tunnels.api.visualstudio.com*'
+    - '*devtunnel.exe *'
+    - '*tunnels-prod-rel-tm.trafficmanager.net*'
+    - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
+    - '*ssh @ssh.*.devtunnels.ms*'
+    - '*https://*.*.devtunnels.ms*'
+    - '* host -p * --allow-anonymous --protocol https*'
+  - pe.company:
+    - '*devtunnel create *'
+    - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
+    - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
+    - '*global.rel.tunnels.api.visualstudio.com*'
+    - '*devtunnel.exe *'
+    - '*tunnels-prod-rel-tm.trafficmanager.net*'
+    - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
+    - '*ssh @ssh.*.devtunnels.ms*'
+    - '*https://*.*.devtunnels.ms*'
+    - '* host -p * --allow-anonymous --protocol https*'
+  - pe.description:
+    - '*devtunnel create *'
+    - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
+    - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
+    - '*global.rel.tunnels.api.visualstudio.com*'
+    - '*devtunnel.exe *'
+    - '*tunnels-prod-rel-tm.trafficmanager.net*'
+    - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
+    - '*ssh @ssh.*.devtunnels.ms*'
+    - '*https://*.*.devtunnels.ms*'
+    - '* host -p * --allow-anonymous --protocol https*'
+  - pe.original_file_name:
+    - '*devtunnel create *'
+    - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
+    - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
+    - '*global.rel.tunnels.api.visualstudio.com*'
+    - '*devtunnel.exe *'
+    - '*tunnels-prod-rel-tm.trafficmanager.net*'
+    - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
+    - '*ssh @ssh.*.devtunnels.ms*'
+    - '*https://*.*.devtunnels.ms*'
+    - '* host -p * --allow-anonymous --protocol https*'
+  - pe.product:
+    - '*devtunnel create *'
+    - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
+    - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
+    - '*global.rel.tunnels.api.visualstudio.com*'
+    - '*devtunnel.exe *'
+    - '*tunnels-prod-rel-tm.trafficmanager.net*'
+    - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
+    - '*ssh @ssh.*.devtunnels.ms*'
+    - '*https://*.*.devtunnels.ms*'
+    - '* host -p * --allow-anonymous --protocol https*'
+  - os.full:
+    - '*devtunnel create *'
+    - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
+    - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
+    - '*global.rel.tunnels.api.visualstudio.com*'
+    - '*devtunnel.exe *'
+    - '*tunnels-prod-rel-tm.trafficmanager.net*'
+    - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
+    - '*ssh @ssh.*.devtunnels.ms*'
+    - '*https://*.*.devtunnels.ms*'
+    - '* host -p * --allow-anonymous --protocol https*'
+  - host.hostname:
+    - '*devtunnel create *'
+    - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
+    - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
+    - '*global.rel.tunnels.api.visualstudio.com*'
+    - '*devtunnel.exe *'
+    - '*tunnels-prod-rel-tm.trafficmanager.net*'
+    - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
+    - '*ssh @ssh.*.devtunnels.ms*'
+    - '*https://*.*.devtunnels.ms*'
+    - '* host -p * --allow-anonymous --protocol https*'
+  - file.fork_name:
+    - '*devtunnel create *'
+    - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
+    - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
+    - '*global.rel.tunnels.api.visualstudio.com*'
+    - '*devtunnel.exe *'
+    - '*tunnels-prod-rel-tm.trafficmanager.net*'
+    - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
+    - '*ssh @ssh.*.devtunnels.ms*'
+    - '*https://*.*.devtunnels.ms*'
+    - '* host -p * --allow-anonymous --protocol https*'
+  - file.name:
+    - '*devtunnel create *'
+    - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
+    - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
+    - '*global.rel.tunnels.api.visualstudio.com*'
+    - '*devtunnel.exe *'
+    - '*tunnels-prod-rel-tm.trafficmanager.net*'
+    - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
+    - '*ssh @ssh.*.devtunnels.ms*'
+    - '*https://*.*.devtunnels.ms*'
+    - '* host -p * --allow-anonymous --protocol https*'
+  - file.path:
+    - '*devtunnel create *'
+    - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
+    - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
+    - '*global.rel.tunnels.api.visualstudio.com*'
+    - '*devtunnel.exe *'
+    - '*tunnels-prod-rel-tm.trafficmanager.net*'
+    - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
+    - '*ssh @ssh.*.devtunnels.ms*'
+    - '*https://*.*.devtunnels.ms*'
+    - '* host -p * --allow-anonymous --protocol https*'
+  - file.target_path:
+    - '*devtunnel create *'
+    - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
+    - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
+    - '*global.rel.tunnels.api.visualstudio.com*'
+    - '*devtunnel.exe *'
+    - '*tunnels-prod-rel-tm.trafficmanager.net*'
+    - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
+    - '*ssh @ssh.*.devtunnels.ms*'
+    - '*https://*.*.devtunnels.ms*'
+    - '* host -p * --allow-anonymous --protocol https*'
+  - email.attachments.file.name:
+    - '*devtunnel create *'
+    - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
+    - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
+    - '*global.rel.tunnels.api.visualstudio.com*'
+    - '*devtunnel.exe *'
+    - '*tunnels-prod-rel-tm.trafficmanager.net*'
+    - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
+    - '*ssh @ssh.*.devtunnels.ms*'
+    - '*https://*.*.devtunnels.ms*'
+    - '* host -p * --allow-anonymous --protocol https*'
+  - email.subject:
+    - '*devtunnel create *'
+    - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
+    - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
+    - '*global.rel.tunnels.api.visualstudio.com*'
+    - '*devtunnel.exe *'
+    - '*tunnels-prod-rel-tm.trafficmanager.net*'
+    - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
+    - '*ssh @ssh.*.devtunnels.ms*'
+    - '*https://*.*.devtunnels.ms*'
+    - '* host -p * --allow-anonymous --protocol https*'
+  - dll.path:
+    - '*devtunnel create *'
+    - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
+    - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
+    - '*global.rel.tunnels.api.visualstudio.com*'
+    - '*devtunnel.exe *'
+    - '*tunnels-prod-rel-tm.trafficmanager.net*'
+    - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
+    - '*ssh @ssh.*.devtunnels.ms*'
+    - '*https://*.*.devtunnels.ms*'
+    - '* host -p * --allow-anonymous --protocol https*'
+  - device.model.name:
+    - '*devtunnel create *'
+    - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
+    - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
+    - '*global.rel.tunnels.api.visualstudio.com*'
+    - '*devtunnel.exe *'
+    - '*tunnels-prod-rel-tm.trafficmanager.net*'
+    - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
+    - '*ssh @ssh.*.devtunnels.ms*'
+    - '*https://*.*.devtunnels.ms*'
+    - '* host -p * --allow-anonymous --protocol https*'
+  - container.image.name:
+    - '*devtunnel create *'
+    - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
+    - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
+    - '*global.rel.tunnels.api.visualstudio.com*'
+    - '*devtunnel.exe *'
+    - '*tunnels-prod-rel-tm.trafficmanager.net*'
+    - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
+    - '*ssh @ssh.*.devtunnels.ms*'
+    - '*https://*.*.devtunnels.ms*'
+    - '* host -p * --allow-anonymous --protocol https*'
+  - container.name:
+    - '*devtunnel create *'
+    - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
+    - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
+    - '*global.rel.tunnels.api.visualstudio.com*'
+    - '*devtunnel.exe *'
+    - '*tunnels-prod-rel-tm.trafficmanager.net*'
+    - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
+    - '*ssh @ssh.*.devtunnels.ms*'
+    - '*https://*.*.devtunnels.ms*'
+    - '* host -p * --allow-anonymous --protocol https*'
+  - object:
+    - '*devtunnel create *'
+    - '*-443.devtunnels.ms*'
+    - '*devtunnel host -p *'
+    - '*wss://*.tunnels.api.visualstudio.com/api/v1/Connect/*'
+    - '*global.rel.tunnels.api.visualstudio.com*'
+    - '*devtunnel.exe *'
+    - '*tunnels-prod-rel-tm.trafficmanager.net*'
+    - '*.asse.devtunnels.ms*'
+    - '*devtunnel* user login -d*'
+    - '*ssh @ssh.*.devtunnels.ms*'
+    - '*https://*.*.devtunnels.ms*'
+    - '* host -p * --allow-anonymous --protocol https*'
+  - url:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -870,7 +1369,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    dest_url:
+  - dest_url:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -880,7 +1379,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    uri:
+  - uri:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -890,7 +1389,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    uri_query:
+  - uri_query:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -900,7 +1399,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    query:
+  - query:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -910,7 +1409,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    url_domain:
+  - url_domain:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -920,7 +1419,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    uri_path:
+  - uri_path:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -930,7 +1429,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    domain:
+  - domain:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -940,7 +1439,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    QueryName:
+  - QueryName:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -950,7 +1449,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    QueryResults:
+  - QueryResults:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -960,7 +1459,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    DestinationHostname:
+  - DestinationHostname:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -970,7 +1469,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    DestinationIp:
+  - DestinationIp:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -980,7 +1479,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    http_referrer:
+  - http_referrer:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -990,7 +1489,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    http_referrer_domain:
+  - http_referrer_domain:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -1000,7 +1499,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    http_user_agent:
+  - http_user_agent:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -1010,7 +1509,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    dest_nt_host:
+  - dest_nt_host:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -1020,7 +1519,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    sender:
+  - sender:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -1030,7 +1529,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    recipient:
+  - recipient:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -1040,7 +1539,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    orig_recipient:
+  - orig_recipient:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -1050,7 +1549,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    subject:
+  - subject:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -1060,7 +1559,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    url.domain:
+  - url.domain:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -1070,7 +1569,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    url.full:
+  - url.full:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -1080,7 +1579,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    url.original:
+  - url.original:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -1090,7 +1589,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    url.query:
+  - url.query:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -1100,7 +1599,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    user_agent.original:
+  - user_agent.original:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -1110,7 +1609,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    network.application:
+  - network.application:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -1120,7 +1619,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    http.request.body.content:
+  - http.request.body.content:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -1130,7 +1629,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    http.request.referrer:
+  - http.request.referrer:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -1140,7 +1639,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    email.from.address:
+  - email.from.address:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -1150,7 +1649,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    dns.question.name:
+  - dns.question.name:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -1160,7 +1659,7 @@ detection:
     - '*https://*.euw.devtunnels.ms*'
     - '*https://*.*.devtunnels.ms*'
     - '*https://*.use.devtunnels.ms*'
-    destination.domain:
+  - destination.domain:
     - '*-443.devtunnels.ms*'
     - '*global.rel.tunnels.api.visualstudio.com*'
     - '*https://aka.ms/DevTunnelCliInstall*'
@@ -1195,6 +1694,7 @@ fields:
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -1202,10 +1702,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -1247,15 +1749,30 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
 - url
 - dest_url
@@ -1288,3 +1805,6 @@ fields:
 - email.from.address
 - dns.question.name
 - destination.domain
+falsepositives:
+- unknown
+level: medium

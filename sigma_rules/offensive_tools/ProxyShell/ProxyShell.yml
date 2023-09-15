@@ -1,9 +1,7 @@
 title: Simple keyword detection rule for ProxyShell
 id: 82999d9d-2402-41cb-beb5-52dc7ee6a7c2
 status: experimental
-description:
-- '''Microsoft Exchange Servers exploits - ProxyLogon and ProxyShell  CVE-2021-27065
-  CVE-2021-34473 CVE-2021-34523 CVE-2021-31207'''
+description: Detects interesting keywords based on ProxyShell tool
 references:
 - https://www.cert.ssi.gouv.fr/uploads/ANSSI_TLPWHITE_ProxyShell_ProxyLogon_Sigma_yml.txt
 author: '@mthcht'
@@ -24,67 +22,63 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
     - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
-    CommandLine:
+  - CommandLine:
     - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
     - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
-    Details:
+  - Details:
     - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
     - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
-    registry.value:
+  - registry.value:
     - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
     - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
-    process.args:
+  - process.args:
     - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
     - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
-    process.command_line:
+  - process.command_line:
     - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
     - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
-    process.env_vars:
+  - process.env_vars:
     - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
     - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
-    process.io.text:
+  - process.io.text:
     - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
     - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
-    process.title:
+  - process.title:
     - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
     - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
-    pe.company:
+  - pe.company:
     - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
     - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
-    pe.description:
+  - pe.description:
     - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
     - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
-    pe.product:
+  - pe.product:
     - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
     - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
-    os.full:
+  - os.full:
     - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
     - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
-    host.hostname:
+  - host.hostname:
     - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
     - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
-    event.original:
+  - event.original:
     - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
     - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
-    email.subject:
+  - email.subject:
     - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
     - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
-    device.model.name:
+  - device.model.name:
     - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
     - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
-    container.image.name:
+  - container.image.name:
     - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
     - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
-    container.name:
+  - container.name:
     - '*New-MailBoxExportRequest -Mailbox *@* -FilePath *.aspx*'
     - '*Set-OabVirtualDirectory -ExternalUrl ''http*://*function Page_Load(){*}</script>*'
   condition: selection
@@ -108,3 +102,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

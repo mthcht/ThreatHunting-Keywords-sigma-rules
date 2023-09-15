@@ -1,9 +1,7 @@
 title: Simple keyword detection rule for ssfd
 id: e725eec1-8a63-41a4-96b4-d97ac89a98fb
 status: experimental
-description:
-- '''sets up a communication channel possibly for command and control (C2) or exfiltration
-  purposes'''
+description: Detects interesting keywords based on ssfd tool
 references:
 - https://github.com/securesocketfunneling/ssf
 author: '@mthcht'
@@ -15,67 +13,63 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- critical
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*ssfd.exe -p *'
     - '*ssf.exe -D * -p * 127.0.0.1*'
-    CommandLine:
+  - CommandLine:
     - '*ssfd.exe -p *'
     - '*ssf.exe -D * -p * 127.0.0.1*'
-    Details:
+  - Details:
     - '*ssfd.exe -p *'
     - '*ssf.exe -D * -p * 127.0.0.1*'
-    registry.value:
+  - registry.value:
     - '*ssfd.exe -p *'
     - '*ssf.exe -D * -p * 127.0.0.1*'
-    process.args:
+  - process.args:
     - '*ssfd.exe -p *'
     - '*ssf.exe -D * -p * 127.0.0.1*'
-    process.command_line:
+  - process.command_line:
     - '*ssfd.exe -p *'
     - '*ssf.exe -D * -p * 127.0.0.1*'
-    process.env_vars:
+  - process.env_vars:
     - '*ssfd.exe -p *'
     - '*ssf.exe -D * -p * 127.0.0.1*'
-    process.io.text:
+  - process.io.text:
     - '*ssfd.exe -p *'
     - '*ssf.exe -D * -p * 127.0.0.1*'
-    process.title:
+  - process.title:
     - '*ssfd.exe -p *'
     - '*ssf.exe -D * -p * 127.0.0.1*'
-    pe.company:
+  - pe.company:
     - '*ssfd.exe -p *'
     - '*ssf.exe -D * -p * 127.0.0.1*'
-    pe.description:
+  - pe.description:
     - '*ssfd.exe -p *'
     - '*ssf.exe -D * -p * 127.0.0.1*'
-    pe.product:
+  - pe.product:
     - '*ssfd.exe -p *'
     - '*ssf.exe -D * -p * 127.0.0.1*'
-    os.full:
+  - os.full:
     - '*ssfd.exe -p *'
     - '*ssf.exe -D * -p * 127.0.0.1*'
-    host.hostname:
+  - host.hostname:
     - '*ssfd.exe -p *'
     - '*ssf.exe -D * -p * 127.0.0.1*'
-    event.original:
+  - event.original:
     - '*ssfd.exe -p *'
     - '*ssf.exe -D * -p * 127.0.0.1*'
-    email.subject:
+  - email.subject:
     - '*ssfd.exe -p *'
     - '*ssf.exe -D * -p * 127.0.0.1*'
-    device.model.name:
+  - device.model.name:
     - '*ssfd.exe -p *'
     - '*ssf.exe -D * -p * 127.0.0.1*'
-    container.image.name:
+  - container.image.name:
     - '*ssfd.exe -p *'
     - '*ssf.exe -D * -p * 127.0.0.1*'
-    container.name:
+  - container.name:
     - '*ssfd.exe -p *'
     - '*ssf.exe -D * -p * 127.0.0.1*'
   condition: selection
@@ -99,3 +93,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

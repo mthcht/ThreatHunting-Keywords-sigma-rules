@@ -1,11 +1,8 @@
 title: Simple keyword detection rule for ncat
 id: f68fff7c-589f-4f64-8784-c31506c20050
 status: experimental
-description:
-- '''linux commands abused by attackers'''
-- '''reverse shell persistence'''
-references:
-- N/A
+description: Detects interesting keywords based on ncat tool
+references: []
 author: '@mthcht'
 date: 2023/07/30
 modified: 2023/09/15
@@ -41,67 +38,63 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*ncat * -p 4444*'
     - '* ncat * -e /bin/bash*|crontab*'
-    CommandLine:
+  - CommandLine:
     - '*ncat * -p 4444*'
     - '* ncat * -e /bin/bash*|crontab*'
-    Details:
+  - Details:
     - '*ncat * -p 4444*'
     - '* ncat * -e /bin/bash*|crontab*'
-    registry.value:
+  - registry.value:
     - '*ncat * -p 4444*'
     - '* ncat * -e /bin/bash*|crontab*'
-    process.args:
+  - process.args:
     - '*ncat * -p 4444*'
     - '* ncat * -e /bin/bash*|crontab*'
-    process.command_line:
+  - process.command_line:
     - '*ncat * -p 4444*'
     - '* ncat * -e /bin/bash*|crontab*'
-    process.env_vars:
+  - process.env_vars:
     - '*ncat * -p 4444*'
     - '* ncat * -e /bin/bash*|crontab*'
-    process.io.text:
+  - process.io.text:
     - '*ncat * -p 4444*'
     - '* ncat * -e /bin/bash*|crontab*'
-    process.title:
+  - process.title:
     - '*ncat * -p 4444*'
     - '* ncat * -e /bin/bash*|crontab*'
-    pe.company:
+  - pe.company:
     - '*ncat * -p 4444*'
     - '* ncat * -e /bin/bash*|crontab*'
-    pe.description:
+  - pe.description:
     - '*ncat * -p 4444*'
     - '* ncat * -e /bin/bash*|crontab*'
-    pe.product:
+  - pe.product:
     - '*ncat * -p 4444*'
     - '* ncat * -e /bin/bash*|crontab*'
-    os.full:
+  - os.full:
     - '*ncat * -p 4444*'
     - '* ncat * -e /bin/bash*|crontab*'
-    host.hostname:
+  - host.hostname:
     - '*ncat * -p 4444*'
     - '* ncat * -e /bin/bash*|crontab*'
-    event.original:
+  - event.original:
     - '*ncat * -p 4444*'
     - '* ncat * -e /bin/bash*|crontab*'
-    email.subject:
+  - email.subject:
     - '*ncat * -p 4444*'
     - '* ncat * -e /bin/bash*|crontab*'
-    device.model.name:
+  - device.model.name:
     - '*ncat * -p 4444*'
     - '* ncat * -e /bin/bash*|crontab*'
-    container.image.name:
+  - container.image.name:
     - '*ncat * -p 4444*'
     - '* ncat * -e /bin/bash*|crontab*'
-    container.name:
+  - container.name:
     - '*ncat * -p 4444*'
     - '* ncat * -e /bin/bash*|crontab*'
   condition: selection
@@ -125,3 +118,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

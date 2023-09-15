@@ -1,25 +1,13 @@
 title: Simple keyword detection rule for domainhunter
 id: 1a559ecb-046d-4f8b-b18b-3426745d5c1c
 status: experimental
-description:
-- '''Checks expired domains for categorization/reputation and Archive.org history
-  to determine good candidates for phishing and C2 domain names '''
-- '''Domain name selection is an important aspect of preparation for penetration tests
-  and especially Red Team engagements. Commonly. domains that were used previously
-  for benign purposes and were properly categorized can be purchased for only a few
-  dollars. Such domains can allow a team to bypass reputation based web filters and
-  network egress restrictions for phishing and C2 related tasks.This Python based
-  tool was written to quickly query the Expireddomains.net search engine for expired/available
-  domains with a previous history of use. It then optionally queries for domain reputation
-  against services like Symantec Site Review (BlueCoat). IBM X-Force. and Cisco Talos.
-  The primary tool output is a timestamped HTML table style report.'''
+description: Detects interesting keywords based on domainhunter tool
 references:
 - https://github.com/threatexpress/domainhunter
 author: '@mthcht'
 date: 2023/07/30
 modified: 2023/09/15
 tags:
-- attack.N/A
 - attack.T1568
 - attack.T1568.002
 - attack.T1569
@@ -32,562 +20,820 @@ logsource:
   category:
   - endpoint
   - network
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
     - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    CommandLine:
+  - CommandLine:
     - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
     - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    Details:
+  - Details:
     - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
     - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    registry.value:
+  - registry.value:
     - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
     - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    process.args:
+  - process.args:
     - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
     - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    process.command_line:
+  - process.command_line:
     - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
     - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    process.env_vars:
+  - process.env_vars:
     - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
     - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    process.io.text:
+  - process.io.text:
     - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
     - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    process.title:
+  - process.title:
     - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
     - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    pe.company:
+  - pe.company:
     - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
     - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    pe.description:
+  - pe.description:
     - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
     - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    pe.product:
+  - pe.product:
     - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
     - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    os.full:
+  - os.full:
     - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
     - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    host.hostname:
+  - host.hostname:
     - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
     - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    event.original:
-    - '* domainhunter *'
-    - '* --keyword * --check --ocr * --alexa*'
-    email.subject:
+  - event.original:
     - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
     - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    device.model.name:
+  - email.subject:
     - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
     - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    container.image.name:
+  - device.model.name:
     - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
     - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    container.name:
+  - container.image.name:
     - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
     - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    Image:
+  - container.name:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    OriginalFileName:
+  - Image:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    CurrentDirectory:
+  - OriginalFileName:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    ParentImage:
+  - CurrentDirectory:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    TargetFilename:
+  - ParentImage:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    Signature:
+  - ParentCommandLine:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    signature:
+  - TargetFilename:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    ImageLoaded:
+  - Signature:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    Company:
+  - signature:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    Description:
+  - ImageLoaded:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    description:
+  - Company:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    SourceImage:
+  - Description:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    TargetImage:
+  - description:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    CallTrace:
+  - CommandLine:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    TargetObject:
+  - SourceImage:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    PipeName:
+  - TargetImage:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    Consumer:
+  - CallTrace:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    Destination:
+  - TargetObject:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    Name:
+  - Details:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    Query:
+  - PipeName:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    NewName:
+  - Consumer:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    StartAddress:
+  - Destination:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    StartModule:
+  - Name:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    StartFunction:
+  - Query:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    SourceHostname:
+  - NewName:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    Device:
+  - StartAddress:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    file_name:
+  - StartModule:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    file_path:
+  - StartFunction:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    process:
+  - SourceHostname:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    original_file_name:
+  - Device:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    parent_process:
+  - file_name:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    process_path:
+  - file_path:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    service_path:
+  - process:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    registry_path:
+  - original_file_name:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    registry_value_data:
+  - parent_process:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    registry_value_name:
+  - process_path:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    ContextInfo:
+  - service_path:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    Payload:
+  - registry_path:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    ScriptBlockText:
+  - registry_value_data:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    ServerName:
+  - registry_value_name:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    TransportName:
+  - ContextInfo:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    NewProcessName:
+  - Payload:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    ParentProcessName:
+  - ScriptBlockText:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    Application:
+  - ServerName:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    Product Name:
+  - TransportName:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    Threat Name:
+  - NewProcessName:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    Process Name:
+  - ParentProcessName:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    Path:
+  - Application:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    ImagePath:
+  - Product Name:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    ServiceName:
+  - Threat Name:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    ProcessPath:
+  - Process Name:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    AppName:
+  - Path:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    AppPath:
+  - ImagePath:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    ModulePath:
+  - ServiceName:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    registry.data.strings:
+  - ProcessPath:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    registry.path:
+  - AppName:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    process.executable:
+  - AppPath:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    process.name:
+  - ModulePath:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    pe.original_file_name:
+  - registry.data.strings:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    file.fork_name:
+  - registry.path:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    file.name:
+  - registry.value:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    file.path:
+  - process.args:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    file.target_path:
+  - process.command_line:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    email.attachments.file.name:
+  - process.env_vars:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    dll.path:
+  - process.io.text:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    object:
+  - process.executable:
+    - '* domainhunter *'
     - '*domainhunter*'
     - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    url:
+  - process.name:
+    - '* domainhunter *'
+    - '*domainhunter*'
+    - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
+    - '*domainhunter.py*'
+    - '*/domainhunter*'
+  - process.title:
+    - '* domainhunter *'
+    - '*domainhunter*'
+    - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
+    - '*domainhunter.py*'
+    - '*/domainhunter*'
+  - pe.company:
+    - '* domainhunter *'
+    - '*domainhunter*'
+    - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
+    - '*domainhunter.py*'
+    - '*/domainhunter*'
+  - pe.description:
+    - '* domainhunter *'
+    - '*domainhunter*'
+    - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
+    - '*domainhunter.py*'
+    - '*/domainhunter*'
+  - pe.original_file_name:
+    - '* domainhunter *'
+    - '*domainhunter*'
+    - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
+    - '*domainhunter.py*'
+    - '*/domainhunter*'
+  - pe.product:
+    - '* domainhunter *'
+    - '*domainhunter*'
+    - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
+    - '*domainhunter.py*'
+    - '*/domainhunter*'
+  - os.full:
+    - '* domainhunter *'
+    - '*domainhunter*'
+    - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
+    - '*domainhunter.py*'
+    - '*/domainhunter*'
+  - host.hostname:
+    - '* domainhunter *'
+    - '*domainhunter*'
+    - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
+    - '*domainhunter.py*'
+    - '*/domainhunter*'
+  - file.fork_name:
+    - '* domainhunter *'
+    - '*domainhunter*'
+    - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
+    - '*domainhunter.py*'
+    - '*/domainhunter*'
+  - file.name:
+    - '* domainhunter *'
+    - '*domainhunter*'
+    - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
+    - '*domainhunter.py*'
+    - '*/domainhunter*'
+  - file.path:
+    - '* domainhunter *'
+    - '*domainhunter*'
+    - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
+    - '*domainhunter.py*'
+    - '*/domainhunter*'
+  - file.target_path:
+    - '* domainhunter *'
+    - '*domainhunter*'
+    - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
+    - '*domainhunter.py*'
+    - '*/domainhunter*'
+  - email.attachments.file.name:
+    - '* domainhunter *'
+    - '*domainhunter*'
+    - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
+    - '*domainhunter.py*'
+    - '*/domainhunter*'
+  - email.subject:
+    - '* domainhunter *'
+    - '*domainhunter*'
+    - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
+    - '*domainhunter.py*'
+    - '*/domainhunter*'
+  - dll.path:
+    - '* domainhunter *'
+    - '*domainhunter*'
+    - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
+    - '*domainhunter.py*'
+    - '*/domainhunter*'
+  - device.model.name:
+    - '* domainhunter *'
+    - '*domainhunter*'
+    - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
+    - '*domainhunter.py*'
+    - '*/domainhunter*'
+  - container.image.name:
+    - '* domainhunter *'
+    - '*domainhunter*'
+    - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
+    - '*domainhunter.py*'
+    - '*/domainhunter*'
+  - container.name:
+    - '* domainhunter *'
+    - '*domainhunter*'
+    - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
+    - '*domainhunter.py*'
+    - '*/domainhunter*'
+  - object:
+    - '* domainhunter *'
+    - '*domainhunter*'
+    - '*downloadMalwareDomains*'
+    - '* --keyword * --check --ocr * --alexa*'
+    - '*domainhunter.py*'
+    - '*/domainhunter*'
+  - url:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    dest_url:
+  - dest_url:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    uri:
+  - uri:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    uri_query:
+  - uri_query:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    query:
+  - query:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    url_domain:
+  - url_domain:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    uri_path:
+  - uri_path:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    domain:
+  - domain:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    QueryName:
+  - QueryName:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    QueryResults:
+  - QueryResults:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    DestinationHostname:
+  - DestinationHostname:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    DestinationIp:
+  - DestinationIp:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    http_referrer:
+  - http_referrer:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    http_referrer_domain:
+  - http_referrer_domain:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    http_user_agent:
+  - http_user_agent:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    dest_nt_host:
+  - dest_nt_host:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    sender:
+  - sender:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    recipient:
+  - recipient:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    orig_recipient:
+  - orig_recipient:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    subject:
+  - subject:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    url.domain:
+  - url.domain:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    url.full:
+  - url.full:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    url.original:
+  - url.original:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    url.query:
+  - url.query:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    user_agent.original:
+  - user_agent.original:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    network.application:
+  - network.application:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    http.request.body.content:
+  - http.request.body.content:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    http.request.referrer:
+  - http.request.referrer:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    email.from.address:
+  - email.from.address:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    dns.question.name:
+  - dns.question.name:
     - '*domainhunter.py*'
     - '*/domainhunter*'
-    destination.domain:
+  - destination.domain:
     - '*domainhunter.py*'
     - '*/domainhunter*'
   condition: selection
@@ -615,6 +861,7 @@ fields:
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -622,10 +869,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -667,15 +916,30 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
 - url
 - dest_url
@@ -708,3 +972,6 @@ fields:
 - email.from.address
 - dns.question.name
 - destination.domain
+falsepositives:
+- unknown
+level: medium

@@ -1,9 +1,7 @@
 title: Simple keyword detection rule for telnet
 id: 476e5f08-d7b6-4068-8bc6-bd36e55d798d
 status: experimental
-description:
-- '''suspicious shell commands used in various Equation Group scripts and tools'''
-- '''telnet reverse shell '''
+description: Detects interesting keywords based on telnet tool
 references:
 - https://github.com/SigmaHQ/sigma/blob/master/rules/linux/lnx_apt_equationgroup_lnx.yml
 - https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md
@@ -19,67 +17,63 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*&& telnet * 2>&1 </dev/console*'
     - '*telnet * | /bin/bash | telnet *'
-    CommandLine:
+  - CommandLine:
     - '*&& telnet * 2>&1 </dev/console*'
     - '*telnet * | /bin/bash | telnet *'
-    Details:
+  - Details:
     - '*&& telnet * 2>&1 </dev/console*'
     - '*telnet * | /bin/bash | telnet *'
-    registry.value:
+  - registry.value:
     - '*&& telnet * 2>&1 </dev/console*'
     - '*telnet * | /bin/bash | telnet *'
-    process.args:
+  - process.args:
     - '*&& telnet * 2>&1 </dev/console*'
     - '*telnet * | /bin/bash | telnet *'
-    process.command_line:
+  - process.command_line:
     - '*&& telnet * 2>&1 </dev/console*'
     - '*telnet * | /bin/bash | telnet *'
-    process.env_vars:
+  - process.env_vars:
     - '*&& telnet * 2>&1 </dev/console*'
     - '*telnet * | /bin/bash | telnet *'
-    process.io.text:
+  - process.io.text:
     - '*&& telnet * 2>&1 </dev/console*'
     - '*telnet * | /bin/bash | telnet *'
-    process.title:
+  - process.title:
     - '*&& telnet * 2>&1 </dev/console*'
     - '*telnet * | /bin/bash | telnet *'
-    pe.company:
+  - pe.company:
     - '*&& telnet * 2>&1 </dev/console*'
     - '*telnet * | /bin/bash | telnet *'
-    pe.description:
+  - pe.description:
     - '*&& telnet * 2>&1 </dev/console*'
     - '*telnet * | /bin/bash | telnet *'
-    pe.product:
+  - pe.product:
     - '*&& telnet * 2>&1 </dev/console*'
     - '*telnet * | /bin/bash | telnet *'
-    os.full:
+  - os.full:
     - '*&& telnet * 2>&1 </dev/console*'
     - '*telnet * | /bin/bash | telnet *'
-    host.hostname:
+  - host.hostname:
     - '*&& telnet * 2>&1 </dev/console*'
     - '*telnet * | /bin/bash | telnet *'
-    event.original:
+  - event.original:
     - '*&& telnet * 2>&1 </dev/console*'
     - '*telnet * | /bin/bash | telnet *'
-    email.subject:
+  - email.subject:
     - '*&& telnet * 2>&1 </dev/console*'
     - '*telnet * | /bin/bash | telnet *'
-    device.model.name:
+  - device.model.name:
     - '*&& telnet * 2>&1 </dev/console*'
     - '*telnet * | /bin/bash | telnet *'
-    container.image.name:
+  - container.image.name:
     - '*&& telnet * 2>&1 </dev/console*'
     - '*telnet * | /bin/bash | telnet *'
-    container.name:
+  - container.name:
     - '*&& telnet * 2>&1 </dev/console*'
     - '*telnet * | /bin/bash | telnet *'
   condition: selection
@@ -103,3 +97,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

@@ -1,12 +1,7 @@
 title: Simple keyword detection rule for pdbedit
 id: 0368f48f-36b6-4aa3-ae92-7aa4f44d2aa2
 status: experimental
-description:
-- '''Enables the verbose listing format. It causes pdbedit to list the users in the
-  database - printing out the account fields in a descriptive format'''
-- '''Sets the smbpasswd listing format. It will make pdbedit list the users in the
-  database - printing out the account fields in a format compatible with the smbpasswd
-  file format.'''
+description: Detects interesting keywords based on pdbedit tool
 references:
 - https://github.com/RoseSecurity/Red-Teaming-TTPs/blob/main/Linux.md
 author: '@mthcht'
@@ -20,67 +15,63 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*pdbedit -L -w*'
     - '*pdbedit -L -v*'
-    CommandLine:
+  - CommandLine:
     - '*pdbedit -L -w*'
     - '*pdbedit -L -v*'
-    Details:
+  - Details:
     - '*pdbedit -L -w*'
     - '*pdbedit -L -v*'
-    registry.value:
+  - registry.value:
     - '*pdbedit -L -w*'
     - '*pdbedit -L -v*'
-    process.args:
+  - process.args:
     - '*pdbedit -L -w*'
     - '*pdbedit -L -v*'
-    process.command_line:
+  - process.command_line:
     - '*pdbedit -L -w*'
     - '*pdbedit -L -v*'
-    process.env_vars:
+  - process.env_vars:
     - '*pdbedit -L -w*'
     - '*pdbedit -L -v*'
-    process.io.text:
+  - process.io.text:
     - '*pdbedit -L -w*'
     - '*pdbedit -L -v*'
-    process.title:
+  - process.title:
     - '*pdbedit -L -w*'
     - '*pdbedit -L -v*'
-    pe.company:
+  - pe.company:
     - '*pdbedit -L -w*'
     - '*pdbedit -L -v*'
-    pe.description:
+  - pe.description:
     - '*pdbedit -L -w*'
     - '*pdbedit -L -v*'
-    pe.product:
+  - pe.product:
     - '*pdbedit -L -w*'
     - '*pdbedit -L -v*'
-    os.full:
+  - os.full:
     - '*pdbedit -L -w*'
     - '*pdbedit -L -v*'
-    host.hostname:
+  - host.hostname:
     - '*pdbedit -L -w*'
     - '*pdbedit -L -v*'
-    event.original:
+  - event.original:
     - '*pdbedit -L -w*'
     - '*pdbedit -L -v*'
-    email.subject:
+  - email.subject:
     - '*pdbedit -L -w*'
     - '*pdbedit -L -v*'
-    device.model.name:
+  - device.model.name:
     - '*pdbedit -L -w*'
     - '*pdbedit -L -v*'
-    container.image.name:
+  - container.image.name:
     - '*pdbedit -L -w*'
     - '*pdbedit -L -v*'
-    container.name:
+  - container.name:
     - '*pdbedit -L -w*'
     - '*pdbedit -L -v*'
   condition: selection
@@ -104,3 +95,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

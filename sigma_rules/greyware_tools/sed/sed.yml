@@ -1,10 +1,8 @@
 title: Simple keyword detection rule for sed
 id: f59628c7-9463-4366-885b-23499a8f3f62
 status: experimental
-description:
-- '''allowing root login for ssh'''
-references:
-- N/A
+description: Detects interesting keywords based on sed tool
+references: []
 author: '@mthcht'
 date: 2023/07/30
 modified: 2023/09/15
@@ -19,49 +17,45 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- critical
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*sed ''s/#PermitRootLogin prohibit-password/PermitRootLogin Yes'' /etc/ssh/sshd_config*'
-    CommandLine:
+  - CommandLine:
     - '*sed ''s/#PermitRootLogin prohibit-password/PermitRootLogin Yes'' /etc/ssh/sshd_config*'
-    Details:
+  - Details:
     - '*sed ''s/#PermitRootLogin prohibit-password/PermitRootLogin Yes'' /etc/ssh/sshd_config*'
-    registry.value:
+  - registry.value:
     - '*sed ''s/#PermitRootLogin prohibit-password/PermitRootLogin Yes'' /etc/ssh/sshd_config*'
-    process.args:
+  - process.args:
     - '*sed ''s/#PermitRootLogin prohibit-password/PermitRootLogin Yes'' /etc/ssh/sshd_config*'
-    process.command_line:
+  - process.command_line:
     - '*sed ''s/#PermitRootLogin prohibit-password/PermitRootLogin Yes'' /etc/ssh/sshd_config*'
-    process.env_vars:
+  - process.env_vars:
     - '*sed ''s/#PermitRootLogin prohibit-password/PermitRootLogin Yes'' /etc/ssh/sshd_config*'
-    process.io.text:
+  - process.io.text:
     - '*sed ''s/#PermitRootLogin prohibit-password/PermitRootLogin Yes'' /etc/ssh/sshd_config*'
-    process.title:
+  - process.title:
     - '*sed ''s/#PermitRootLogin prohibit-password/PermitRootLogin Yes'' /etc/ssh/sshd_config*'
-    pe.company:
+  - pe.company:
     - '*sed ''s/#PermitRootLogin prohibit-password/PermitRootLogin Yes'' /etc/ssh/sshd_config*'
-    pe.description:
+  - pe.description:
     - '*sed ''s/#PermitRootLogin prohibit-password/PermitRootLogin Yes'' /etc/ssh/sshd_config*'
-    pe.product:
+  - pe.product:
     - '*sed ''s/#PermitRootLogin prohibit-password/PermitRootLogin Yes'' /etc/ssh/sshd_config*'
-    os.full:
+  - os.full:
     - '*sed ''s/#PermitRootLogin prohibit-password/PermitRootLogin Yes'' /etc/ssh/sshd_config*'
-    host.hostname:
+  - host.hostname:
     - '*sed ''s/#PermitRootLogin prohibit-password/PermitRootLogin Yes'' /etc/ssh/sshd_config*'
-    event.original:
+  - event.original:
     - '*sed ''s/#PermitRootLogin prohibit-password/PermitRootLogin Yes'' /etc/ssh/sshd_config*'
-    email.subject:
+  - email.subject:
     - '*sed ''s/#PermitRootLogin prohibit-password/PermitRootLogin Yes'' /etc/ssh/sshd_config*'
-    device.model.name:
+  - device.model.name:
     - '*sed ''s/#PermitRootLogin prohibit-password/PermitRootLogin Yes'' /etc/ssh/sshd_config*'
-    container.image.name:
+  - container.image.name:
     - '*sed ''s/#PermitRootLogin prohibit-password/PermitRootLogin Yes'' /etc/ssh/sshd_config*'
-    container.name:
+  - container.name:
     - '*sed ''s/#PermitRootLogin prohibit-password/PermitRootLogin Yes'' /etc/ssh/sshd_config*'
   condition: selection
 fields:
@@ -84,3 +78,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

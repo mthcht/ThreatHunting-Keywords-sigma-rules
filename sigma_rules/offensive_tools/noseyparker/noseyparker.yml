@@ -1,9 +1,7 @@
 title: Simple keyword detection rule for noseyparker
 id: e563b962-0e72-4e5c-8404-d6f2af361fcc
 status: experimental
-description:
-- '''Nosey Parker is a command-line program that finds secrets and sensitive information
-  in textual data and Git history.'''
+description: Detects interesting keywords based on noseyparker tool
 references:
 - https://github.com/praetorian-inc/noseyparker
 author: '@mthcht'
@@ -20,13 +18,9 @@ logsource:
   category:
   - endpoint
   - network
-falsepositives:
-- Unknown
-level:
-- medium
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -40,7 +34,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    CommandLine:
+  - CommandLine:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -54,7 +48,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    Details:
+  - Details:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -68,7 +62,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    registry.value:
+  - registry.value:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -82,7 +76,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    process.args:
+  - process.args:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -96,7 +90,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    process.command_line:
+  - process.command_line:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -110,7 +104,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    process.env_vars:
+  - process.env_vars:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -124,7 +118,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    process.io.text:
+  - process.io.text:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -138,7 +132,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    process.title:
+  - process.title:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -152,7 +146,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    pe.company:
+  - pe.company:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -166,7 +160,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    pe.description:
+  - pe.description:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -180,7 +174,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    pe.product:
+  - pe.product:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -194,7 +188,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    os.full:
+  - os.full:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -208,7 +202,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    host.hostname:
+  - host.hostname:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -222,15 +216,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    event.original:
-    - '*noseyparker summarize --datastore *'
-    - '*noseyparker report --datastore *'
-    - '*noseyparker scan --datastore *'
-    - '* scan --github-user*'
-    - '* scan --github-org*'
-    - '* github repos list --org*'
-    - '* github repos list --user *'
-    email.subject:
+  - event.original:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -244,7 +230,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    device.model.name:
+  - email.subject:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -258,7 +244,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    container.image.name:
+  - device.model.name:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -272,7 +258,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    container.name:
+  - container.image.name:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -286,7 +272,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    url:
+  - container.name:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -300,7 +286,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    dest_url:
+  - Image:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -314,7 +300,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    uri:
+  - OriginalFileName:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -328,7 +314,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    uri_query:
+  - CurrentDirectory:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -342,7 +328,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    query:
+  - ParentImage:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -356,7 +342,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    url_domain:
+  - ParentCommandLine:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -370,7 +356,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    uri_path:
+  - TargetFilename:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -384,7 +370,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    domain:
+  - Signature:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -398,7 +384,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    QueryName:
+  - signature:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -412,7 +398,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    QueryResults:
+  - ImageLoaded:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -426,7 +412,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    DestinationHostname:
+  - Company:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -440,7 +426,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    DestinationIp:
+  - Description:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -454,7 +440,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    http_referrer:
+  - description:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -468,7 +454,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    http_referrer_domain:
+  - CommandLine:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -482,7 +468,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    http_user_agent:
+  - SourceImage:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -496,7 +482,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    dest_nt_host:
+  - TargetImage:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -510,7 +496,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    sender:
+  - CallTrace:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -524,7 +510,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    recipient:
+  - TargetObject:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -538,7 +524,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    orig_recipient:
+  - Details:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -552,7 +538,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    subject:
+  - PipeName:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -566,7 +552,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    url.domain:
+  - Consumer:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -580,7 +566,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    url.full:
+  - Destination:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -594,7 +580,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    url.original:
+  - Name:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -608,7 +594,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    url.query:
+  - Query:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -622,7 +608,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    user_agent.original:
+  - NewName:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -636,7 +622,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    network.application:
+  - StartAddress:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -650,7 +636,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    http.request.body.content:
+  - StartModule:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -664,7 +650,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    http.request.referrer:
+  - StartFunction:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -678,7 +664,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    email.from.address:
+  - SourceHostname:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -692,7 +678,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    dns.question.name:
+  - Device:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -706,7 +692,7 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    destination.domain:
+  - file_name:
     - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
@@ -720,468 +706,1196 @@ detection:
     - '* scan --github-org*'
     - '* github repos list --org*'
     - '* github repos list --user *'
-    Image:
+  - file_path:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    OriginalFileName:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - process:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    CurrentDirectory:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - original_file_name:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    ParentImage:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - parent_process:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    TargetFilename:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - process_path:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    Signature:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - service_path:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    signature:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - registry_path:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    ImageLoaded:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - registry_value_data:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    Company:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - registry_value_name:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    Description:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - ContextInfo:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    description:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - Payload:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    SourceImage:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - ScriptBlockText:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    TargetImage:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - ServerName:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    CallTrace:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - TransportName:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    TargetObject:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - NewProcessName:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    PipeName:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - ParentProcessName:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    Consumer:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - Application:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    Destination:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - Product Name:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    Name:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - Threat Name:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    Query:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - Process Name:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    NewName:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - Path:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    StartAddress:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - ImagePath:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    StartModule:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - ServiceName:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    StartFunction:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - ProcessPath:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    SourceHostname:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - AppName:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    Device:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - AppPath:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    file_name:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - ModulePath:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    file_path:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - registry.data.strings:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    process:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - registry.path:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    original_file_name:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - registry.value:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    parent_process:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - process.args:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    process_path:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - process.command_line:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    service_path:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - process.env_vars:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    registry_path:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - process.io.text:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    registry_value_data:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - process.executable:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    registry_value_name:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - process.name:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    ContextInfo:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - process.title:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    Payload:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - pe.company:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    ScriptBlockText:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - pe.description:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    ServerName:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - pe.original_file_name:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    TransportName:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - pe.product:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    NewProcessName:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - os.full:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    ParentProcessName:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - host.hostname:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    Application:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - file.fork_name:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    Product Name:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - file.name:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    Threat Name:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - file.path:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    Process Name:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - file.target_path:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    Path:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - email.attachments.file.name:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    ImagePath:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - email.subject:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    ServiceName:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - dll.path:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    ProcessPath:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - device.model.name:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    AppName:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - container.image.name:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    AppPath:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - container.name:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    ModulePath:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - object:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    registry.data.strings:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - url:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    registry.path:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - dest_url:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    process.executable:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - uri:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    process.name:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - uri_query:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    pe.original_file_name:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - query:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    file.fork_name:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - url_domain:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    file.name:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - uri_path:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    file.path:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - domain:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    file.target_path:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - QueryName:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    email.attachments.file.name:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - QueryResults:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    dll.path:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - DestinationHostname:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
-    object:
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - DestinationIp:
+    - '*noseyparker summarize --datastore *'
     - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
     - '*praetorian-inc/noseyparker*'
     - '*noseyparker-v*-universal-macos*'
     - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
     - '*noseyparker-main*'
+    - '* scan --github-user*'
     - '*/noseyparker.git*'
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - http_referrer:
+    - '*noseyparker summarize --datastore *'
+    - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
+    - '*praetorian-inc/noseyparker*'
+    - '*noseyparker-v*-universal-macos*'
+    - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
+    - '*noseyparker-main*'
+    - '* scan --github-user*'
+    - '*/noseyparker.git*'
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - http_referrer_domain:
+    - '*noseyparker summarize --datastore *'
+    - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
+    - '*praetorian-inc/noseyparker*'
+    - '*noseyparker-v*-universal-macos*'
+    - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
+    - '*noseyparker-main*'
+    - '* scan --github-user*'
+    - '*/noseyparker.git*'
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - http_user_agent:
+    - '*noseyparker summarize --datastore *'
+    - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
+    - '*praetorian-inc/noseyparker*'
+    - '*noseyparker-v*-universal-macos*'
+    - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
+    - '*noseyparker-main*'
+    - '* scan --github-user*'
+    - '*/noseyparker.git*'
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - dest_nt_host:
+    - '*noseyparker summarize --datastore *'
+    - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
+    - '*praetorian-inc/noseyparker*'
+    - '*noseyparker-v*-universal-macos*'
+    - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
+    - '*noseyparker-main*'
+    - '* scan --github-user*'
+    - '*/noseyparker.git*'
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - sender:
+    - '*noseyparker summarize --datastore *'
+    - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
+    - '*praetorian-inc/noseyparker*'
+    - '*noseyparker-v*-universal-macos*'
+    - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
+    - '*noseyparker-main*'
+    - '* scan --github-user*'
+    - '*/noseyparker.git*'
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - recipient:
+    - '*noseyparker summarize --datastore *'
+    - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
+    - '*praetorian-inc/noseyparker*'
+    - '*noseyparker-v*-universal-macos*'
+    - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
+    - '*noseyparker-main*'
+    - '* scan --github-user*'
+    - '*/noseyparker.git*'
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - orig_recipient:
+    - '*noseyparker summarize --datastore *'
+    - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
+    - '*praetorian-inc/noseyparker*'
+    - '*noseyparker-v*-universal-macos*'
+    - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
+    - '*noseyparker-main*'
+    - '* scan --github-user*'
+    - '*/noseyparker.git*'
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - subject:
+    - '*noseyparker summarize --datastore *'
+    - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
+    - '*praetorian-inc/noseyparker*'
+    - '*noseyparker-v*-universal-macos*'
+    - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
+    - '*noseyparker-main*'
+    - '* scan --github-user*'
+    - '*/noseyparker.git*'
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - url.domain:
+    - '*noseyparker summarize --datastore *'
+    - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
+    - '*praetorian-inc/noseyparker*'
+    - '*noseyparker-v*-universal-macos*'
+    - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
+    - '*noseyparker-main*'
+    - '* scan --github-user*'
+    - '*/noseyparker.git*'
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - url.full:
+    - '*noseyparker summarize --datastore *'
+    - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
+    - '*praetorian-inc/noseyparker*'
+    - '*noseyparker-v*-universal-macos*'
+    - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
+    - '*noseyparker-main*'
+    - '* scan --github-user*'
+    - '*/noseyparker.git*'
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - url.original:
+    - '*noseyparker summarize --datastore *'
+    - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
+    - '*praetorian-inc/noseyparker*'
+    - '*noseyparker-v*-universal-macos*'
+    - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
+    - '*noseyparker-main*'
+    - '* scan --github-user*'
+    - '*/noseyparker.git*'
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - url.query:
+    - '*noseyparker summarize --datastore *'
+    - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
+    - '*praetorian-inc/noseyparker*'
+    - '*noseyparker-v*-universal-macos*'
+    - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
+    - '*noseyparker-main*'
+    - '* scan --github-user*'
+    - '*/noseyparker.git*'
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - user_agent.original:
+    - '*noseyparker summarize --datastore *'
+    - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
+    - '*praetorian-inc/noseyparker*'
+    - '*noseyparker-v*-universal-macos*'
+    - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
+    - '*noseyparker-main*'
+    - '* scan --github-user*'
+    - '*/noseyparker.git*'
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - network.application:
+    - '*noseyparker summarize --datastore *'
+    - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
+    - '*praetorian-inc/noseyparker*'
+    - '*noseyparker-v*-universal-macos*'
+    - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
+    - '*noseyparker-main*'
+    - '* scan --github-user*'
+    - '*/noseyparker.git*'
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - http.request.body.content:
+    - '*noseyparker summarize --datastore *'
+    - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
+    - '*praetorian-inc/noseyparker*'
+    - '*noseyparker-v*-universal-macos*'
+    - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
+    - '*noseyparker-main*'
+    - '* scan --github-user*'
+    - '*/noseyparker.git*'
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - http.request.referrer:
+    - '*noseyparker summarize --datastore *'
+    - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
+    - '*praetorian-inc/noseyparker*'
+    - '*noseyparker-v*-universal-macos*'
+    - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
+    - '*noseyparker-main*'
+    - '* scan --github-user*'
+    - '*/noseyparker.git*'
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - email.from.address:
+    - '*noseyparker summarize --datastore *'
+    - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
+    - '*praetorian-inc/noseyparker*'
+    - '*noseyparker-v*-universal-macos*'
+    - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
+    - '*noseyparker-main*'
+    - '* scan --github-user*'
+    - '*/noseyparker.git*'
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - dns.question.name:
+    - '*noseyparker summarize --datastore *'
+    - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
+    - '*praetorian-inc/noseyparker*'
+    - '*noseyparker-v*-universal-macos*'
+    - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
+    - '*noseyparker-main*'
+    - '* scan --github-user*'
+    - '*/noseyparker.git*'
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
+  - destination.domain:
+    - '*noseyparker summarize --datastore *'
+    - '*noseyparker-v*-x86_64-unknown-linux-gnu*'
+    - '*praetorian-inc/noseyparker*'
+    - '*noseyparker-v*-universal-macos*'
+    - '*noseyparker-cli*'
+    - '*noseyparker report --datastore *'
+    - '*noseyparker scan --datastore *'
+    - '*noseyparker-main*'
+    - '* scan --github-user*'
+    - '*/noseyparker.git*'
+    - '* scan --github-org*'
+    - '* github repos list --org*'
+    - '* github repos list --user *'
   condition: selection
 fields:
 - ParentCommandLine
@@ -1203,41 +1917,11 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
-- url
-- dest_url
-- uri
-- uri_query
-- query
-- url_domain
-- uri_path
-- domain
-- QueryName
-- QueryResults
-- DestinationHostname
-- DestinationIp
-- http_referrer
-- http_referrer_domain
-- http_user_agent
-- dest_nt_host
-- sender
-- recipient
-- orig_recipient
-- subject
-- url.domain
-- url.full
-- url.original
-- url.query
-- user_agent.original
-- network.application
-- http.request.body.content
-- http.request.referrer
-- email.from.address
-- dns.question.name
-- destination.domain
 - Image
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -1245,10 +1929,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -1290,13 +1976,62 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
+- url
+- dest_url
+- uri
+- uri_query
+- query
+- url_domain
+- uri_path
+- domain
+- QueryName
+- QueryResults
+- DestinationHostname
+- DestinationIp
+- http_referrer
+- http_referrer_domain
+- http_user_agent
+- dest_nt_host
+- sender
+- recipient
+- orig_recipient
+- subject
+- url.domain
+- url.full
+- url.original
+- url.query
+- user_agent.original
+- network.application
+- http.request.body.content
+- http.request.referrer
+- email.from.address
+- dns.question.name
+- destination.domain
+falsepositives:
+- unknown
+level: medium

@@ -1,9 +1,7 @@
 title: Simple keyword detection rule for ldifde
 id: bde9a27d-456c-4c62-9675-0bc8725cc678
 status: experimental
-description:
-- '''using ldifde.exe to export data from Active Directory to a .txt file in the Temp
-  directory'''
+description: Detects interesting keywords based on ldifde tool
 references:
 - https://media.defense.gov/2023/May/24/2003229517/-1/-1/0/CSA_Living_off_the_Land.PDF
 author: '@mthcht'
@@ -19,49 +17,45 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*ldifde.exe -f *\temp\*.txt -p subtree*'
-    CommandLine:
+  - CommandLine:
     - '*ldifde.exe -f *\temp\*.txt -p subtree*'
-    Details:
+  - Details:
     - '*ldifde.exe -f *\temp\*.txt -p subtree*'
-    registry.value:
+  - registry.value:
     - '*ldifde.exe -f *\temp\*.txt -p subtree*'
-    process.args:
+  - process.args:
     - '*ldifde.exe -f *\temp\*.txt -p subtree*'
-    process.command_line:
+  - process.command_line:
     - '*ldifde.exe -f *\temp\*.txt -p subtree*'
-    process.env_vars:
+  - process.env_vars:
     - '*ldifde.exe -f *\temp\*.txt -p subtree*'
-    process.io.text:
+  - process.io.text:
     - '*ldifde.exe -f *\temp\*.txt -p subtree*'
-    process.title:
+  - process.title:
     - '*ldifde.exe -f *\temp\*.txt -p subtree*'
-    pe.company:
+  - pe.company:
     - '*ldifde.exe -f *\temp\*.txt -p subtree*'
-    pe.description:
+  - pe.description:
     - '*ldifde.exe -f *\temp\*.txt -p subtree*'
-    pe.product:
+  - pe.product:
     - '*ldifde.exe -f *\temp\*.txt -p subtree*'
-    os.full:
+  - os.full:
     - '*ldifde.exe -f *\temp\*.txt -p subtree*'
-    host.hostname:
+  - host.hostname:
     - '*ldifde.exe -f *\temp\*.txt -p subtree*'
-    event.original:
+  - event.original:
     - '*ldifde.exe -f *\temp\*.txt -p subtree*'
-    email.subject:
+  - email.subject:
     - '*ldifde.exe -f *\temp\*.txt -p subtree*'
-    device.model.name:
+  - device.model.name:
     - '*ldifde.exe -f *\temp\*.txt -p subtree*'
-    container.image.name:
+  - container.image.name:
     - '*ldifde.exe -f *\temp\*.txt -p subtree*'
-    container.name:
+  - container.name:
     - '*ldifde.exe -f *\temp\*.txt -p subtree*'
   condition: selection
 fields:
@@ -84,3 +78,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

@@ -1,20 +1,7 @@
 title: Simple keyword detection rule for powerview
 id: cf54ddf6-c413-4d3f-926c-be8223490994
 status: experimental
-description:
-- '''modifying existing permissions on an Active Directory object (''AdminSDHolder'').
-  which can be used to maintain unauthorized access or escalate privileges in the
-  targeted environment. The ''AdminSDHolder'' container plays a crucial role in managing
-  the security of protected groups in Active Directory. and modifying its permissions
-  may lead to unintended security consequences.'''
-- '''PowerView is a PowerShell tool to gain network situational awareness on Windows
-  domains. It contains a set of pure-PowerShell replacements for various windows net
-  commands. which utilize PowerShell AD hooks and underlying Win32 API functions to
-  perform useful Windows domain functionality It also implements various useful metafunctions.
-  including some custom-written user-hunting functions which will identify where on
-  the network specific users are logged into. It can also check which machines on
-  the domain the current user has local administrator access on. Several functions
-  for the enumeration and abuse of domain trusts also exist'''
+description: Detects interesting keywords based on powerview tool
 references:
 - https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon
 - https://github.com/zloeber/PSAD/blob/master/src/inprogress/Add-ObjectACL.ps1
@@ -34,217 +21,418 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    Image:
-    - '*PowerView.ps1*'
-    OriginalFileName:
-    - '*PowerView.ps1*'
-    CurrentDirectory:
-    - '*PowerView.ps1*'
-    ParentImage:
-    - '*PowerView.ps1*'
-    ParentCommandLine:
+  - Image:
     - '*PowerView.ps1*'
     - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
       * -Rights All*'
-    TargetFilename:
-    - '*PowerView.ps1*'
-    Signature:
-    - '*PowerView.ps1*'
-    signature:
-    - '*PowerView.ps1*'
-    ImageLoaded:
-    - '*PowerView.ps1*'
-    Company:
-    - '*PowerView.ps1*'
-    Description:
-    - '*PowerView.ps1*'
-    description:
-    - '*PowerView.ps1*'
-    CommandLine:
+  - OriginalFileName:
     - '*PowerView.ps1*'
     - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
       * -Rights All*'
-    SourceImage:
-    - '*PowerView.ps1*'
-    TargetImage:
-    - '*PowerView.ps1*'
-    CallTrace:
-    - '*PowerView.ps1*'
-    TargetObject:
-    - '*PowerView.ps1*'
-    Details:
+  - CurrentDirectory:
     - '*PowerView.ps1*'
     - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
       * -Rights All*'
-    PipeName:
-    - '*PowerView.ps1*'
-    Consumer:
-    - '*PowerView.ps1*'
-    Destination:
-    - '*PowerView.ps1*'
-    Name:
-    - '*PowerView.ps1*'
-    Query:
-    - '*PowerView.ps1*'
-    NewName:
-    - '*PowerView.ps1*'
-    StartAddress:
-    - '*PowerView.ps1*'
-    StartModule:
-    - '*PowerView.ps1*'
-    StartFunction:
-    - '*PowerView.ps1*'
-    SourceHostname:
-    - '*PowerView.ps1*'
-    Device:
-    - '*PowerView.ps1*'
-    file_name:
-    - '*PowerView.ps1*'
-    file_path:
-    - '*PowerView.ps1*'
-    process:
-    - '*PowerView.ps1*'
-    original_file_name:
-    - '*PowerView.ps1*'
-    parent_process:
-    - '*PowerView.ps1*'
-    process_path:
-    - '*PowerView.ps1*'
-    service_path:
-    - '*PowerView.ps1*'
-    registry_path:
-    - '*PowerView.ps1*'
-    registry_value_data:
-    - '*PowerView.ps1*'
-    registry_value_name:
-    - '*PowerView.ps1*'
-    ContextInfo:
-    - '*PowerView.ps1*'
-    Payload:
-    - '*PowerView.ps1*'
-    ScriptBlockText:
-    - '*PowerView.ps1*'
-    ServerName:
-    - '*PowerView.ps1*'
-    TransportName:
-    - '*PowerView.ps1*'
-    NewProcessName:
-    - '*PowerView.ps1*'
-    ParentProcessName:
-    - '*PowerView.ps1*'
-    Application:
-    - '*PowerView.ps1*'
-    Product Name:
-    - '*PowerView.ps1*'
-    Threat Name:
-    - '*PowerView.ps1*'
-    Process Name:
-    - '*PowerView.ps1*'
-    Path:
-    - '*PowerView.ps1*'
-    ImagePath:
-    - '*PowerView.ps1*'
-    ServiceName:
-    - '*PowerView.ps1*'
-    ProcessPath:
-    - '*PowerView.ps1*'
-    AppName:
-    - '*PowerView.ps1*'
-    AppPath:
-    - '*PowerView.ps1*'
-    ModulePath:
-    - '*PowerView.ps1*'
-    registry.data.strings:
-    - '*PowerView.ps1*'
-    registry.path:
-    - '*PowerView.ps1*'
-    registry.value:
+  - ParentImage:
     - '*PowerView.ps1*'
     - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
       * -Rights All*'
-    process.args:
+  - ParentCommandLine:
     - '*PowerView.ps1*'
     - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
       * -Rights All*'
-    process.command_line:
+  - TargetFilename:
     - '*PowerView.ps1*'
     - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
       * -Rights All*'
-    process.env_vars:
+  - Signature:
     - '*PowerView.ps1*'
     - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
       * -Rights All*'
-    process.io.text:
+  - signature:
     - '*PowerView.ps1*'
     - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
       * -Rights All*'
-    process.executable:
-    - '*PowerView.ps1*'
-    process.name:
-    - '*PowerView.ps1*'
-    process.title:
+  - ImageLoaded:
     - '*PowerView.ps1*'
     - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
       * -Rights All*'
-    pe.company:
+  - Company:
     - '*PowerView.ps1*'
     - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
       * -Rights All*'
-    pe.description:
+  - Description:
     - '*PowerView.ps1*'
     - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
       * -Rights All*'
-    pe.original_file_name:
-    - '*PowerView.ps1*'
-    pe.product:
+  - description:
     - '*PowerView.ps1*'
     - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
       * -Rights All*'
-    os.full:
+  - CommandLine:
     - '*PowerView.ps1*'
     - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
       * -Rights All*'
-    host.hostname:
+  - SourceImage:
     - '*PowerView.ps1*'
     - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
       * -Rights All*'
-    file.fork_name:
-    - '*PowerView.ps1*'
-    file.name:
-    - '*PowerView.ps1*'
-    file.path:
-    - '*PowerView.ps1*'
-    file.target_path:
-    - '*PowerView.ps1*'
-    email.attachments.file.name:
-    - '*PowerView.ps1*'
-    email.subject:
+  - TargetImage:
     - '*PowerView.ps1*'
     - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
       * -Rights All*'
-    dll.path:
-    - '*PowerView.ps1*'
-    device.model.name:
+  - CallTrace:
     - '*PowerView.ps1*'
     - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
       * -Rights All*'
-    container.image.name:
+  - TargetObject:
     - '*PowerView.ps1*'
     - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
       * -Rights All*'
-    container.name:
+  - Details:
     - '*PowerView.ps1*'
     - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
       * -Rights All*'
-    object:
+  - PipeName:
     - '*PowerView.ps1*'
-    event.original:
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - Consumer:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - Destination:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - Name:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - Query:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - NewName:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - StartAddress:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - StartModule:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - StartFunction:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - SourceHostname:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - Device:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - file_name:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - file_path:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - process:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - original_file_name:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - parent_process:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - process_path:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - service_path:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - registry_path:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - registry_value_data:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - registry_value_name:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - ContextInfo:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - Payload:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - ScriptBlockText:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - ServerName:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - TransportName:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - NewProcessName:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - ParentProcessName:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - Application:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - Product Name:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - Threat Name:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - Process Name:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - Path:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - ImagePath:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - ServiceName:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - ProcessPath:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - AppName:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - AppPath:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - ModulePath:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - registry.data.strings:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - registry.path:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - registry.value:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - process.args:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - process.command_line:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - process.env_vars:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - process.io.text:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - process.executable:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - process.name:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - process.title:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - pe.company:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - pe.description:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - pe.original_file_name:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - pe.product:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - os.full:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - host.hostname:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - file.fork_name:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - file.name:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - file.path:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - file.target_path:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - email.attachments.file.name:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - email.subject:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - dll.path:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - device.model.name:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - container.image.name:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - container.name:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - object:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - ParentCommandLine:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - CommandLine:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - Details:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - registry.value:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - process.args:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - process.command_line:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - process.env_vars:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - process.io.text:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - process.title:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - pe.company:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - pe.description:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - pe.product:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - os.full:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - host.hostname:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - event.original:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - email.subject:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - device.model.name:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - container.image.name:
+    - '*PowerView.ps1*'
+    - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
+      * -Rights All*'
+  - container.name:
+    - '*PowerView.ps1*'
     - '*Add-ObjectAcl -TargetADSprefix ''CN=AdminSDHolder*CN=System'' -PrincipalSamAccountName
       * -Rights All*'
   condition: selection
@@ -333,4 +521,25 @@ fields:
 - container.image.name
 - container.name
 - object
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
 - event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium

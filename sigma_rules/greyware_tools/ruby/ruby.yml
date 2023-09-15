@@ -1,8 +1,7 @@
 title: Simple keyword detection rule for ruby
 id: 6fba0a14-7520-41bc-ba16-99cd9d32b7f1
 status: experimental
-description:
-- '''ruby reverse shell'''
+description: Detects interesting keywords based on ruby tool
 references:
 - https://github.com/RoseSecurity/Red-Teaming-TTPs/blob/main/Linux.md
 author: '@mthcht'
@@ -17,49 +16,45 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- critical
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*ruby -rsocket *TCPSocket.open(*exec sprintf*/bin/sh -i *'
-    CommandLine:
+  - CommandLine:
     - '*ruby -rsocket *TCPSocket.open(*exec sprintf*/bin/sh -i *'
-    Details:
+  - Details:
     - '*ruby -rsocket *TCPSocket.open(*exec sprintf*/bin/sh -i *'
-    registry.value:
+  - registry.value:
     - '*ruby -rsocket *TCPSocket.open(*exec sprintf*/bin/sh -i *'
-    process.args:
+  - process.args:
     - '*ruby -rsocket *TCPSocket.open(*exec sprintf*/bin/sh -i *'
-    process.command_line:
+  - process.command_line:
     - '*ruby -rsocket *TCPSocket.open(*exec sprintf*/bin/sh -i *'
-    process.env_vars:
+  - process.env_vars:
     - '*ruby -rsocket *TCPSocket.open(*exec sprintf*/bin/sh -i *'
-    process.io.text:
+  - process.io.text:
     - '*ruby -rsocket *TCPSocket.open(*exec sprintf*/bin/sh -i *'
-    process.title:
+  - process.title:
     - '*ruby -rsocket *TCPSocket.open(*exec sprintf*/bin/sh -i *'
-    pe.company:
+  - pe.company:
     - '*ruby -rsocket *TCPSocket.open(*exec sprintf*/bin/sh -i *'
-    pe.description:
+  - pe.description:
     - '*ruby -rsocket *TCPSocket.open(*exec sprintf*/bin/sh -i *'
-    pe.product:
+  - pe.product:
     - '*ruby -rsocket *TCPSocket.open(*exec sprintf*/bin/sh -i *'
-    os.full:
+  - os.full:
     - '*ruby -rsocket *TCPSocket.open(*exec sprintf*/bin/sh -i *'
-    host.hostname:
+  - host.hostname:
     - '*ruby -rsocket *TCPSocket.open(*exec sprintf*/bin/sh -i *'
-    event.original:
+  - event.original:
     - '*ruby -rsocket *TCPSocket.open(*exec sprintf*/bin/sh -i *'
-    email.subject:
+  - email.subject:
     - '*ruby -rsocket *TCPSocket.open(*exec sprintf*/bin/sh -i *'
-    device.model.name:
+  - device.model.name:
     - '*ruby -rsocket *TCPSocket.open(*exec sprintf*/bin/sh -i *'
-    container.image.name:
+  - container.image.name:
     - '*ruby -rsocket *TCPSocket.open(*exec sprintf*/bin/sh -i *'
-    container.name:
+  - container.name:
     - '*ruby -rsocket *TCPSocket.open(*exec sprintf*/bin/sh -i *'
   condition: selection
 fields:
@@ -82,3 +77,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

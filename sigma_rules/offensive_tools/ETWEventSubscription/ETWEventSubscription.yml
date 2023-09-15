@@ -1,10 +1,7 @@
 title: Simple keyword detection rule for ETWEventSubscription
 id: 7a24427c-af5d-4d29-8510-c893afeae0ad
 status: experimental
-description:
-- '''Similar to WMI event subscriptions but leverages Event Tracing for Windows. When
-  the event on the system occurs currently either when any user logs in or a specified
-  process is started - the DoEvil() method is executed.'''
+description: Detects interesting keywords based on ETWEventSubscription tool
 references:
 - https://github.com/matterpreter/OffensiveCSharp/tree/master/ETWEventSubscription
 author: '@mthcht'
@@ -20,543 +17,717 @@ logsource:
   category:
   - endpoint
   - network
-falsepositives:
-- Unknown
-level:
-- critical
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    CommandLine:
+  - CommandLine:
     - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    Details:
+  - Details:
     - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    registry.value:
+  - registry.value:
     - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    process.args:
+  - process.args:
     - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    process.command_line:
+  - process.command_line:
     - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    process.env_vars:
+  - process.env_vars:
     - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    process.io.text:
+  - process.io.text:
     - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    process.title:
+  - process.title:
     - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    pe.company:
+  - pe.company:
     - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    pe.description:
+  - pe.description:
     - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    pe.product:
+  - pe.product:
     - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    os.full:
+  - os.full:
     - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    host.hostname:
+  - host.hostname:
     - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    event.original:
-    - '*ETWEventSubscription.exe* -ProcStart *'
-    email.subject:
+  - event.original:
     - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    device.model.name:
+  - email.subject:
     - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    container.image.name:
+  - device.model.name:
     - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    container.name:
+  - container.image.name:
     - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    Image:
+  - container.name:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    OriginalFileName:
+  - Image:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    CurrentDirectory:
+  - OriginalFileName:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    ParentImage:
+  - CurrentDirectory:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    TargetFilename:
+  - ParentImage:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    Signature:
+  - ParentCommandLine:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    signature:
+  - TargetFilename:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    ImageLoaded:
+  - Signature:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    Company:
+  - signature:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    Description:
+  - ImageLoaded:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    description:
+  - Company:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    SourceImage:
+  - Description:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    TargetImage:
+  - description:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    CallTrace:
+  - CommandLine:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    TargetObject:
+  - SourceImage:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    PipeName:
+  - TargetImage:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    Consumer:
+  - CallTrace:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    Destination:
+  - TargetObject:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    Name:
+  - Details:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    Query:
+  - PipeName:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    NewName:
+  - Consumer:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    StartAddress:
+  - Destination:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    StartModule:
+  - Name:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    StartFunction:
+  - Query:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    SourceHostname:
+  - NewName:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    Device:
+  - StartAddress:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    file_name:
+  - StartModule:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    file_path:
+  - StartFunction:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    process:
+  - SourceHostname:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    original_file_name:
+  - Device:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    parent_process:
+  - file_name:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    process_path:
+  - file_path:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    service_path:
+  - process:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    registry_path:
+  - original_file_name:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    registry_value_data:
+  - parent_process:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    registry_value_name:
+  - process_path:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    ContextInfo:
+  - service_path:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    Payload:
+  - registry_path:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    ScriptBlockText:
+  - registry_value_data:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    ServerName:
+  - registry_value_name:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    TransportName:
+  - ContextInfo:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    NewProcessName:
+  - Payload:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    ParentProcessName:
+  - ScriptBlockText:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    Application:
+  - ServerName:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    Product Name:
+  - TransportName:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    Threat Name:
+  - NewProcessName:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    Process Name:
+  - ParentProcessName:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    Path:
+  - Application:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    ImagePath:
+  - Product Name:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    ServiceName:
+  - Threat Name:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    ProcessPath:
+  - Process Name:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    AppName:
+  - Path:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    AppPath:
+  - ImagePath:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    ModulePath:
+  - ServiceName:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    registry.data.strings:
+  - ProcessPath:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    registry.path:
+  - AppName:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    process.executable:
+  - AppPath:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    process.name:
+  - ModulePath:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    pe.original_file_name:
+  - registry.data.strings:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    file.fork_name:
+  - registry.path:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    file.name:
+  - registry.value:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    file.path:
+  - process.args:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    file.target_path:
+  - process.command_line:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    email.attachments.file.name:
+  - process.env_vars:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    dll.path:
+  - process.io.text:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    object:
+  - process.executable:
+    - '*ETWEventSubscription.exe* -ProcStart *'
     - '*ETWEventSubscription.exe* -UserLogon*'
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*DoEvil()*'
     - '*ETWEventSubscription*Program.cs*'
-    url:
+  - process.name:
+    - '*ETWEventSubscription.exe* -ProcStart *'
+    - '*ETWEventSubscription.exe* -UserLogon*'
+    - '*OffensiveCSharp*ETWEventSubscription*'
+    - '*DoEvil()*'
+    - '*ETWEventSubscription*Program.cs*'
+  - process.title:
+    - '*ETWEventSubscription.exe* -ProcStart *'
+    - '*ETWEventSubscription.exe* -UserLogon*'
+    - '*OffensiveCSharp*ETWEventSubscription*'
+    - '*DoEvil()*'
+    - '*ETWEventSubscription*Program.cs*'
+  - pe.company:
+    - '*ETWEventSubscription.exe* -ProcStart *'
+    - '*ETWEventSubscription.exe* -UserLogon*'
+    - '*OffensiveCSharp*ETWEventSubscription*'
+    - '*DoEvil()*'
+    - '*ETWEventSubscription*Program.cs*'
+  - pe.description:
+    - '*ETWEventSubscription.exe* -ProcStart *'
+    - '*ETWEventSubscription.exe* -UserLogon*'
+    - '*OffensiveCSharp*ETWEventSubscription*'
+    - '*DoEvil()*'
+    - '*ETWEventSubscription*Program.cs*'
+  - pe.original_file_name:
+    - '*ETWEventSubscription.exe* -ProcStart *'
+    - '*ETWEventSubscription.exe* -UserLogon*'
+    - '*OffensiveCSharp*ETWEventSubscription*'
+    - '*DoEvil()*'
+    - '*ETWEventSubscription*Program.cs*'
+  - pe.product:
+    - '*ETWEventSubscription.exe* -ProcStart *'
+    - '*ETWEventSubscription.exe* -UserLogon*'
+    - '*OffensiveCSharp*ETWEventSubscription*'
+    - '*DoEvil()*'
+    - '*ETWEventSubscription*Program.cs*'
+  - os.full:
+    - '*ETWEventSubscription.exe* -ProcStart *'
+    - '*ETWEventSubscription.exe* -UserLogon*'
+    - '*OffensiveCSharp*ETWEventSubscription*'
+    - '*DoEvil()*'
+    - '*ETWEventSubscription*Program.cs*'
+  - host.hostname:
+    - '*ETWEventSubscription.exe* -ProcStart *'
+    - '*ETWEventSubscription.exe* -UserLogon*'
+    - '*OffensiveCSharp*ETWEventSubscription*'
+    - '*DoEvil()*'
+    - '*ETWEventSubscription*Program.cs*'
+  - file.fork_name:
+    - '*ETWEventSubscription.exe* -ProcStart *'
+    - '*ETWEventSubscription.exe* -UserLogon*'
+    - '*OffensiveCSharp*ETWEventSubscription*'
+    - '*DoEvil()*'
+    - '*ETWEventSubscription*Program.cs*'
+  - file.name:
+    - '*ETWEventSubscription.exe* -ProcStart *'
+    - '*ETWEventSubscription.exe* -UserLogon*'
+    - '*OffensiveCSharp*ETWEventSubscription*'
+    - '*DoEvil()*'
+    - '*ETWEventSubscription*Program.cs*'
+  - file.path:
+    - '*ETWEventSubscription.exe* -ProcStart *'
+    - '*ETWEventSubscription.exe* -UserLogon*'
+    - '*OffensiveCSharp*ETWEventSubscription*'
+    - '*DoEvil()*'
+    - '*ETWEventSubscription*Program.cs*'
+  - file.target_path:
+    - '*ETWEventSubscription.exe* -ProcStart *'
+    - '*ETWEventSubscription.exe* -UserLogon*'
+    - '*OffensiveCSharp*ETWEventSubscription*'
+    - '*DoEvil()*'
+    - '*ETWEventSubscription*Program.cs*'
+  - email.attachments.file.name:
+    - '*ETWEventSubscription.exe* -ProcStart *'
+    - '*ETWEventSubscription.exe* -UserLogon*'
+    - '*OffensiveCSharp*ETWEventSubscription*'
+    - '*DoEvil()*'
+    - '*ETWEventSubscription*Program.cs*'
+  - email.subject:
+    - '*ETWEventSubscription.exe* -ProcStart *'
+    - '*ETWEventSubscription.exe* -UserLogon*'
+    - '*OffensiveCSharp*ETWEventSubscription*'
+    - '*DoEvil()*'
+    - '*ETWEventSubscription*Program.cs*'
+  - dll.path:
+    - '*ETWEventSubscription.exe* -ProcStart *'
+    - '*ETWEventSubscription.exe* -UserLogon*'
+    - '*OffensiveCSharp*ETWEventSubscription*'
+    - '*DoEvil()*'
+    - '*ETWEventSubscription*Program.cs*'
+  - device.model.name:
+    - '*ETWEventSubscription.exe* -ProcStart *'
+    - '*ETWEventSubscription.exe* -UserLogon*'
+    - '*OffensiveCSharp*ETWEventSubscription*'
+    - '*DoEvil()*'
+    - '*ETWEventSubscription*Program.cs*'
+  - container.image.name:
+    - '*ETWEventSubscription.exe* -ProcStart *'
+    - '*ETWEventSubscription.exe* -UserLogon*'
+    - '*OffensiveCSharp*ETWEventSubscription*'
+    - '*DoEvil()*'
+    - '*ETWEventSubscription*Program.cs*'
+  - container.name:
+    - '*ETWEventSubscription.exe* -ProcStart *'
+    - '*ETWEventSubscription.exe* -UserLogon*'
+    - '*OffensiveCSharp*ETWEventSubscription*'
+    - '*DoEvil()*'
+    - '*ETWEventSubscription*Program.cs*'
+  - object:
+    - '*ETWEventSubscription.exe* -ProcStart *'
+    - '*ETWEventSubscription.exe* -UserLogon*'
+    - '*OffensiveCSharp*ETWEventSubscription*'
+    - '*DoEvil()*'
+    - '*ETWEventSubscription*Program.cs*'
+  - url:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    dest_url:
+  - dest_url:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    uri:
+  - uri:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    uri_query:
+  - uri_query:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    query:
+  - query:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    url_domain:
+  - url_domain:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    uri_path:
+  - uri_path:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    domain:
+  - domain:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    QueryName:
+  - QueryName:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    QueryResults:
+  - QueryResults:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    DestinationHostname:
+  - DestinationHostname:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    DestinationIp:
+  - DestinationIp:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    http_referrer:
+  - http_referrer:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    http_referrer_domain:
+  - http_referrer_domain:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    http_user_agent:
+  - http_user_agent:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    dest_nt_host:
+  - dest_nt_host:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    sender:
+  - sender:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    recipient:
+  - recipient:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    orig_recipient:
+  - orig_recipient:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    subject:
+  - subject:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    url.domain:
+  - url.domain:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    url.full:
+  - url.full:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    url.original:
+  - url.original:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    url.query:
+  - url.query:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    user_agent.original:
+  - user_agent.original:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    network.application:
+  - network.application:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    http.request.body.content:
+  - http.request.body.content:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    http.request.referrer:
+  - http.request.referrer:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    email.from.address:
+  - email.from.address:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    dns.question.name:
+  - dns.question.name:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
-    destination.domain:
+  - destination.domain:
     - '*OffensiveCSharp*ETWEventSubscription*'
     - '*ETWEventSubscription*Program.cs*'
   condition: selection
@@ -584,6 +755,7 @@ fields:
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -591,10 +763,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -636,15 +810,30 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
 - url
 - dest_url
@@ -677,3 +866,6 @@ fields:
 - email.from.address
 - dns.question.name
 - destination.domain
+falsepositives:
+- unknown
+level: medium

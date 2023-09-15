@@ -1,9 +1,7 @@
 title: Simple keyword detection rule for updog
 id: 1dcbed10-3265-4d92-bc51-6d8318e24a90
 status: experimental
-description:
-- '''Updog is a replacement for SimpleHTTPServer. It allows uploading and downloading
-  via HTTP/S can set ad hoc SSL certificates and use http basic auth.'''
+description: Detects interesting keywords based on updog tool
 references:
 - https://github.com/sc0tfree/updog
 author: '@mthcht'
@@ -19,13 +17,9 @@ logsource:
   category:
   - endpoint
   - network
-falsepositives:
-- Unknown
-level:
-- critical
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*updog -p *'
     - '*updog -d /*'
     - '*/updog.git*'
@@ -36,7 +30,7 @@ detection:
     - '*pip* install updog*'
     - '*\updog-master\*'
     - '*updog --*'
-    CommandLine:
+  - CommandLine:
     - '*updog -p *'
     - '*updog -d /*'
     - '*/updog.git*'
@@ -47,7 +41,7 @@ detection:
     - '*pip* install updog*'
     - '*\updog-master\*'
     - '*updog --*'
-    Details:
+  - Details:
     - '*updog -p *'
     - '*updog -d /*'
     - '*/updog.git*'
@@ -58,7 +52,7 @@ detection:
     - '*pip* install updog*'
     - '*\updog-master\*'
     - '*updog --*'
-    registry.value:
+  - registry.value:
     - '*updog -p *'
     - '*updog -d /*'
     - '*/updog.git*'
@@ -69,7 +63,7 @@ detection:
     - '*pip* install updog*'
     - '*\updog-master\*'
     - '*updog --*'
-    process.args:
+  - process.args:
     - '*updog -p *'
     - '*updog -d /*'
     - '*/updog.git*'
@@ -80,7 +74,7 @@ detection:
     - '*pip* install updog*'
     - '*\updog-master\*'
     - '*updog --*'
-    process.command_line:
+  - process.command_line:
     - '*updog -p *'
     - '*updog -d /*'
     - '*/updog.git*'
@@ -91,7 +85,7 @@ detection:
     - '*pip* install updog*'
     - '*\updog-master\*'
     - '*updog --*'
-    process.env_vars:
+  - process.env_vars:
     - '*updog -p *'
     - '*updog -d /*'
     - '*/updog.git*'
@@ -102,7 +96,7 @@ detection:
     - '*pip* install updog*'
     - '*\updog-master\*'
     - '*updog --*'
-    process.io.text:
+  - process.io.text:
     - '*updog -p *'
     - '*updog -d /*'
     - '*/updog.git*'
@@ -113,7 +107,7 @@ detection:
     - '*pip* install updog*'
     - '*\updog-master\*'
     - '*updog --*'
-    process.title:
+  - process.title:
     - '*updog -p *'
     - '*updog -d /*'
     - '*/updog.git*'
@@ -124,7 +118,7 @@ detection:
     - '*pip* install updog*'
     - '*\updog-master\*'
     - '*updog --*'
-    pe.company:
+  - pe.company:
     - '*updog -p *'
     - '*updog -d /*'
     - '*/updog.git*'
@@ -135,7 +129,7 @@ detection:
     - '*pip* install updog*'
     - '*\updog-master\*'
     - '*updog --*'
-    pe.description:
+  - pe.description:
     - '*updog -p *'
     - '*updog -d /*'
     - '*/updog.git*'
@@ -146,7 +140,7 @@ detection:
     - '*pip* install updog*'
     - '*\updog-master\*'
     - '*updog --*'
-    pe.product:
+  - pe.product:
     - '*updog -p *'
     - '*updog -d /*'
     - '*/updog.git*'
@@ -157,7 +151,7 @@ detection:
     - '*pip* install updog*'
     - '*\updog-master\*'
     - '*updog --*'
-    os.full:
+  - os.full:
     - '*updog -p *'
     - '*updog -d /*'
     - '*/updog.git*'
@@ -168,7 +162,7 @@ detection:
     - '*pip* install updog*'
     - '*\updog-master\*'
     - '*updog --*'
-    host.hostname:
+  - host.hostname:
     - '*updog -p *'
     - '*updog -d /*'
     - '*/updog.git*'
@@ -179,12 +173,7 @@ detection:
     - '*pip* install updog*'
     - '*\updog-master\*'
     - '*updog --*'
-    event.original:
-    - '*updog -p *'
-    - '*updog -d /*'
-    - '*pip* install updog*'
-    - '*updog --*'
-    email.subject:
+  - event.original:
     - '*updog -p *'
     - '*updog -d /*'
     - '*/updog.git*'
@@ -195,7 +184,7 @@ detection:
     - '*pip* install updog*'
     - '*\updog-master\*'
     - '*updog --*'
-    device.model.name:
+  - email.subject:
     - '*updog -p *'
     - '*updog -d /*'
     - '*/updog.git*'
@@ -206,7 +195,7 @@ detection:
     - '*pip* install updog*'
     - '*\updog-master\*'
     - '*updog --*'
-    container.image.name:
+  - device.model.name:
     - '*updog -p *'
     - '*updog -d /*'
     - '*/updog.git*'
@@ -217,7 +206,7 @@ detection:
     - '*pip* install updog*'
     - '*\updog-master\*'
     - '*updog --*'
-    container.name:
+  - container.image.name:
     - '*updog -p *'
     - '*updog -d /*'
     - '*/updog.git*'
@@ -228,649 +217,1122 @@ detection:
     - '*pip* install updog*'
     - '*\updog-master\*'
     - '*updog --*'
-    Image:
+  - container.name:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    OriginalFileName:
+    - '*updog --*'
+  - Image:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    CurrentDirectory:
+    - '*updog --*'
+  - OriginalFileName:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    ParentImage:
+    - '*updog --*'
+  - CurrentDirectory:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    TargetFilename:
+    - '*updog --*'
+  - ParentImage:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    Signature:
+    - '*updog --*'
+  - ParentCommandLine:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    signature:
+    - '*updog --*'
+  - TargetFilename:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    ImageLoaded:
+    - '*updog --*'
+  - Signature:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    Company:
+    - '*updog --*'
+  - signature:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    Description:
+    - '*updog --*'
+  - ImageLoaded:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    description:
+    - '*updog --*'
+  - Company:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    SourceImage:
+    - '*updog --*'
+  - Description:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    TargetImage:
+    - '*updog --*'
+  - description:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    CallTrace:
+    - '*updog --*'
+  - CommandLine:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    TargetObject:
+    - '*updog --*'
+  - SourceImage:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    PipeName:
+    - '*updog --*'
+  - TargetImage:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    Consumer:
+    - '*updog --*'
+  - CallTrace:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    Destination:
+    - '*updog --*'
+  - TargetObject:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    Name:
+    - '*updog --*'
+  - Details:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    Query:
+    - '*updog --*'
+  - PipeName:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    NewName:
+    - '*updog --*'
+  - Consumer:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    StartAddress:
+    - '*updog --*'
+  - Destination:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    StartModule:
+    - '*updog --*'
+  - Name:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    StartFunction:
+    - '*updog --*'
+  - Query:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    SourceHostname:
+    - '*updog --*'
+  - NewName:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    Device:
+    - '*updog --*'
+  - StartAddress:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    file_name:
+    - '*updog --*'
+  - StartModule:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    file_path:
+    - '*updog --*'
+  - StartFunction:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    process:
+    - '*updog --*'
+  - SourceHostname:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    original_file_name:
+    - '*updog --*'
+  - Device:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    parent_process:
+    - '*updog --*'
+  - file_name:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    process_path:
+    - '*updog --*'
+  - file_path:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    service_path:
+    - '*updog --*'
+  - process:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    registry_path:
+    - '*updog --*'
+  - original_file_name:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    registry_value_data:
+    - '*updog --*'
+  - parent_process:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    registry_value_name:
+    - '*updog --*'
+  - process_path:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    ContextInfo:
+    - '*updog --*'
+  - service_path:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    Payload:
+    - '*updog --*'
+  - registry_path:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    ScriptBlockText:
+    - '*updog --*'
+  - registry_value_data:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    ServerName:
+    - '*updog --*'
+  - registry_value_name:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    TransportName:
+    - '*updog --*'
+  - ContextInfo:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    NewProcessName:
+    - '*updog --*'
+  - Payload:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    ParentProcessName:
+    - '*updog --*'
+  - ScriptBlockText:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    Application:
+    - '*updog --*'
+  - ServerName:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    Product Name:
+    - '*updog --*'
+  - TransportName:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    Threat Name:
+    - '*updog --*'
+  - NewProcessName:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    Process Name:
+    - '*updog --*'
+  - ParentProcessName:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    Path:
+    - '*updog --*'
+  - Application:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    ImagePath:
+    - '*updog --*'
+  - Product Name:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    ServiceName:
+    - '*updog --*'
+  - Threat Name:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    ProcessPath:
+    - '*updog --*'
+  - Process Name:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    AppName:
+    - '*updog --*'
+  - Path:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    AppPath:
+    - '*updog --*'
+  - ImagePath:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    ModulePath:
+    - '*updog --*'
+  - ServiceName:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    registry.data.strings:
+    - '*updog --*'
+  - ProcessPath:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    registry.path:
+    - '*updog --*'
+  - AppName:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    process.executable:
+    - '*updog --*'
+  - AppPath:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    process.name:
+    - '*updog --*'
+  - ModulePath:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    pe.original_file_name:
+    - '*updog --*'
+  - registry.data.strings:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    file.fork_name:
+    - '*updog --*'
+  - registry.path:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    file.name:
+    - '*updog --*'
+  - registry.value:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    file.path:
+    - '*updog --*'
+  - process.args:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    file.target_path:
+    - '*updog --*'
+  - process.command_line:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    email.attachments.file.name:
+    - '*updog --*'
+  - process.env_vars:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    dll.path:
+    - '*updog --*'
+  - process.io.text:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    object:
+    - '*updog --*'
+  - process.executable:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
+    - '*pip* install updog*'
     - '*\updog-master\*'
-    url:
+    - '*updog --*'
+  - process.name:
+    - '*updog -p *'
+    - '*updog -d /*'
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    dest_url:
+    - '*pip* install updog*'
+    - '*\updog-master\*'
+    - '*updog --*'
+  - process.title:
+    - '*updog -p *'
+    - '*updog -d /*'
+    - '*/updog.git*'
+    - '*/updog-*.tar.gz*'
+    - '*/updog/archive/updog-*'
+    - '*updog-master.zip*'
+    - '*sc0tfree/updog*'
+    - '*pip* install updog*'
+    - '*\updog-master\*'
+    - '*updog --*'
+  - pe.company:
+    - '*updog -p *'
+    - '*updog -d /*'
+    - '*/updog.git*'
+    - '*/updog-*.tar.gz*'
+    - '*/updog/archive/updog-*'
+    - '*updog-master.zip*'
+    - '*sc0tfree/updog*'
+    - '*pip* install updog*'
+    - '*\updog-master\*'
+    - '*updog --*'
+  - pe.description:
+    - '*updog -p *'
+    - '*updog -d /*'
+    - '*/updog.git*'
+    - '*/updog-*.tar.gz*'
+    - '*/updog/archive/updog-*'
+    - '*updog-master.zip*'
+    - '*sc0tfree/updog*'
+    - '*pip* install updog*'
+    - '*\updog-master\*'
+    - '*updog --*'
+  - pe.original_file_name:
+    - '*updog -p *'
+    - '*updog -d /*'
+    - '*/updog.git*'
+    - '*/updog-*.tar.gz*'
+    - '*/updog/archive/updog-*'
+    - '*updog-master.zip*'
+    - '*sc0tfree/updog*'
+    - '*pip* install updog*'
+    - '*\updog-master\*'
+    - '*updog --*'
+  - pe.product:
+    - '*updog -p *'
+    - '*updog -d /*'
+    - '*/updog.git*'
+    - '*/updog-*.tar.gz*'
+    - '*/updog/archive/updog-*'
+    - '*updog-master.zip*'
+    - '*sc0tfree/updog*'
+    - '*pip* install updog*'
+    - '*\updog-master\*'
+    - '*updog --*'
+  - os.full:
+    - '*updog -p *'
+    - '*updog -d /*'
+    - '*/updog.git*'
+    - '*/updog-*.tar.gz*'
+    - '*/updog/archive/updog-*'
+    - '*updog-master.zip*'
+    - '*sc0tfree/updog*'
+    - '*pip* install updog*'
+    - '*\updog-master\*'
+    - '*updog --*'
+  - host.hostname:
+    - '*updog -p *'
+    - '*updog -d /*'
+    - '*/updog.git*'
+    - '*/updog-*.tar.gz*'
+    - '*/updog/archive/updog-*'
+    - '*updog-master.zip*'
+    - '*sc0tfree/updog*'
+    - '*pip* install updog*'
+    - '*\updog-master\*'
+    - '*updog --*'
+  - file.fork_name:
+    - '*updog -p *'
+    - '*updog -d /*'
+    - '*/updog.git*'
+    - '*/updog-*.tar.gz*'
+    - '*/updog/archive/updog-*'
+    - '*updog-master.zip*'
+    - '*sc0tfree/updog*'
+    - '*pip* install updog*'
+    - '*\updog-master\*'
+    - '*updog --*'
+  - file.name:
+    - '*updog -p *'
+    - '*updog -d /*'
+    - '*/updog.git*'
+    - '*/updog-*.tar.gz*'
+    - '*/updog/archive/updog-*'
+    - '*updog-master.zip*'
+    - '*sc0tfree/updog*'
+    - '*pip* install updog*'
+    - '*\updog-master\*'
+    - '*updog --*'
+  - file.path:
+    - '*updog -p *'
+    - '*updog -d /*'
+    - '*/updog.git*'
+    - '*/updog-*.tar.gz*'
+    - '*/updog/archive/updog-*'
+    - '*updog-master.zip*'
+    - '*sc0tfree/updog*'
+    - '*pip* install updog*'
+    - '*\updog-master\*'
+    - '*updog --*'
+  - file.target_path:
+    - '*updog -p *'
+    - '*updog -d /*'
+    - '*/updog.git*'
+    - '*/updog-*.tar.gz*'
+    - '*/updog/archive/updog-*'
+    - '*updog-master.zip*'
+    - '*sc0tfree/updog*'
+    - '*pip* install updog*'
+    - '*\updog-master\*'
+    - '*updog --*'
+  - email.attachments.file.name:
+    - '*updog -p *'
+    - '*updog -d /*'
+    - '*/updog.git*'
+    - '*/updog-*.tar.gz*'
+    - '*/updog/archive/updog-*'
+    - '*updog-master.zip*'
+    - '*sc0tfree/updog*'
+    - '*pip* install updog*'
+    - '*\updog-master\*'
+    - '*updog --*'
+  - email.subject:
+    - '*updog -p *'
+    - '*updog -d /*'
+    - '*/updog.git*'
+    - '*/updog-*.tar.gz*'
+    - '*/updog/archive/updog-*'
+    - '*updog-master.zip*'
+    - '*sc0tfree/updog*'
+    - '*pip* install updog*'
+    - '*\updog-master\*'
+    - '*updog --*'
+  - dll.path:
+    - '*updog -p *'
+    - '*updog -d /*'
+    - '*/updog.git*'
+    - '*/updog-*.tar.gz*'
+    - '*/updog/archive/updog-*'
+    - '*updog-master.zip*'
+    - '*sc0tfree/updog*'
+    - '*pip* install updog*'
+    - '*\updog-master\*'
+    - '*updog --*'
+  - device.model.name:
+    - '*updog -p *'
+    - '*updog -d /*'
+    - '*/updog.git*'
+    - '*/updog-*.tar.gz*'
+    - '*/updog/archive/updog-*'
+    - '*updog-master.zip*'
+    - '*sc0tfree/updog*'
+    - '*pip* install updog*'
+    - '*\updog-master\*'
+    - '*updog --*'
+  - container.image.name:
+    - '*updog -p *'
+    - '*updog -d /*'
+    - '*/updog.git*'
+    - '*/updog-*.tar.gz*'
+    - '*/updog/archive/updog-*'
+    - '*updog-master.zip*'
+    - '*sc0tfree/updog*'
+    - '*pip* install updog*'
+    - '*\updog-master\*'
+    - '*updog --*'
+  - container.name:
+    - '*updog -p *'
+    - '*updog -d /*'
+    - '*/updog.git*'
+    - '*/updog-*.tar.gz*'
+    - '*/updog/archive/updog-*'
+    - '*updog-master.zip*'
+    - '*sc0tfree/updog*'
+    - '*pip* install updog*'
+    - '*\updog-master\*'
+    - '*updog --*'
+  - object:
+    - '*updog -p *'
+    - '*updog -d /*'
+    - '*/updog.git*'
+    - '*/updog-*.tar.gz*'
+    - '*/updog/archive/updog-*'
+    - '*updog-master.zip*'
+    - '*sc0tfree/updog*'
+    - '*pip* install updog*'
+    - '*\updog-master\*'
+    - '*updog --*'
+  - url:
+    - '*/updog.git*'
+    - '*/updog-*.tar.gz*'
+    - '*/updog/archive/updog-*'
+    - '*updog-master.zip*'
+    - '*sc0tfree/updog*'
+  - dest_url:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    uri:
+  - uri:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    uri_query:
+  - uri_query:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    query:
+  - query:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    url_domain:
+  - url_domain:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    uri_path:
+  - uri_path:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    domain:
+  - domain:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    QueryName:
+  - QueryName:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    QueryResults:
+  - QueryResults:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    DestinationHostname:
+  - DestinationHostname:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    DestinationIp:
+  - DestinationIp:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    http_referrer:
+  - http_referrer:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    http_referrer_domain:
+  - http_referrer_domain:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    http_user_agent:
+  - http_user_agent:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    dest_nt_host:
+  - dest_nt_host:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    sender:
+  - sender:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    recipient:
+  - recipient:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    orig_recipient:
+  - orig_recipient:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    subject:
+  - subject:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    url.domain:
+  - url.domain:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    url.full:
+  - url.full:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    url.original:
+  - url.original:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    url.query:
+  - url.query:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    user_agent.original:
+  - user_agent.original:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    network.application:
+  - network.application:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    http.request.body.content:
+  - http.request.body.content:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    http.request.referrer:
+  - http.request.referrer:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    email.from.address:
+  - email.from.address:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    dns.question.name:
+  - dns.question.name:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
     - '*updog-master.zip*'
     - '*sc0tfree/updog*'
-    destination.domain:
+  - destination.domain:
     - '*/updog.git*'
     - '*/updog-*.tar.gz*'
     - '*/updog/archive/updog-*'
@@ -901,6 +1363,7 @@ fields:
 - OriginalFileName
 - CurrentDirectory
 - ParentImage
+- ParentCommandLine
 - TargetFilename
 - Signature
 - signature
@@ -908,10 +1371,12 @@ fields:
 - Company
 - Description
 - description
+- CommandLine
 - SourceImage
 - TargetImage
 - CallTrace
 - TargetObject
+- Details
 - PipeName
 - Consumer
 - Destination
@@ -953,15 +1418,30 @@ fields:
 - ModulePath
 - registry.data.strings
 - registry.path
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
 - process.executable
 - process.name
+- process.title
+- pe.company
+- pe.description
 - pe.original_file_name
+- pe.product
+- os.full
+- host.hostname
 - file.fork_name
 - file.name
 - file.path
 - file.target_path
 - email.attachments.file.name
+- email.subject
 - dll.path
+- device.model.name
+- container.image.name
+- container.name
 - object
 - url
 - dest_url
@@ -994,3 +1474,6 @@ fields:
 - email.from.address
 - dns.question.name
 - destination.domain
+falsepositives:
+- unknown
+level: medium

@@ -1,11 +1,7 @@
 title: Simple keyword detection rule for dig
 id: 8bac093f-c64e-4ce9-8475-7e8f623058ba
 status: experimental
-description:
-- '''classic DNS Zone transfer request. The idea behind it is to attempt to duplicate
-  all the DNS records for a given zone (or domain). This is a technique often used
-  by attackers to gather information about the infrastructure of a target organization.'''
-- '''dig'''
+description: Detects interesting keywords based on dig tool
 references:
 - https://linux.die.net/man/1/dig
 author: '@mthcht'
@@ -17,67 +13,63 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*dig *@* axfr*'
     - '*dig * axfr *@*'
-    CommandLine:
+  - CommandLine:
     - '*dig *@* axfr*'
     - '*dig * axfr *@*'
-    Details:
+  - Details:
     - '*dig *@* axfr*'
     - '*dig * axfr *@*'
-    registry.value:
+  - registry.value:
     - '*dig *@* axfr*'
     - '*dig * axfr *@*'
-    process.args:
+  - process.args:
     - '*dig *@* axfr*'
     - '*dig * axfr *@*'
-    process.command_line:
+  - process.command_line:
     - '*dig *@* axfr*'
     - '*dig * axfr *@*'
-    process.env_vars:
+  - process.env_vars:
     - '*dig *@* axfr*'
     - '*dig * axfr *@*'
-    process.io.text:
+  - process.io.text:
     - '*dig *@* axfr*'
     - '*dig * axfr *@*'
-    process.title:
+  - process.title:
     - '*dig *@* axfr*'
     - '*dig * axfr *@*'
-    pe.company:
+  - pe.company:
     - '*dig *@* axfr*'
     - '*dig * axfr *@*'
-    pe.description:
+  - pe.description:
     - '*dig *@* axfr*'
     - '*dig * axfr *@*'
-    pe.product:
+  - pe.product:
     - '*dig *@* axfr*'
     - '*dig * axfr *@*'
-    os.full:
+  - os.full:
     - '*dig *@* axfr*'
     - '*dig * axfr *@*'
-    host.hostname:
+  - host.hostname:
     - '*dig *@* axfr*'
     - '*dig * axfr *@*'
-    event.original:
+  - event.original:
     - '*dig *@* axfr*'
     - '*dig * axfr *@*'
-    email.subject:
+  - email.subject:
     - '*dig *@* axfr*'
     - '*dig * axfr *@*'
-    device.model.name:
+  - device.model.name:
     - '*dig *@* axfr*'
     - '*dig * axfr *@*'
-    container.image.name:
+  - container.image.name:
     - '*dig *@* axfr*'
     - '*dig * axfr *@*'
-    container.name:
+  - container.name:
     - '*dig *@* axfr*'
     - '*dig * axfr *@*'
   condition: selection
@@ -101,3 +93,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

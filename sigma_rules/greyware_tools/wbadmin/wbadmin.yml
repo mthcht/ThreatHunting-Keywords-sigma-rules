@@ -1,16 +1,8 @@
 title: Simple keyword detection rule for wbadmin
 id: 2ad1c3d1-68fa-4541-b302-80f02fe761b5
 status: experimental
-description:
-- '''Wbadmin allows administrators to manage and automate backup and recovery operations
-  in Windows systems. Adversaries may abuse wbadmin to manipulate backups and restore
-  points as part of their evasion tactics. This can include deleting backup files.
-  disabling backup tasks. or tampering with backup configurations to hinder recovery
-  efforts and potentially erase traces of their malicious activities. By interfering
-  with backups. adversaries can make it more challenging for defenders to restore
-  systems and detect their presence.'''
-references:
-- N/A
+description: Detects interesting keywords based on wbadmin tool
+references: []
 author: '@mthcht'
 date: 2023/07/30
 modified: 2023/09/15
@@ -22,67 +14,63 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- Unknown
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*wbadmin DELETE SYSTEMSTATEBACKUP*'
     - '*wbadmin DELETE SYSTEMSTATEBACKUP -deleteOldest*'
-    CommandLine:
+  - CommandLine:
     - '*wbadmin DELETE SYSTEMSTATEBACKUP*'
     - '*wbadmin DELETE SYSTEMSTATEBACKUP -deleteOldest*'
-    Details:
+  - Details:
     - '*wbadmin DELETE SYSTEMSTATEBACKUP*'
     - '*wbadmin DELETE SYSTEMSTATEBACKUP -deleteOldest*'
-    registry.value:
+  - registry.value:
     - '*wbadmin DELETE SYSTEMSTATEBACKUP*'
     - '*wbadmin DELETE SYSTEMSTATEBACKUP -deleteOldest*'
-    process.args:
+  - process.args:
     - '*wbadmin DELETE SYSTEMSTATEBACKUP*'
     - '*wbadmin DELETE SYSTEMSTATEBACKUP -deleteOldest*'
-    process.command_line:
+  - process.command_line:
     - '*wbadmin DELETE SYSTEMSTATEBACKUP*'
     - '*wbadmin DELETE SYSTEMSTATEBACKUP -deleteOldest*'
-    process.env_vars:
+  - process.env_vars:
     - '*wbadmin DELETE SYSTEMSTATEBACKUP*'
     - '*wbadmin DELETE SYSTEMSTATEBACKUP -deleteOldest*'
-    process.io.text:
+  - process.io.text:
     - '*wbadmin DELETE SYSTEMSTATEBACKUP*'
     - '*wbadmin DELETE SYSTEMSTATEBACKUP -deleteOldest*'
-    process.title:
+  - process.title:
     - '*wbadmin DELETE SYSTEMSTATEBACKUP*'
     - '*wbadmin DELETE SYSTEMSTATEBACKUP -deleteOldest*'
-    pe.company:
+  - pe.company:
     - '*wbadmin DELETE SYSTEMSTATEBACKUP*'
     - '*wbadmin DELETE SYSTEMSTATEBACKUP -deleteOldest*'
-    pe.description:
+  - pe.description:
     - '*wbadmin DELETE SYSTEMSTATEBACKUP*'
     - '*wbadmin DELETE SYSTEMSTATEBACKUP -deleteOldest*'
-    pe.product:
+  - pe.product:
     - '*wbadmin DELETE SYSTEMSTATEBACKUP*'
     - '*wbadmin DELETE SYSTEMSTATEBACKUP -deleteOldest*'
-    os.full:
+  - os.full:
     - '*wbadmin DELETE SYSTEMSTATEBACKUP*'
     - '*wbadmin DELETE SYSTEMSTATEBACKUP -deleteOldest*'
-    host.hostname:
+  - host.hostname:
     - '*wbadmin DELETE SYSTEMSTATEBACKUP*'
     - '*wbadmin DELETE SYSTEMSTATEBACKUP -deleteOldest*'
-    event.original:
+  - event.original:
     - '*wbadmin DELETE SYSTEMSTATEBACKUP*'
     - '*wbadmin DELETE SYSTEMSTATEBACKUP -deleteOldest*'
-    email.subject:
+  - email.subject:
     - '*wbadmin DELETE SYSTEMSTATEBACKUP*'
     - '*wbadmin DELETE SYSTEMSTATEBACKUP -deleteOldest*'
-    device.model.name:
+  - device.model.name:
     - '*wbadmin DELETE SYSTEMSTATEBACKUP*'
     - '*wbadmin DELETE SYSTEMSTATEBACKUP -deleteOldest*'
-    container.image.name:
+  - container.image.name:
     - '*wbadmin DELETE SYSTEMSTATEBACKUP*'
     - '*wbadmin DELETE SYSTEMSTATEBACKUP -deleteOldest*'
-    container.name:
+  - container.name:
     - '*wbadmin DELETE SYSTEMSTATEBACKUP*'
     - '*wbadmin DELETE SYSTEMSTATEBACKUP -deleteOldest*'
   condition: selection
@@ -106,3 +94,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

@@ -1,8 +1,7 @@
 title: Simple keyword detection rule for movefile64.exe
 id: b3a3e833-c9d9-4cf4-bb33-f8e6a959d4d6
 status: experimental
-description:
-- '''Spartacus DLL/COM Hijacking Toolkit'''
+description: Detects interesting keywords based on movefile64.exe tool
 references:
 - https://www.pavel.gr/blog/neutralising-amsi-system-wide-as-an-admin
 author: '@mthcht'
@@ -17,49 +16,45 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- high
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*movefile64.exe /nobanner *.dll C:\Windows\System32\amsi.dll*'
-    CommandLine:
+  - CommandLine:
     - '*movefile64.exe /nobanner *.dll C:\Windows\System32\amsi.dll*'
-    Details:
+  - Details:
     - '*movefile64.exe /nobanner *.dll C:\Windows\System32\amsi.dll*'
-    registry.value:
+  - registry.value:
     - '*movefile64.exe /nobanner *.dll C:\Windows\System32\amsi.dll*'
-    process.args:
+  - process.args:
     - '*movefile64.exe /nobanner *.dll C:\Windows\System32\amsi.dll*'
-    process.command_line:
+  - process.command_line:
     - '*movefile64.exe /nobanner *.dll C:\Windows\System32\amsi.dll*'
-    process.env_vars:
+  - process.env_vars:
     - '*movefile64.exe /nobanner *.dll C:\Windows\System32\amsi.dll*'
-    process.io.text:
+  - process.io.text:
     - '*movefile64.exe /nobanner *.dll C:\Windows\System32\amsi.dll*'
-    process.title:
+  - process.title:
     - '*movefile64.exe /nobanner *.dll C:\Windows\System32\amsi.dll*'
-    pe.company:
+  - pe.company:
     - '*movefile64.exe /nobanner *.dll C:\Windows\System32\amsi.dll*'
-    pe.description:
+  - pe.description:
     - '*movefile64.exe /nobanner *.dll C:\Windows\System32\amsi.dll*'
-    pe.product:
+  - pe.product:
     - '*movefile64.exe /nobanner *.dll C:\Windows\System32\amsi.dll*'
-    os.full:
+  - os.full:
     - '*movefile64.exe /nobanner *.dll C:\Windows\System32\amsi.dll*'
-    host.hostname:
+  - host.hostname:
     - '*movefile64.exe /nobanner *.dll C:\Windows\System32\amsi.dll*'
-    event.original:
+  - event.original:
     - '*movefile64.exe /nobanner *.dll C:\Windows\System32\amsi.dll*'
-    email.subject:
+  - email.subject:
     - '*movefile64.exe /nobanner *.dll C:\Windows\System32\amsi.dll*'
-    device.model.name:
+  - device.model.name:
     - '*movefile64.exe /nobanner *.dll C:\Windows\System32\amsi.dll*'
-    container.image.name:
+  - container.image.name:
     - '*movefile64.exe /nobanner *.dll C:\Windows\System32\amsi.dll*'
-    container.name:
+  - container.name:
     - '*movefile64.exe /nobanner *.dll C:\Windows\System32\amsi.dll*'
   condition: selection
 fields:
@@ -82,3 +77,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium

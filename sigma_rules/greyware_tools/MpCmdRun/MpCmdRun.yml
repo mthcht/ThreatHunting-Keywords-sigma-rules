@@ -1,11 +1,8 @@
 title: Simple keyword detection rule for MpCmdRun
 id: 0f643374-534d-4f14-ac22-7a01fc09b3d2
 status: experimental
-description:
-- '''Removing all the signature from windows defender - used by a metasploit module'''
-- '''Wipe currently stored definitions'''
-references:
-- N/A
+description: Detects interesting keywords based on MpCmdRun tool
+references: []
 author: '@mthcht'
 date: 2023/07/30
 modified: 2023/09/15
@@ -18,67 +15,63 @@ tags:
 logsource:
   category:
   - endpoint
-falsepositives:
-- Unknown
-level:
-- critical
 detection:
   selection:
-    ParentCommandLine:
+  - ParentCommandLine:
     - '*MpCmdRun.exe -RemoveDefinitions -All*'
     - '*MpCmdRun.exe* -RemoveDefinitions -All*'
-    CommandLine:
+  - CommandLine:
     - '*MpCmdRun.exe -RemoveDefinitions -All*'
     - '*MpCmdRun.exe* -RemoveDefinitions -All*'
-    Details:
+  - Details:
     - '*MpCmdRun.exe -RemoveDefinitions -All*'
     - '*MpCmdRun.exe* -RemoveDefinitions -All*'
-    registry.value:
+  - registry.value:
     - '*MpCmdRun.exe -RemoveDefinitions -All*'
     - '*MpCmdRun.exe* -RemoveDefinitions -All*'
-    process.args:
+  - process.args:
     - '*MpCmdRun.exe -RemoveDefinitions -All*'
     - '*MpCmdRun.exe* -RemoveDefinitions -All*'
-    process.command_line:
+  - process.command_line:
     - '*MpCmdRun.exe -RemoveDefinitions -All*'
     - '*MpCmdRun.exe* -RemoveDefinitions -All*'
-    process.env_vars:
+  - process.env_vars:
     - '*MpCmdRun.exe -RemoveDefinitions -All*'
     - '*MpCmdRun.exe* -RemoveDefinitions -All*'
-    process.io.text:
+  - process.io.text:
     - '*MpCmdRun.exe -RemoveDefinitions -All*'
     - '*MpCmdRun.exe* -RemoveDefinitions -All*'
-    process.title:
+  - process.title:
     - '*MpCmdRun.exe -RemoveDefinitions -All*'
     - '*MpCmdRun.exe* -RemoveDefinitions -All*'
-    pe.company:
+  - pe.company:
     - '*MpCmdRun.exe -RemoveDefinitions -All*'
     - '*MpCmdRun.exe* -RemoveDefinitions -All*'
-    pe.description:
+  - pe.description:
     - '*MpCmdRun.exe -RemoveDefinitions -All*'
     - '*MpCmdRun.exe* -RemoveDefinitions -All*'
-    pe.product:
+  - pe.product:
     - '*MpCmdRun.exe -RemoveDefinitions -All*'
     - '*MpCmdRun.exe* -RemoveDefinitions -All*'
-    os.full:
+  - os.full:
     - '*MpCmdRun.exe -RemoveDefinitions -All*'
     - '*MpCmdRun.exe* -RemoveDefinitions -All*'
-    host.hostname:
+  - host.hostname:
     - '*MpCmdRun.exe -RemoveDefinitions -All*'
     - '*MpCmdRun.exe* -RemoveDefinitions -All*'
-    event.original:
+  - event.original:
     - '*MpCmdRun.exe -RemoveDefinitions -All*'
     - '*MpCmdRun.exe* -RemoveDefinitions -All*'
-    email.subject:
+  - email.subject:
     - '*MpCmdRun.exe -RemoveDefinitions -All*'
     - '*MpCmdRun.exe* -RemoveDefinitions -All*'
-    device.model.name:
+  - device.model.name:
     - '*MpCmdRun.exe -RemoveDefinitions -All*'
     - '*MpCmdRun.exe* -RemoveDefinitions -All*'
-    container.image.name:
+  - container.image.name:
     - '*MpCmdRun.exe -RemoveDefinitions -All*'
     - '*MpCmdRun.exe* -RemoveDefinitions -All*'
-    container.name:
+  - container.name:
     - '*MpCmdRun.exe -RemoveDefinitions -All*'
     - '*MpCmdRun.exe* -RemoveDefinitions -All*'
   condition: selection
@@ -102,3 +95,6 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+falsepositives:
+- unknown
+level: medium
