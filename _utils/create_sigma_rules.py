@@ -76,7 +76,7 @@ for subdir, dirs, files in os.walk(parent_directory):
                     "title": "Simple keyword detection rule for {}".format(data[0]['tool_name']),
                     "id": id,
                     "status": "experimental",
-                    "description": "Detects interesting keywords based on {} file".format(data[0]['tool_name']),
+                    "description": "Detects interesting keywords based on {} tool".format(data[0]['tool_name']),
                     "references": [],
                     "author": "@mthcht",
                     "date": "2023/07/30",
@@ -92,7 +92,7 @@ for subdir, dirs, files in os.walk(parent_directory):
                     "falsepositives": ["unknown"],
                     "level": 'medium'
                 }
-
+                # setting medium level for all the hunting rules instead of using get_level function
 
                 # We use these bools to avoid duplication when choosing the fields
                 endpoint_hash_fields_bool = False
@@ -184,11 +184,14 @@ for subdir, dirs, files in os.walk(parent_directory):
                 
                 # remove duplicate
                 sigma_rule['tags'] = list(set(sigma_rule['tags']))
-                sigma_rule['tags'].remove('attack.N/A')
-
+                if 'attack.N/A' in sigma_rule['tags']:
+                    sigma_rule['tags'].remove('attack.N/A')
                 # sort
                 sigma_rule['tags'].sort(key=lambda s: s.lower())
+                # remove duplicate
+                sigma_rule['references'] = list(set(sigma_rule['references']))
                 sigma_rule['references'].sort(key=lambda s: s.lower())
+                
                 sigma_rule['logsource']['category'].sort(key=lambda s: s.lower())
 
                 # Save the sigma_rule to a .yml file in the same directory as the JSON file
