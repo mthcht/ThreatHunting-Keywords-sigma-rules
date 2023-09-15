@@ -2,63 +2,131 @@ title: Simple keyword detection rule for sudo
 id: d7bfcd3a-2a39-432d-b873-cdafd4ef6df4
 status: experimental
 description:
+- '''abusinf LD_PREDLOAD option to escalade privilege'''
+- '''abusing LD_LIBRARY_PATH sudo option  to escalade privilege'''
+- '''access sensitive files by abusing sudo permissions'''
 - '''Sudo Persistence via sudoers file'''
 references:
 - https://github.com/RoseSecurity/Red-Teaming-TTPs/blob/main/Linux.md
+- N/A
 author: '@mthcht'
 date: 2023/07/30
-modified: 2023/09/14
+modified: 2023/09/15
 tags:
+- attack.T1059.004
 - attack.T1078
 - attack.T1166
+- attack.T1546.009
+- attack.T1548.001
+- attack.T1548.002
+- attack.TA0002
 - attack.TA0003
+- attack.TA0004
 logsource:
   category:
   - endpoint
 falsepositives:
 - Unknown
 level:
+- critical
 - Unknown
 detection:
   selection:
     ParentCommandLine:
     - '*echo *%sudo  ALL=(ALL) NOPASSWD: ALL* >> /etc/sudoers*'
+    - '*sudo LD_PRELOAD=/tmp/preload.so find*'
+    - '*sudo LD_LIBRARY_PATH=. apache2*'
+    - '*sudo apache2 -f /etc/shadow*'
     CommandLine:
     - '*echo *%sudo  ALL=(ALL) NOPASSWD: ALL* >> /etc/sudoers*'
+    - '*sudo LD_PRELOAD=/tmp/preload.so find*'
+    - '*sudo LD_LIBRARY_PATH=. apache2*'
+    - '*sudo apache2 -f /etc/shadow*'
     Details:
     - '*echo *%sudo  ALL=(ALL) NOPASSWD: ALL* >> /etc/sudoers*'
+    - '*sudo LD_PRELOAD=/tmp/preload.so find*'
+    - '*sudo LD_LIBRARY_PATH=. apache2*'
+    - '*sudo apache2 -f /etc/shadow*'
     registry.value:
     - '*echo *%sudo  ALL=(ALL) NOPASSWD: ALL* >> /etc/sudoers*'
+    - '*sudo LD_PRELOAD=/tmp/preload.so find*'
+    - '*sudo LD_LIBRARY_PATH=. apache2*'
+    - '*sudo apache2 -f /etc/shadow*'
     process.args:
     - '*echo *%sudo  ALL=(ALL) NOPASSWD: ALL* >> /etc/sudoers*'
+    - '*sudo LD_PRELOAD=/tmp/preload.so find*'
+    - '*sudo LD_LIBRARY_PATH=. apache2*'
+    - '*sudo apache2 -f /etc/shadow*'
     process.command_line:
     - '*echo *%sudo  ALL=(ALL) NOPASSWD: ALL* >> /etc/sudoers*'
+    - '*sudo LD_PRELOAD=/tmp/preload.so find*'
+    - '*sudo LD_LIBRARY_PATH=. apache2*'
+    - '*sudo apache2 -f /etc/shadow*'
     process.env_vars:
     - '*echo *%sudo  ALL=(ALL) NOPASSWD: ALL* >> /etc/sudoers*'
+    - '*sudo LD_PRELOAD=/tmp/preload.so find*'
+    - '*sudo LD_LIBRARY_PATH=. apache2*'
+    - '*sudo apache2 -f /etc/shadow*'
     process.io.text:
     - '*echo *%sudo  ALL=(ALL) NOPASSWD: ALL* >> /etc/sudoers*'
+    - '*sudo LD_PRELOAD=/tmp/preload.so find*'
+    - '*sudo LD_LIBRARY_PATH=. apache2*'
+    - '*sudo apache2 -f /etc/shadow*'
     process.title:
     - '*echo *%sudo  ALL=(ALL) NOPASSWD: ALL* >> /etc/sudoers*'
+    - '*sudo LD_PRELOAD=/tmp/preload.so find*'
+    - '*sudo LD_LIBRARY_PATH=. apache2*'
+    - '*sudo apache2 -f /etc/shadow*'
     pe.company:
     - '*echo *%sudo  ALL=(ALL) NOPASSWD: ALL* >> /etc/sudoers*'
+    - '*sudo LD_PRELOAD=/tmp/preload.so find*'
+    - '*sudo LD_LIBRARY_PATH=. apache2*'
+    - '*sudo apache2 -f /etc/shadow*'
     pe.description:
     - '*echo *%sudo  ALL=(ALL) NOPASSWD: ALL* >> /etc/sudoers*'
+    - '*sudo LD_PRELOAD=/tmp/preload.so find*'
+    - '*sudo LD_LIBRARY_PATH=. apache2*'
+    - '*sudo apache2 -f /etc/shadow*'
     pe.product:
     - '*echo *%sudo  ALL=(ALL) NOPASSWD: ALL* >> /etc/sudoers*'
+    - '*sudo LD_PRELOAD=/tmp/preload.so find*'
+    - '*sudo LD_LIBRARY_PATH=. apache2*'
+    - '*sudo apache2 -f /etc/shadow*'
     os.full:
     - '*echo *%sudo  ALL=(ALL) NOPASSWD: ALL* >> /etc/sudoers*'
+    - '*sudo LD_PRELOAD=/tmp/preload.so find*'
+    - '*sudo LD_LIBRARY_PATH=. apache2*'
+    - '*sudo apache2 -f /etc/shadow*'
     host.hostname:
     - '*echo *%sudo  ALL=(ALL) NOPASSWD: ALL* >> /etc/sudoers*'
+    - '*sudo LD_PRELOAD=/tmp/preload.so find*'
+    - '*sudo LD_LIBRARY_PATH=. apache2*'
+    - '*sudo apache2 -f /etc/shadow*'
     event.original:
     - '*echo *%sudo  ALL=(ALL) NOPASSWD: ALL* >> /etc/sudoers*'
+    - '*sudo LD_PRELOAD=/tmp/preload.so find*'
+    - '*sudo LD_LIBRARY_PATH=. apache2*'
+    - '*sudo apache2 -f /etc/shadow*'
     email.subject:
     - '*echo *%sudo  ALL=(ALL) NOPASSWD: ALL* >> /etc/sudoers*'
+    - '*sudo LD_PRELOAD=/tmp/preload.so find*'
+    - '*sudo LD_LIBRARY_PATH=. apache2*'
+    - '*sudo apache2 -f /etc/shadow*'
     device.model.name:
     - '*echo *%sudo  ALL=(ALL) NOPASSWD: ALL* >> /etc/sudoers*'
+    - '*sudo LD_PRELOAD=/tmp/preload.so find*'
+    - '*sudo LD_LIBRARY_PATH=. apache2*'
+    - '*sudo apache2 -f /etc/shadow*'
     container.image.name:
     - '*echo *%sudo  ALL=(ALL) NOPASSWD: ALL* >> /etc/sudoers*'
+    - '*sudo LD_PRELOAD=/tmp/preload.so find*'
+    - '*sudo LD_LIBRARY_PATH=. apache2*'
+    - '*sudo apache2 -f /etc/shadow*'
     container.name:
     - '*echo *%sudo  ALL=(ALL) NOPASSWD: ALL* >> /etc/sudoers*'
+    - '*sudo LD_PRELOAD=/tmp/preload.so find*'
+    - '*sudo LD_LIBRARY_PATH=. apache2*'
+    - '*sudo apache2 -f /etc/shadow*'
   condition: selection
 fields:
 - ParentCommandLine

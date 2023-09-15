@@ -1,0 +1,107 @@
+title: 'Simple keyword detection rule for '
+id: 6fa8e4fd-1a6c-44f0-a836-6713d02ec6db
+status: experimental
+description:
+- '''NetExec (a.k.a nxc) is a post-exploitation tool that helps automate assessing
+  the security of large Active Directory networks.'''
+references:
+- https://github.com/Pennyw0rth/NetExec
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/09/15
+tags:
+- attack.T1018
+- attack.T1021
+- attack.T1069
+- attack.T1136
+- attack.TA0001
+- attack.TA0002
+- attack.TA0003
+- attack.TA0007
+logsource:
+  category:
+  - endpoint
+falsepositives:
+- Unknown
+level:
+- high
+detection:
+  selection:
+    ParentCommandLine:
+    - '*powershell -c *\windows\system32\inetsrv\appcmd.exe list apppool /@t:*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    CommandLine:
+    - '*powershell -c *\windows\system32\inetsrv\appcmd.exe list apppool /@t:*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    Details:
+    - '*powershell -c *\windows\system32\inetsrv\appcmd.exe list apppool /@t:*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    registry.value:
+    - '*powershell -c *\windows\system32\inetsrv\appcmd.exe list apppool /@t:*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    process.args:
+    - '*powershell -c *\windows\system32\inetsrv\appcmd.exe list apppool /@t:*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    process.command_line:
+    - '*powershell -c *\windows\system32\inetsrv\appcmd.exe list apppool /@t:*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    process.env_vars:
+    - '*powershell -c *\windows\system32\inetsrv\appcmd.exe list apppool /@t:*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    process.io.text:
+    - '*powershell -c *\windows\system32\inetsrv\appcmd.exe list apppool /@t:*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    process.title:
+    - '*powershell -c *\windows\system32\inetsrv\appcmd.exe list apppool /@t:*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    pe.company:
+    - '*powershell -c *\windows\system32\inetsrv\appcmd.exe list apppool /@t:*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    pe.description:
+    - '*powershell -c *\windows\system32\inetsrv\appcmd.exe list apppool /@t:*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    pe.product:
+    - '*powershell -c *\windows\system32\inetsrv\appcmd.exe list apppool /@t:*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    os.full:
+    - '*powershell -c *\windows\system32\inetsrv\appcmd.exe list apppool /@t:*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    host.hostname:
+    - '*powershell -c *\windows\system32\inetsrv\appcmd.exe list apppool /@t:*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    event.original:
+    - '*powershell -c *\windows\system32\inetsrv\appcmd.exe list apppool /@t:*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    email.subject:
+    - '*powershell -c *\windows\system32\inetsrv\appcmd.exe list apppool /@t:*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    device.model.name:
+    - '*powershell -c *\windows\system32\inetsrv\appcmd.exe list apppool /@t:*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    container.image.name:
+    - '*powershell -c *\windows\system32\inetsrv\appcmd.exe list apppool /@t:*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    container.name:
+    - '*powershell -c *\windows\system32\inetsrv\appcmd.exe list apppool /@t:*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
