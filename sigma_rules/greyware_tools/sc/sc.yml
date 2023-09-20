@@ -1,0 +1,81 @@
+title: Simple keyword detection rule for sc
+id: 54d00402-eec0-4d5c-b1ee-5414fbb8fd3d
+status: experimental
+description: Detects interesting keywords based on sc tool
+references:
+- https://thedfirreport.com/2023/02/06/collect-exfiltrate-sleep-repeat/
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/09/20
+tags:
+- attack.T1049
+- attack.T1518.001
+- attack.TA0007
+- attack.TA0009
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '* /c sc query WinDefend*'
+  - CommandLine:
+    - '* /c sc query WinDefend*'
+  - Details:
+    - '* /c sc query WinDefend*'
+  - registry.value:
+    - '* /c sc query WinDefend*'
+  - process.args:
+    - '* /c sc query WinDefend*'
+  - process.command_line:
+    - '* /c sc query WinDefend*'
+  - process.env_vars:
+    - '* /c sc query WinDefend*'
+  - process.io.text:
+    - '* /c sc query WinDefend*'
+  - process.title:
+    - '* /c sc query WinDefend*'
+  - pe.company:
+    - '* /c sc query WinDefend*'
+  - pe.description:
+    - '* /c sc query WinDefend*'
+  - pe.product:
+    - '* /c sc query WinDefend*'
+  - os.full:
+    - '* /c sc query WinDefend*'
+  - host.hostname:
+    - '* /c sc query WinDefend*'
+  - event.original:
+    - '* /c sc query WinDefend*'
+  - email.subject:
+    - '* /c sc query WinDefend*'
+  - device.model.name:
+    - '* /c sc query WinDefend*'
+  - container.image.name:
+    - '* /c sc query WinDefend*'
+  - container.name:
+    - '* /c sc query WinDefend*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium

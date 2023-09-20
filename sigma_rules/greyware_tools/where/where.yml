@@ -1,0 +1,83 @@
+title: Simple keyword detection rule for where
+id: 1c6df8ff-6248-40fd-a243-5e61e6eb6dc5
+status: experimental
+description: Detects interesting keywords based on where tool
+references:
+- https://thedfirreport.com/2023/04/03/malicious-iso-file-leads-to-domain-wide-ransomware/
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/09/20
+tags:
+- attack.A0002
+- attack.T1018
+- attack.T1059
+- attack.T1083
+- attack.TA0009
+- attack.TA0040
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '* where /r C:\Windows\WinSxS\ *Microsoft.ActiveDirectory.Management.dll*'
+  - CommandLine:
+    - '* where /r C:\Windows\WinSxS\ *Microsoft.ActiveDirectory.Management.dll*'
+  - Details:
+    - '* where /r C:\Windows\WinSxS\ *Microsoft.ActiveDirectory.Management.dll*'
+  - registry.value:
+    - '* where /r C:\Windows\WinSxS\ *Microsoft.ActiveDirectory.Management.dll*'
+  - process.args:
+    - '* where /r C:\Windows\WinSxS\ *Microsoft.ActiveDirectory.Management.dll*'
+  - process.command_line:
+    - '* where /r C:\Windows\WinSxS\ *Microsoft.ActiveDirectory.Management.dll*'
+  - process.env_vars:
+    - '* where /r C:\Windows\WinSxS\ *Microsoft.ActiveDirectory.Management.dll*'
+  - process.io.text:
+    - '* where /r C:\Windows\WinSxS\ *Microsoft.ActiveDirectory.Management.dll*'
+  - process.title:
+    - '* where /r C:\Windows\WinSxS\ *Microsoft.ActiveDirectory.Management.dll*'
+  - pe.company:
+    - '* where /r C:\Windows\WinSxS\ *Microsoft.ActiveDirectory.Management.dll*'
+  - pe.description:
+    - '* where /r C:\Windows\WinSxS\ *Microsoft.ActiveDirectory.Management.dll*'
+  - pe.product:
+    - '* where /r C:\Windows\WinSxS\ *Microsoft.ActiveDirectory.Management.dll*'
+  - os.full:
+    - '* where /r C:\Windows\WinSxS\ *Microsoft.ActiveDirectory.Management.dll*'
+  - host.hostname:
+    - '* where /r C:\Windows\WinSxS\ *Microsoft.ActiveDirectory.Management.dll*'
+  - event.original:
+    - '* where /r C:\Windows\WinSxS\ *Microsoft.ActiveDirectory.Management.dll*'
+  - email.subject:
+    - '* where /r C:\Windows\WinSxS\ *Microsoft.ActiveDirectory.Management.dll*'
+  - device.model.name:
+    - '* where /r C:\Windows\WinSxS\ *Microsoft.ActiveDirectory.Management.dll*'
+  - container.image.name:
+    - '* where /r C:\Windows\WinSxS\ *Microsoft.ActiveDirectory.Management.dll*'
+  - container.name:
+    - '* where /r C:\Windows\WinSxS\ *Microsoft.ActiveDirectory.Management.dll*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium

@@ -1,0 +1,81 @@
+title: Simple keyword detection rule for chcp
+id: dfd84f7f-aa27-494d-81ad-29f447f0a5c5
+status: experimental
+description: Detects interesting keywords based on chcp tool
+references:
+- https://thedfirreport.com/2023/04/03/malicious-iso-file-leads-to-domain-wide-ransomware/
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/09/20
+tags:
+- attack.T1027
+- attack.T1059
+- attack.TA0002
+- attack.TA0009
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*cmd.exe /c chcp >&2*'
+  - CommandLine:
+    - '*cmd.exe /c chcp >&2*'
+  - Details:
+    - '*cmd.exe /c chcp >&2*'
+  - registry.value:
+    - '*cmd.exe /c chcp >&2*'
+  - process.args:
+    - '*cmd.exe /c chcp >&2*'
+  - process.command_line:
+    - '*cmd.exe /c chcp >&2*'
+  - process.env_vars:
+    - '*cmd.exe /c chcp >&2*'
+  - process.io.text:
+    - '*cmd.exe /c chcp >&2*'
+  - process.title:
+    - '*cmd.exe /c chcp >&2*'
+  - pe.company:
+    - '*cmd.exe /c chcp >&2*'
+  - pe.description:
+    - '*cmd.exe /c chcp >&2*'
+  - pe.product:
+    - '*cmd.exe /c chcp >&2*'
+  - os.full:
+    - '*cmd.exe /c chcp >&2*'
+  - host.hostname:
+    - '*cmd.exe /c chcp >&2*'
+  - event.original:
+    - '*cmd.exe /c chcp >&2*'
+  - email.subject:
+    - '*cmd.exe /c chcp >&2*'
+  - device.model.name:
+    - '*cmd.exe /c chcp >&2*'
+  - container.image.name:
+    - '*cmd.exe /c chcp >&2*'
+  - container.name:
+    - '*cmd.exe /c chcp >&2*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium

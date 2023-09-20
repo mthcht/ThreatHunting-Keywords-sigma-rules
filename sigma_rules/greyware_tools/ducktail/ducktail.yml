@@ -1,0 +1,82 @@
+title: Simple keyword detection rule for ducktail
+id: 93ab567e-8d53-4200-820d-cf0badad5e9a
+status: experimental
+description: Detects interesting keywords based on ducktail tool
+references:
+- https://www.trendmicro.com/en_be/research/23/e/managed-xdr-investigation-of-ducktail-in-trend-micro-vision-one.html
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/09/20
+tags:
+- attack.T1590.005
+- attack.T1596
+- attack.TA0007
+- attack.TA0009
+- attack.TA0043
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*--headless --disable-gpu --disable-logging --dump-dom https://getip.pro*'
+  - CommandLine:
+    - '*--headless --disable-gpu --disable-logging --dump-dom https://getip.pro*'
+  - Details:
+    - '*--headless --disable-gpu --disable-logging --dump-dom https://getip.pro*'
+  - registry.value:
+    - '*--headless --disable-gpu --disable-logging --dump-dom https://getip.pro*'
+  - process.args:
+    - '*--headless --disable-gpu --disable-logging --dump-dom https://getip.pro*'
+  - process.command_line:
+    - '*--headless --disable-gpu --disable-logging --dump-dom https://getip.pro*'
+  - process.env_vars:
+    - '*--headless --disable-gpu --disable-logging --dump-dom https://getip.pro*'
+  - process.io.text:
+    - '*--headless --disable-gpu --disable-logging --dump-dom https://getip.pro*'
+  - process.title:
+    - '*--headless --disable-gpu --disable-logging --dump-dom https://getip.pro*'
+  - pe.company:
+    - '*--headless --disable-gpu --disable-logging --dump-dom https://getip.pro*'
+  - pe.description:
+    - '*--headless --disable-gpu --disable-logging --dump-dom https://getip.pro*'
+  - pe.product:
+    - '*--headless --disable-gpu --disable-logging --dump-dom https://getip.pro*'
+  - os.full:
+    - '*--headless --disable-gpu --disable-logging --dump-dom https://getip.pro*'
+  - host.hostname:
+    - '*--headless --disable-gpu --disable-logging --dump-dom https://getip.pro*'
+  - event.original:
+    - '*--headless --disable-gpu --disable-logging --dump-dom https://getip.pro*'
+  - email.subject:
+    - '*--headless --disable-gpu --disable-logging --dump-dom https://getip.pro*'
+  - device.model.name:
+    - '*--headless --disable-gpu --disable-logging --dump-dom https://getip.pro*'
+  - container.image.name:
+    - '*--headless --disable-gpu --disable-logging --dump-dom https://getip.pro*'
+  - container.name:
+    - '*--headless --disable-gpu --disable-logging --dump-dom https://getip.pro*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium
