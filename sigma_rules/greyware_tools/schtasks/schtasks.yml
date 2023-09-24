@@ -1,0 +1,80 @@
+title: Simple keyword detection rule for schtasks
+id: 60856937-14dd-49de-b94a-0de774350b59
+status: experimental
+description: Detects interesting keywords based on schtasks tool
+references: []
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/09/25
+tags:
+- attack.T1053.005
+- attack.T1082
+- attack.TA0004
+- attack.TA0007
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*schtasks /query /v /fo LIST*'
+  - CommandLine:
+    - '*schtasks /query /v /fo LIST*'
+  - Details:
+    - '*schtasks /query /v /fo LIST*'
+  - registry.value:
+    - '*schtasks /query /v /fo LIST*'
+  - process.args:
+    - '*schtasks /query /v /fo LIST*'
+  - process.command_line:
+    - '*schtasks /query /v /fo LIST*'
+  - process.env_vars:
+    - '*schtasks /query /v /fo LIST*'
+  - process.io.text:
+    - '*schtasks /query /v /fo LIST*'
+  - process.title:
+    - '*schtasks /query /v /fo LIST*'
+  - pe.company:
+    - '*schtasks /query /v /fo LIST*'
+  - pe.description:
+    - '*schtasks /query /v /fo LIST*'
+  - pe.product:
+    - '*schtasks /query /v /fo LIST*'
+  - os.full:
+    - '*schtasks /query /v /fo LIST*'
+  - host.hostname:
+    - '*schtasks /query /v /fo LIST*'
+  - event.original:
+    - '*schtasks /query /v /fo LIST*'
+  - email.subject:
+    - '*schtasks /query /v /fo LIST*'
+  - device.model.name:
+    - '*schtasks /query /v /fo LIST*'
+  - container.image.name:
+    - '*schtasks /query /v /fo LIST*'
+  - container.name:
+    - '*schtasks /query /v /fo LIST*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium

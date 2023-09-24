@@ -1,18 +1,23 @@
 title: Simple keyword detection rule for echo
-id: 9abdc52b-28d2-4286-8db6-d9b64491763d
+id: f66aca76-513c-4ff4-a5cb-45296fd68a68
 status: experimental
 description: Detects interesting keywords based on echo tool
 references:
 - https://github.com/SigmaHQ/sigma/blob/master/rules/windows/process_creation/win_meterpreter_or_cobaltstrike_getsystem_service_start.yml
+- https://thedfirreport.com/2023/04/03/malicious-iso-file-leads-to-domain-wide-ransomware/
 author: '@mthcht'
 date: 2023/07/30
-modified: 2023/09/20
+modified: 2023/09/25
 tags:
+- attack.T1055
 - attack.T1059.001
 - attack.T1059.003
 - attack.T1068.003
 - attack.T1078.002
+- attack.T1134.002
+- attack.T1548.002
 - attack.TA0002
+- attack.TA0003
 - attack.TA0004
 - attack.TA0006
 - attack.TA0008
@@ -21,420 +26,542 @@ logsource:
   - endpoint
 detection:
   selection:
-  - Image:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - OriginalFileName:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - CurrentDirectory:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - ParentImage:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
   - ParentCommandLine:
-    - '*cmd*echo*\pipe\*'
+    - '*cmd.exe /c echo * > \\.\pipe\*'
     - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - TargetFilename:
     - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - Signature:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - signature:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - ImageLoaded:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - Company:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - Description:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - description:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
     - '*%COMSPEC%*echo*\pipe\*'
   - CommandLine:
-    - '*cmd*echo*\pipe\*'
+    - '*cmd.exe /c echo * > \\.\pipe\*'
     - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - SourceImage:
     - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - TargetImage:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - CallTrace:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - TargetObject:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
     - '*%COMSPEC%*echo*\pipe\*'
   - Details:
-    - '*cmd*echo*\pipe\*'
+    - '*cmd.exe /c echo * > \\.\pipe\*'
     - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - PipeName:
     - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - Consumer:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - Destination:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - Name:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - Query:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - NewName:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - StartAddress:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - StartModule:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - StartFunction:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - SourceHostname:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - Device:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - file_name:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - file_path:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - process:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - original_file_name:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - parent_process:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - process_path:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - service_path:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - registry_path:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - registry_value_data:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - registry_value_name:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - ContextInfo:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - Payload:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - ScriptBlockText:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - ServerName:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - TransportName:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - NewProcessName:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - ParentProcessName:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - Application:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - Product Name:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - Threat Name:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - Process Name:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - Path:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - ImagePath:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - ServiceName:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - ProcessPath:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - AppName:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - AppPath:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - ModulePath:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - registry.data.strings:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - registry.path:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
     - '*%COMSPEC%*echo*\pipe\*'
   - registry.value:
-    - '*cmd*echo*\pipe\*'
+    - '*cmd.exe /c echo * > \\.\pipe\*'
     - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
     - '*%COMSPEC%*echo*\pipe\*'
   - process.args:
-    - '*cmd*echo*\pipe\*'
+    - '*cmd.exe /c echo * > \\.\pipe\*'
     - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
     - '*%COMSPEC%*echo*\pipe\*'
   - process.command_line:
-    - '*cmd*echo*\pipe\*'
+    - '*cmd.exe /c echo * > \\.\pipe\*'
     - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
     - '*%COMSPEC%*echo*\pipe\*'
   - process.env_vars:
-    - '*cmd*echo*\pipe\*'
+    - '*cmd.exe /c echo * > \\.\pipe\*'
     - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
     - '*%COMSPEC%*echo*\pipe\*'
   - process.io.text:
-    - '*cmd*echo*\pipe\*'
+    - '*cmd.exe /c echo * > \\.\pipe\*'
     - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - process.executable:
     - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - process.name:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
     - '*%COMSPEC%*echo*\pipe\*'
   - process.title:
-    - '*cmd*echo*\pipe\*'
+    - '*cmd.exe /c echo * > \\.\pipe\*'
     - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
     - '*%COMSPEC%*echo*\pipe\*'
   - pe.company:
-    - '*cmd*echo*\pipe\*'
+    - '*cmd.exe /c echo * > \\.\pipe\*'
     - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
     - '*%COMSPEC%*echo*\pipe\*'
   - pe.description:
-    - '*cmd*echo*\pipe\*'
+    - '*cmd.exe /c echo * > \\.\pipe\*'
     - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - pe.original_file_name:
     - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
     - '*%COMSPEC%*echo*\pipe\*'
   - pe.product:
-    - '*cmd*echo*\pipe\*'
+    - '*cmd.exe /c echo * > \\.\pipe\*'
     - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
     - '*%COMSPEC%*echo*\pipe\*'
   - os.full:
-    - '*cmd*echo*\pipe\*'
+    - '*cmd.exe /c echo * > \\.\pipe\*'
     - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
     - '*%COMSPEC%*echo*\pipe\*'
   - host.hostname:
-    - '*cmd*echo*\pipe\*'
+    - '*cmd.exe /c echo * > \\.\pipe\*'
     - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - file.fork_name:
     - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - file.name:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - file.path:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - file.target_path:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - email.attachments.file.name:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - email.subject:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - dll.path:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - device.model.name:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - container.image.name:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - container.name:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - object:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - ParentCommandLine:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - CommandLine:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - Details:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - registry.value:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - process.args:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - process.command_line:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - process.env_vars:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - process.io.text:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - process.title:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - pe.company:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - pe.description:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - pe.product:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - os.full:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
-    - '*%COMSPEC%*echo*\pipe\*'
-  - host.hostname:
-    - '*cmd*echo*\pipe\*'
-    - '*cmd.exe  /S /D /c* echo 123'
     - '*%COMSPEC%*echo*\pipe\*'
   - event.original:
-    - '*cmd*echo*\pipe\*'
+    - '*cmd.exe /c echo * > \\.\pipe\*'
     - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
     - '*%COMSPEC%*echo*\pipe\*'
   - email.subject:
-    - '*cmd*echo*\pipe\*'
+    - '*cmd.exe /c echo * > \\.\pipe\*'
     - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
     - '*%COMSPEC%*echo*\pipe\*'
   - device.model.name:
-    - '*cmd*echo*\pipe\*'
+    - '*cmd.exe /c echo * > \\.\pipe\*'
     - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
     - '*%COMSPEC%*echo*\pipe\*'
   - container.image.name:
-    - '*cmd*echo*\pipe\*'
+    - '*cmd.exe /c echo * > \\.\pipe\*'
     - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
     - '*%COMSPEC%*echo*\pipe\*'
   - container.name:
-    - '*cmd*echo*\pipe\*'
+    - '*cmd.exe /c echo * > \\.\pipe\*'
     - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - Image:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - OriginalFileName:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - CurrentDirectory:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - ParentImage:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - ParentCommandLine:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - TargetFilename:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - Signature:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - signature:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - ImageLoaded:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - Company:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - Description:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - description:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - CommandLine:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - SourceImage:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - TargetImage:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - CallTrace:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - TargetObject:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - Details:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - PipeName:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - Consumer:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - Destination:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - Name:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - Query:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - NewName:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - StartAddress:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - StartModule:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - StartFunction:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - SourceHostname:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - Device:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - file_name:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - file_path:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - process:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - original_file_name:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - parent_process:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - process_path:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - service_path:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - registry_path:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - registry_value_data:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - registry_value_name:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - ContextInfo:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - Payload:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - ScriptBlockText:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - ServerName:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - TransportName:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - NewProcessName:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - ParentProcessName:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - Application:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - Product Name:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - Threat Name:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - Process Name:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - Path:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - ImagePath:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - ServiceName:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - ProcessPath:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - AppName:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - AppPath:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - ModulePath:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - registry.data.strings:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - registry.path:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - registry.value:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - process.args:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - process.command_line:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - process.env_vars:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - process.io.text:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - process.executable:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - process.name:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - process.title:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - pe.company:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - pe.description:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - pe.original_file_name:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - pe.product:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - os.full:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - host.hostname:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - file.fork_name:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - file.name:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - file.path:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - file.target_path:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - email.attachments.file.name:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - email.subject:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - dll.path:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - device.model.name:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - container.image.name:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - container.name:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
+    - '*%COMSPEC%*echo*\pipe\*'
+  - object:
+    - '*cmd.exe /c echo * > \\.\pipe\*'
+    - '*cmd.exe  /S /D /c* echo 123'
+    - '*cmd*echo*\pipe\*'
     - '*%COMSPEC%*echo*\pipe\*'
   condition: selection
 fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
 - Image
 - OriginalFileName
 - CurrentDirectory
@@ -519,25 +646,6 @@ fields:
 - container.image.name
 - container.name
 - object
-- ParentCommandLine
-- CommandLine
-- Details
-- registry.value
-- process.args
-- process.command_line
-- process.env_vars
-- process.io.text
-- process.title
-- pe.company
-- pe.description
-- pe.product
-- os.full
-- host.hostname
-- event.original
-- email.subject
-- device.model.name
-- container.image.name
-- container.name
 falsepositives:
 - unknown
 level: medium

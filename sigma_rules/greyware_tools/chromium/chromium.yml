@@ -1,12 +1,13 @@
 title: Simple keyword detection rule for chromium
-id: a95e2e84-bc65-4a56-a39f-193f86f49512
+id: cb30845c-6584-4297-9049-80152c59c64a
 status: experimental
 description: Detects interesting keywords based on chromium tool
 references:
 - https://redcanary.com/blog/intelligence-insights-june-2023/
+- https://www.splunk.com/en_us/blog/security/mockbin-and-the-art-of-deception-tracing-adversaries-going-headless-and-mocking-apis.html
 author: '@mthcht'
 date: 2023/07/30
-modified: 2023/09/20
+modified: 2023/09/25
 tags:
 - attack.T1059.005
 - attack.T1071.001
@@ -16,122 +17,204 @@ tags:
 logsource:
   category:
   - endpoint
+  - network
 detection:
   selection:
   - ParentCommandLine:
-    - '*opera* --headless * --dump-dom http*'
-    - '*vivaldi* --headless * --dump-dom http*'
-    - '*msedge* --headless * --dump-dom http*'
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
     - '*brave* --headless * --dump-dom http*'
     - '*chrome* --headless * --dump-dom http*'
+    - '*vivaldi* --headless * --dump-dom http*'
+    - '*opera* --headless * --dump-dom http*'
+    - '*msedge* --headless * --dump-dom http*'
   - CommandLine:
-    - '*opera* --headless * --dump-dom http*'
-    - '*vivaldi* --headless * --dump-dom http*'
-    - '*msedge* --headless * --dump-dom http*'
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
     - '*brave* --headless * --dump-dom http*'
     - '*chrome* --headless * --dump-dom http*'
+    - '*vivaldi* --headless * --dump-dom http*'
+    - '*opera* --headless * --dump-dom http*'
+    - '*msedge* --headless * --dump-dom http*'
   - Details:
-    - '*opera* --headless * --dump-dom http*'
-    - '*vivaldi* --headless * --dump-dom http*'
-    - '*msedge* --headless * --dump-dom http*'
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
     - '*brave* --headless * --dump-dom http*'
     - '*chrome* --headless * --dump-dom http*'
+    - '*vivaldi* --headless * --dump-dom http*'
+    - '*opera* --headless * --dump-dom http*'
+    - '*msedge* --headless * --dump-dom http*'
   - registry.value:
-    - '*opera* --headless * --dump-dom http*'
-    - '*vivaldi* --headless * --dump-dom http*'
-    - '*msedge* --headless * --dump-dom http*'
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
     - '*brave* --headless * --dump-dom http*'
     - '*chrome* --headless * --dump-dom http*'
+    - '*vivaldi* --headless * --dump-dom http*'
+    - '*opera* --headless * --dump-dom http*'
+    - '*msedge* --headless * --dump-dom http*'
   - process.args:
-    - '*opera* --headless * --dump-dom http*'
-    - '*vivaldi* --headless * --dump-dom http*'
-    - '*msedge* --headless * --dump-dom http*'
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
     - '*brave* --headless * --dump-dom http*'
     - '*chrome* --headless * --dump-dom http*'
+    - '*vivaldi* --headless * --dump-dom http*'
+    - '*opera* --headless * --dump-dom http*'
+    - '*msedge* --headless * --dump-dom http*'
   - process.command_line:
-    - '*opera* --headless * --dump-dom http*'
-    - '*vivaldi* --headless * --dump-dom http*'
-    - '*msedge* --headless * --dump-dom http*'
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
     - '*brave* --headless * --dump-dom http*'
     - '*chrome* --headless * --dump-dom http*'
+    - '*vivaldi* --headless * --dump-dom http*'
+    - '*opera* --headless * --dump-dom http*'
+    - '*msedge* --headless * --dump-dom http*'
   - process.env_vars:
-    - '*opera* --headless * --dump-dom http*'
-    - '*vivaldi* --headless * --dump-dom http*'
-    - '*msedge* --headless * --dump-dom http*'
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
     - '*brave* --headless * --dump-dom http*'
     - '*chrome* --headless * --dump-dom http*'
+    - '*vivaldi* --headless * --dump-dom http*'
+    - '*opera* --headless * --dump-dom http*'
+    - '*msedge* --headless * --dump-dom http*'
   - process.io.text:
-    - '*opera* --headless * --dump-dom http*'
-    - '*vivaldi* --headless * --dump-dom http*'
-    - '*msedge* --headless * --dump-dom http*'
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
     - '*brave* --headless * --dump-dom http*'
     - '*chrome* --headless * --dump-dom http*'
+    - '*vivaldi* --headless * --dump-dom http*'
+    - '*opera* --headless * --dump-dom http*'
+    - '*msedge* --headless * --dump-dom http*'
   - process.title:
-    - '*opera* --headless * --dump-dom http*'
-    - '*vivaldi* --headless * --dump-dom http*'
-    - '*msedge* --headless * --dump-dom http*'
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
     - '*brave* --headless * --dump-dom http*'
     - '*chrome* --headless * --dump-dom http*'
+    - '*vivaldi* --headless * --dump-dom http*'
+    - '*opera* --headless * --dump-dom http*'
+    - '*msedge* --headless * --dump-dom http*'
   - pe.company:
-    - '*opera* --headless * --dump-dom http*'
-    - '*vivaldi* --headless * --dump-dom http*'
-    - '*msedge* --headless * --dump-dom http*'
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
     - '*brave* --headless * --dump-dom http*'
     - '*chrome* --headless * --dump-dom http*'
+    - '*vivaldi* --headless * --dump-dom http*'
+    - '*opera* --headless * --dump-dom http*'
+    - '*msedge* --headless * --dump-dom http*'
   - pe.description:
-    - '*opera* --headless * --dump-dom http*'
-    - '*vivaldi* --headless * --dump-dom http*'
-    - '*msedge* --headless * --dump-dom http*'
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
     - '*brave* --headless * --dump-dom http*'
     - '*chrome* --headless * --dump-dom http*'
+    - '*vivaldi* --headless * --dump-dom http*'
+    - '*opera* --headless * --dump-dom http*'
+    - '*msedge* --headless * --dump-dom http*'
   - pe.product:
-    - '*opera* --headless * --dump-dom http*'
-    - '*vivaldi* --headless * --dump-dom http*'
-    - '*msedge* --headless * --dump-dom http*'
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
     - '*brave* --headless * --dump-dom http*'
     - '*chrome* --headless * --dump-dom http*'
+    - '*vivaldi* --headless * --dump-dom http*'
+    - '*opera* --headless * --dump-dom http*'
+    - '*msedge* --headless * --dump-dom http*'
   - os.full:
-    - '*opera* --headless * --dump-dom http*'
-    - '*vivaldi* --headless * --dump-dom http*'
-    - '*msedge* --headless * --dump-dom http*'
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
     - '*brave* --headless * --dump-dom http*'
     - '*chrome* --headless * --dump-dom http*'
+    - '*vivaldi* --headless * --dump-dom http*'
+    - '*opera* --headless * --dump-dom http*'
+    - '*msedge* --headless * --dump-dom http*'
   - host.hostname:
-    - '*opera* --headless * --dump-dom http*'
-    - '*vivaldi* --headless * --dump-dom http*'
-    - '*msedge* --headless * --dump-dom http*'
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
     - '*brave* --headless * --dump-dom http*'
     - '*chrome* --headless * --dump-dom http*'
+    - '*vivaldi* --headless * --dump-dom http*'
+    - '*opera* --headless * --dump-dom http*'
+    - '*msedge* --headless * --dump-dom http*'
   - event.original:
-    - '*opera* --headless * --dump-dom http*'
-    - '*vivaldi* --headless * --dump-dom http*'
-    - '*msedge* --headless * --dump-dom http*'
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
     - '*brave* --headless * --dump-dom http*'
     - '*chrome* --headless * --dump-dom http*'
+    - '*vivaldi* --headless * --dump-dom http*'
+    - '*opera* --headless * --dump-dom http*'
+    - '*msedge* --headless * --dump-dom http*'
   - email.subject:
-    - '*opera* --headless * --dump-dom http*'
-    - '*vivaldi* --headless * --dump-dom http*'
-    - '*msedge* --headless * --dump-dom http*'
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
     - '*brave* --headless * --dump-dom http*'
     - '*chrome* --headless * --dump-dom http*'
+    - '*vivaldi* --headless * --dump-dom http*'
+    - '*opera* --headless * --dump-dom http*'
+    - '*msedge* --headless * --dump-dom http*'
   - device.model.name:
-    - '*opera* --headless * --dump-dom http*'
-    - '*vivaldi* --headless * --dump-dom http*'
-    - '*msedge* --headless * --dump-dom http*'
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
     - '*brave* --headless * --dump-dom http*'
     - '*chrome* --headless * --dump-dom http*'
+    - '*vivaldi* --headless * --dump-dom http*'
+    - '*opera* --headless * --dump-dom http*'
+    - '*msedge* --headless * --dump-dom http*'
   - container.image.name:
-    - '*opera* --headless * --dump-dom http*'
-    - '*vivaldi* --headless * --dump-dom http*'
-    - '*msedge* --headless * --dump-dom http*'
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
     - '*brave* --headless * --dump-dom http*'
     - '*chrome* --headless * --dump-dom http*'
+    - '*vivaldi* --headless * --dump-dom http*'
+    - '*opera* --headless * --dump-dom http*'
+    - '*msedge* --headless * --dump-dom http*'
   - container.name:
-    - '*opera* --headless * --dump-dom http*'
-    - '*vivaldi* --headless * --dump-dom http*'
-    - '*msedge* --headless * --dump-dom http*'
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
     - '*brave* --headless * --dump-dom http*'
     - '*chrome* --headless * --dump-dom http*'
+    - '*vivaldi* --headless * --dump-dom http*'
+    - '*opera* --headless * --dump-dom http*'
+    - '*msedge* --headless * --dump-dom http*'
+  - url:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - dest_url:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - uri:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - uri_query:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - query:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - url_domain:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - uri_path:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - domain:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - QueryName:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - QueryResults:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - DestinationHostname:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - DestinationIp:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - http_referrer:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - http_referrer_domain:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - http_user_agent:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - dest_nt_host:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - sender:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - recipient:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - orig_recipient:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - subject:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - url.domain:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - url.full:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - url.original:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - url.query:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - user_agent.original:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - network.application:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - http.request.body.content:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - http.request.referrer:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - email.from.address:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - dns.question.name:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
+  - destination.domain:
+    - '*msedge* --headless --disable-gpu --remote-debugging-port=*'
   condition: selection
 fields:
 - ParentCommandLine
@@ -153,6 +236,37 @@ fields:
 - device.model.name
 - container.image.name
 - container.name
+- url
+- dest_url
+- uri
+- uri_query
+- query
+- url_domain
+- uri_path
+- domain
+- QueryName
+- QueryResults
+- DestinationHostname
+- DestinationIp
+- http_referrer
+- http_referrer_domain
+- http_user_agent
+- dest_nt_host
+- sender
+- recipient
+- orig_recipient
+- subject
+- url.domain
+- url.full
+- url.original
+- url.query
+- user_agent.original
+- network.application
+- http.request.body.content
+- http.request.referrer
+- email.from.address
+- dns.question.name
+- destination.domain
 falsepositives:
 - unknown
 level: medium
