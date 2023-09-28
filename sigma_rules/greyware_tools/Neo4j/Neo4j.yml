@@ -1,12 +1,12 @@
 title: Simple keyword detection rule for Neo4j
-id: 98ac47da-bd9d-4e2d-a5e6-dc28b6d7e26a
+id: 6c8369f4-2a94-4dcb-b8e0-2f56995af43a
 status: experimental
 description: Detects interesting keywords based on Neo4j tool
 references:
 - https://hideandsec.sh/books/cheatsheets-82c/page/active-directory
 author: '@mthcht'
 date: 2023/07/30
-modified: 2023/09/25
+modified: 2023/09/28
 tags:
 - attack.T1046
 - attack.T1078.003
@@ -19,542 +19,523 @@ logsource:
   - endpoint
 detection:
   selection:
-  - ParentCommandLine:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
-    - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
-    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
-  - CommandLine:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
-    - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
-    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
-  - Details:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
-    - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
-    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
-  - registry.value:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
-    - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
-    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
-  - process.args:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
-    - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
-    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
-  - process.command_line:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
-    - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
-    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
-  - process.env_vars:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
-    - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
-    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
-  - process.io.text:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
-    - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
-    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
-  - process.title:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
-    - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
-    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
-  - pe.company:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
-    - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
-    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
-  - pe.description:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
-    - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
-    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
-  - pe.product:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
-    - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
-    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
-  - os.full:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
-    - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
-    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
-  - host.hostname:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
-    - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
-    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
-  - event.original:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
-    - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
-    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
-  - email.subject:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
-    - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
-    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
-  - device.model.name:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
-    - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
-    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
-  - container.image.name:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
-    - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
-    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
-  - container.name:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
-    - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
-    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
   - Image:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - OriginalFileName:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - CurrentDirectory:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - ParentImage:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - ParentCommandLine:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - TargetFilename:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - Signature:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - signature:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - ImageLoaded:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - Company:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - Description:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - description:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - CommandLine:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - SourceImage:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - TargetImage:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - CallTrace:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - TargetObject:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - Details:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - PipeName:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - Consumer:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - Destination:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - Name:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - Query:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - NewName:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - StartAddress:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - StartModule:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - StartFunction:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - SourceHostname:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - Device:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - file_name:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - file_path:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - process:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - original_file_name:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - parent_process:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - process_path:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - service_path:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - registry_path:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - registry_value_data:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - registry_value_name:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - ContextInfo:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - Payload:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - ScriptBlockText:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - ServerName:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - TransportName:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - NewProcessName:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - ParentProcessName:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - Application:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - Product Name:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - Threat Name:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - Process Name:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - Path:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - ImagePath:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - ServiceName:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - ProcessPath:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - AppName:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - AppPath:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - ModulePath:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - registry.data.strings:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - registry.path:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - registry.value:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - process.args:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - process.command_line:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - process.env_vars:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - process.io.text:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - process.executable:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - process.name:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - process.title:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - pe.company:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - pe.description:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - pe.original_file_name:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - pe.product:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - os.full:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - host.hostname:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - file.fork_name:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - file.name:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - file.path:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - file.target_path:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - email.attachments.file.name:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - email.subject:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - dll.path:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - device.model.name:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - container.image.name:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - container.name:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   - object:
-    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
     - '*neo4j start*'
-    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
     - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+  - ParentCommandLine:
+    - '*neo4j start*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+  - CommandLine:
+    - '*neo4j start*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+  - Details:
+    - '*neo4j start*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+  - registry.value:
+    - '*neo4j start*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+  - process.args:
+    - '*neo4j start*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+  - process.command_line:
+    - '*neo4j start*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+  - process.env_vars:
+    - '*neo4j start*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+  - process.io.text:
+    - '*neo4j start*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+  - process.title:
+    - '*neo4j start*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+  - pe.company:
+    - '*neo4j start*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+  - pe.description:
+    - '*neo4j start*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+  - pe.product:
+    - '*neo4j start*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+  - os.full:
+    - '*neo4j start*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+  - host.hostname:
+    - '*neo4j start*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+  - event.original:
+    - '*neo4j start*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+  - email.subject:
+    - '*neo4j start*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+  - device.model.name:
+    - '*neo4j start*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+  - container.image.name:
+    - '*neo4j start*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
+  - container.name:
+    - '*neo4j start*'
+    - '*MATCH p=(u:User)-[:SQLAdmin]*(c:Computer) return p*'
+    - '*MATCH (c:Computer)*(t:Computer)* *-[:AllowedToDelegate]* return p*'
+    - '*MATCH (c:Computer {unconsraineddelegation:true}) RETURN c*'
   condition: selection
 fields:
-- ParentCommandLine
-- CommandLine
-- Details
-- registry.value
-- process.args
-- process.command_line
-- process.env_vars
-- process.io.text
-- process.title
-- pe.company
-- pe.description
-- pe.product
-- os.full
-- host.hostname
-- event.original
-- email.subject
-- device.model.name
-- container.image.name
-- container.name
 - Image
 - OriginalFileName
 - CurrentDirectory
@@ -639,6 +620,25 @@ fields:
 - container.image.name
 - container.name
 - object
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
 falsepositives:
 - unknown
 level: medium

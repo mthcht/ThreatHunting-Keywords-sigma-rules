@@ -1,0 +1,81 @@
+title: Simple keyword detection rule for Werfault
+id: 11e40a69-98a6-4922-b035-1eba22d909e4
+status: experimental
+description: Detects interesting keywords based on Werfault tool
+references:
+- https://media.defcon.org/DEF%20CON%2030/DEF%20CON%2030%20presentations/Asaf%20Gilboa%20-%20LSASS%20Shtinkering%20Abusing%20Windows%20Error%20Reporting%20to%20Dump%20LSASS.pdf
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/09/28
+tags:
+- attack.T1003.001
+- attack.T1189
+- attack.TA0005
+- attack.TA0006
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*\Werfault.exe -u -p * -s *'
+  - CommandLine:
+    - '*\Werfault.exe -u -p * -s *'
+  - Details:
+    - '*\Werfault.exe -u -p * -s *'
+  - registry.value:
+    - '*\Werfault.exe -u -p * -s *'
+  - process.args:
+    - '*\Werfault.exe -u -p * -s *'
+  - process.command_line:
+    - '*\Werfault.exe -u -p * -s *'
+  - process.env_vars:
+    - '*\Werfault.exe -u -p * -s *'
+  - process.io.text:
+    - '*\Werfault.exe -u -p * -s *'
+  - process.title:
+    - '*\Werfault.exe -u -p * -s *'
+  - pe.company:
+    - '*\Werfault.exe -u -p * -s *'
+  - pe.description:
+    - '*\Werfault.exe -u -p * -s *'
+  - pe.product:
+    - '*\Werfault.exe -u -p * -s *'
+  - os.full:
+    - '*\Werfault.exe -u -p * -s *'
+  - host.hostname:
+    - '*\Werfault.exe -u -p * -s *'
+  - event.original:
+    - '*\Werfault.exe -u -p * -s *'
+  - email.subject:
+    - '*\Werfault.exe -u -p * -s *'
+  - device.model.name:
+    - '*\Werfault.exe -u -p * -s *'
+  - container.image.name:
+    - '*\Werfault.exe -u -p * -s *'
+  - container.name:
+    - '*\Werfault.exe -u -p * -s *'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium

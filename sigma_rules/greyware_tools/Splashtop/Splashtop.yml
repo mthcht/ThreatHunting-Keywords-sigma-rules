@@ -1,0 +1,87 @@
+title: Simple keyword detection rule for Splashtop
+id: 06c129c0-18f8-47de-baad-14e08689969b
+status: experimental
+description: Detects interesting keywords based on Splashtop tool
+references:
+- https://thedfirreport.com/2023/09/25/from-screenconnect-to-hive-ransomware-in-61-hours/
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/09/28
+tags:
+- attack.T1021.001
+- attack.T1078
+- attack.T1112
+- attack.T1133
+- attack.TA0003
+- attack.TA0004
+- attack.TA0005
+- attack.TA0008
+- attack.TA0010
+- attack.TA0011
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*SplashtopStreamer3500.exe* prevercheck *'
+  - CommandLine:
+    - '*SplashtopStreamer3500.exe* prevercheck *'
+  - Details:
+    - '*SplashtopStreamer3500.exe* prevercheck *'
+  - registry.value:
+    - '*SplashtopStreamer3500.exe* prevercheck *'
+  - process.args:
+    - '*SplashtopStreamer3500.exe* prevercheck *'
+  - process.command_line:
+    - '*SplashtopStreamer3500.exe* prevercheck *'
+  - process.env_vars:
+    - '*SplashtopStreamer3500.exe* prevercheck *'
+  - process.io.text:
+    - '*SplashtopStreamer3500.exe* prevercheck *'
+  - process.title:
+    - '*SplashtopStreamer3500.exe* prevercheck *'
+  - pe.company:
+    - '*SplashtopStreamer3500.exe* prevercheck *'
+  - pe.description:
+    - '*SplashtopStreamer3500.exe* prevercheck *'
+  - pe.product:
+    - '*SplashtopStreamer3500.exe* prevercheck *'
+  - os.full:
+    - '*SplashtopStreamer3500.exe* prevercheck *'
+  - host.hostname:
+    - '*SplashtopStreamer3500.exe* prevercheck *'
+  - event.original:
+    - '*SplashtopStreamer3500.exe* prevercheck *'
+  - email.subject:
+    - '*SplashtopStreamer3500.exe* prevercheck *'
+  - device.model.name:
+    - '*SplashtopStreamer3500.exe* prevercheck *'
+  - container.image.name:
+    - '*SplashtopStreamer3500.exe* prevercheck *'
+  - container.name:
+    - '*SplashtopStreamer3500.exe* prevercheck *'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium
