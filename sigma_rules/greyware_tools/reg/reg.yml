@@ -11,7 +11,7 @@ references:
 - https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/winPEAS/winPEASbat/winPEAS.bat
 author: '@mthcht'
 date: 2023/07/30
-modified: 2023/10/02
+modified: 2023/10/04
 tags:
 - attack.T1003.002
 - attack.T1003.003
@@ -56,1303 +56,1303 @@ logsource:
 detection:
   selection:
   - ParentCommandLine:
-    - '*reg save hklm\sam sam*'
     - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
-      /v *Start* /t REG_DWORD /d *0* /f*'
-    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
-      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
-    - '*reg save hklm\system *.dat*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
-    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
-      /va /f*'
-    - '*reg query hkcu\software\*\putty\session*'
+      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\realvnc\vncserver*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg add *HKLM\System\CurrentControlSet\Services\SecurityHealthService* /v
       *Start* /t REG_DWORD /d *4* /f*'
-    - '*copy *system.hive \\*'
-    - '*reg query hklm\software\realvnc*'
-    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc\Allusers*'
+    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\OpenSSH*'
+    - '*reg query hkcu\software\*\putty\session*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
+      /t REG_EXPAND_SZ /v ServiceDll /d *'
+    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
+      /t REG_DWORD /d *1* /f*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
-    - '*reg query hklm\software\realvnc\vncserver*'
-    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
-      /v UseLogonCredential*'
+    - '*reg save HKLM\SYSTEM c:*'
     - '*reg add *HKLM\SOFTWARE\Policies\Microsoft\Windows Defender"* /v DisableAntiSpyware
       /t REG_DWORD /d 1 /f*'
+    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
+      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
+    - '*reg save hklm\system system*'
+    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
+      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
+    - '*reg save hklm\sam sam*'
+    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+      /v UseLogonCredential*'
+    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
+      /v *Start* /t REG_DWORD /d *0* /f*'
+    - '*reg query hklm\software\OpenSSH\Agent*'
+    - '*reg save hklm\system *.dat*'
+    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+      /va /f*'
+    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc*'
+    - '*copy *sam.hive \\*'
+    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
+      /t REG_DWORD /d *1* /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    - '*reg save hklm\sam *.dat*'
+    - '*copy *system.hive \\*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
     - '*reg save HKLM\SAM c:*'
     - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v Disable* /t
       REG_DWORD /d 1 /f*'
-    - '*reg query hklm\software\OpenSSH*'
-    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
-    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query hklm\software\realvnc\Allusers*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
-    - '*reg save hklm\system system*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
-      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
-    - '*copy *sam.hive \\*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    - '*reg save HKLM\SYSTEM c:*'
-    - '*reg query hklm\software\OpenSSH\Agent*'
-    - '*reg save hklm\sam *.dat*'
-    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
-      /t REG_EXPAND_SZ /v ServiceDll /d *'
   - CommandLine:
-    - '*reg save hklm\sam sam*'
     - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
-      /v *Start* /t REG_DWORD /d *0* /f*'
-    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
-      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
-    - '*reg save hklm\system *.dat*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
-    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
-      /va /f*'
-    - '*reg query hkcu\software\*\putty\session*'
+      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\realvnc\vncserver*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg add *HKLM\System\CurrentControlSet\Services\SecurityHealthService* /v
       *Start* /t REG_DWORD /d *4* /f*'
-    - '*copy *system.hive \\*'
-    - '*reg query hklm\software\realvnc*'
-    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc\Allusers*'
+    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\OpenSSH*'
+    - '*reg query hkcu\software\*\putty\session*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
+      /t REG_EXPAND_SZ /v ServiceDll /d *'
+    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
+      /t REG_DWORD /d *1* /f*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
-    - '*reg query hklm\software\realvnc\vncserver*'
-    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
-      /v UseLogonCredential*'
+    - '*reg save HKLM\SYSTEM c:*'
     - '*reg add *HKLM\SOFTWARE\Policies\Microsoft\Windows Defender"* /v DisableAntiSpyware
       /t REG_DWORD /d 1 /f*'
+    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
+      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
+    - '*reg save hklm\system system*'
+    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
+      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
+    - '*reg save hklm\sam sam*'
+    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+      /v UseLogonCredential*'
+    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
+      /v *Start* /t REG_DWORD /d *0* /f*'
+    - '*reg query hklm\software\OpenSSH\Agent*'
+    - '*reg save hklm\system *.dat*'
+    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+      /va /f*'
+    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc*'
+    - '*copy *sam.hive \\*'
+    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
+      /t REG_DWORD /d *1* /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    - '*reg save hklm\sam *.dat*'
+    - '*copy *system.hive \\*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
     - '*reg save HKLM\SAM c:*'
     - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v Disable* /t
       REG_DWORD /d 1 /f*'
-    - '*reg query hklm\software\OpenSSH*'
-    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
-    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query hklm\software\realvnc\Allusers*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
-    - '*reg save hklm\system system*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
-      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
-    - '*copy *sam.hive \\*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    - '*reg save HKLM\SYSTEM c:*'
-    - '*reg query hklm\software\OpenSSH\Agent*'
-    - '*reg save hklm\sam *.dat*'
-    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
-      /t REG_EXPAND_SZ /v ServiceDll /d *'
   - Details:
-    - '*reg save hklm\sam sam*'
     - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
-      /v *Start* /t REG_DWORD /d *0* /f*'
-    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
-      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
-    - '*reg save hklm\system *.dat*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
-    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
-      /va /f*'
-    - '*reg query hkcu\software\*\putty\session*'
+      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\realvnc\vncserver*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg add *HKLM\System\CurrentControlSet\Services\SecurityHealthService* /v
       *Start* /t REG_DWORD /d *4* /f*'
-    - '*copy *system.hive \\*'
-    - '*reg query hklm\software\realvnc*'
-    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc\Allusers*'
+    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\OpenSSH*'
+    - '*reg query hkcu\software\*\putty\session*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
+      /t REG_EXPAND_SZ /v ServiceDll /d *'
+    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
+      /t REG_DWORD /d *1* /f*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
-    - '*reg query hklm\software\realvnc\vncserver*'
-    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
-      /v UseLogonCredential*'
+    - '*reg save HKLM\SYSTEM c:*'
     - '*reg add *HKLM\SOFTWARE\Policies\Microsoft\Windows Defender"* /v DisableAntiSpyware
       /t REG_DWORD /d 1 /f*'
+    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
+      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
+    - '*reg save hklm\system system*'
+    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
+      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
+    - '*reg save hklm\sam sam*'
+    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+      /v UseLogonCredential*'
+    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
+      /v *Start* /t REG_DWORD /d *0* /f*'
+    - '*reg query hklm\software\OpenSSH\Agent*'
+    - '*reg save hklm\system *.dat*'
+    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+      /va /f*'
+    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc*'
+    - '*copy *sam.hive \\*'
+    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
+      /t REG_DWORD /d *1* /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    - '*reg save hklm\sam *.dat*'
+    - '*copy *system.hive \\*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
     - '*reg save HKLM\SAM c:*'
     - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v Disable* /t
       REG_DWORD /d 1 /f*'
-    - '*reg query hklm\software\OpenSSH*'
-    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
-    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query hklm\software\realvnc\Allusers*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
-    - '*reg save hklm\system system*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
-      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
-    - '*copy *sam.hive \\*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    - '*reg save HKLM\SYSTEM c:*'
-    - '*reg query hklm\software\OpenSSH\Agent*'
-    - '*reg save hklm\sam *.dat*'
-    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
-      /t REG_EXPAND_SZ /v ServiceDll /d *'
   - registry.value:
-    - '*reg save hklm\sam sam*'
     - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
-      /v *Start* /t REG_DWORD /d *0* /f*'
-    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
-      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
-    - '*reg save hklm\system *.dat*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
-    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
-      /va /f*'
-    - '*reg query hkcu\software\*\putty\session*'
+      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\realvnc\vncserver*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg add *HKLM\System\CurrentControlSet\Services\SecurityHealthService* /v
       *Start* /t REG_DWORD /d *4* /f*'
-    - '*copy *system.hive \\*'
-    - '*reg query hklm\software\realvnc*'
-    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc\Allusers*'
+    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\OpenSSH*'
+    - '*reg query hkcu\software\*\putty\session*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
+      /t REG_EXPAND_SZ /v ServiceDll /d *'
+    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
+      /t REG_DWORD /d *1* /f*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
-    - '*reg query hklm\software\realvnc\vncserver*'
-    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
-      /v UseLogonCredential*'
+    - '*reg save HKLM\SYSTEM c:*'
     - '*reg add *HKLM\SOFTWARE\Policies\Microsoft\Windows Defender"* /v DisableAntiSpyware
       /t REG_DWORD /d 1 /f*'
+    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
+      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
+    - '*reg save hklm\system system*'
+    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
+      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
+    - '*reg save hklm\sam sam*'
+    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+      /v UseLogonCredential*'
+    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
+      /v *Start* /t REG_DWORD /d *0* /f*'
+    - '*reg query hklm\software\OpenSSH\Agent*'
+    - '*reg save hklm\system *.dat*'
+    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+      /va /f*'
+    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc*'
+    - '*copy *sam.hive \\*'
+    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
+      /t REG_DWORD /d *1* /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    - '*reg save hklm\sam *.dat*'
+    - '*copy *system.hive \\*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
     - '*reg save HKLM\SAM c:*'
     - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v Disable* /t
       REG_DWORD /d 1 /f*'
-    - '*reg query hklm\software\OpenSSH*'
-    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
-    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query hklm\software\realvnc\Allusers*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
-    - '*reg save hklm\system system*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
-      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
-    - '*copy *sam.hive \\*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    - '*reg save HKLM\SYSTEM c:*'
-    - '*reg query hklm\software\OpenSSH\Agent*'
-    - '*reg save hklm\sam *.dat*'
-    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
-      /t REG_EXPAND_SZ /v ServiceDll /d *'
   - process.args:
-    - '*reg save hklm\sam sam*'
     - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
-      /v *Start* /t REG_DWORD /d *0* /f*'
-    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
-      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
-    - '*reg save hklm\system *.dat*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
-    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
-      /va /f*'
-    - '*reg query hkcu\software\*\putty\session*'
+      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\realvnc\vncserver*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg add *HKLM\System\CurrentControlSet\Services\SecurityHealthService* /v
       *Start* /t REG_DWORD /d *4* /f*'
-    - '*copy *system.hive \\*'
-    - '*reg query hklm\software\realvnc*'
-    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc\Allusers*'
+    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\OpenSSH*'
+    - '*reg query hkcu\software\*\putty\session*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
+      /t REG_EXPAND_SZ /v ServiceDll /d *'
+    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
+      /t REG_DWORD /d *1* /f*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
-    - '*reg query hklm\software\realvnc\vncserver*'
-    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
-      /v UseLogonCredential*'
+    - '*reg save HKLM\SYSTEM c:*'
     - '*reg add *HKLM\SOFTWARE\Policies\Microsoft\Windows Defender"* /v DisableAntiSpyware
       /t REG_DWORD /d 1 /f*'
+    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
+      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
+    - '*reg save hklm\system system*'
+    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
+      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
+    - '*reg save hklm\sam sam*'
+    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+      /v UseLogonCredential*'
+    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
+      /v *Start* /t REG_DWORD /d *0* /f*'
+    - '*reg query hklm\software\OpenSSH\Agent*'
+    - '*reg save hklm\system *.dat*'
+    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+      /va /f*'
+    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc*'
+    - '*copy *sam.hive \\*'
+    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
+      /t REG_DWORD /d *1* /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    - '*reg save hklm\sam *.dat*'
+    - '*copy *system.hive \\*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
     - '*reg save HKLM\SAM c:*'
     - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v Disable* /t
       REG_DWORD /d 1 /f*'
-    - '*reg query hklm\software\OpenSSH*'
-    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
-    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query hklm\software\realvnc\Allusers*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
-    - '*reg save hklm\system system*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
-      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
-    - '*copy *sam.hive \\*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    - '*reg save HKLM\SYSTEM c:*'
-    - '*reg query hklm\software\OpenSSH\Agent*'
-    - '*reg save hklm\sam *.dat*'
-    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
-      /t REG_EXPAND_SZ /v ServiceDll /d *'
   - process.command_line:
-    - '*reg save hklm\sam sam*'
     - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
-      /v *Start* /t REG_DWORD /d *0* /f*'
-    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
-      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
-    - '*reg save hklm\system *.dat*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
-    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
-      /va /f*'
-    - '*reg query hkcu\software\*\putty\session*'
+      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\realvnc\vncserver*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg add *HKLM\System\CurrentControlSet\Services\SecurityHealthService* /v
       *Start* /t REG_DWORD /d *4* /f*'
-    - '*copy *system.hive \\*'
-    - '*reg query hklm\software\realvnc*'
-    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc\Allusers*'
+    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\OpenSSH*'
+    - '*reg query hkcu\software\*\putty\session*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
+      /t REG_EXPAND_SZ /v ServiceDll /d *'
+    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
+      /t REG_DWORD /d *1* /f*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
-    - '*reg query hklm\software\realvnc\vncserver*'
-    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
-      /v UseLogonCredential*'
+    - '*reg save HKLM\SYSTEM c:*'
     - '*reg add *HKLM\SOFTWARE\Policies\Microsoft\Windows Defender"* /v DisableAntiSpyware
       /t REG_DWORD /d 1 /f*'
+    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
+      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
+    - '*reg save hklm\system system*'
+    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
+      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
+    - '*reg save hklm\sam sam*'
+    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+      /v UseLogonCredential*'
+    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
+      /v *Start* /t REG_DWORD /d *0* /f*'
+    - '*reg query hklm\software\OpenSSH\Agent*'
+    - '*reg save hklm\system *.dat*'
+    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+      /va /f*'
+    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc*'
+    - '*copy *sam.hive \\*'
+    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
+      /t REG_DWORD /d *1* /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    - '*reg save hklm\sam *.dat*'
+    - '*copy *system.hive \\*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
     - '*reg save HKLM\SAM c:*'
     - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v Disable* /t
       REG_DWORD /d 1 /f*'
-    - '*reg query hklm\software\OpenSSH*'
-    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
-    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query hklm\software\realvnc\Allusers*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
-    - '*reg save hklm\system system*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
-      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
-    - '*copy *sam.hive \\*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    - '*reg save HKLM\SYSTEM c:*'
-    - '*reg query hklm\software\OpenSSH\Agent*'
-    - '*reg save hklm\sam *.dat*'
-    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
-      /t REG_EXPAND_SZ /v ServiceDll /d *'
   - process.env_vars:
-    - '*reg save hklm\sam sam*'
     - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
-      /v *Start* /t REG_DWORD /d *0* /f*'
-    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
-      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
-    - '*reg save hklm\system *.dat*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
-    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
-      /va /f*'
-    - '*reg query hkcu\software\*\putty\session*'
+      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\realvnc\vncserver*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg add *HKLM\System\CurrentControlSet\Services\SecurityHealthService* /v
       *Start* /t REG_DWORD /d *4* /f*'
-    - '*copy *system.hive \\*'
-    - '*reg query hklm\software\realvnc*'
-    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc\Allusers*'
+    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\OpenSSH*'
+    - '*reg query hkcu\software\*\putty\session*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
+      /t REG_EXPAND_SZ /v ServiceDll /d *'
+    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
+      /t REG_DWORD /d *1* /f*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
-    - '*reg query hklm\software\realvnc\vncserver*'
-    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
-      /v UseLogonCredential*'
+    - '*reg save HKLM\SYSTEM c:*'
     - '*reg add *HKLM\SOFTWARE\Policies\Microsoft\Windows Defender"* /v DisableAntiSpyware
       /t REG_DWORD /d 1 /f*'
+    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
+      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
+    - '*reg save hklm\system system*'
+    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
+      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
+    - '*reg save hklm\sam sam*'
+    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+      /v UseLogonCredential*'
+    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
+      /v *Start* /t REG_DWORD /d *0* /f*'
+    - '*reg query hklm\software\OpenSSH\Agent*'
+    - '*reg save hklm\system *.dat*'
+    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+      /va /f*'
+    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc*'
+    - '*copy *sam.hive \\*'
+    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
+      /t REG_DWORD /d *1* /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    - '*reg save hklm\sam *.dat*'
+    - '*copy *system.hive \\*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
     - '*reg save HKLM\SAM c:*'
     - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v Disable* /t
       REG_DWORD /d 1 /f*'
-    - '*reg query hklm\software\OpenSSH*'
-    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
-    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query hklm\software\realvnc\Allusers*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
-    - '*reg save hklm\system system*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
-      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
-    - '*copy *sam.hive \\*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    - '*reg save HKLM\SYSTEM c:*'
-    - '*reg query hklm\software\OpenSSH\Agent*'
-    - '*reg save hklm\sam *.dat*'
-    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
-      /t REG_EXPAND_SZ /v ServiceDll /d *'
   - process.io.text:
-    - '*reg save hklm\sam sam*'
     - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
-      /v *Start* /t REG_DWORD /d *0* /f*'
-    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
-      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
-    - '*reg save hklm\system *.dat*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
-    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
-      /va /f*'
-    - '*reg query hkcu\software\*\putty\session*'
+      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\realvnc\vncserver*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg add *HKLM\System\CurrentControlSet\Services\SecurityHealthService* /v
       *Start* /t REG_DWORD /d *4* /f*'
-    - '*copy *system.hive \\*'
-    - '*reg query hklm\software\realvnc*'
-    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc\Allusers*'
+    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\OpenSSH*'
+    - '*reg query hkcu\software\*\putty\session*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
+      /t REG_EXPAND_SZ /v ServiceDll /d *'
+    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
+      /t REG_DWORD /d *1* /f*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
-    - '*reg query hklm\software\realvnc\vncserver*'
-    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
-      /v UseLogonCredential*'
+    - '*reg save HKLM\SYSTEM c:*'
     - '*reg add *HKLM\SOFTWARE\Policies\Microsoft\Windows Defender"* /v DisableAntiSpyware
       /t REG_DWORD /d 1 /f*'
+    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
+      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
+    - '*reg save hklm\system system*'
+    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
+      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
+    - '*reg save hklm\sam sam*'
+    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+      /v UseLogonCredential*'
+    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
+      /v *Start* /t REG_DWORD /d *0* /f*'
+    - '*reg query hklm\software\OpenSSH\Agent*'
+    - '*reg save hklm\system *.dat*'
+    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+      /va /f*'
+    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc*'
+    - '*copy *sam.hive \\*'
+    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
+      /t REG_DWORD /d *1* /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    - '*reg save hklm\sam *.dat*'
+    - '*copy *system.hive \\*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
     - '*reg save HKLM\SAM c:*'
     - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v Disable* /t
       REG_DWORD /d 1 /f*'
-    - '*reg query hklm\software\OpenSSH*'
-    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
-    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query hklm\software\realvnc\Allusers*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
-    - '*reg save hklm\system system*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
-      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
-    - '*copy *sam.hive \\*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    - '*reg save HKLM\SYSTEM c:*'
-    - '*reg query hklm\software\OpenSSH\Agent*'
-    - '*reg save hklm\sam *.dat*'
-    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
-      /t REG_EXPAND_SZ /v ServiceDll /d *'
   - process.title:
-    - '*reg save hklm\sam sam*'
     - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
-      /v *Start* /t REG_DWORD /d *0* /f*'
-    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
-      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
-    - '*reg save hklm\system *.dat*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
-    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
-      /va /f*'
-    - '*reg query hkcu\software\*\putty\session*'
+      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\realvnc\vncserver*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg add *HKLM\System\CurrentControlSet\Services\SecurityHealthService* /v
       *Start* /t REG_DWORD /d *4* /f*'
-    - '*copy *system.hive \\*'
-    - '*reg query hklm\software\realvnc*'
-    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc\Allusers*'
+    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\OpenSSH*'
+    - '*reg query hkcu\software\*\putty\session*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
+      /t REG_EXPAND_SZ /v ServiceDll /d *'
+    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
+      /t REG_DWORD /d *1* /f*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
-    - '*reg query hklm\software\realvnc\vncserver*'
-    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
-      /v UseLogonCredential*'
+    - '*reg save HKLM\SYSTEM c:*'
     - '*reg add *HKLM\SOFTWARE\Policies\Microsoft\Windows Defender"* /v DisableAntiSpyware
       /t REG_DWORD /d 1 /f*'
+    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
+      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
+    - '*reg save hklm\system system*'
+    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
+      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
+    - '*reg save hklm\sam sam*'
+    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+      /v UseLogonCredential*'
+    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
+      /v *Start* /t REG_DWORD /d *0* /f*'
+    - '*reg query hklm\software\OpenSSH\Agent*'
+    - '*reg save hklm\system *.dat*'
+    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+      /va /f*'
+    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc*'
+    - '*copy *sam.hive \\*'
+    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
+      /t REG_DWORD /d *1* /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    - '*reg save hklm\sam *.dat*'
+    - '*copy *system.hive \\*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
     - '*reg save HKLM\SAM c:*'
     - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v Disable* /t
       REG_DWORD /d 1 /f*'
-    - '*reg query hklm\software\OpenSSH*'
-    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
-    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query hklm\software\realvnc\Allusers*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
-    - '*reg save hklm\system system*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
-      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
-    - '*copy *sam.hive \\*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    - '*reg save HKLM\SYSTEM c:*'
-    - '*reg query hklm\software\OpenSSH\Agent*'
-    - '*reg save hklm\sam *.dat*'
-    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
-      /t REG_EXPAND_SZ /v ServiceDll /d *'
   - pe.company:
-    - '*reg save hklm\sam sam*'
     - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
-      /v *Start* /t REG_DWORD /d *0* /f*'
-    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
-      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
-    - '*reg save hklm\system *.dat*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
-    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
-      /va /f*'
-    - '*reg query hkcu\software\*\putty\session*'
+      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\realvnc\vncserver*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg add *HKLM\System\CurrentControlSet\Services\SecurityHealthService* /v
       *Start* /t REG_DWORD /d *4* /f*'
-    - '*copy *system.hive \\*'
-    - '*reg query hklm\software\realvnc*'
-    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc\Allusers*'
+    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\OpenSSH*'
+    - '*reg query hkcu\software\*\putty\session*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
+      /t REG_EXPAND_SZ /v ServiceDll /d *'
+    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
+      /t REG_DWORD /d *1* /f*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
-    - '*reg query hklm\software\realvnc\vncserver*'
-    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
-      /v UseLogonCredential*'
+    - '*reg save HKLM\SYSTEM c:*'
     - '*reg add *HKLM\SOFTWARE\Policies\Microsoft\Windows Defender"* /v DisableAntiSpyware
       /t REG_DWORD /d 1 /f*'
+    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
+      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
+    - '*reg save hklm\system system*'
+    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
+      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
+    - '*reg save hklm\sam sam*'
+    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+      /v UseLogonCredential*'
+    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
+      /v *Start* /t REG_DWORD /d *0* /f*'
+    - '*reg query hklm\software\OpenSSH\Agent*'
+    - '*reg save hklm\system *.dat*'
+    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+      /va /f*'
+    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc*'
+    - '*copy *sam.hive \\*'
+    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
+      /t REG_DWORD /d *1* /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    - '*reg save hklm\sam *.dat*'
+    - '*copy *system.hive \\*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
     - '*reg save HKLM\SAM c:*'
     - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v Disable* /t
       REG_DWORD /d 1 /f*'
-    - '*reg query hklm\software\OpenSSH*'
-    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
-    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query hklm\software\realvnc\Allusers*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
-    - '*reg save hklm\system system*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
-      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
-    - '*copy *sam.hive \\*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    - '*reg save HKLM\SYSTEM c:*'
-    - '*reg query hklm\software\OpenSSH\Agent*'
-    - '*reg save hklm\sam *.dat*'
-    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
-      /t REG_EXPAND_SZ /v ServiceDll /d *'
   - pe.description:
-    - '*reg save hklm\sam sam*'
     - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
-      /v *Start* /t REG_DWORD /d *0* /f*'
-    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
-      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
-    - '*reg save hklm\system *.dat*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
-    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
-      /va /f*'
-    - '*reg query hkcu\software\*\putty\session*'
+      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\realvnc\vncserver*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg add *HKLM\System\CurrentControlSet\Services\SecurityHealthService* /v
       *Start* /t REG_DWORD /d *4* /f*'
-    - '*copy *system.hive \\*'
-    - '*reg query hklm\software\realvnc*'
-    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc\Allusers*'
+    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\OpenSSH*'
+    - '*reg query hkcu\software\*\putty\session*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
+      /t REG_EXPAND_SZ /v ServiceDll /d *'
+    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
+      /t REG_DWORD /d *1* /f*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
-    - '*reg query hklm\software\realvnc\vncserver*'
-    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
-      /v UseLogonCredential*'
+    - '*reg save HKLM\SYSTEM c:*'
     - '*reg add *HKLM\SOFTWARE\Policies\Microsoft\Windows Defender"* /v DisableAntiSpyware
       /t REG_DWORD /d 1 /f*'
+    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
+      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
+    - '*reg save hklm\system system*'
+    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
+      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
+    - '*reg save hklm\sam sam*'
+    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+      /v UseLogonCredential*'
+    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
+      /v *Start* /t REG_DWORD /d *0* /f*'
+    - '*reg query hklm\software\OpenSSH\Agent*'
+    - '*reg save hklm\system *.dat*'
+    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+      /va /f*'
+    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc*'
+    - '*copy *sam.hive \\*'
+    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
+      /t REG_DWORD /d *1* /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    - '*reg save hklm\sam *.dat*'
+    - '*copy *system.hive \\*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
     - '*reg save HKLM\SAM c:*'
     - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v Disable* /t
       REG_DWORD /d 1 /f*'
-    - '*reg query hklm\software\OpenSSH*'
-    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
-    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query hklm\software\realvnc\Allusers*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
-    - '*reg save hklm\system system*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
-      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
-    - '*copy *sam.hive \\*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    - '*reg save HKLM\SYSTEM c:*'
-    - '*reg query hklm\software\OpenSSH\Agent*'
-    - '*reg save hklm\sam *.dat*'
-    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
-      /t REG_EXPAND_SZ /v ServiceDll /d *'
   - pe.product:
-    - '*reg save hklm\sam sam*'
     - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
-      /v *Start* /t REG_DWORD /d *0* /f*'
-    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
-      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
-    - '*reg save hklm\system *.dat*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
-    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
-      /va /f*'
-    - '*reg query hkcu\software\*\putty\session*'
+      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\realvnc\vncserver*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg add *HKLM\System\CurrentControlSet\Services\SecurityHealthService* /v
       *Start* /t REG_DWORD /d *4* /f*'
-    - '*copy *system.hive \\*'
-    - '*reg query hklm\software\realvnc*'
-    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc\Allusers*'
+    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\OpenSSH*'
+    - '*reg query hkcu\software\*\putty\session*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
+      /t REG_EXPAND_SZ /v ServiceDll /d *'
+    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
+      /t REG_DWORD /d *1* /f*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
-    - '*reg query hklm\software\realvnc\vncserver*'
-    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
-      /v UseLogonCredential*'
+    - '*reg save HKLM\SYSTEM c:*'
     - '*reg add *HKLM\SOFTWARE\Policies\Microsoft\Windows Defender"* /v DisableAntiSpyware
       /t REG_DWORD /d 1 /f*'
+    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
+      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
+    - '*reg save hklm\system system*'
+    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
+      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
+    - '*reg save hklm\sam sam*'
+    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+      /v UseLogonCredential*'
+    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
+      /v *Start* /t REG_DWORD /d *0* /f*'
+    - '*reg query hklm\software\OpenSSH\Agent*'
+    - '*reg save hklm\system *.dat*'
+    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+      /va /f*'
+    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc*'
+    - '*copy *sam.hive \\*'
+    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
+      /t REG_DWORD /d *1* /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    - '*reg save hklm\sam *.dat*'
+    - '*copy *system.hive \\*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
     - '*reg save HKLM\SAM c:*'
     - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v Disable* /t
       REG_DWORD /d 1 /f*'
-    - '*reg query hklm\software\OpenSSH*'
-    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
-    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query hklm\software\realvnc\Allusers*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
-    - '*reg save hklm\system system*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
-      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
-    - '*copy *sam.hive \\*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    - '*reg save HKLM\SYSTEM c:*'
-    - '*reg query hklm\software\OpenSSH\Agent*'
-    - '*reg save hklm\sam *.dat*'
-    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
-      /t REG_EXPAND_SZ /v ServiceDll /d *'
   - os.full:
-    - '*reg save hklm\sam sam*'
     - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
-      /v *Start* /t REG_DWORD /d *0* /f*'
-    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
-      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
-    - '*reg save hklm\system *.dat*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
-    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
-      /va /f*'
-    - '*reg query hkcu\software\*\putty\session*'
+      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\realvnc\vncserver*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg add *HKLM\System\CurrentControlSet\Services\SecurityHealthService* /v
       *Start* /t REG_DWORD /d *4* /f*'
-    - '*copy *system.hive \\*'
-    - '*reg query hklm\software\realvnc*'
-    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc\Allusers*'
+    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\OpenSSH*'
+    - '*reg query hkcu\software\*\putty\session*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
+      /t REG_EXPAND_SZ /v ServiceDll /d *'
+    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
+      /t REG_DWORD /d *1* /f*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
-    - '*reg query hklm\software\realvnc\vncserver*'
-    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
-      /v UseLogonCredential*'
+    - '*reg save HKLM\SYSTEM c:*'
     - '*reg add *HKLM\SOFTWARE\Policies\Microsoft\Windows Defender"* /v DisableAntiSpyware
       /t REG_DWORD /d 1 /f*'
+    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
+      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
+    - '*reg save hklm\system system*'
+    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
+      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
+    - '*reg save hklm\sam sam*'
+    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+      /v UseLogonCredential*'
+    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
+      /v *Start* /t REG_DWORD /d *0* /f*'
+    - '*reg query hklm\software\OpenSSH\Agent*'
+    - '*reg save hklm\system *.dat*'
+    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+      /va /f*'
+    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc*'
+    - '*copy *sam.hive \\*'
+    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
+      /t REG_DWORD /d *1* /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    - '*reg save hklm\sam *.dat*'
+    - '*copy *system.hive \\*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
     - '*reg save HKLM\SAM c:*'
     - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v Disable* /t
       REG_DWORD /d 1 /f*'
-    - '*reg query hklm\software\OpenSSH*'
-    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
-    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query hklm\software\realvnc\Allusers*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
-    - '*reg save hklm\system system*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
-      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
-    - '*copy *sam.hive \\*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    - '*reg save HKLM\SYSTEM c:*'
-    - '*reg query hklm\software\OpenSSH\Agent*'
-    - '*reg save hklm\sam *.dat*'
-    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
-      /t REG_EXPAND_SZ /v ServiceDll /d *'
   - host.hostname:
-    - '*reg save hklm\sam sam*'
     - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
-      /v *Start* /t REG_DWORD /d *0* /f*'
-    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
-      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
-    - '*reg save hklm\system *.dat*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
-    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
-      /va /f*'
-    - '*reg query hkcu\software\*\putty\session*'
+      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\realvnc\vncserver*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg add *HKLM\System\CurrentControlSet\Services\SecurityHealthService* /v
       *Start* /t REG_DWORD /d *4* /f*'
-    - '*copy *system.hive \\*'
-    - '*reg query hklm\software\realvnc*'
-    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc\Allusers*'
+    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\OpenSSH*'
+    - '*reg query hkcu\software\*\putty\session*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
+      /t REG_EXPAND_SZ /v ServiceDll /d *'
+    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
+      /t REG_DWORD /d *1* /f*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
-    - '*reg query hklm\software\realvnc\vncserver*'
-    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
-      /v UseLogonCredential*'
+    - '*reg save HKLM\SYSTEM c:*'
     - '*reg add *HKLM\SOFTWARE\Policies\Microsoft\Windows Defender"* /v DisableAntiSpyware
       /t REG_DWORD /d 1 /f*'
+    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
+      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
+    - '*reg save hklm\system system*'
+    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
+      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
+    - '*reg save hklm\sam sam*'
+    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+      /v UseLogonCredential*'
+    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
+      /v *Start* /t REG_DWORD /d *0* /f*'
+    - '*reg query hklm\software\OpenSSH\Agent*'
+    - '*reg save hklm\system *.dat*'
+    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+      /va /f*'
+    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc*'
+    - '*copy *sam.hive \\*'
+    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
+      /t REG_DWORD /d *1* /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    - '*reg save hklm\sam *.dat*'
+    - '*copy *system.hive \\*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
     - '*reg save HKLM\SAM c:*'
     - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v Disable* /t
       REG_DWORD /d 1 /f*'
-    - '*reg query hklm\software\OpenSSH*'
-    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
-    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query hklm\software\realvnc\Allusers*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
-    - '*reg save hklm\system system*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
-      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
-    - '*copy *sam.hive \\*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    - '*reg save HKLM\SYSTEM c:*'
-    - '*reg query hklm\software\OpenSSH\Agent*'
-    - '*reg save hklm\sam *.dat*'
-    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
-      /t REG_EXPAND_SZ /v ServiceDll /d *'
   - event.original:
-    - '*reg save hklm\sam sam*'
     - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
-      /v *Start* /t REG_DWORD /d *0* /f*'
-    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
-      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
-    - '*reg save hklm\system *.dat*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
-    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
-      /va /f*'
-    - '*reg query hkcu\software\*\putty\session*'
+      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\realvnc\vncserver*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg add *HKLM\System\CurrentControlSet\Services\SecurityHealthService* /v
       *Start* /t REG_DWORD /d *4* /f*'
-    - '*copy *system.hive \\*'
-    - '*reg query hklm\software\realvnc*'
-    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc\Allusers*'
+    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\OpenSSH*'
+    - '*reg query hkcu\software\*\putty\session*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
+      /t REG_EXPAND_SZ /v ServiceDll /d *'
+    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
+      /t REG_DWORD /d *1* /f*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
-    - '*reg query hklm\software\realvnc\vncserver*'
-    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
-      /v UseLogonCredential*'
+    - '*reg save HKLM\SYSTEM c:*'
     - '*reg add *HKLM\SOFTWARE\Policies\Microsoft\Windows Defender"* /v DisableAntiSpyware
       /t REG_DWORD /d 1 /f*'
+    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
+      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
+    - '*reg save hklm\system system*'
+    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
+      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
+    - '*reg save hklm\sam sam*'
+    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+      /v UseLogonCredential*'
+    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
+      /v *Start* /t REG_DWORD /d *0* /f*'
+    - '*reg query hklm\software\OpenSSH\Agent*'
+    - '*reg save hklm\system *.dat*'
+    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+      /va /f*'
+    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc*'
+    - '*copy *sam.hive \\*'
+    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
+      /t REG_DWORD /d *1* /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    - '*reg save hklm\sam *.dat*'
+    - '*copy *system.hive \\*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
     - '*reg save HKLM\SAM c:*'
     - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v Disable* /t
       REG_DWORD /d 1 /f*'
-    - '*reg query hklm\software\OpenSSH*'
-    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
-    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query hklm\software\realvnc\Allusers*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
-    - '*reg save hklm\system system*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
-      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
-    - '*copy *sam.hive \\*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    - '*reg save HKLM\SYSTEM c:*'
-    - '*reg query hklm\software\OpenSSH\Agent*'
-    - '*reg save hklm\sam *.dat*'
-    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
-      /t REG_EXPAND_SZ /v ServiceDll /d *'
   - email.subject:
-    - '*reg save hklm\sam sam*'
     - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
-      /v *Start* /t REG_DWORD /d *0* /f*'
-    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
-      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
-    - '*reg save hklm\system *.dat*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
-    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
-      /va /f*'
-    - '*reg query hkcu\software\*\putty\session*'
+      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\realvnc\vncserver*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg add *HKLM\System\CurrentControlSet\Services\SecurityHealthService* /v
       *Start* /t REG_DWORD /d *4* /f*'
-    - '*copy *system.hive \\*'
-    - '*reg query hklm\software\realvnc*'
-    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc\Allusers*'
+    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\OpenSSH*'
+    - '*reg query hkcu\software\*\putty\session*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
+      /t REG_EXPAND_SZ /v ServiceDll /d *'
+    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
+      /t REG_DWORD /d *1* /f*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
-    - '*reg query hklm\software\realvnc\vncserver*'
-    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
-      /v UseLogonCredential*'
+    - '*reg save HKLM\SYSTEM c:*'
     - '*reg add *HKLM\SOFTWARE\Policies\Microsoft\Windows Defender"* /v DisableAntiSpyware
       /t REG_DWORD /d 1 /f*'
+    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
+      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
+    - '*reg save hklm\system system*'
+    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
+      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
+    - '*reg save hklm\sam sam*'
+    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+      /v UseLogonCredential*'
+    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
+      /v *Start* /t REG_DWORD /d *0* /f*'
+    - '*reg query hklm\software\OpenSSH\Agent*'
+    - '*reg save hklm\system *.dat*'
+    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+      /va /f*'
+    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc*'
+    - '*copy *sam.hive \\*'
+    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
+      /t REG_DWORD /d *1* /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    - '*reg save hklm\sam *.dat*'
+    - '*copy *system.hive \\*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
     - '*reg save HKLM\SAM c:*'
     - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v Disable* /t
       REG_DWORD /d 1 /f*'
-    - '*reg query hklm\software\OpenSSH*'
-    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
-    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query hklm\software\realvnc\Allusers*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
-    - '*reg save hklm\system system*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
-      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
-    - '*copy *sam.hive \\*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    - '*reg save HKLM\SYSTEM c:*'
-    - '*reg query hklm\software\OpenSSH\Agent*'
-    - '*reg save hklm\sam *.dat*'
-    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
-      /t REG_EXPAND_SZ /v ServiceDll /d *'
   - device.model.name:
-    - '*reg save hklm\sam sam*'
     - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
-      /v *Start* /t REG_DWORD /d *0* /f*'
-    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
-      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
-    - '*reg save hklm\system *.dat*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
-    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
-      /va /f*'
-    - '*reg query hkcu\software\*\putty\session*'
+      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\realvnc\vncserver*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg add *HKLM\System\CurrentControlSet\Services\SecurityHealthService* /v
       *Start* /t REG_DWORD /d *4* /f*'
-    - '*copy *system.hive \\*'
-    - '*reg query hklm\software\realvnc*'
-    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc\Allusers*'
+    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\OpenSSH*'
+    - '*reg query hkcu\software\*\putty\session*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
+      /t REG_EXPAND_SZ /v ServiceDll /d *'
+    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
+      /t REG_DWORD /d *1* /f*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
-    - '*reg query hklm\software\realvnc\vncserver*'
-    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
-      /v UseLogonCredential*'
+    - '*reg save HKLM\SYSTEM c:*'
     - '*reg add *HKLM\SOFTWARE\Policies\Microsoft\Windows Defender"* /v DisableAntiSpyware
       /t REG_DWORD /d 1 /f*'
+    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
+      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
+    - '*reg save hklm\system system*'
+    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
+      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
+    - '*reg save hklm\sam sam*'
+    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+      /v UseLogonCredential*'
+    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
+      /v *Start* /t REG_DWORD /d *0* /f*'
+    - '*reg query hklm\software\OpenSSH\Agent*'
+    - '*reg save hklm\system *.dat*'
+    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+      /va /f*'
+    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc*'
+    - '*copy *sam.hive \\*'
+    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
+      /t REG_DWORD /d *1* /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    - '*reg save hklm\sam *.dat*'
+    - '*copy *system.hive \\*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
     - '*reg save HKLM\SAM c:*'
     - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v Disable* /t
       REG_DWORD /d 1 /f*'
-    - '*reg query hklm\software\OpenSSH*'
-    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
-    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query hklm\software\realvnc\Allusers*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
-    - '*reg save hklm\system system*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
-      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
-    - '*copy *sam.hive \\*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    - '*reg save HKLM\SYSTEM c:*'
-    - '*reg query hklm\software\OpenSSH\Agent*'
-    - '*reg save hklm\sam *.dat*'
-    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
-      /t REG_EXPAND_SZ /v ServiceDll /d *'
   - container.image.name:
-    - '*reg save hklm\sam sam*'
     - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
-      /v *Start* /t REG_DWORD /d *0* /f*'
-    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
-      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
-    - '*reg save hklm\system *.dat*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
-    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
-      /va /f*'
-    - '*reg query hkcu\software\*\putty\session*'
+      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\realvnc\vncserver*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg add *HKLM\System\CurrentControlSet\Services\SecurityHealthService* /v
       *Start* /t REG_DWORD /d *4* /f*'
-    - '*copy *system.hive \\*'
-    - '*reg query hklm\software\realvnc*'
-    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc\Allusers*'
+    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\OpenSSH*'
+    - '*reg query hkcu\software\*\putty\session*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
+      /t REG_EXPAND_SZ /v ServiceDll /d *'
+    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
+      /t REG_DWORD /d *1* /f*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
-    - '*reg query hklm\software\realvnc\vncserver*'
-    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
-      /v UseLogonCredential*'
+    - '*reg save HKLM\SYSTEM c:*'
     - '*reg add *HKLM\SOFTWARE\Policies\Microsoft\Windows Defender"* /v DisableAntiSpyware
       /t REG_DWORD /d 1 /f*'
+    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
+      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
+    - '*reg save hklm\system system*'
+    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
+      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
+    - '*reg save hklm\sam sam*'
+    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+      /v UseLogonCredential*'
+    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
+      /v *Start* /t REG_DWORD /d *0* /f*'
+    - '*reg query hklm\software\OpenSSH\Agent*'
+    - '*reg save hklm\system *.dat*'
+    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+      /va /f*'
+    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc*'
+    - '*copy *sam.hive \\*'
+    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
+      /t REG_DWORD /d *1* /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    - '*reg save hklm\sam *.dat*'
+    - '*copy *system.hive \\*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
     - '*reg save HKLM\SAM c:*'
     - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v Disable* /t
       REG_DWORD /d 1 /f*'
-    - '*reg query hklm\software\OpenSSH*'
-    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
-    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query hklm\software\realvnc\Allusers*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
-    - '*reg save hklm\system system*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
-      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
-    - '*copy *sam.hive \\*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    - '*reg save HKLM\SYSTEM c:*'
-    - '*reg query hklm\software\OpenSSH\Agent*'
-    - '*reg save hklm\sam *.dat*'
-    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
-      /t REG_EXPAND_SZ /v ServiceDll /d *'
   - container.name:
-    - '*reg save hklm\sam sam*'
     - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
-      /v *Start* /t REG_DWORD /d *0* /f*'
-    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
-      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
-    - '*reg save hklm\system *.dat*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
-    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
-      /va /f*'
-    - '*reg query hkcu\software\*\putty\session*'
+      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\realvnc\vncserver*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg add *HKLM\System\CurrentControlSet\Services\SecurityHealthService* /v
       *Start* /t REG_DWORD /d *4* /f*'
-    - '*copy *system.hive \\*'
-    - '*reg query hklm\software\realvnc*'
-    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc\Allusers*'
+    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
+    - '*reg query hklm\software\OpenSSH*'
+    - '*reg query hkcu\software\*\putty\session*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
+      /t REG_EXPAND_SZ /v ServiceDll /d *'
+    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
+      /t REG_DWORD /d *1* /f*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
-    - '*reg query hklm\software\realvnc\vncserver*'
-    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
-      /v UseLogonCredential*'
+    - '*reg save HKLM\SYSTEM c:*'
     - '*reg add *HKLM\SOFTWARE\Policies\Microsoft\Windows Defender"* /v DisableAntiSpyware
       /t REG_DWORD /d 1 /f*'
+    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
+      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
+    - '*reg save hklm\system system*'
+    - '*reg add *HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server*
+      /v fDenyTSConnections /t REG_DWORD /d 0 /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
+    - '*reg save hklm\sam sam*'
+    - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+      /v UseLogonCredential*'
+    - '*reg add *HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger*
+      /v *Start* /t REG_DWORD /d *0* /f*'
+    - '*reg query hklm\software\OpenSSH\Agent*'
+    - '*reg save hklm\system *.dat*'
+    - '*reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+      /va /f*'
+    - '*reg delete *HKLM\Software\Policies\Microsoft\Windows Defender* /f*'
+    - '*reg query hklm\software\realvnc*'
+    - '*copy *sam.hive \\*'
+    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
+    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
+      /t REG_DWORD /d *1* /f*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\ /v RunAsPPL*'
+    - '*reg save hklm\sam *.dat*'
+    - '*copy *system.hive \\*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
     - '*reg save HKLM\SAM c:*'
     - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v Disable* /t
       REG_DWORD /d 1 /f*'
-    - '*reg query hklm\software\OpenSSH*'
-    - '*REG ADD *HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
-      Options\utilman.exe* /t REG_SZ /v Debugger /d *\windows\system32\cmd.exe* /f*'
-    - '*reg query hklm\software\realvnc\Allusers\vncserver*'
-    - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query hklm\software\realvnc\Allusers*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v RunAsPPL*'
-    - '*reg save hklm\system system*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender"*/v *DisableAntiSpyware*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg add *HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters*
-      /v EnablePrefetcher /t REG_DWORD /f /d 0*'
-    - '*copy *sam.hive \\*'
-    - '*reg add *HKLM\Software\Policies\Microsoft\Windows Defender* /v *DisableAntiVirus*
-      /t REG_DWORD /d *1* /f*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
-    - '*reg save HKLM\SYSTEM c:*'
-    - '*reg query hklm\software\OpenSSH\Agent*'
-    - '*reg save hklm\sam *.dat*'
-    - '*reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters
-      /t REG_EXPAND_SZ /v ServiceDll /d *'
   - url:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - dest_url:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - uri:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - uri_query:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - query:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - url_domain:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - uri_path:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - domain:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - QueryName:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - QueryResults:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - DestinationHostname:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - DestinationIp:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - http_referrer:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - http_referrer_domain:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - http_user_agent:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - dest_nt_host:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - sender:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - recipient:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - orig_recipient:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - subject:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - url.domain:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - url.full:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - url.original:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - url.query:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - user_agent.original:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - network.application:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - http.request.body.content:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - http.request.referrer:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - email.from.address:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - dns.question.name:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   - destination.domain:
-    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
-      /v CACHEDLOGONSCOUNT*'
+    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
     - '*reg save "HK"L""M\s""ys""t"em" win32.exe*'
+    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
     - '*reg save "HK*L*M\s*ec*u*rit*y*" update.exe*'
     - '*reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
       /v UseLogonCredential*'
     - '*reg save "HK"L""M\s""a""m"" win32.dll*'
-    - '*reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL*'
-    - '*reg query HKLM\System\CurrentControlSet\Control\LSA /v LsaCfgFlags*'
+    - '*reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON"
+      /v CACHEDLOGONSCOUNT*'
   condition: selection
 fields:
 - ParentCommandLine
