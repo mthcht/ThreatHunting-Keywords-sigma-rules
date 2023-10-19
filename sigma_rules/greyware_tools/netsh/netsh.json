@@ -1,19 +1,5 @@
 [
     {
-        "keyword": "*netsh firewall set opmode disable*",
-        "description": "Disable Windows Firewall",
-        "tool_name": "netsh",
-        "reference": "N/A",
-        "severity": "6",
-        "popularity": "10",
-        "keyword_type": "greyware_tool_keyword",
-        "comment": "N/A",
-        "tactics": "TA0005 - TA0040",
-        "techniques": "T1562.004 - T1059.005",
-        "endpoint_detection": true,
-        "network_detection": false
-    },
-    {
         "keyword": "*NetSh Advfirewall set allprofiles state off*",
         "description": "Disable Windows Firewall",
         "tool_name": "netsh",
@@ -24,6 +10,34 @@
         "comment": "greyware tool - risks of False positive !",
         "tactics": "TA0005",
         "techniques": "T1562.004 - T1055.001",
+        "endpoint_detection": true,
+        "network_detection": false
+    },
+    {
+        "keyword": "*netsh firewall add allowedprogram \"C:\\Users\\*\\AppData\\*.exe\" \"*.exe\" ENABLE*",
+        "description": "adding a executable in user appdata folder to the allowed programs",
+        "tool_name": "netsh",
+        "reference": "https://tria.ge/231006-ydmxjsfe5s/behavioral1/analog?proc=66",
+        "severity": "3",
+        "popularity": "8",
+        "keyword_type": "greyware_tool_keyword",
+        "comment": "N/A",
+        "tactics": "TA0005 ",
+        "techniques": "T1562.004",
+        "endpoint_detection": true,
+        "network_detection": false
+    },
+    {
+        "keyword": "*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*",
+        "description": "The actor has used the following commands to enable port forwarding [T1090] on the host",
+        "tool_name": "netsh",
+        "reference": "https://media.defense.gov/2023/May/24/2003229517/-1/-1/0/CSA_Living_off_the_Land.PDF",
+        "severity": "N/A",
+        "popularity": "N/A",
+        "keyword_type": "greyware_tool_keyword",
+        "comment": "N/A",
+        "tactics": "TA0005 - TA0002",
+        "techniques": "T1090.003 - T1123",
         "endpoint_detection": true,
         "network_detection": false
     },
@@ -56,6 +70,20 @@
         "network_detection": true
     },
     {
+        "keyword": "*netsh firewall set opmode disable*",
+        "description": "Disable Windows Firewall",
+        "tool_name": "netsh",
+        "reference": "N/A",
+        "severity": "6",
+        "popularity": "10",
+        "keyword_type": "greyware_tool_keyword",
+        "comment": "N/A",
+        "tactics": "TA0005 - TA0040",
+        "techniques": "T1562.004 - T1059.005",
+        "endpoint_detection": true,
+        "network_detection": false
+    },
+    {
         "keyword": "*netsh interface portproxy add v4tov4 listenport=* connectport=* connectaddress=*",
         "description": "commands from wmiexec2.0 -  is the same wmiexec that everyone knows and loves (debatable). This 2.0 version is obfuscated to avoid well known signatures from various AV engines.",
         "tool_name": "netsh",
@@ -68,33 +96,5 @@
         "techniques": "T1047 - T1027 - T1059",
         "endpoint_detection": true,
         "network_detection": true
-    },
-    {
-        "keyword": "*netsh firewall add allowedprogram \"C:\\Users\\*\\AppData\\*.exe\" \"*.exe\" ENABLE*",
-        "description": "adding a executable in user appdata folder to the allowed programs",
-        "tool_name": "netsh",
-        "reference": "https://tria.ge/231006-ydmxjsfe5s/behavioral1/analog?proc=66",
-        "severity": "3",
-        "popularity": "8",
-        "keyword_type": "greyware_tool_keyword",
-        "comment": "N/A",
-        "tactics": "TA0005 ",
-        "techniques": "T1562.004",
-        "endpoint_detection": true,
-        "network_detection": false
-    },
-    {
-        "keyword": "*netsh interface portproxy add v4tov4*listenaddress=* listenport=*connectaddress=*connectport*",
-        "description": "The actor has used the following commands to enable port forwarding [T1090] on the host",
-        "tool_name": "netsh",
-        "reference": "https://media.defense.gov/2023/May/24/2003229517/-1/-1/0/CSA_Living_off_the_Land.PDF",
-        "severity": "N/A",
-        "popularity": "N/A",
-        "keyword_type": "greyware_tool_keyword",
-        "comment": "N/A",
-        "tactics": "TA0005 - TA0002",
-        "techniques": "T1090.003 - T1123",
-        "endpoint_detection": true,
-        "network_detection": false
     }
 ]
