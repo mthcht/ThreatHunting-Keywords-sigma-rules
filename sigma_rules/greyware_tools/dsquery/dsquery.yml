@@ -6,7 +6,7 @@ references:
 - https://www.politoinc.com/post/ldap-queries-for-offensive-and-defensive-operations
 author: '@mthcht'
 date: 2023/07/30
-modified: 2023/10/31
+modified: 2023/11/05
 tags:
 - attack.T1018
 - attack.T1021.004
@@ -22,935 +22,954 @@ logsource:
   - endpoint
 detection:
   selection:
-  - Image:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - OriginalFileName:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - CurrentDirectory:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - ParentImage:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
   - ParentCommandLine:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
       0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - TargetFilename:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
     - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - Signature:
     - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
     - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - signature:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
     - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - ImageLoaded:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - Company:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - Description:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - description:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
   - CommandLine:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
       0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - SourceImage:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
     - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - TargetImage:
     - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
     - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - CallTrace:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
     - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - TargetObject:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
   - Details:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
       0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - PipeName:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
     - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - Consumer:
     - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
     - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - Destination:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
     - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - Name:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - Query:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - NewName:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - StartAddress:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - StartModule:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - StartFunction:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - SourceHostname:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - Device:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - file_name:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - file_path:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - process:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - original_file_name:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - parent_process:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - process_path:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - service_path:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - registry_path:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - registry_value_data:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - registry_value_name:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - ContextInfo:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - Payload:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - ScriptBlockText:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - ServerName:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - TransportName:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - NewProcessName:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - ParentProcessName:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - Application:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - Product Name:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - Threat Name:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - Process Name:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - Path:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - ImagePath:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - ServiceName:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - ProcessPath:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - AppName:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - AppPath:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - ModulePath:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - registry.data.strings:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - registry.path:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
   - registry.value:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
       0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
     - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
   - process.args:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
       0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
     - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
   - process.command_line:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
       0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
     - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
   - process.env_vars:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
       0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
     - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
   - process.io.text:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
       0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - process.executable:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
     - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - process.name:
     - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
     - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
   - process.title:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
       0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
     - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
   - pe.company:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
       0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
     - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
   - pe.description:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
       0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - pe.original_file_name:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
     - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
     - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
   - pe.product:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
       0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
     - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
   - os.full:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
       0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
     - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
   - host.hostname:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
       0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - file.fork_name:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
     - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - file.name:
     - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
     - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - file.path:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
     - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - file.target_path:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - email.attachments.file.name:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - email.subject:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - dll.path:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - device.model.name:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - container.image.name:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - container.name:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - object:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - ParentCommandLine:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - CommandLine:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - Details:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - registry.value:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - process.args:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - process.command_line:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - process.env_vars:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - process.io.text:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - process.title:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - pe.company:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - pe.description:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - pe.product:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - os.full:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
-  - host.hostname:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
-    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
-      0 -attr samaccountname serviceprincipalname*'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
   - event.original:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
       0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
     - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
   - email.subject:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
       0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
     - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
   - device.model.name:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
       0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
     - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
   - container.image.name:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
       0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
     - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
   - container.name:
-    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
-    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
-    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
-    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
-    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
     - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
       0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
     - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - Image:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - OriginalFileName:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - CurrentDirectory:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - ParentImage:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - ParentCommandLine:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - TargetFilename:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - Signature:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - signature:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - ImageLoaded:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - Company:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - Description:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - description:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - CommandLine:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - SourceImage:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - TargetImage:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - CallTrace:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - TargetObject:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - Details:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - PipeName:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - Consumer:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - Destination:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - Name:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - Query:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - NewName:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - StartAddress:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - StartModule:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - StartFunction:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - SourceHostname:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - Device:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - file_name:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - file_path:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - process:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - original_file_name:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - parent_process:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - process_path:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - service_path:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - registry_path:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - registry_value_data:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - registry_value_name:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - ContextInfo:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - Payload:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - ScriptBlockText:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - ServerName:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - TransportName:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - NewProcessName:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - ParentProcessName:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - Application:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - Product Name:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - Threat Name:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - Process Name:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - Path:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - ImagePath:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - ServiceName:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - ProcessPath:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - AppName:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - AppPath:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - ModulePath:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - registry.data.strings:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - registry.path:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - registry.value:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - process.args:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - process.command_line:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - process.env_vars:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - process.io.text:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - process.executable:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - process.name:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - process.title:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - pe.company:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - pe.description:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - pe.original_file_name:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - pe.product:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - os.full:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - host.hostname:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - file.fork_name:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - file.name:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - file.path:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - file.target_path:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - email.attachments.file.name:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - email.subject:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - dll.path:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - device.model.name:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - container.image.name:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - container.name:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
+  - object:
+    - '*-filter *(&(objectClass=User)(serviceprincipalname=*)(samaccountname=* -limit
+      0 -attr samaccountname serviceprincipalname*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304*'
+    - '*-filter *(&(objectClass=user)(servicePrincipalName=*)(!(cn=krbtgt))(!(samaccounttype=805306369*'
+    - '*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*'
+    - '*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*'
+    - '*-filter *(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32*'
+    - '*dsquery * -filter *(objectClass=trustedDomain)* -attr *'
   condition: selection
 fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
 - Image
 - OriginalFileName
 - CurrentDirectory
@@ -1035,25 +1054,6 @@ fields:
 - container.image.name
 - container.name
 - object
-- ParentCommandLine
-- CommandLine
-- Details
-- registry.value
-- process.args
-- process.command_line
-- process.env_vars
-- process.io.text
-- process.title
-- pe.company
-- pe.description
-- pe.product
-- os.full
-- host.hostname
-- event.original
-- email.subject
-- device.model.name
-- container.image.name
-- container.name
 falsepositives:
 - unknown
 level: medium
