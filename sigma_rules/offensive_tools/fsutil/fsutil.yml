@@ -1,0 +1,83 @@
+title: Simple keyword detection rule for fsutil
+id: 588c9f74-92ef-42f1-8fff-828219502f62
+status: experimental
+description: Detects interesting keywords based on fsutil tool
+references:
+- https://x.com/0gtweet/status/1720532496847167784
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/11/16
+tags:
+- attack.T1112
+- attack.T1222.001
+- attack.T1480
+- attack.T1562.001
+- attack.TA0003
+- attack.TA0005
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*fsutil devdrv enable /disallowAv*'
+  - CommandLine:
+    - '*fsutil devdrv enable /disallowAv*'
+  - Details:
+    - '*fsutil devdrv enable /disallowAv*'
+  - registry.value:
+    - '*fsutil devdrv enable /disallowAv*'
+  - process.args:
+    - '*fsutil devdrv enable /disallowAv*'
+  - process.command_line:
+    - '*fsutil devdrv enable /disallowAv*'
+  - process.env_vars:
+    - '*fsutil devdrv enable /disallowAv*'
+  - process.io.text:
+    - '*fsutil devdrv enable /disallowAv*'
+  - process.title:
+    - '*fsutil devdrv enable /disallowAv*'
+  - pe.company:
+    - '*fsutil devdrv enable /disallowAv*'
+  - pe.description:
+    - '*fsutil devdrv enable /disallowAv*'
+  - pe.product:
+    - '*fsutil devdrv enable /disallowAv*'
+  - os.full:
+    - '*fsutil devdrv enable /disallowAv*'
+  - host.hostname:
+    - '*fsutil devdrv enable /disallowAv*'
+  - event.original:
+    - '*fsutil devdrv enable /disallowAv*'
+  - email.subject:
+    - '*fsutil devdrv enable /disallowAv*'
+  - device.model.name:
+    - '*fsutil devdrv enable /disallowAv*'
+  - container.image.name:
+    - '*fsutil devdrv enable /disallowAv*'
+  - container.name:
+    - '*fsutil devdrv enable /disallowAv*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium
