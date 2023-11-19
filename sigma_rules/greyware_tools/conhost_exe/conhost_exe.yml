@@ -1,0 +1,81 @@
+title: Simple keyword detection rule for conhost.exe
+id: c7d48cf0-d989-4749-886e-e93580f9e0e7
+status: experimental
+description: Detects interesting keywords based on conhost.exe tool
+references:
+- https://x.com/TheDFIRReport/status/1721521617908473907?s=20
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/11/19
+tags:
+- attack.T1055
+- attack.T1562.001
+- attack.TA0003
+- attack.TA0005
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*conhost.exe * --headless*'
+  - CommandLine:
+    - '*conhost.exe * --headless*'
+  - Details:
+    - '*conhost.exe * --headless*'
+  - registry.value:
+    - '*conhost.exe * --headless*'
+  - process.args:
+    - '*conhost.exe * --headless*'
+  - process.command_line:
+    - '*conhost.exe * --headless*'
+  - process.env_vars:
+    - '*conhost.exe * --headless*'
+  - process.io.text:
+    - '*conhost.exe * --headless*'
+  - process.title:
+    - '*conhost.exe * --headless*'
+  - pe.company:
+    - '*conhost.exe * --headless*'
+  - pe.description:
+    - '*conhost.exe * --headless*'
+  - pe.product:
+    - '*conhost.exe * --headless*'
+  - os.full:
+    - '*conhost.exe * --headless*'
+  - host.hostname:
+    - '*conhost.exe * --headless*'
+  - event.original:
+    - '*conhost.exe * --headless*'
+  - email.subject:
+    - '*conhost.exe * --headless*'
+  - device.model.name:
+    - '*conhost.exe * --headless*'
+  - container.image.name:
+    - '*conhost.exe * --headless*'
+  - container.name:
+    - '*conhost.exe * --headless*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium
