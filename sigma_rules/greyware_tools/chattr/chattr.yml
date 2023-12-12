@@ -1,0 +1,97 @@
+title: Simple keyword detection rule for chattr
+id: 0bd9c122-c2e8-40d1-9f93-33717a097128
+status: experimental
+description: Detects interesting keywords based on chattr tool
+references: []
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/12/13
+tags:
+- attack.T1070.006
+- attack.TA0005
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*chattr +i *.bash_history*'
+    - '*chattr +i $HISTFILE*'
+  - CommandLine:
+    - '*chattr +i *.bash_history*'
+    - '*chattr +i $HISTFILE*'
+  - Details:
+    - '*chattr +i *.bash_history*'
+    - '*chattr +i $HISTFILE*'
+  - registry.value:
+    - '*chattr +i *.bash_history*'
+    - '*chattr +i $HISTFILE*'
+  - process.args:
+    - '*chattr +i *.bash_history*'
+    - '*chattr +i $HISTFILE*'
+  - process.command_line:
+    - '*chattr +i *.bash_history*'
+    - '*chattr +i $HISTFILE*'
+  - process.env_vars:
+    - '*chattr +i *.bash_history*'
+    - '*chattr +i $HISTFILE*'
+  - process.io.text:
+    - '*chattr +i *.bash_history*'
+    - '*chattr +i $HISTFILE*'
+  - process.title:
+    - '*chattr +i *.bash_history*'
+    - '*chattr +i $HISTFILE*'
+  - pe.company:
+    - '*chattr +i *.bash_history*'
+    - '*chattr +i $HISTFILE*'
+  - pe.description:
+    - '*chattr +i *.bash_history*'
+    - '*chattr +i $HISTFILE*'
+  - pe.product:
+    - '*chattr +i *.bash_history*'
+    - '*chattr +i $HISTFILE*'
+  - os.full:
+    - '*chattr +i *.bash_history*'
+    - '*chattr +i $HISTFILE*'
+  - host.hostname:
+    - '*chattr +i *.bash_history*'
+    - '*chattr +i $HISTFILE*'
+  - event.original:
+    - '*chattr +i *.bash_history*'
+    - '*chattr +i $HISTFILE*'
+  - email.subject:
+    - '*chattr +i *.bash_history*'
+    - '*chattr +i $HISTFILE*'
+  - device.model.name:
+    - '*chattr +i *.bash_history*'
+    - '*chattr +i $HISTFILE*'
+  - container.image.name:
+    - '*chattr +i *.bash_history*'
+    - '*chattr +i $HISTFILE*'
+  - container.name:
+    - '*chattr +i *.bash_history*'
+    - '*chattr +i $HISTFILE*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium

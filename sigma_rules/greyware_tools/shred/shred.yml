@@ -6,10 +6,11 @@ references:
 - https://github.com/elastic/detection-rules/blob/main/rules/linux/defense_evasion_file_deletion_via_shred.toml
 author: '@mthcht'
 date: 2023/07/30
-modified: 2023/12/06
+modified: 2023/12/13
 tags:
 - attack.T1027
 - attack.T1070.004
+- attack.T1070.006
 - attack.T1564.001
 - attack.TA0005
 - attack.TA0011
@@ -19,542 +20,626 @@ logsource:
   - endpoint
 detection:
   selection:
-  - ParentCommandLine:
-    - '*shred --zero*'
-    - '*shred --remove*'
-    - '*shred -z*'
-    - '*shred -u*'
-  - CommandLine:
-    - '*shred --zero*'
-    - '*shred --remove*'
-    - '*shred -z*'
-    - '*shred -u*'
-  - Details:
-    - '*shred --zero*'
-    - '*shred --remove*'
-    - '*shred -z*'
-    - '*shred -u*'
-  - registry.value:
-    - '*shred --zero*'
-    - '*shred --remove*'
-    - '*shred -z*'
-    - '*shred -u*'
-  - process.args:
-    - '*shred --zero*'
-    - '*shred --remove*'
-    - '*shred -z*'
-    - '*shred -u*'
-  - process.command_line:
-    - '*shred --zero*'
-    - '*shred --remove*'
-    - '*shred -z*'
-    - '*shred -u*'
-  - process.env_vars:
-    - '*shred --zero*'
-    - '*shred --remove*'
-    - '*shred -z*'
-    - '*shred -u*'
-  - process.io.text:
-    - '*shred --zero*'
-    - '*shred --remove*'
-    - '*shred -z*'
-    - '*shred -u*'
-  - process.title:
-    - '*shred --zero*'
-    - '*shred --remove*'
-    - '*shred -z*'
-    - '*shred -u*'
-  - pe.company:
-    - '*shred --zero*'
-    - '*shred --remove*'
-    - '*shred -z*'
-    - '*shred -u*'
-  - pe.description:
-    - '*shred --zero*'
-    - '*shred --remove*'
-    - '*shred -z*'
-    - '*shred -u*'
-  - pe.product:
-    - '*shred --zero*'
-    - '*shred --remove*'
-    - '*shred -z*'
-    - '*shred -u*'
-  - os.full:
-    - '*shred --zero*'
-    - '*shred --remove*'
-    - '*shred -z*'
-    - '*shred -u*'
-  - host.hostname:
-    - '*shred --zero*'
-    - '*shred --remove*'
-    - '*shred -z*'
-    - '*shred -u*'
-  - event.original:
-    - '*shred --zero*'
-    - '*shred --remove*'
-    - '*shred -z*'
-    - '*shred -u*'
-  - email.subject:
-    - '*shred --zero*'
-    - '*shred --remove*'
-    - '*shred -z*'
-    - '*shred -u*'
-  - device.model.name:
-    - '*shred --zero*'
-    - '*shred --remove*'
-    - '*shred -z*'
-    - '*shred -u*'
-  - container.image.name:
-    - '*shred --zero*'
-    - '*shred --remove*'
-    - '*shred -z*'
-    - '*shred -u*'
-  - container.name:
-    - '*shred --zero*'
-    - '*shred --remove*'
-    - '*shred -z*'
-    - '*shred -u*'
   - Image:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - OriginalFileName:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - CurrentDirectory:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - ParentImage:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - ParentCommandLine:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - TargetFilename:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - Signature:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - signature:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - ImageLoaded:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - Company:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - Description:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - description:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - CommandLine:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - SourceImage:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - TargetImage:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - CallTrace:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - TargetObject:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - Details:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - PipeName:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - Consumer:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - Destination:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - Name:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - Query:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - NewName:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - StartAddress:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - StartModule:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - StartFunction:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - SourceHostname:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - Device:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - file_name:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - file_path:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - process:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - original_file_name:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - parent_process:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - process_path:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - service_path:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - registry_path:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - registry_value_data:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - registry_value_name:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - ContextInfo:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - Payload:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - ScriptBlockText:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - ServerName:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - TransportName:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - NewProcessName:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - ParentProcessName:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - Application:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - Product Name:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - Threat Name:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - Process Name:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - Path:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - ImagePath:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - ServiceName:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - ProcessPath:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - AppName:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - AppPath:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - ModulePath:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - registry.data.strings:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - registry.path:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - registry.value:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - process.args:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - process.command_line:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - process.env_vars:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - process.io.text:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - process.executable:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - process.name:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - process.title:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - pe.company:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - pe.description:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - pe.original_file_name:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - pe.product:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - os.full:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - host.hostname:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - file.fork_name:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - file.name:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - file.path:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - file.target_path:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - email.attachments.file.name:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - email.subject:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - dll.path:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - device.model.name:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - container.image.name:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - container.name:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
-    - '*shred -u*'
   - object:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
     - '*shred --zero*'
     - '*shred --remove*'
     - '*shred -z*'
+  - ParentCommandLine:
+    - '*shred $HISTFILE*'
     - '*shred -u*'
+    - '*shred --zero*'
+    - '*shred --remove*'
+    - '*shred -z*'
+  - CommandLine:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
+    - '*shred --zero*'
+    - '*shred --remove*'
+    - '*shred -z*'
+  - Details:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
+    - '*shred --zero*'
+    - '*shred --remove*'
+    - '*shred -z*'
+  - registry.value:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
+    - '*shred --zero*'
+    - '*shred --remove*'
+    - '*shred -z*'
+  - process.args:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
+    - '*shred --zero*'
+    - '*shred --remove*'
+    - '*shred -z*'
+  - process.command_line:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
+    - '*shred --zero*'
+    - '*shred --remove*'
+    - '*shred -z*'
+  - process.env_vars:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
+    - '*shred --zero*'
+    - '*shred --remove*'
+    - '*shred -z*'
+  - process.io.text:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
+    - '*shred --zero*'
+    - '*shred --remove*'
+    - '*shred -z*'
+  - process.title:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
+    - '*shred --zero*'
+    - '*shred --remove*'
+    - '*shred -z*'
+  - pe.company:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
+    - '*shred --zero*'
+    - '*shred --remove*'
+    - '*shred -z*'
+  - pe.description:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
+    - '*shred --zero*'
+    - '*shred --remove*'
+    - '*shred -z*'
+  - pe.product:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
+    - '*shred --zero*'
+    - '*shred --remove*'
+    - '*shred -z*'
+  - os.full:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
+    - '*shred --zero*'
+    - '*shred --remove*'
+    - '*shred -z*'
+  - host.hostname:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
+    - '*shred --zero*'
+    - '*shred --remove*'
+    - '*shred -z*'
+  - event.original:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
+    - '*shred --zero*'
+    - '*shred --remove*'
+    - '*shred -z*'
+  - email.subject:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
+    - '*shred --zero*'
+    - '*shred --remove*'
+    - '*shred -z*'
+  - device.model.name:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
+    - '*shred --zero*'
+    - '*shred --remove*'
+    - '*shred -z*'
+  - container.image.name:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
+    - '*shred --zero*'
+    - '*shred --remove*'
+    - '*shred -z*'
+  - container.name:
+    - '*shred $HISTFILE*'
+    - '*shred -u*'
+    - '*shred --zero*'
+    - '*shred --remove*'
+    - '*shred -z*'
   condition: selection
 fields:
-- ParentCommandLine
-- CommandLine
-- Details
-- registry.value
-- process.args
-- process.command_line
-- process.env_vars
-- process.io.text
-- process.title
-- pe.company
-- pe.description
-- pe.product
-- os.full
-- host.hostname
-- event.original
-- email.subject
-- device.model.name
-- container.image.name
-- container.name
 - Image
 - OriginalFileName
 - CurrentDirectory
@@ -639,6 +724,25 @@ fields:
 - container.image.name
 - container.name
 - object
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
 falsepositives:
 - unknown
 level: medium

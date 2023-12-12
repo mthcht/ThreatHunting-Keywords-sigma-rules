@@ -1,0 +1,78 @@
+title: Simple keyword detection rule for set
+id: 336e504f-94b0-4d50-a8ff-872e9fe6ea0b
+status: experimental
+description: Detects interesting keywords based on set tool
+references: []
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/12/13
+tags:
+- attack.T1070.006
+- attack.TA0005
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*set +o history*'
+  - CommandLine:
+    - '*set +o history*'
+  - Details:
+    - '*set +o history*'
+  - registry.value:
+    - '*set +o history*'
+  - process.args:
+    - '*set +o history*'
+  - process.command_line:
+    - '*set +o history*'
+  - process.env_vars:
+    - '*set +o history*'
+  - process.io.text:
+    - '*set +o history*'
+  - process.title:
+    - '*set +o history*'
+  - pe.company:
+    - '*set +o history*'
+  - pe.description:
+    - '*set +o history*'
+  - pe.product:
+    - '*set +o history*'
+  - os.full:
+    - '*set +o history*'
+  - host.hostname:
+    - '*set +o history*'
+  - event.original:
+    - '*set +o history*'
+  - email.subject:
+    - '*set +o history*'
+  - device.model.name:
+    - '*set +o history*'
+  - container.image.name:
+    - '*set +o history*'
+  - container.name:
+    - '*set +o history*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium
