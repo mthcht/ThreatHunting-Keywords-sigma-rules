@@ -1,0 +1,80 @@
+title: Simple keyword detection rule for AdvancedRun
+id: eb5bcc75-6da3-4cc4-9eed-0ef807b14dd0
+status: experimental
+description: Detects interesting keywords based on AdvancedRun tool
+references:
+- https://medium.com/s2wblog/analysis-of-destructive-malware-whispergate-targeting-ukraine-9d5d158f19f3
+author: '@mthcht'
+date: 2023/07/30
+modified: 2023/12/25
+tags:
+- attack.T1089
+- attack.T1562
+- attack.TA0005
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*AdvancedRun.exe /EXEFilename *\sc.exe*stop WinDefend*'
+  - CommandLine:
+    - '*AdvancedRun.exe /EXEFilename *\sc.exe*stop WinDefend*'
+  - Details:
+    - '*AdvancedRun.exe /EXEFilename *\sc.exe*stop WinDefend*'
+  - registry.value:
+    - '*AdvancedRun.exe /EXEFilename *\sc.exe*stop WinDefend*'
+  - process.args:
+    - '*AdvancedRun.exe /EXEFilename *\sc.exe*stop WinDefend*'
+  - process.command_line:
+    - '*AdvancedRun.exe /EXEFilename *\sc.exe*stop WinDefend*'
+  - process.env_vars:
+    - '*AdvancedRun.exe /EXEFilename *\sc.exe*stop WinDefend*'
+  - process.io.text:
+    - '*AdvancedRun.exe /EXEFilename *\sc.exe*stop WinDefend*'
+  - process.title:
+    - '*AdvancedRun.exe /EXEFilename *\sc.exe*stop WinDefend*'
+  - pe.company:
+    - '*AdvancedRun.exe /EXEFilename *\sc.exe*stop WinDefend*'
+  - pe.description:
+    - '*AdvancedRun.exe /EXEFilename *\sc.exe*stop WinDefend*'
+  - pe.product:
+    - '*AdvancedRun.exe /EXEFilename *\sc.exe*stop WinDefend*'
+  - os.full:
+    - '*AdvancedRun.exe /EXEFilename *\sc.exe*stop WinDefend*'
+  - host.hostname:
+    - '*AdvancedRun.exe /EXEFilename *\sc.exe*stop WinDefend*'
+  - event.original:
+    - '*AdvancedRun.exe /EXEFilename *\sc.exe*stop WinDefend*'
+  - email.subject:
+    - '*AdvancedRun.exe /EXEFilename *\sc.exe*stop WinDefend*'
+  - device.model.name:
+    - '*AdvancedRun.exe /EXEFilename *\sc.exe*stop WinDefend*'
+  - container.image.name:
+    - '*AdvancedRun.exe /EXEFilename *\sc.exe*stop WinDefend*'
+  - container.name:
+    - '*AdvancedRun.exe /EXEFilename *\sc.exe*stop WinDefend*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium
