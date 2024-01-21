@@ -1,0 +1,82 @@
+title: Simple keyword detection rule for openssh server
+id: 014b6210-8e9c-404b-ae34-6091953d943f
+status: experimental
+description: Detects interesting keywords based on openssh server tool
+references:
+- https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=powershell#install-openssh-for-windows
+author: '@mthcht'
+date: 2023/07/30
+modified: 2024/01/21
+tags:
+- attack.T1021.004
+- attack.T1574.001
+- attack.T1574.010
+- attack.TA0003
+- attack.TA0011
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*Add-WindowsCapability -Online -Name OpenSSH.Server*'
+  - CommandLine:
+    - '*Add-WindowsCapability -Online -Name OpenSSH.Server*'
+  - Details:
+    - '*Add-WindowsCapability -Online -Name OpenSSH.Server*'
+  - registry.value:
+    - '*Add-WindowsCapability -Online -Name OpenSSH.Server*'
+  - process.args:
+    - '*Add-WindowsCapability -Online -Name OpenSSH.Server*'
+  - process.command_line:
+    - '*Add-WindowsCapability -Online -Name OpenSSH.Server*'
+  - process.env_vars:
+    - '*Add-WindowsCapability -Online -Name OpenSSH.Server*'
+  - process.io.text:
+    - '*Add-WindowsCapability -Online -Name OpenSSH.Server*'
+  - process.title:
+    - '*Add-WindowsCapability -Online -Name OpenSSH.Server*'
+  - pe.company:
+    - '*Add-WindowsCapability -Online -Name OpenSSH.Server*'
+  - pe.description:
+    - '*Add-WindowsCapability -Online -Name OpenSSH.Server*'
+  - pe.product:
+    - '*Add-WindowsCapability -Online -Name OpenSSH.Server*'
+  - os.full:
+    - '*Add-WindowsCapability -Online -Name OpenSSH.Server*'
+  - host.hostname:
+    - '*Add-WindowsCapability -Online -Name OpenSSH.Server*'
+  - event.original:
+    - '*Add-WindowsCapability -Online -Name OpenSSH.Server*'
+  - email.subject:
+    - '*Add-WindowsCapability -Online -Name OpenSSH.Server*'
+  - device.model.name:
+    - '*Add-WindowsCapability -Online -Name OpenSSH.Server*'
+  - container.image.name:
+    - '*Add-WindowsCapability -Online -Name OpenSSH.Server*'
+  - container.name:
+    - '*Add-WindowsCapability -Online -Name OpenSSH.Server*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium

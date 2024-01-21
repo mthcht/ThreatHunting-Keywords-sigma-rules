@@ -1,0 +1,81 @@
+title: Simple keyword detection rule for taskkill
+id: 5085fe07-c4d6-4d73-b4e7-f1e61e3addeb
+status: experimental
+description: Detects interesting keywords based on taskkill tool
+references:
+- https://x.com/malmoeb/status/1741114854037987437
+author: '@mthcht'
+date: 2023/07/30
+modified: 2024/01/21
+tags:
+- attack.T1489
+- attack.T1569.002
+- attack.TA0005
+- attack.TA0040
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*taskkill.exe /F /IM lsass.exe*'
+  - CommandLine:
+    - '*taskkill.exe /F /IM lsass.exe*'
+  - Details:
+    - '*taskkill.exe /F /IM lsass.exe*'
+  - registry.value:
+    - '*taskkill.exe /F /IM lsass.exe*'
+  - process.args:
+    - '*taskkill.exe /F /IM lsass.exe*'
+  - process.command_line:
+    - '*taskkill.exe /F /IM lsass.exe*'
+  - process.env_vars:
+    - '*taskkill.exe /F /IM lsass.exe*'
+  - process.io.text:
+    - '*taskkill.exe /F /IM lsass.exe*'
+  - process.title:
+    - '*taskkill.exe /F /IM lsass.exe*'
+  - pe.company:
+    - '*taskkill.exe /F /IM lsass.exe*'
+  - pe.description:
+    - '*taskkill.exe /F /IM lsass.exe*'
+  - pe.product:
+    - '*taskkill.exe /F /IM lsass.exe*'
+  - os.full:
+    - '*taskkill.exe /F /IM lsass.exe*'
+  - host.hostname:
+    - '*taskkill.exe /F /IM lsass.exe*'
+  - event.original:
+    - '*taskkill.exe /F /IM lsass.exe*'
+  - email.subject:
+    - '*taskkill.exe /F /IM lsass.exe*'
+  - device.model.name:
+    - '*taskkill.exe /F /IM lsass.exe*'
+  - container.image.name:
+    - '*taskkill.exe /F /IM lsass.exe*'
+  - container.name:
+    - '*taskkill.exe /F /IM lsass.exe*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium

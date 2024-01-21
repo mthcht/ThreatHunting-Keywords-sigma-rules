@@ -1,0 +1,99 @@
+title: Simple keyword detection rule for logman
+id: cb4d3308-cd22-4756-88f6-5da28be888d7
+status: experimental
+description: Detects interesting keywords based on logman tool
+references: []
+author: '@mthcht'
+date: 2023/07/30
+modified: 2024/01/21
+tags:
+- attack.T1070.001
+- attack.T1562.004
+- attack.TA0005
+- attack.TA0040
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*logman update trace EventLog-Application --p Microsoft-Windows-PowerShell
+      -ets*'
+  - CommandLine:
+    - '*logman update trace EventLog-Application --p Microsoft-Windows-PowerShell
+      -ets*'
+  - Details:
+    - '*logman update trace EventLog-Application --p Microsoft-Windows-PowerShell
+      -ets*'
+  - registry.value:
+    - '*logman update trace EventLog-Application --p Microsoft-Windows-PowerShell
+      -ets*'
+  - process.args:
+    - '*logman update trace EventLog-Application --p Microsoft-Windows-PowerShell
+      -ets*'
+  - process.command_line:
+    - '*logman update trace EventLog-Application --p Microsoft-Windows-PowerShell
+      -ets*'
+  - process.env_vars:
+    - '*logman update trace EventLog-Application --p Microsoft-Windows-PowerShell
+      -ets*'
+  - process.io.text:
+    - '*logman update trace EventLog-Application --p Microsoft-Windows-PowerShell
+      -ets*'
+  - process.title:
+    - '*logman update trace EventLog-Application --p Microsoft-Windows-PowerShell
+      -ets*'
+  - pe.company:
+    - '*logman update trace EventLog-Application --p Microsoft-Windows-PowerShell
+      -ets*'
+  - pe.description:
+    - '*logman update trace EventLog-Application --p Microsoft-Windows-PowerShell
+      -ets*'
+  - pe.product:
+    - '*logman update trace EventLog-Application --p Microsoft-Windows-PowerShell
+      -ets*'
+  - os.full:
+    - '*logman update trace EventLog-Application --p Microsoft-Windows-PowerShell
+      -ets*'
+  - host.hostname:
+    - '*logman update trace EventLog-Application --p Microsoft-Windows-PowerShell
+      -ets*'
+  - event.original:
+    - '*logman update trace EventLog-Application --p Microsoft-Windows-PowerShell
+      -ets*'
+  - email.subject:
+    - '*logman update trace EventLog-Application --p Microsoft-Windows-PowerShell
+      -ets*'
+  - device.model.name:
+    - '*logman update trace EventLog-Application --p Microsoft-Windows-PowerShell
+      -ets*'
+  - container.image.name:
+    - '*logman update trace EventLog-Application --p Microsoft-Windows-PowerShell
+      -ets*'
+  - container.name:
+    - '*logman update trace EventLog-Application --p Microsoft-Windows-PowerShell
+      -ets*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium

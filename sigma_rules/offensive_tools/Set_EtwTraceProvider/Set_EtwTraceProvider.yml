@@ -1,0 +1,97 @@
+title: Simple keyword detection rule for Set-EtwTraceProvider
+id: 331d7742-b565-4af3-b622-179a1295c290
+status: experimental
+description: Detects interesting keywords based on Set-EtwTraceProvider tool
+references: []
+author: '@mthcht'
+date: 2023/07/30
+modified: 2024/01/21
+tags:
+- attack.T1070.001
+- attack.TA0005
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*Set-EtwTraceProvider -Guid ''{A0C1853B-5C40-4B15-8766-3CF1C58F985A}'' -AutologgerName
+      ''EventLog-Application'' -Property 0x11*'
+  - CommandLine:
+    - '*Set-EtwTraceProvider -Guid ''{A0C1853B-5C40-4B15-8766-3CF1C58F985A}'' -AutologgerName
+      ''EventLog-Application'' -Property 0x11*'
+  - Details:
+    - '*Set-EtwTraceProvider -Guid ''{A0C1853B-5C40-4B15-8766-3CF1C58F985A}'' -AutologgerName
+      ''EventLog-Application'' -Property 0x11*'
+  - registry.value:
+    - '*Set-EtwTraceProvider -Guid ''{A0C1853B-5C40-4B15-8766-3CF1C58F985A}'' -AutologgerName
+      ''EventLog-Application'' -Property 0x11*'
+  - process.args:
+    - '*Set-EtwTraceProvider -Guid ''{A0C1853B-5C40-4B15-8766-3CF1C58F985A}'' -AutologgerName
+      ''EventLog-Application'' -Property 0x11*'
+  - process.command_line:
+    - '*Set-EtwTraceProvider -Guid ''{A0C1853B-5C40-4B15-8766-3CF1C58F985A}'' -AutologgerName
+      ''EventLog-Application'' -Property 0x11*'
+  - process.env_vars:
+    - '*Set-EtwTraceProvider -Guid ''{A0C1853B-5C40-4B15-8766-3CF1C58F985A}'' -AutologgerName
+      ''EventLog-Application'' -Property 0x11*'
+  - process.io.text:
+    - '*Set-EtwTraceProvider -Guid ''{A0C1853B-5C40-4B15-8766-3CF1C58F985A}'' -AutologgerName
+      ''EventLog-Application'' -Property 0x11*'
+  - process.title:
+    - '*Set-EtwTraceProvider -Guid ''{A0C1853B-5C40-4B15-8766-3CF1C58F985A}'' -AutologgerName
+      ''EventLog-Application'' -Property 0x11*'
+  - pe.company:
+    - '*Set-EtwTraceProvider -Guid ''{A0C1853B-5C40-4B15-8766-3CF1C58F985A}'' -AutologgerName
+      ''EventLog-Application'' -Property 0x11*'
+  - pe.description:
+    - '*Set-EtwTraceProvider -Guid ''{A0C1853B-5C40-4B15-8766-3CF1C58F985A}'' -AutologgerName
+      ''EventLog-Application'' -Property 0x11*'
+  - pe.product:
+    - '*Set-EtwTraceProvider -Guid ''{A0C1853B-5C40-4B15-8766-3CF1C58F985A}'' -AutologgerName
+      ''EventLog-Application'' -Property 0x11*'
+  - os.full:
+    - '*Set-EtwTraceProvider -Guid ''{A0C1853B-5C40-4B15-8766-3CF1C58F985A}'' -AutologgerName
+      ''EventLog-Application'' -Property 0x11*'
+  - host.hostname:
+    - '*Set-EtwTraceProvider -Guid ''{A0C1853B-5C40-4B15-8766-3CF1C58F985A}'' -AutologgerName
+      ''EventLog-Application'' -Property 0x11*'
+  - event.original:
+    - '*Set-EtwTraceProvider -Guid ''{A0C1853B-5C40-4B15-8766-3CF1C58F985A}'' -AutologgerName
+      ''EventLog-Application'' -Property 0x11*'
+  - email.subject:
+    - '*Set-EtwTraceProvider -Guid ''{A0C1853B-5C40-4B15-8766-3CF1C58F985A}'' -AutologgerName
+      ''EventLog-Application'' -Property 0x11*'
+  - device.model.name:
+    - '*Set-EtwTraceProvider -Guid ''{A0C1853B-5C40-4B15-8766-3CF1C58F985A}'' -AutologgerName
+      ''EventLog-Application'' -Property 0x11*'
+  - container.image.name:
+    - '*Set-EtwTraceProvider -Guid ''{A0C1853B-5C40-4B15-8766-3CF1C58F985A}'' -AutologgerName
+      ''EventLog-Application'' -Property 0x11*'
+  - container.name:
+    - '*Set-EtwTraceProvider -Guid ''{A0C1853B-5C40-4B15-8766-3CF1C58F985A}'' -AutologgerName
+      ''EventLog-Application'' -Property 0x11*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium
