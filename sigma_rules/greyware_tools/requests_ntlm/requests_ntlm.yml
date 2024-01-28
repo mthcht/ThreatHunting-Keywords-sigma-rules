@@ -1,0 +1,102 @@
+title: Simple keyword detection rule for requests-ntlm
+id: 716ec1c5-4324-4d12-88b5-6efb1431f469
+status: experimental
+description: Detects interesting keywords based on requests-ntlm tool
+references:
+- https://pypi.org/project/requests-ntlm/
+author: '@mthcht'
+date: 2023/07/30
+modified: 2024/01/28
+tags:
+- attack.T1003
+- attack.T1055
+- attack.T1547.005
+- attack.T1557
+- attack.TA0006
+- attack.TA0008
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '* install requests_ntlm*'
+    - '*from requests_ntlm import HttpNtlmAuth*'
+  - CommandLine:
+    - '* install requests_ntlm*'
+    - '*from requests_ntlm import HttpNtlmAuth*'
+  - Details:
+    - '* install requests_ntlm*'
+    - '*from requests_ntlm import HttpNtlmAuth*'
+  - registry.value:
+    - '* install requests_ntlm*'
+    - '*from requests_ntlm import HttpNtlmAuth*'
+  - process.args:
+    - '* install requests_ntlm*'
+    - '*from requests_ntlm import HttpNtlmAuth*'
+  - process.command_line:
+    - '* install requests_ntlm*'
+    - '*from requests_ntlm import HttpNtlmAuth*'
+  - process.env_vars:
+    - '* install requests_ntlm*'
+    - '*from requests_ntlm import HttpNtlmAuth*'
+  - process.io.text:
+    - '* install requests_ntlm*'
+    - '*from requests_ntlm import HttpNtlmAuth*'
+  - process.title:
+    - '* install requests_ntlm*'
+    - '*from requests_ntlm import HttpNtlmAuth*'
+  - pe.company:
+    - '* install requests_ntlm*'
+    - '*from requests_ntlm import HttpNtlmAuth*'
+  - pe.description:
+    - '* install requests_ntlm*'
+    - '*from requests_ntlm import HttpNtlmAuth*'
+  - pe.product:
+    - '* install requests_ntlm*'
+    - '*from requests_ntlm import HttpNtlmAuth*'
+  - os.full:
+    - '* install requests_ntlm*'
+    - '*from requests_ntlm import HttpNtlmAuth*'
+  - host.hostname:
+    - '* install requests_ntlm*'
+    - '*from requests_ntlm import HttpNtlmAuth*'
+  - event.original:
+    - '* install requests_ntlm*'
+    - '*from requests_ntlm import HttpNtlmAuth*'
+  - email.subject:
+    - '* install requests_ntlm*'
+    - '*from requests_ntlm import HttpNtlmAuth*'
+  - device.model.name:
+    - '* install requests_ntlm*'
+    - '*from requests_ntlm import HttpNtlmAuth*'
+  - container.image.name:
+    - '* install requests_ntlm*'
+    - '*from requests_ntlm import HttpNtlmAuth*'
+  - container.name:
+    - '* install requests_ntlm*'
+    - '*from requests_ntlm import HttpNtlmAuth*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium
