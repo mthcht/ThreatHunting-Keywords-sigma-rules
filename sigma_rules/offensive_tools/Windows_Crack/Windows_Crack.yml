@@ -1,0 +1,100 @@
+title: Simple keyword detection rule for Windows-Crack
+id: 959aebad-fd5e-4913-baf7-17c6309d8371
+status: experimental
+description: Detects interesting keywords based on Windows-Crack tool
+references:
+- https://github.com/japd06/Windows-Crack/
+author: '@mthcht'
+date: 2023/07/30
+modified: 2024/04/08
+tags:
+- attack.T1078
+- attack.T1174
+- attack.T1546.013
+- attack.TA0003
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe" /v Debugger /t REG_SZ /d "C:\windows\system32\cmd.exe"*'
+  - CommandLine:
+    - '*REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe" /v Debugger /t REG_SZ /d "C:\windows\system32\cmd.exe"*'
+  - Details:
+    - '*REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe" /v Debugger /t REG_SZ /d "C:\windows\system32\cmd.exe"*'
+  - registry.value:
+    - '*REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe" /v Debugger /t REG_SZ /d "C:\windows\system32\cmd.exe"*'
+  - process.args:
+    - '*REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe" /v Debugger /t REG_SZ /d "C:\windows\system32\cmd.exe"*'
+  - process.command_line:
+    - '*REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe" /v Debugger /t REG_SZ /d "C:\windows\system32\cmd.exe"*'
+  - process.env_vars:
+    - '*REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe" /v Debugger /t REG_SZ /d "C:\windows\system32\cmd.exe"*'
+  - process.io.text:
+    - '*REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe" /v Debugger /t REG_SZ /d "C:\windows\system32\cmd.exe"*'
+  - process.title:
+    - '*REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe" /v Debugger /t REG_SZ /d "C:\windows\system32\cmd.exe"*'
+  - pe.company:
+    - '*REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe" /v Debugger /t REG_SZ /d "C:\windows\system32\cmd.exe"*'
+  - pe.description:
+    - '*REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe" /v Debugger /t REG_SZ /d "C:\windows\system32\cmd.exe"*'
+  - pe.product:
+    - '*REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe" /v Debugger /t REG_SZ /d "C:\windows\system32\cmd.exe"*'
+  - os.full:
+    - '*REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe" /v Debugger /t REG_SZ /d "C:\windows\system32\cmd.exe"*'
+  - host.hostname:
+    - '*REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe" /v Debugger /t REG_SZ /d "C:\windows\system32\cmd.exe"*'
+  - event.original:
+    - '*REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe" /v Debugger /t REG_SZ /d "C:\windows\system32\cmd.exe"*'
+  - email.subject:
+    - '*REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe" /v Debugger /t REG_SZ /d "C:\windows\system32\cmd.exe"*'
+  - device.model.name:
+    - '*REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe" /v Debugger /t REG_SZ /d "C:\windows\system32\cmd.exe"*'
+  - container.image.name:
+    - '*REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe" /v Debugger /t REG_SZ /d "C:\windows\system32\cmd.exe"*'
+  - container.name:
+    - '*REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+      Options\sethc.exe" /v Debugger /t REG_SZ /d "C:\windows\system32\cmd.exe"*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium

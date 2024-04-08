@@ -4,19 +4,28 @@ status: experimental
 description: Detects interesting keywords based on takeown tool
 references:
 - https://github.com/ice-wzl/wmiexec2
+- https://github.com/l3m0n/WinPirate
 - https://www.pavel.gr/blog/neutralising-amsi-system-wide-as-an-admin
 author: '@mthcht'
 date: 2023/07/30
-modified: 2024/04/06
+modified: 2024/04/08
 tags:
+- attack.T1003
 - attack.T1027
 - attack.T1027.002
 - attack.T1047
 - attack.T1055.001
 - attack.T1059
+- attack.T1070.004
+- attack.T1546.008
+- attack.T1547.001
+- attack.T1555.003
+- attack.T1573
 - attack.T1574.001
 - attack.TA0002
+- attack.TA0003
 - attack.TA0005
+- attack.TA0006
 - attack.TA0040
 logsource:
   category:
@@ -26,60 +35,98 @@ detection:
   selection:
   - ParentCommandLine:
     - '*takeown /f "C:\windows\system32\config\SAM"*'
+    - '*takeown /f c:\windows\system32\sethcold.exe*'
+    - '*takeown /f c:\windows\system32\sethc.exe*'
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
   - CommandLine:
     - '*takeown /f "C:\windows\system32\config\SAM"*'
+    - '*takeown /f c:\windows\system32\sethcold.exe*'
+    - '*takeown /f c:\windows\system32\sethc.exe*'
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
   - Details:
     - '*takeown /f "C:\windows\system32\config\SAM"*'
+    - '*takeown /f c:\windows\system32\sethcold.exe*'
+    - '*takeown /f c:\windows\system32\sethc.exe*'
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
   - registry.value:
     - '*takeown /f "C:\windows\system32\config\SAM"*'
+    - '*takeown /f c:\windows\system32\sethcold.exe*'
+    - '*takeown /f c:\windows\system32\sethc.exe*'
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
   - process.args:
     - '*takeown /f "C:\windows\system32\config\SAM"*'
+    - '*takeown /f c:\windows\system32\sethcold.exe*'
+    - '*takeown /f c:\windows\system32\sethc.exe*'
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
   - process.command_line:
     - '*takeown /f "C:\windows\system32\config\SAM"*'
+    - '*takeown /f c:\windows\system32\sethcold.exe*'
+    - '*takeown /f c:\windows\system32\sethc.exe*'
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
   - process.env_vars:
     - '*takeown /f "C:\windows\system32\config\SAM"*'
+    - '*takeown /f c:\windows\system32\sethcold.exe*'
+    - '*takeown /f c:\windows\system32\sethc.exe*'
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
   - process.io.text:
     - '*takeown /f "C:\windows\system32\config\SAM"*'
+    - '*takeown /f c:\windows\system32\sethcold.exe*'
+    - '*takeown /f c:\windows\system32\sethc.exe*'
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
   - process.title:
     - '*takeown /f "C:\windows\system32\config\SAM"*'
+    - '*takeown /f c:\windows\system32\sethcold.exe*'
+    - '*takeown /f c:\windows\system32\sethc.exe*'
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
   - pe.company:
     - '*takeown /f "C:\windows\system32\config\SAM"*'
+    - '*takeown /f c:\windows\system32\sethcold.exe*'
+    - '*takeown /f c:\windows\system32\sethc.exe*'
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
   - pe.description:
     - '*takeown /f "C:\windows\system32\config\SAM"*'
+    - '*takeown /f c:\windows\system32\sethcold.exe*'
+    - '*takeown /f c:\windows\system32\sethc.exe*'
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
   - pe.product:
     - '*takeown /f "C:\windows\system32\config\SAM"*'
+    - '*takeown /f c:\windows\system32\sethcold.exe*'
+    - '*takeown /f c:\windows\system32\sethc.exe*'
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
   - os.full:
     - '*takeown /f "C:\windows\system32\config\SAM"*'
+    - '*takeown /f c:\windows\system32\sethcold.exe*'
+    - '*takeown /f c:\windows\system32\sethc.exe*'
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
   - host.hostname:
     - '*takeown /f "C:\windows\system32\config\SAM"*'
+    - '*takeown /f c:\windows\system32\sethcold.exe*'
+    - '*takeown /f c:\windows\system32\sethc.exe*'
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
   - event.original:
     - '*takeown /f "C:\windows\system32\config\SAM"*'
+    - '*takeown /f c:\windows\system32\sethcold.exe*'
+    - '*takeown /f c:\windows\system32\sethc.exe*'
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
   - email.subject:
     - '*takeown /f "C:\windows\system32\config\SAM"*'
+    - '*takeown /f c:\windows\system32\sethcold.exe*'
+    - '*takeown /f c:\windows\system32\sethc.exe*'
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
   - device.model.name:
     - '*takeown /f "C:\windows\system32\config\SAM"*'
+    - '*takeown /f c:\windows\system32\sethcold.exe*'
+    - '*takeown /f c:\windows\system32\sethc.exe*'
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
   - container.image.name:
     - '*takeown /f "C:\windows\system32\config\SAM"*'
+    - '*takeown /f c:\windows\system32\sethcold.exe*'
+    - '*takeown /f c:\windows\system32\sethc.exe*'
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
   - container.name:
     - '*takeown /f "C:\windows\system32\config\SAM"*'
+    - '*takeown /f c:\windows\system32\sethcold.exe*'
+    - '*takeown /f c:\windows\system32\sethc.exe*'
     - '*takeown /f C:\Windows\System32\amsi.dll /a*'
   - url:
     - '*takeown /f "C:\windows\system32\config\SAM"*'

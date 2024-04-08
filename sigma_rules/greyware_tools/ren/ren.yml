@@ -3,15 +3,25 @@ id: 0afed2ee-1375-4cb0-be41-02c6ae960410
 status: experimental
 description: Detects interesting keywords based on ren tool
 references:
+- https://github.com/l3m0n/WinPirate
 - https://www.pavel.gr/blog/neutralising-amsi-system-wide-as-an-admin
 author: '@mthcht'
 date: 2023/07/30
-modified: 2024/04/06
+modified: 2024/04/08
 tags:
+- attack.T1003
 - attack.T1027.002
 - attack.T1055.001
+- attack.T1059
+- attack.T1070.004
+- attack.T1546.008
+- attack.T1547.001
+- attack.T1555.003
+- attack.T1573
 - attack.T1574.001
+- attack.TA0003
 - attack.TA0005
+- attack.TA0006
 - attack.TA0040
 logsource:
   category:
@@ -20,42 +30,80 @@ detection:
   selection:
   - ParentCommandLine:
     - '*ren C:\Windows\System32\amsi.dll *.dll'
+    - '*ren sethc.exe sethcbad.exe*'
+    - '*ren sethcold.exe sethc.exe*'
   - CommandLine:
     - '*ren C:\Windows\System32\amsi.dll *.dll'
+    - '*ren sethc.exe sethcbad.exe*'
+    - '*ren sethcold.exe sethc.exe*'
   - Details:
     - '*ren C:\Windows\System32\amsi.dll *.dll'
+    - '*ren sethc.exe sethcbad.exe*'
+    - '*ren sethcold.exe sethc.exe*'
   - registry.value:
     - '*ren C:\Windows\System32\amsi.dll *.dll'
+    - '*ren sethc.exe sethcbad.exe*'
+    - '*ren sethcold.exe sethc.exe*'
   - process.args:
     - '*ren C:\Windows\System32\amsi.dll *.dll'
+    - '*ren sethc.exe sethcbad.exe*'
+    - '*ren sethcold.exe sethc.exe*'
   - process.command_line:
     - '*ren C:\Windows\System32\amsi.dll *.dll'
+    - '*ren sethc.exe sethcbad.exe*'
+    - '*ren sethcold.exe sethc.exe*'
   - process.env_vars:
     - '*ren C:\Windows\System32\amsi.dll *.dll'
+    - '*ren sethc.exe sethcbad.exe*'
+    - '*ren sethcold.exe sethc.exe*'
   - process.io.text:
     - '*ren C:\Windows\System32\amsi.dll *.dll'
+    - '*ren sethc.exe sethcbad.exe*'
+    - '*ren sethcold.exe sethc.exe*'
   - process.title:
     - '*ren C:\Windows\System32\amsi.dll *.dll'
+    - '*ren sethc.exe sethcbad.exe*'
+    - '*ren sethcold.exe sethc.exe*'
   - pe.company:
     - '*ren C:\Windows\System32\amsi.dll *.dll'
+    - '*ren sethc.exe sethcbad.exe*'
+    - '*ren sethcold.exe sethc.exe*'
   - pe.description:
     - '*ren C:\Windows\System32\amsi.dll *.dll'
+    - '*ren sethc.exe sethcbad.exe*'
+    - '*ren sethcold.exe sethc.exe*'
   - pe.product:
     - '*ren C:\Windows\System32\amsi.dll *.dll'
+    - '*ren sethc.exe sethcbad.exe*'
+    - '*ren sethcold.exe sethc.exe*'
   - os.full:
     - '*ren C:\Windows\System32\amsi.dll *.dll'
+    - '*ren sethc.exe sethcbad.exe*'
+    - '*ren sethcold.exe sethc.exe*'
   - host.hostname:
     - '*ren C:\Windows\System32\amsi.dll *.dll'
+    - '*ren sethc.exe sethcbad.exe*'
+    - '*ren sethcold.exe sethc.exe*'
   - event.original:
     - '*ren C:\Windows\System32\amsi.dll *.dll'
+    - '*ren sethc.exe sethcbad.exe*'
+    - '*ren sethcold.exe sethc.exe*'
   - email.subject:
     - '*ren C:\Windows\System32\amsi.dll *.dll'
+    - '*ren sethc.exe sethcbad.exe*'
+    - '*ren sethcold.exe sethc.exe*'
   - device.model.name:
     - '*ren C:\Windows\System32\amsi.dll *.dll'
+    - '*ren sethc.exe sethcbad.exe*'
+    - '*ren sethcold.exe sethc.exe*'
   - container.image.name:
     - '*ren C:\Windows\System32\amsi.dll *.dll'
+    - '*ren sethc.exe sethcbad.exe*'
+    - '*ren sethcold.exe sethc.exe*'
   - container.name:
     - '*ren C:\Windows\System32\amsi.dll *.dll'
+    - '*ren sethc.exe sethcbad.exe*'
+    - '*ren sethcold.exe sethc.exe*'
   condition: selection
 fields:
 - ParentCommandLine
