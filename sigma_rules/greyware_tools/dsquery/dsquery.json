@@ -28,8 +28,8 @@
         "network_detection": false
     },
     {
-        "keyword": "*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*",
-        "description": "Finding accounts with unconstrained delegation",
+        "keyword": "*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*",
+        "description": "Finding accounts with constrained delegation",
         "tool_name": "dsquery",
         "reference": "https://www.politoinc.com/post/ldap-queries-for-offensive-and-defensive-operations",
         "severity": "7",
@@ -56,6 +56,20 @@
         "network_detection": false
     },
     {
+        "keyword": "*-filter *(userAccountControl:1.2.840.113556.1.4.803:=524288)*",
+        "description": "Finding accounts with unconstrained delegation",
+        "tool_name": "dsquery",
+        "reference": "https://www.politoinc.com/post/ldap-queries-for-offensive-and-defensive-operations",
+        "severity": "7",
+        "popularity": "10",
+        "keyword_type": "greyware_tool_keyword",
+        "comment": "N/A",
+        "tactics": "TA0007 - TA0008 - TA0011",
+        "techniques": "T1021.004 - T1087.002 - T1018",
+        "endpoint_detection": true,
+        "network_detection": false
+    },
+    {
         "keyword": "*dsquery * -filter *(objectClass=trustedDomain)* -attr *",
         "description": "enumerate domain trusts with dsquery",
         "tool_name": "dsquery",
@@ -66,20 +80,6 @@
         "comment": "N/A",
         "tactics": "TA0007",
         "techniques": "T1482 - T1018",
-        "endpoint_detection": true,
-        "network_detection": false
-    },
-    {
-        "keyword": "*-filter *(&(objectClass=User)(msDS-AllowedToDelegateTo=*",
-        "description": "Finding accounts with constrained delegation",
-        "tool_name": "dsquery",
-        "reference": "https://www.politoinc.com/post/ldap-queries-for-offensive-and-defensive-operations",
-        "severity": "7",
-        "popularity": "10",
-        "keyword_type": "greyware_tool_keyword",
-        "comment": "N/A",
-        "tactics": "TA0007 - TA0008 - TA0011",
-        "techniques": "T1021.004 - T1087.002 - T1018",
         "endpoint_detection": true,
         "network_detection": false
     },
