@@ -1,0 +1,79 @@
+title: Simple keyword detection rule for AutoIt
+id: f9cc877e-2f1a-4752-b26c-fb51c3485f38
+status: experimental
+description: Detects interesting keywords based on AutoIt tool
+references:
+- https://github.com/PaloAltoNetworks/Unit42-timely-threat-intel/blob/main/2024-05-14-IOCs-for-DarkGate-activity.txt
+author: '@mthcht'
+date: 2023/07/30
+modified: 2024/05/27
+tags:
+- attack.T1070
+- attack.TA0005
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*start ''AutoIt3.exe'' -a ''*.a3x'';attrib +h*'
+  - CommandLine:
+    - '*start ''AutoIt3.exe'' -a ''*.a3x'';attrib +h*'
+  - Details:
+    - '*start ''AutoIt3.exe'' -a ''*.a3x'';attrib +h*'
+  - registry.value:
+    - '*start ''AutoIt3.exe'' -a ''*.a3x'';attrib +h*'
+  - process.args:
+    - '*start ''AutoIt3.exe'' -a ''*.a3x'';attrib +h*'
+  - process.command_line:
+    - '*start ''AutoIt3.exe'' -a ''*.a3x'';attrib +h*'
+  - process.env_vars:
+    - '*start ''AutoIt3.exe'' -a ''*.a3x'';attrib +h*'
+  - process.io.text:
+    - '*start ''AutoIt3.exe'' -a ''*.a3x'';attrib +h*'
+  - process.title:
+    - '*start ''AutoIt3.exe'' -a ''*.a3x'';attrib +h*'
+  - pe.company:
+    - '*start ''AutoIt3.exe'' -a ''*.a3x'';attrib +h*'
+  - pe.description:
+    - '*start ''AutoIt3.exe'' -a ''*.a3x'';attrib +h*'
+  - pe.product:
+    - '*start ''AutoIt3.exe'' -a ''*.a3x'';attrib +h*'
+  - os.full:
+    - '*start ''AutoIt3.exe'' -a ''*.a3x'';attrib +h*'
+  - host.hostname:
+    - '*start ''AutoIt3.exe'' -a ''*.a3x'';attrib +h*'
+  - event.original:
+    - '*start ''AutoIt3.exe'' -a ''*.a3x'';attrib +h*'
+  - email.subject:
+    - '*start ''AutoIt3.exe'' -a ''*.a3x'';attrib +h*'
+  - device.model.name:
+    - '*start ''AutoIt3.exe'' -a ''*.a3x'';attrib +h*'
+  - container.image.name:
+    - '*start ''AutoIt3.exe'' -a ''*.a3x'';attrib +h*'
+  - container.name:
+    - '*start ''AutoIt3.exe'' -a ''*.a3x'';attrib +h*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium
