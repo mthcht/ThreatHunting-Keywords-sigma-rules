@@ -1,0 +1,80 @@
+title: Simple keyword detection rule for rdrleakdiag
+id: 836122f7-a75a-47aa-b7b3-caae307a7522
+status: experimental
+description: Detects interesting keywords based on rdrleakdiag tool
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Rdrleakdiag/
+author: '@mthcht'
+date: 2023/07/30
+modified: 2024/06/18
+tags:
+- attack.T1003
+- attack.TA0005
+- attack.TA0006
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*rdrleakdiag.exe /p * /o * /fullmemdmp /wait 1*'
+  - CommandLine:
+    - '*rdrleakdiag.exe /p * /o * /fullmemdmp /wait 1*'
+  - Details:
+    - '*rdrleakdiag.exe /p * /o * /fullmemdmp /wait 1*'
+  - registry.value:
+    - '*rdrleakdiag.exe /p * /o * /fullmemdmp /wait 1*'
+  - process.args:
+    - '*rdrleakdiag.exe /p * /o * /fullmemdmp /wait 1*'
+  - process.command_line:
+    - '*rdrleakdiag.exe /p * /o * /fullmemdmp /wait 1*'
+  - process.env_vars:
+    - '*rdrleakdiag.exe /p * /o * /fullmemdmp /wait 1*'
+  - process.io.text:
+    - '*rdrleakdiag.exe /p * /o * /fullmemdmp /wait 1*'
+  - process.title:
+    - '*rdrleakdiag.exe /p * /o * /fullmemdmp /wait 1*'
+  - pe.company:
+    - '*rdrleakdiag.exe /p * /o * /fullmemdmp /wait 1*'
+  - pe.description:
+    - '*rdrleakdiag.exe /p * /o * /fullmemdmp /wait 1*'
+  - pe.product:
+    - '*rdrleakdiag.exe /p * /o * /fullmemdmp /wait 1*'
+  - os.full:
+    - '*rdrleakdiag.exe /p * /o * /fullmemdmp /wait 1*'
+  - host.hostname:
+    - '*rdrleakdiag.exe /p * /o * /fullmemdmp /wait 1*'
+  - event.original:
+    - '*rdrleakdiag.exe /p * /o * /fullmemdmp /wait 1*'
+  - email.subject:
+    - '*rdrleakdiag.exe /p * /o * /fullmemdmp /wait 1*'
+  - device.model.name:
+    - '*rdrleakdiag.exe /p * /o * /fullmemdmp /wait 1*'
+  - container.image.name:
+    - '*rdrleakdiag.exe /p * /o * /fullmemdmp /wait 1*'
+  - container.name:
+    - '*rdrleakdiag.exe /p * /o * /fullmemdmp /wait 1*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium

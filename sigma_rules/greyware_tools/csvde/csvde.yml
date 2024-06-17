@@ -1,0 +1,156 @@
+title: Simple keyword detection rule for csvde
+id: a552ded1-baa7-41ad-8fb5-93d019bb9647
+status: experimental
+description: Detects interesting keywords based on csvde tool
+references:
+- https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc732101(v=ws.11)
+author: '@mthcht'
+date: 2023/07/30
+modified: 2024/06/18
+tags:
+- attack.T1005
+- attack.TA0007
+- attack.TA0009
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*csvde.exe -f *'
+    - '*csvde.exe" -f *'
+    - '*csvde -r * -f *'
+    - '*csvde -f *'
+    - '*csvde.exe -r * -f *'
+  - CommandLine:
+    - '*csvde.exe -f *'
+    - '*csvde.exe" -f *'
+    - '*csvde -r * -f *'
+    - '*csvde -f *'
+    - '*csvde.exe -r * -f *'
+  - Details:
+    - '*csvde.exe -f *'
+    - '*csvde.exe" -f *'
+    - '*csvde -r * -f *'
+    - '*csvde -f *'
+    - '*csvde.exe -r * -f *'
+  - registry.value:
+    - '*csvde.exe -f *'
+    - '*csvde.exe" -f *'
+    - '*csvde -r * -f *'
+    - '*csvde -f *'
+    - '*csvde.exe -r * -f *'
+  - process.args:
+    - '*csvde.exe -f *'
+    - '*csvde.exe" -f *'
+    - '*csvde -r * -f *'
+    - '*csvde -f *'
+    - '*csvde.exe -r * -f *'
+  - process.command_line:
+    - '*csvde.exe -f *'
+    - '*csvde.exe" -f *'
+    - '*csvde -r * -f *'
+    - '*csvde -f *'
+    - '*csvde.exe -r * -f *'
+  - process.env_vars:
+    - '*csvde.exe -f *'
+    - '*csvde.exe" -f *'
+    - '*csvde -r * -f *'
+    - '*csvde -f *'
+    - '*csvde.exe -r * -f *'
+  - process.io.text:
+    - '*csvde.exe -f *'
+    - '*csvde.exe" -f *'
+    - '*csvde -r * -f *'
+    - '*csvde -f *'
+    - '*csvde.exe -r * -f *'
+  - process.title:
+    - '*csvde.exe -f *'
+    - '*csvde.exe" -f *'
+    - '*csvde -r * -f *'
+    - '*csvde -f *'
+    - '*csvde.exe -r * -f *'
+  - pe.company:
+    - '*csvde.exe -f *'
+    - '*csvde.exe" -f *'
+    - '*csvde -r * -f *'
+    - '*csvde -f *'
+    - '*csvde.exe -r * -f *'
+  - pe.description:
+    - '*csvde.exe -f *'
+    - '*csvde.exe" -f *'
+    - '*csvde -r * -f *'
+    - '*csvde -f *'
+    - '*csvde.exe -r * -f *'
+  - pe.product:
+    - '*csvde.exe -f *'
+    - '*csvde.exe" -f *'
+    - '*csvde -r * -f *'
+    - '*csvde -f *'
+    - '*csvde.exe -r * -f *'
+  - os.full:
+    - '*csvde.exe -f *'
+    - '*csvde.exe" -f *'
+    - '*csvde -r * -f *'
+    - '*csvde -f *'
+    - '*csvde.exe -r * -f *'
+  - host.hostname:
+    - '*csvde.exe -f *'
+    - '*csvde.exe" -f *'
+    - '*csvde -r * -f *'
+    - '*csvde -f *'
+    - '*csvde.exe -r * -f *'
+  - event.original:
+    - '*csvde.exe -f *'
+    - '*csvde.exe" -f *'
+    - '*csvde -r * -f *'
+    - '*csvde -f *'
+    - '*csvde.exe -r * -f *'
+  - email.subject:
+    - '*csvde.exe -f *'
+    - '*csvde.exe" -f *'
+    - '*csvde -r * -f *'
+    - '*csvde -f *'
+    - '*csvde.exe -r * -f *'
+  - device.model.name:
+    - '*csvde.exe -f *'
+    - '*csvde.exe" -f *'
+    - '*csvde -r * -f *'
+    - '*csvde -f *'
+    - '*csvde.exe -r * -f *'
+  - container.image.name:
+    - '*csvde.exe -f *'
+    - '*csvde.exe" -f *'
+    - '*csvde -r * -f *'
+    - '*csvde -f *'
+    - '*csvde.exe -r * -f *'
+  - container.name:
+    - '*csvde.exe -f *'
+    - '*csvde.exe" -f *'
+    - '*csvde -r * -f *'
+    - '*csvde -f *'
+    - '*csvde.exe -r * -f *'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium
