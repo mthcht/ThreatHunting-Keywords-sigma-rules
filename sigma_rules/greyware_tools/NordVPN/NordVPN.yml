@@ -3,10 +3,11 @@ id: 447d9c68-97b4-4aef-8ab4-c35fd690a5f0
 status: experimental
 description: Detects interesting keywords based on NordVPN tool
 references:
+- https://nordvpn.com
 - https://raw.githubusercontent.com/SigmaHQ/sigma/43277f26fc1c81fc98fc79147b711189e901b757/rules/windows/registry/registry_set/registry_set_chrome_extension.yml
 author: '@mthcht'
 date: 2023/07/30
-modified: 2024/06/18
+modified: 2024/06/29
 tags:
 - attack.T1090.003
 - attack.T1133
@@ -19,6 +20,7 @@ tags:
 logsource:
   category:
   - endpoint
+  - network
 detection:
   selection:
   - Image:
@@ -189,6 +191,68 @@ detection:
     - '*fjoaledfpmneenckfbpdfhkmimnjocfa*'
   - object:
     - '*fjoaledfpmneenckfbpdfhkmimnjocfa*'
+  - url:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - dest_url:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - uri:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - uri_query:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - query:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - url_domain:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - uri_path:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - domain:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - QueryName:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - QueryResults:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - DestinationHostname:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - DestinationIp:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - http_referrer:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - http_referrer_domain:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - http_user_agent:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - dest_nt_host:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - sender:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - recipient:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - orig_recipient:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - subject:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - url.domain:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - url.full:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - url.original:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - url.query:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - user_agent.original:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - network.application:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - http.request.body.content:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - http.request.referrer:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - email.from.address:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - dns.question.name:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
+  - destination.domain:
+    - '*https://nordvpn.com*/ovpn/*.ovpn*'
   condition: selection
 fields:
 - Image
@@ -275,6 +339,37 @@ fields:
 - container.image.name
 - container.name
 - object
+- url
+- dest_url
+- uri
+- uri_query
+- query
+- url_domain
+- uri_path
+- domain
+- QueryName
+- QueryResults
+- DestinationHostname
+- DestinationIp
+- http_referrer
+- http_referrer_domain
+- http_user_agent
+- dest_nt_host
+- sender
+- recipient
+- orig_recipient
+- subject
+- url.domain
+- url.full
+- url.original
+- url.query
+- user_agent.original
+- network.application
+- http.request.body.content
+- http.request.referrer
+- email.from.address
+- dns.question.name
+- destination.domain
 falsepositives:
 - unknown
 level: medium
