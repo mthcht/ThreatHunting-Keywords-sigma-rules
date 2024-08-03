@@ -2,15 +2,19 @@ title: Simple keyword detection rule for schtasks
 id: 59159c1a-bb2b-460f-b14f-af0fae8bc6db
 status: experimental
 description: Detects interesting keywords based on schtasks tool
-references: []
+references:
+- https://www.trellix.com/blogs/research/cactus-ransomware-new-strain-in-the-market/
 author: '@mthcht'
 date: 2023/07/30
-modified: 2024/07/01
+modified: 2024/08/03
 tags:
+- attack.
 - attack.T1053.005
 - attack.T1082
+- attack.TA0003
 - attack.TA0004
 - attack.TA0007
+- attack.TA0011
 logsource:
   category:
   - endpoint
@@ -18,42 +22,118 @@ detection:
   selection:
   - ParentCommandLine:
     - '*schtasks /query /v /fo LIST*'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
+      -N -R * -o StrictHostKeyChecking=no -o *'
   - CommandLine:
     - '*schtasks /query /v /fo LIST*'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
+      -N -R * -o StrictHostKeyChecking=no -o *'
   - Details:
     - '*schtasks /query /v /fo LIST*'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
+      -N -R * -o StrictHostKeyChecking=no -o *'
   - registry.value:
     - '*schtasks /query /v /fo LIST*'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
+      -N -R * -o StrictHostKeyChecking=no -o *'
   - process.args:
     - '*schtasks /query /v /fo LIST*'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
+      -N -R * -o StrictHostKeyChecking=no -o *'
   - process.command_line:
     - '*schtasks /query /v /fo LIST*'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
+      -N -R * -o StrictHostKeyChecking=no -o *'
   - process.env_vars:
     - '*schtasks /query /v /fo LIST*'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
+      -N -R * -o StrictHostKeyChecking=no -o *'
   - process.io.text:
     - '*schtasks /query /v /fo LIST*'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
+      -N -R * -o StrictHostKeyChecking=no -o *'
   - process.title:
     - '*schtasks /query /v /fo LIST*'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
+      -N -R * -o StrictHostKeyChecking=no -o *'
   - pe.company:
     - '*schtasks /query /v /fo LIST*'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
+      -N -R * -o StrictHostKeyChecking=no -o *'
   - pe.description:
     - '*schtasks /query /v /fo LIST*'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
+      -N -R * -o StrictHostKeyChecking=no -o *'
   - pe.product:
     - '*schtasks /query /v /fo LIST*'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
+      -N -R * -o StrictHostKeyChecking=no -o *'
   - os.full:
     - '*schtasks /query /v /fo LIST*'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
+      -N -R * -o StrictHostKeyChecking=no -o *'
   - host.hostname:
     - '*schtasks /query /v /fo LIST*'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
+      -N -R * -o StrictHostKeyChecking=no -o *'
   - event.original:
     - '*schtasks /query /v /fo LIST*'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
+      -N -R * -o StrictHostKeyChecking=no -o *'
   - email.subject:
     - '*schtasks /query /v /fo LIST*'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
+      -N -R * -o StrictHostKeyChecking=no -o *'
   - device.model.name:
     - '*schtasks /query /v /fo LIST*'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
+      -N -R * -o StrictHostKeyChecking=no -o *'
   - container.image.name:
     - '*schtasks /query /v /fo LIST*'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
+      -N -R * -o StrictHostKeyChecking=no -o *'
   - container.name:
     - '*schtasks /query /v /fo LIST*'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
+      -N -R * -o StrictHostKeyChecking=no -o *'
   condition: selection
 fields:
 - ParentCommandLine

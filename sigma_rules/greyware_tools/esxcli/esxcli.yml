@@ -1,0 +1,288 @@
+title: Simple keyword detection rule for esxcli
+id: cfdca2f4-32af-4719-8e59-79f6987ee307
+status: experimental
+description: Detects interesting keywords based on esxcli tool
+references:
+- https://medium.com/detect-fyi/detecting-and-responding-to-esxi-compromise-with-splunk-f33998ce7823
+author: '@mthcht'
+date: 2023/07/30
+modified: 2024/08/03
+tags:
+- attack.T1057
+- 'attack.T1069.002 '
+- attack.T1070.003
+- attack.T1078
+- attack.T1078.003
+- attack.T1082
+- attack.T1098
+- attack.T1489
+- attack.T1542
+- attack.T1542.003
+- attack.T1553.002
+- attack.T1562.001
+- attack.T1562.004
+- attack.T1569.002
+- attack.T1600
+- attack.TA0003
+- attack.TA0004
+- attack.TA0005
+- 'attack.TA0005 '
+- attack.TA0007
+- attack.TA0040
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*esxcli system account set -i * -s t*'
+    - '*esxcli vm process kill *'
+    - '*esxcli network firewall set -enabled f*'
+    - '*esxcli system account add*'
+    - '*esxcli system settings encryption set - require-exec-installed-only=F*'
+    - '*esxcli vm process list*'
+    - '*esxcli system settings encryption set - require-secure-boot=F*'
+    - '*esxcli system auditrecords local disable*'
+    - '*esxcli system account remove*'
+    - '*esxcli system settings kernel set -s execInstalledOnly -v F*'
+    - '*esxcli system permission list*'
+  - CommandLine:
+    - '*esxcli system account set -i * -s t*'
+    - '*esxcli vm process kill *'
+    - '*esxcli network firewall set -enabled f*'
+    - '*esxcli system account add*'
+    - '*esxcli system settings encryption set - require-exec-installed-only=F*'
+    - '*esxcli vm process list*'
+    - '*esxcli system settings encryption set - require-secure-boot=F*'
+    - '*esxcli system auditrecords local disable*'
+    - '*esxcli system account remove*'
+    - '*esxcli system settings kernel set -s execInstalledOnly -v F*'
+    - '*esxcli system permission list*'
+  - Details:
+    - '*esxcli system account set -i * -s t*'
+    - '*esxcli vm process kill *'
+    - '*esxcli network firewall set -enabled f*'
+    - '*esxcli system account add*'
+    - '*esxcli system settings encryption set - require-exec-installed-only=F*'
+    - '*esxcli vm process list*'
+    - '*esxcli system settings encryption set - require-secure-boot=F*'
+    - '*esxcli system auditrecords local disable*'
+    - '*esxcli system account remove*'
+    - '*esxcli system settings kernel set -s execInstalledOnly -v F*'
+    - '*esxcli system permission list*'
+  - registry.value:
+    - '*esxcli system account set -i * -s t*'
+    - '*esxcli vm process kill *'
+    - '*esxcli network firewall set -enabled f*'
+    - '*esxcli system account add*'
+    - '*esxcli system settings encryption set - require-exec-installed-only=F*'
+    - '*esxcli vm process list*'
+    - '*esxcli system settings encryption set - require-secure-boot=F*'
+    - '*esxcli system auditrecords local disable*'
+    - '*esxcli system account remove*'
+    - '*esxcli system settings kernel set -s execInstalledOnly -v F*'
+    - '*esxcli system permission list*'
+  - process.args:
+    - '*esxcli system account set -i * -s t*'
+    - '*esxcli vm process kill *'
+    - '*esxcli network firewall set -enabled f*'
+    - '*esxcli system account add*'
+    - '*esxcli system settings encryption set - require-exec-installed-only=F*'
+    - '*esxcli vm process list*'
+    - '*esxcli system settings encryption set - require-secure-boot=F*'
+    - '*esxcli system auditrecords local disable*'
+    - '*esxcli system account remove*'
+    - '*esxcli system settings kernel set -s execInstalledOnly -v F*'
+    - '*esxcli system permission list*'
+  - process.command_line:
+    - '*esxcli system account set -i * -s t*'
+    - '*esxcli vm process kill *'
+    - '*esxcli network firewall set -enabled f*'
+    - '*esxcli system account add*'
+    - '*esxcli system settings encryption set - require-exec-installed-only=F*'
+    - '*esxcli vm process list*'
+    - '*esxcli system settings encryption set - require-secure-boot=F*'
+    - '*esxcli system auditrecords local disable*'
+    - '*esxcli system account remove*'
+    - '*esxcli system settings kernel set -s execInstalledOnly -v F*'
+    - '*esxcli system permission list*'
+  - process.env_vars:
+    - '*esxcli system account set -i * -s t*'
+    - '*esxcli vm process kill *'
+    - '*esxcli network firewall set -enabled f*'
+    - '*esxcli system account add*'
+    - '*esxcli system settings encryption set - require-exec-installed-only=F*'
+    - '*esxcli vm process list*'
+    - '*esxcli system settings encryption set - require-secure-boot=F*'
+    - '*esxcli system auditrecords local disable*'
+    - '*esxcli system account remove*'
+    - '*esxcli system settings kernel set -s execInstalledOnly -v F*'
+    - '*esxcli system permission list*'
+  - process.io.text:
+    - '*esxcli system account set -i * -s t*'
+    - '*esxcli vm process kill *'
+    - '*esxcli network firewall set -enabled f*'
+    - '*esxcli system account add*'
+    - '*esxcli system settings encryption set - require-exec-installed-only=F*'
+    - '*esxcli vm process list*'
+    - '*esxcli system settings encryption set - require-secure-boot=F*'
+    - '*esxcli system auditrecords local disable*'
+    - '*esxcli system account remove*'
+    - '*esxcli system settings kernel set -s execInstalledOnly -v F*'
+    - '*esxcli system permission list*'
+  - process.title:
+    - '*esxcli system account set -i * -s t*'
+    - '*esxcli vm process kill *'
+    - '*esxcli network firewall set -enabled f*'
+    - '*esxcli system account add*'
+    - '*esxcli system settings encryption set - require-exec-installed-only=F*'
+    - '*esxcli vm process list*'
+    - '*esxcli system settings encryption set - require-secure-boot=F*'
+    - '*esxcli system auditrecords local disable*'
+    - '*esxcli system account remove*'
+    - '*esxcli system settings kernel set -s execInstalledOnly -v F*'
+    - '*esxcli system permission list*'
+  - pe.company:
+    - '*esxcli system account set -i * -s t*'
+    - '*esxcli vm process kill *'
+    - '*esxcli network firewall set -enabled f*'
+    - '*esxcli system account add*'
+    - '*esxcli system settings encryption set - require-exec-installed-only=F*'
+    - '*esxcli vm process list*'
+    - '*esxcli system settings encryption set - require-secure-boot=F*'
+    - '*esxcli system auditrecords local disable*'
+    - '*esxcli system account remove*'
+    - '*esxcli system settings kernel set -s execInstalledOnly -v F*'
+    - '*esxcli system permission list*'
+  - pe.description:
+    - '*esxcli system account set -i * -s t*'
+    - '*esxcli vm process kill *'
+    - '*esxcli network firewall set -enabled f*'
+    - '*esxcli system account add*'
+    - '*esxcli system settings encryption set - require-exec-installed-only=F*'
+    - '*esxcli vm process list*'
+    - '*esxcli system settings encryption set - require-secure-boot=F*'
+    - '*esxcli system auditrecords local disable*'
+    - '*esxcli system account remove*'
+    - '*esxcli system settings kernel set -s execInstalledOnly -v F*'
+    - '*esxcli system permission list*'
+  - pe.product:
+    - '*esxcli system account set -i * -s t*'
+    - '*esxcli vm process kill *'
+    - '*esxcli network firewall set -enabled f*'
+    - '*esxcli system account add*'
+    - '*esxcli system settings encryption set - require-exec-installed-only=F*'
+    - '*esxcli vm process list*'
+    - '*esxcli system settings encryption set - require-secure-boot=F*'
+    - '*esxcli system auditrecords local disable*'
+    - '*esxcli system account remove*'
+    - '*esxcli system settings kernel set -s execInstalledOnly -v F*'
+    - '*esxcli system permission list*'
+  - os.full:
+    - '*esxcli system account set -i * -s t*'
+    - '*esxcli vm process kill *'
+    - '*esxcli network firewall set -enabled f*'
+    - '*esxcli system account add*'
+    - '*esxcli system settings encryption set - require-exec-installed-only=F*'
+    - '*esxcli vm process list*'
+    - '*esxcli system settings encryption set - require-secure-boot=F*'
+    - '*esxcli system auditrecords local disable*'
+    - '*esxcli system account remove*'
+    - '*esxcli system settings kernel set -s execInstalledOnly -v F*'
+    - '*esxcli system permission list*'
+  - host.hostname:
+    - '*esxcli system account set -i * -s t*'
+    - '*esxcli vm process kill *'
+    - '*esxcli network firewall set -enabled f*'
+    - '*esxcli system account add*'
+    - '*esxcli system settings encryption set - require-exec-installed-only=F*'
+    - '*esxcli vm process list*'
+    - '*esxcli system settings encryption set - require-secure-boot=F*'
+    - '*esxcli system auditrecords local disable*'
+    - '*esxcli system account remove*'
+    - '*esxcli system settings kernel set -s execInstalledOnly -v F*'
+    - '*esxcli system permission list*'
+  - event.original:
+    - '*esxcli system account set -i * -s t*'
+    - '*esxcli vm process kill *'
+    - '*esxcli network firewall set -enabled f*'
+    - '*esxcli system account add*'
+    - '*esxcli system settings encryption set - require-exec-installed-only=F*'
+    - '*esxcli vm process list*'
+    - '*esxcli system settings encryption set - require-secure-boot=F*'
+    - '*esxcli system auditrecords local disable*'
+    - '*esxcli system account remove*'
+    - '*esxcli system settings kernel set -s execInstalledOnly -v F*'
+    - '*esxcli system permission list*'
+  - email.subject:
+    - '*esxcli system account set -i * -s t*'
+    - '*esxcli vm process kill *'
+    - '*esxcli network firewall set -enabled f*'
+    - '*esxcli system account add*'
+    - '*esxcli system settings encryption set - require-exec-installed-only=F*'
+    - '*esxcli vm process list*'
+    - '*esxcli system settings encryption set - require-secure-boot=F*'
+    - '*esxcli system auditrecords local disable*'
+    - '*esxcli system account remove*'
+    - '*esxcli system settings kernel set -s execInstalledOnly -v F*'
+    - '*esxcli system permission list*'
+  - device.model.name:
+    - '*esxcli system account set -i * -s t*'
+    - '*esxcli vm process kill *'
+    - '*esxcli network firewall set -enabled f*'
+    - '*esxcli system account add*'
+    - '*esxcli system settings encryption set - require-exec-installed-only=F*'
+    - '*esxcli vm process list*'
+    - '*esxcli system settings encryption set - require-secure-boot=F*'
+    - '*esxcli system auditrecords local disable*'
+    - '*esxcli system account remove*'
+    - '*esxcli system settings kernel set -s execInstalledOnly -v F*'
+    - '*esxcli system permission list*'
+  - container.image.name:
+    - '*esxcli system account set -i * -s t*'
+    - '*esxcli vm process kill *'
+    - '*esxcli network firewall set -enabled f*'
+    - '*esxcli system account add*'
+    - '*esxcli system settings encryption set - require-exec-installed-only=F*'
+    - '*esxcli vm process list*'
+    - '*esxcli system settings encryption set - require-secure-boot=F*'
+    - '*esxcli system auditrecords local disable*'
+    - '*esxcli system account remove*'
+    - '*esxcli system settings kernel set -s execInstalledOnly -v F*'
+    - '*esxcli system permission list*'
+  - container.name:
+    - '*esxcli system account set -i * -s t*'
+    - '*esxcli vm process kill *'
+    - '*esxcli network firewall set -enabled f*'
+    - '*esxcli system account add*'
+    - '*esxcli system settings encryption set - require-exec-installed-only=F*'
+    - '*esxcli vm process list*'
+    - '*esxcli system settings encryption set - require-secure-boot=F*'
+    - '*esxcli system auditrecords local disable*'
+    - '*esxcli system account remove*'
+    - '*esxcli system settings kernel set -s execInstalledOnly -v F*'
+    - '*esxcli system permission list*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium
