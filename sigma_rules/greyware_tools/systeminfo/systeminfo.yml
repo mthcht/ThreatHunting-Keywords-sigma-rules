@@ -1,0 +1,101 @@
+title: Simple keyword detection rule for systeminfo
+id: 2407086b-c8cb-4d16-bcbf-3e7d7f07bc68
+status: experimental
+description: Detects interesting keywords based on systeminfo tool
+references:
+- https://thedfirreport.com/2024/08/26/blacksuit-ransomware/
+author: '@mthcht'
+date: 2023/07/30
+modified: 2024/08/31
+tags:
+- attack.T1012
+- attack.T1033
+- attack.T1082
+- attack.TA0002
+- attack.TA0007
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*cmd.exe /c systeminfo*'
+    - '*cmd /c systeminfo*'
+  - CommandLine:
+    - '*cmd.exe /c systeminfo*'
+    - '*cmd /c systeminfo*'
+  - Details:
+    - '*cmd.exe /c systeminfo*'
+    - '*cmd /c systeminfo*'
+  - registry.value:
+    - '*cmd.exe /c systeminfo*'
+    - '*cmd /c systeminfo*'
+  - process.args:
+    - '*cmd.exe /c systeminfo*'
+    - '*cmd /c systeminfo*'
+  - process.command_line:
+    - '*cmd.exe /c systeminfo*'
+    - '*cmd /c systeminfo*'
+  - process.env_vars:
+    - '*cmd.exe /c systeminfo*'
+    - '*cmd /c systeminfo*'
+  - process.io.text:
+    - '*cmd.exe /c systeminfo*'
+    - '*cmd /c systeminfo*'
+  - process.title:
+    - '*cmd.exe /c systeminfo*'
+    - '*cmd /c systeminfo*'
+  - pe.company:
+    - '*cmd.exe /c systeminfo*'
+    - '*cmd /c systeminfo*'
+  - pe.description:
+    - '*cmd.exe /c systeminfo*'
+    - '*cmd /c systeminfo*'
+  - pe.product:
+    - '*cmd.exe /c systeminfo*'
+    - '*cmd /c systeminfo*'
+  - os.full:
+    - '*cmd.exe /c systeminfo*'
+    - '*cmd /c systeminfo*'
+  - host.hostname:
+    - '*cmd.exe /c systeminfo*'
+    - '*cmd /c systeminfo*'
+  - event.original:
+    - '*cmd.exe /c systeminfo*'
+    - '*cmd /c systeminfo*'
+  - email.subject:
+    - '*cmd.exe /c systeminfo*'
+    - '*cmd /c systeminfo*'
+  - device.model.name:
+    - '*cmd.exe /c systeminfo*'
+    - '*cmd /c systeminfo*'
+  - container.image.name:
+    - '*cmd.exe /c systeminfo*'
+    - '*cmd /c systeminfo*'
+  - container.name:
+    - '*cmd.exe /c systeminfo*'
+    - '*cmd /c systeminfo*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium

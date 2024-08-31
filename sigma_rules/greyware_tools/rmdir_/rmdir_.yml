@@ -1,0 +1,79 @@
+title: 'Simple keyword detection rule for rmdir '
+id: 37b073ef-2874-4fa8-bd43-be20ef77a708
+status: experimental
+description: Detects interesting keywords based on rmdir  tool
+references:
+- https://github.com/roadwy/DefenderYara/blob/9bbdb7f9fd3513ce30aa69cd1d88830e3cf596ca/Ransom/MSIL/Hakbit/Ransom_MSIL_Hakbit_PA_MTB.yar#L7
+author: '@mthcht'
+date: 2023/07/30
+modified: 2024/08/31
+tags:
+- attack.T1070.003
+- attack.TA0005
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*rd /s /q %systemdrive%\$RECYCLE.BIN*'
+  - CommandLine:
+    - '*rd /s /q %systemdrive%\$RECYCLE.BIN*'
+  - Details:
+    - '*rd /s /q %systemdrive%\$RECYCLE.BIN*'
+  - registry.value:
+    - '*rd /s /q %systemdrive%\$RECYCLE.BIN*'
+  - process.args:
+    - '*rd /s /q %systemdrive%\$RECYCLE.BIN*'
+  - process.command_line:
+    - '*rd /s /q %systemdrive%\$RECYCLE.BIN*'
+  - process.env_vars:
+    - '*rd /s /q %systemdrive%\$RECYCLE.BIN*'
+  - process.io.text:
+    - '*rd /s /q %systemdrive%\$RECYCLE.BIN*'
+  - process.title:
+    - '*rd /s /q %systemdrive%\$RECYCLE.BIN*'
+  - pe.company:
+    - '*rd /s /q %systemdrive%\$RECYCLE.BIN*'
+  - pe.description:
+    - '*rd /s /q %systemdrive%\$RECYCLE.BIN*'
+  - pe.product:
+    - '*rd /s /q %systemdrive%\$RECYCLE.BIN*'
+  - os.full:
+    - '*rd /s /q %systemdrive%\$RECYCLE.BIN*'
+  - host.hostname:
+    - '*rd /s /q %systemdrive%\$RECYCLE.BIN*'
+  - event.original:
+    - '*rd /s /q %systemdrive%\$RECYCLE.BIN*'
+  - email.subject:
+    - '*rd /s /q %systemdrive%\$RECYCLE.BIN*'
+  - device.model.name:
+    - '*rd /s /q %systemdrive%\$RECYCLE.BIN*'
+  - container.image.name:
+    - '*rd /s /q %systemdrive%\$RECYCLE.BIN*'
+  - container.name:
+    - '*rd /s /q %systemdrive%\$RECYCLE.BIN*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium

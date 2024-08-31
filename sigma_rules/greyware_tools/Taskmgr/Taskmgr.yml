@@ -1,0 +1,79 @@
+title: Simple keyword detection rule for Taskmgr
+id: f4b35e38-7569-40cc-81c4-3b13d7929f49
+status: experimental
+description: Detects interesting keywords based on Taskmgr tool
+references:
+- https://learn.microsoft.com/en-us/sysinternals/downloads/procdump
+author: '@mthcht'
+date: 2023/07/30
+modified: 2024/08/31
+tags:
+- attack.T1003.001
+- attack.TA0006
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*<Data Name=''PipeName''>\lsass</Data><Data Name=''Image''>C:\Windows\System32\Taskmgr.exe</Data>*'
+  - CommandLine:
+    - '*<Data Name=''PipeName''>\lsass</Data><Data Name=''Image''>C:\Windows\System32\Taskmgr.exe</Data>*'
+  - Details:
+    - '*<Data Name=''PipeName''>\lsass</Data><Data Name=''Image''>C:\Windows\System32\Taskmgr.exe</Data>*'
+  - registry.value:
+    - '*<Data Name=''PipeName''>\lsass</Data><Data Name=''Image''>C:\Windows\System32\Taskmgr.exe</Data>*'
+  - process.args:
+    - '*<Data Name=''PipeName''>\lsass</Data><Data Name=''Image''>C:\Windows\System32\Taskmgr.exe</Data>*'
+  - process.command_line:
+    - '*<Data Name=''PipeName''>\lsass</Data><Data Name=''Image''>C:\Windows\System32\Taskmgr.exe</Data>*'
+  - process.env_vars:
+    - '*<Data Name=''PipeName''>\lsass</Data><Data Name=''Image''>C:\Windows\System32\Taskmgr.exe</Data>*'
+  - process.io.text:
+    - '*<Data Name=''PipeName''>\lsass</Data><Data Name=''Image''>C:\Windows\System32\Taskmgr.exe</Data>*'
+  - process.title:
+    - '*<Data Name=''PipeName''>\lsass</Data><Data Name=''Image''>C:\Windows\System32\Taskmgr.exe</Data>*'
+  - pe.company:
+    - '*<Data Name=''PipeName''>\lsass</Data><Data Name=''Image''>C:\Windows\System32\Taskmgr.exe</Data>*'
+  - pe.description:
+    - '*<Data Name=''PipeName''>\lsass</Data><Data Name=''Image''>C:\Windows\System32\Taskmgr.exe</Data>*'
+  - pe.product:
+    - '*<Data Name=''PipeName''>\lsass</Data><Data Name=''Image''>C:\Windows\System32\Taskmgr.exe</Data>*'
+  - os.full:
+    - '*<Data Name=''PipeName''>\lsass</Data><Data Name=''Image''>C:\Windows\System32\Taskmgr.exe</Data>*'
+  - host.hostname:
+    - '*<Data Name=''PipeName''>\lsass</Data><Data Name=''Image''>C:\Windows\System32\Taskmgr.exe</Data>*'
+  - event.original:
+    - '*<Data Name=''PipeName''>\lsass</Data><Data Name=''Image''>C:\Windows\System32\Taskmgr.exe</Data>*'
+  - email.subject:
+    - '*<Data Name=''PipeName''>\lsass</Data><Data Name=''Image''>C:\Windows\System32\Taskmgr.exe</Data>*'
+  - device.model.name:
+    - '*<Data Name=''PipeName''>\lsass</Data><Data Name=''Image''>C:\Windows\System32\Taskmgr.exe</Data>*'
+  - container.image.name:
+    - '*<Data Name=''PipeName''>\lsass</Data><Data Name=''Image''>C:\Windows\System32\Taskmgr.exe</Data>*'
+  - container.name:
+    - '*<Data Name=''PipeName''>\lsass</Data><Data Name=''Image''>C:\Windows\System32\Taskmgr.exe</Data>*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium
