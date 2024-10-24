@@ -1,0 +1,79 @@
+title: Simple keyword detection rule for w32times
+id: 0331a910-e574-4ffa-8258-714f238707da
+status: experimental
+description: Detects interesting keywords based on w32times tool
+references: []
+author: '@mthcht'
+date: 2023/07/30
+modified: 2024/10/24
+tags:
+- attack.T1619
+- attack.TA0005
+- attack.TA0008
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*w32tm /config */manualpeerlist:*'
+  - CommandLine:
+    - '*w32tm /config */manualpeerlist:*'
+  - Details:
+    - '*w32tm /config */manualpeerlist:*'
+  - registry.value:
+    - '*w32tm /config */manualpeerlist:*'
+  - process.args:
+    - '*w32tm /config */manualpeerlist:*'
+  - process.command_line:
+    - '*w32tm /config */manualpeerlist:*'
+  - process.env_vars:
+    - '*w32tm /config */manualpeerlist:*'
+  - process.io.text:
+    - '*w32tm /config */manualpeerlist:*'
+  - process.title:
+    - '*w32tm /config */manualpeerlist:*'
+  - pe.company:
+    - '*w32tm /config */manualpeerlist:*'
+  - pe.description:
+    - '*w32tm /config */manualpeerlist:*'
+  - pe.product:
+    - '*w32tm /config */manualpeerlist:*'
+  - os.full:
+    - '*w32tm /config */manualpeerlist:*'
+  - host.hostname:
+    - '*w32tm /config */manualpeerlist:*'
+  - event.original:
+    - '*w32tm /config */manualpeerlist:*'
+  - email.subject:
+    - '*w32tm /config */manualpeerlist:*'
+  - device.model.name:
+    - '*w32tm /config */manualpeerlist:*'
+  - container.image.name:
+    - '*w32tm /config */manualpeerlist:*'
+  - container.name:
+    - '*w32tm /config */manualpeerlist:*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium

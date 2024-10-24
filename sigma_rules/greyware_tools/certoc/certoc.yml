@@ -1,0 +1,82 @@
+title: Simple keyword detection rule for certoc
+id: 497339e9-77d7-4ff9-b76b-90279e2df10b
+status: experimental
+description: Detects interesting keywords based on certoc tool
+references:
+- https://lolbas-project.github.io/lolbas/Binaries/Certoc/
+author: '@mthcht'
+date: 2023/07/30
+modified: 2024/10/24
+tags:
+- attack.T1071.001
+- attack.T1105
+- attack.T1566.001
+- attack.TA0005
+- attack.TA0009
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*certoc.exe -GetCACAPS https://raw.githubusercontent.com*'
+  - CommandLine:
+    - '*certoc.exe -GetCACAPS https://raw.githubusercontent.com*'
+  - Details:
+    - '*certoc.exe -GetCACAPS https://raw.githubusercontent.com*'
+  - registry.value:
+    - '*certoc.exe -GetCACAPS https://raw.githubusercontent.com*'
+  - process.args:
+    - '*certoc.exe -GetCACAPS https://raw.githubusercontent.com*'
+  - process.command_line:
+    - '*certoc.exe -GetCACAPS https://raw.githubusercontent.com*'
+  - process.env_vars:
+    - '*certoc.exe -GetCACAPS https://raw.githubusercontent.com*'
+  - process.io.text:
+    - '*certoc.exe -GetCACAPS https://raw.githubusercontent.com*'
+  - process.title:
+    - '*certoc.exe -GetCACAPS https://raw.githubusercontent.com*'
+  - pe.company:
+    - '*certoc.exe -GetCACAPS https://raw.githubusercontent.com*'
+  - pe.description:
+    - '*certoc.exe -GetCACAPS https://raw.githubusercontent.com*'
+  - pe.product:
+    - '*certoc.exe -GetCACAPS https://raw.githubusercontent.com*'
+  - os.full:
+    - '*certoc.exe -GetCACAPS https://raw.githubusercontent.com*'
+  - host.hostname:
+    - '*certoc.exe -GetCACAPS https://raw.githubusercontent.com*'
+  - event.original:
+    - '*certoc.exe -GetCACAPS https://raw.githubusercontent.com*'
+  - email.subject:
+    - '*certoc.exe -GetCACAPS https://raw.githubusercontent.com*'
+  - device.model.name:
+    - '*certoc.exe -GetCACAPS https://raw.githubusercontent.com*'
+  - container.image.name:
+    - '*certoc.exe -GetCACAPS https://raw.githubusercontent.com*'
+  - container.name:
+    - '*certoc.exe -GetCACAPS https://raw.githubusercontent.com*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium
