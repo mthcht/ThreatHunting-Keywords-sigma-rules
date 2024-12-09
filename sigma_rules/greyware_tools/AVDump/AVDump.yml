@@ -1,0 +1,119 @@
+title: Simple keyword detection rule for AVDump
+id: 7c74fbf9-80ce-4791-beaf-3a6623ddf36e
+status: experimental
+description: Detects interesting keywords based on AVDump tool
+references:
+- https://rosesecurity.gitbook.io/red-teaming-ttps/windows#av-lsass-dump
+author: '@mthcht'
+date: 2023/07/30
+modified: 2024/12/09
+tags:
+- attack.T1003.001
+- attack.T1059.001
+- attack.T1106
+- attack.TA0006
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*\AvDump.exe --pid * --exception_ptr 0*'
+    - '*Dumped by AvDump*'
+    - '*AvDump.exe --pid * --dump_file *.dmp*'
+  - CommandLine:
+    - '*\AvDump.exe --pid * --exception_ptr 0*'
+    - '*Dumped by AvDump*'
+    - '*AvDump.exe --pid * --dump_file *.dmp*'
+  - Details:
+    - '*\AvDump.exe --pid * --exception_ptr 0*'
+    - '*Dumped by AvDump*'
+    - '*AvDump.exe --pid * --dump_file *.dmp*'
+  - registry.value:
+    - '*\AvDump.exe --pid * --exception_ptr 0*'
+    - '*Dumped by AvDump*'
+    - '*AvDump.exe --pid * --dump_file *.dmp*'
+  - process.args:
+    - '*\AvDump.exe --pid * --exception_ptr 0*'
+    - '*Dumped by AvDump*'
+    - '*AvDump.exe --pid * --dump_file *.dmp*'
+  - process.command_line:
+    - '*\AvDump.exe --pid * --exception_ptr 0*'
+    - '*Dumped by AvDump*'
+    - '*AvDump.exe --pid * --dump_file *.dmp*'
+  - process.env_vars:
+    - '*\AvDump.exe --pid * --exception_ptr 0*'
+    - '*Dumped by AvDump*'
+    - '*AvDump.exe --pid * --dump_file *.dmp*'
+  - process.io.text:
+    - '*\AvDump.exe --pid * --exception_ptr 0*'
+    - '*Dumped by AvDump*'
+    - '*AvDump.exe --pid * --dump_file *.dmp*'
+  - process.title:
+    - '*\AvDump.exe --pid * --exception_ptr 0*'
+    - '*Dumped by AvDump*'
+    - '*AvDump.exe --pid * --dump_file *.dmp*'
+  - pe.company:
+    - '*\AvDump.exe --pid * --exception_ptr 0*'
+    - '*Dumped by AvDump*'
+    - '*AvDump.exe --pid * --dump_file *.dmp*'
+  - pe.description:
+    - '*\AvDump.exe --pid * --exception_ptr 0*'
+    - '*Dumped by AvDump*'
+    - '*AvDump.exe --pid * --dump_file *.dmp*'
+  - pe.product:
+    - '*\AvDump.exe --pid * --exception_ptr 0*'
+    - '*Dumped by AvDump*'
+    - '*AvDump.exe --pid * --dump_file *.dmp*'
+  - os.full:
+    - '*\AvDump.exe --pid * --exception_ptr 0*'
+    - '*Dumped by AvDump*'
+    - '*AvDump.exe --pid * --dump_file *.dmp*'
+  - host.hostname:
+    - '*\AvDump.exe --pid * --exception_ptr 0*'
+    - '*Dumped by AvDump*'
+    - '*AvDump.exe --pid * --dump_file *.dmp*'
+  - event.original:
+    - '*\AvDump.exe --pid * --exception_ptr 0*'
+    - '*Dumped by AvDump*'
+    - '*AvDump.exe --pid * --dump_file *.dmp*'
+  - email.subject:
+    - '*\AvDump.exe --pid * --exception_ptr 0*'
+    - '*Dumped by AvDump*'
+    - '*AvDump.exe --pid * --dump_file *.dmp*'
+  - device.model.name:
+    - '*\AvDump.exe --pid * --exception_ptr 0*'
+    - '*Dumped by AvDump*'
+    - '*AvDump.exe --pid * --dump_file *.dmp*'
+  - container.image.name:
+    - '*\AvDump.exe --pid * --exception_ptr 0*'
+    - '*Dumped by AvDump*'
+    - '*AvDump.exe --pid * --dump_file *.dmp*'
+  - container.name:
+    - '*\AvDump.exe --pid * --exception_ptr 0*'
+    - '*Dumped by AvDump*'
+    - '*AvDump.exe --pid * --dump_file *.dmp*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium

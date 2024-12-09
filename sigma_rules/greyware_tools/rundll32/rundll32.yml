@@ -7,7 +7,7 @@ references:
 - https://github.com/SigmaHQ/sigma/blob/master/rules/windows/process_creation/win_meterpreter_or_cobaltstrike_getsystem_service_start.yml
 author: '@mthcht'
 date: 2023/07/30
-modified: 2024/11/02
+modified: 2024/12/09
 tags:
 - attack.T1003
 - attack.T1055.002
@@ -28,439 +28,523 @@ logsource:
   - endpoint
 detection:
   selection:
-  - ParentCommandLine:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
-    - '*rundll32*.dll*StartW*'
-    - '*rundll32*.dll*a*/p:*'
-  - CommandLine:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
-    - '*rundll32*.dll*StartW*'
-    - '*rundll32*.dll*a*/p:*'
-  - Details:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
-    - '*rundll32*.dll*StartW*'
-    - '*rundll32*.dll*a*/p:*'
-  - registry.value:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
-    - '*rundll32*.dll*StartW*'
-    - '*rundll32*.dll*a*/p:*'
-  - process.args:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
-    - '*rundll32*.dll*StartW*'
-    - '*rundll32*.dll*a*/p:*'
-  - process.command_line:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
-    - '*rundll32*.dll*StartW*'
-    - '*rundll32*.dll*a*/p:*'
-  - process.env_vars:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
-    - '*rundll32*.dll*StartW*'
-    - '*rundll32*.dll*a*/p:*'
-  - process.io.text:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
-    - '*rundll32*.dll*StartW*'
-    - '*rundll32*.dll*a*/p:*'
-  - process.title:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
-    - '*rundll32*.dll*StartW*'
-    - '*rundll32*.dll*a*/p:*'
-  - pe.company:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
-    - '*rundll32*.dll*StartW*'
-    - '*rundll32*.dll*a*/p:*'
-  - pe.description:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
-    - '*rundll32*.dll*StartW*'
-    - '*rundll32*.dll*a*/p:*'
-  - pe.product:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
-    - '*rundll32*.dll*StartW*'
-    - '*rundll32*.dll*a*/p:*'
-  - os.full:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
-    - '*rundll32*.dll*StartW*'
-    - '*rundll32*.dll*a*/p:*'
-  - host.hostname:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
-    - '*rundll32*.dll*StartW*'
-    - '*rundll32*.dll*a*/p:*'
-  - event.original:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
-    - '*rundll32*.dll*StartW*'
-    - '*rundll32*.dll*a*/p:*'
-  - email.subject:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
-    - '*rundll32*.dll*StartW*'
-    - '*rundll32*.dll*a*/p:*'
-  - device.model.name:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
-    - '*rundll32*.dll*StartW*'
-    - '*rundll32*.dll*a*/p:*'
-  - container.image.name:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
-    - '*rundll32*.dll*StartW*'
-    - '*rundll32*.dll*a*/p:*'
-  - container.name:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
-    - '*rundll32*.dll*StartW*'
-    - '*rundll32*.dll*a*/p:*'
   - Image:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - OriginalFileName:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - CurrentDirectory:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - ParentImage:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - ParentCommandLine:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - TargetFilename:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - Signature:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - signature:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - ImageLoaded:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - Company:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - Description:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - description:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - CommandLine:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - SourceImage:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - TargetImage:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - CallTrace:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - TargetObject:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - Details:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - PipeName:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - Consumer:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - Destination:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - Name:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - Query:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - NewName:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - StartAddress:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - StartModule:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - StartFunction:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - SourceHostname:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - Device:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - file_name:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - file_path:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - process:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - original_file_name:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - parent_process:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - process_path:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - service_path:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - registry_path:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - registry_value_data:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - registry_value_name:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - ContextInfo:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - Payload:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - ScriptBlockText:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - ServerName:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - TransportName:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - NewProcessName:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - ParentProcessName:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - Application:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - Product Name:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - Threat Name:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - Process Name:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - Path:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - ImagePath:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - ServiceName:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - ProcessPath:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - AppName:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - AppPath:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - ModulePath:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - registry.data.strings:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - registry.path:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - registry.value:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - process.args:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - process.command_line:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - process.env_vars:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - process.io.text:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - process.executable:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - process.name:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - process.title:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - pe.company:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - pe.description:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - pe.original_file_name:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - pe.product:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - os.full:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - host.hostname:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - file.fork_name:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - file.name:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - file.path:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - file.target_path:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - email.attachments.file.name:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - email.subject:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - dll.path:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - device.model.name:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - container.image.name:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - container.name:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   - object:
-    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
     - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
     - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
+  - ParentCommandLine:
+    - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
+    - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
+  - CommandLine:
+    - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
+    - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
+  - Details:
+    - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
+    - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
+  - registry.value:
+    - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
+    - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
+  - process.args:
+    - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
+    - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
+  - process.command_line:
+    - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
+    - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
+  - process.env_vars:
+    - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
+    - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
+  - process.io.text:
+    - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
+    - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
+  - process.title:
+    - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
+    - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
+  - pe.company:
+    - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
+    - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
+  - pe.description:
+    - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
+    - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
+  - pe.product:
+    - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
+    - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
+  - os.full:
+    - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
+    - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
+  - host.hostname:
+    - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
+    - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
+  - event.original:
+    - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
+    - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
+  - email.subject:
+    - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
+    - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
+  - device.model.name:
+    - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
+    - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
+  - container.image.name:
+    - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
+    - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
+  - container.name:
+    - '*rundll32*.dll*StartW*'
+    - '*rundll32.exe *comsvcs.dll, MiniDump *lsass*full*'
+    - '*rundll32*.dll*a*/p:*'
+    - '*lsass*rundll32.exe *comsvcs.dll, MiniDump *.dmp full*'
   condition: selection
 fields:
-- ParentCommandLine
-- CommandLine
-- Details
-- registry.value
-- process.args
-- process.command_line
-- process.env_vars
-- process.io.text
-- process.title
-- pe.company
-- pe.description
-- pe.product
-- os.full
-- host.hostname
-- event.original
-- email.subject
-- device.model.name
-- container.image.name
-- container.name
 - Image
 - OriginalFileName
 - CurrentDirectory
@@ -545,6 +629,25 @@ fields:
 - container.image.name
 - container.name
 - object
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
 falsepositives:
 - unknown
 level: medium

@@ -7,11 +7,13 @@ references:
 - https://www.trellix.com/blogs/research/cactus-ransomware-new-strain-in-the-market/
 author: '@mthcht'
 date: 2023/07/30
-modified: 2024/11/02
+modified: 2024/12/09
 tags:
-- attack.
+- attack.T1053
 - attack.T1053.005
+- attack.T1059.004
 - attack.T1082
+- attack.T1090
 - attack.T1562.001
 - attack.TA0003
 - attack.TA0004
@@ -24,307 +26,383 @@ logsource:
 detection:
   selection:
   - ParentCommandLine:
+    - '* /Create /TN sch.bat /TR "c:\temp\script.vbs" *'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks /Create /RU SYSTEM /XML c:\temp\*'
+    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
+      Refresh" /Disable*'
+    - '* /Create /RU SYSTEM /TN MicrosoftEdgeUpdateTaskMachine /TR *'
+    - '* /create /tn "SysChecks" /tr c:\temp\sch.bat *'
+    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
+      Cache Maintenance" /Disable*'
+    - '*schtasks /query /v /fo LIST*'
     - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
       -N -R * -o StrictHostKeyChecking=no -o *'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Scheduled Scan" /Disable*'
-    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
-      -f *\sshd\config\sshd_config*'
-    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
-      Refresh" /Disable*'
-    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Verification" /Disable*'
-    - '*schtasks /query /v /fo LIST*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Cache Maintenance" /Disable*'
+      Scheduled Scan" /Disable*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Cleanup" /Disable*'
   - CommandLine:
+    - '* /Create /TN sch.bat /TR "c:\temp\script.vbs" *'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks /Create /RU SYSTEM /XML c:\temp\*'
+    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
+      Refresh" /Disable*'
+    - '* /Create /RU SYSTEM /TN MicrosoftEdgeUpdateTaskMachine /TR *'
+    - '* /create /tn "SysChecks" /tr c:\temp\sch.bat *'
+    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
+      Cache Maintenance" /Disable*'
+    - '*schtasks /query /v /fo LIST*'
     - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
       -N -R * -o StrictHostKeyChecking=no -o *'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Scheduled Scan" /Disable*'
-    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
-      -f *\sshd\config\sshd_config*'
-    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
-      Refresh" /Disable*'
-    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Verification" /Disable*'
-    - '*schtasks /query /v /fo LIST*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Cache Maintenance" /Disable*'
+      Scheduled Scan" /Disable*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Cleanup" /Disable*'
   - Details:
+    - '* /Create /TN sch.bat /TR "c:\temp\script.vbs" *'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks /Create /RU SYSTEM /XML c:\temp\*'
+    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
+      Refresh" /Disable*'
+    - '* /Create /RU SYSTEM /TN MicrosoftEdgeUpdateTaskMachine /TR *'
+    - '* /create /tn "SysChecks" /tr c:\temp\sch.bat *'
+    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
+      Cache Maintenance" /Disable*'
+    - '*schtasks /query /v /fo LIST*'
     - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
       -N -R * -o StrictHostKeyChecking=no -o *'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Scheduled Scan" /Disable*'
-    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
-      -f *\sshd\config\sshd_config*'
-    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
-      Refresh" /Disable*'
-    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Verification" /Disable*'
-    - '*schtasks /query /v /fo LIST*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Cache Maintenance" /Disable*'
+      Scheduled Scan" /Disable*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Cleanup" /Disable*'
   - registry.value:
+    - '* /Create /TN sch.bat /TR "c:\temp\script.vbs" *'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks /Create /RU SYSTEM /XML c:\temp\*'
+    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
+      Refresh" /Disable*'
+    - '* /Create /RU SYSTEM /TN MicrosoftEdgeUpdateTaskMachine /TR *'
+    - '* /create /tn "SysChecks" /tr c:\temp\sch.bat *'
+    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
+      Cache Maintenance" /Disable*'
+    - '*schtasks /query /v /fo LIST*'
     - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
       -N -R * -o StrictHostKeyChecking=no -o *'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Scheduled Scan" /Disable*'
-    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
-      -f *\sshd\config\sshd_config*'
-    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
-      Refresh" /Disable*'
-    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Verification" /Disable*'
-    - '*schtasks /query /v /fo LIST*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Cache Maintenance" /Disable*'
+      Scheduled Scan" /Disable*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Cleanup" /Disable*'
   - process.args:
+    - '* /Create /TN sch.bat /TR "c:\temp\script.vbs" *'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks /Create /RU SYSTEM /XML c:\temp\*'
+    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
+      Refresh" /Disable*'
+    - '* /Create /RU SYSTEM /TN MicrosoftEdgeUpdateTaskMachine /TR *'
+    - '* /create /tn "SysChecks" /tr c:\temp\sch.bat *'
+    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
+      Cache Maintenance" /Disable*'
+    - '*schtasks /query /v /fo LIST*'
     - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
       -N -R * -o StrictHostKeyChecking=no -o *'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Scheduled Scan" /Disable*'
-    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
-      -f *\sshd\config\sshd_config*'
-    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
-      Refresh" /Disable*'
-    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Verification" /Disable*'
-    - '*schtasks /query /v /fo LIST*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Cache Maintenance" /Disable*'
+      Scheduled Scan" /Disable*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Cleanup" /Disable*'
   - process.command_line:
+    - '* /Create /TN sch.bat /TR "c:\temp\script.vbs" *'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks /Create /RU SYSTEM /XML c:\temp\*'
+    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
+      Refresh" /Disable*'
+    - '* /Create /RU SYSTEM /TN MicrosoftEdgeUpdateTaskMachine /TR *'
+    - '* /create /tn "SysChecks" /tr c:\temp\sch.bat *'
+    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
+      Cache Maintenance" /Disable*'
+    - '*schtasks /query /v /fo LIST*'
     - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
       -N -R * -o StrictHostKeyChecking=no -o *'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Scheduled Scan" /Disable*'
-    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
-      -f *\sshd\config\sshd_config*'
-    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
-      Refresh" /Disable*'
-    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Verification" /Disable*'
-    - '*schtasks /query /v /fo LIST*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Cache Maintenance" /Disable*'
+      Scheduled Scan" /Disable*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Cleanup" /Disable*'
   - process.env_vars:
+    - '* /Create /TN sch.bat /TR "c:\temp\script.vbs" *'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks /Create /RU SYSTEM /XML c:\temp\*'
+    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
+      Refresh" /Disable*'
+    - '* /Create /RU SYSTEM /TN MicrosoftEdgeUpdateTaskMachine /TR *'
+    - '* /create /tn "SysChecks" /tr c:\temp\sch.bat *'
+    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
+      Cache Maintenance" /Disable*'
+    - '*schtasks /query /v /fo LIST*'
     - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
       -N -R * -o StrictHostKeyChecking=no -o *'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Scheduled Scan" /Disable*'
-    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
-      -f *\sshd\config\sshd_config*'
-    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
-      Refresh" /Disable*'
-    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Verification" /Disable*'
-    - '*schtasks /query /v /fo LIST*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Cache Maintenance" /Disable*'
+      Scheduled Scan" /Disable*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Cleanup" /Disable*'
   - process.io.text:
+    - '* /Create /TN sch.bat /TR "c:\temp\script.vbs" *'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks /Create /RU SYSTEM /XML c:\temp\*'
+    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
+      Refresh" /Disable*'
+    - '* /Create /RU SYSTEM /TN MicrosoftEdgeUpdateTaskMachine /TR *'
+    - '* /create /tn "SysChecks" /tr c:\temp\sch.bat *'
+    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
+      Cache Maintenance" /Disable*'
+    - '*schtasks /query /v /fo LIST*'
     - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
       -N -R * -o StrictHostKeyChecking=no -o *'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Scheduled Scan" /Disable*'
-    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
-      -f *\sshd\config\sshd_config*'
-    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
-      Refresh" /Disable*'
-    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Verification" /Disable*'
-    - '*schtasks /query /v /fo LIST*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Cache Maintenance" /Disable*'
+      Scheduled Scan" /Disable*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Cleanup" /Disable*'
   - process.title:
+    - '* /Create /TN sch.bat /TR "c:\temp\script.vbs" *'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks /Create /RU SYSTEM /XML c:\temp\*'
+    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
+      Refresh" /Disable*'
+    - '* /Create /RU SYSTEM /TN MicrosoftEdgeUpdateTaskMachine /TR *'
+    - '* /create /tn "SysChecks" /tr c:\temp\sch.bat *'
+    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
+      Cache Maintenance" /Disable*'
+    - '*schtasks /query /v /fo LIST*'
     - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
       -N -R * -o StrictHostKeyChecking=no -o *'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Scheduled Scan" /Disable*'
-    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
-      -f *\sshd\config\sshd_config*'
-    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
-      Refresh" /Disable*'
-    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Verification" /Disable*'
-    - '*schtasks /query /v /fo LIST*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Cache Maintenance" /Disable*'
+      Scheduled Scan" /Disable*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Cleanup" /Disable*'
   - pe.company:
+    - '* /Create /TN sch.bat /TR "c:\temp\script.vbs" *'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks /Create /RU SYSTEM /XML c:\temp\*'
+    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
+      Refresh" /Disable*'
+    - '* /Create /RU SYSTEM /TN MicrosoftEdgeUpdateTaskMachine /TR *'
+    - '* /create /tn "SysChecks" /tr c:\temp\sch.bat *'
+    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
+      Cache Maintenance" /Disable*'
+    - '*schtasks /query /v /fo LIST*'
     - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
       -N -R * -o StrictHostKeyChecking=no -o *'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Scheduled Scan" /Disable*'
-    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
-      -f *\sshd\config\sshd_config*'
-    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
-      Refresh" /Disable*'
-    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Verification" /Disable*'
-    - '*schtasks /query /v /fo LIST*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Cache Maintenance" /Disable*'
+      Scheduled Scan" /Disable*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Cleanup" /Disable*'
   - pe.description:
+    - '* /Create /TN sch.bat /TR "c:\temp\script.vbs" *'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks /Create /RU SYSTEM /XML c:\temp\*'
+    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
+      Refresh" /Disable*'
+    - '* /Create /RU SYSTEM /TN MicrosoftEdgeUpdateTaskMachine /TR *'
+    - '* /create /tn "SysChecks" /tr c:\temp\sch.bat *'
+    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
+      Cache Maintenance" /Disable*'
+    - '*schtasks /query /v /fo LIST*'
     - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
       -N -R * -o StrictHostKeyChecking=no -o *'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Scheduled Scan" /Disable*'
-    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
-      -f *\sshd\config\sshd_config*'
-    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
-      Refresh" /Disable*'
-    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Verification" /Disable*'
-    - '*schtasks /query /v /fo LIST*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Cache Maintenance" /Disable*'
+      Scheduled Scan" /Disable*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Cleanup" /Disable*'
   - pe.product:
+    - '* /Create /TN sch.bat /TR "c:\temp\script.vbs" *'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks /Create /RU SYSTEM /XML c:\temp\*'
+    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
+      Refresh" /Disable*'
+    - '* /Create /RU SYSTEM /TN MicrosoftEdgeUpdateTaskMachine /TR *'
+    - '* /create /tn "SysChecks" /tr c:\temp\sch.bat *'
+    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
+      Cache Maintenance" /Disable*'
+    - '*schtasks /query /v /fo LIST*'
     - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
       -N -R * -o StrictHostKeyChecking=no -o *'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Scheduled Scan" /Disable*'
-    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
-      -f *\sshd\config\sshd_config*'
-    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
-      Refresh" /Disable*'
-    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Verification" /Disable*'
-    - '*schtasks /query /v /fo LIST*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Cache Maintenance" /Disable*'
+      Scheduled Scan" /Disable*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Cleanup" /Disable*'
   - os.full:
+    - '* /Create /TN sch.bat /TR "c:\temp\script.vbs" *'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks /Create /RU SYSTEM /XML c:\temp\*'
+    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
+      Refresh" /Disable*'
+    - '* /Create /RU SYSTEM /TN MicrosoftEdgeUpdateTaskMachine /TR *'
+    - '* /create /tn "SysChecks" /tr c:\temp\sch.bat *'
+    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
+      Cache Maintenance" /Disable*'
+    - '*schtasks /query /v /fo LIST*'
     - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
       -N -R * -o StrictHostKeyChecking=no -o *'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Scheduled Scan" /Disable*'
-    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
-      -f *\sshd\config\sshd_config*'
-    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
-      Refresh" /Disable*'
-    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Verification" /Disable*'
-    - '*schtasks /query /v /fo LIST*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Cache Maintenance" /Disable*'
+      Scheduled Scan" /Disable*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Cleanup" /Disable*'
   - host.hostname:
+    - '* /Create /TN sch.bat /TR "c:\temp\script.vbs" *'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks /Create /RU SYSTEM /XML c:\temp\*'
+    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
+      Refresh" /Disable*'
+    - '* /Create /RU SYSTEM /TN MicrosoftEdgeUpdateTaskMachine /TR *'
+    - '* /create /tn "SysChecks" /tr c:\temp\sch.bat *'
+    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
+      Cache Maintenance" /Disable*'
+    - '*schtasks /query /v /fo LIST*'
     - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
       -N -R * -o StrictHostKeyChecking=no -o *'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Scheduled Scan" /Disable*'
-    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
-      -f *\sshd\config\sshd_config*'
-    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
-      Refresh" /Disable*'
-    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Verification" /Disable*'
-    - '*schtasks /query /v /fo LIST*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Cache Maintenance" /Disable*'
+      Scheduled Scan" /Disable*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Cleanup" /Disable*'
   - event.original:
+    - '* /Create /TN sch.bat /TR "c:\temp\script.vbs" *'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks /Create /RU SYSTEM /XML c:\temp\*'
+    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
+      Refresh" /Disable*'
+    - '* /Create /RU SYSTEM /TN MicrosoftEdgeUpdateTaskMachine /TR *'
+    - '* /create /tn "SysChecks" /tr c:\temp\sch.bat *'
+    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
+      Cache Maintenance" /Disable*'
+    - '*schtasks /query /v /fo LIST*'
     - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
       -N -R * -o StrictHostKeyChecking=no -o *'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Scheduled Scan" /Disable*'
-    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
-      -f *\sshd\config\sshd_config*'
-    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
-      Refresh" /Disable*'
-    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Verification" /Disable*'
-    - '*schtasks /query /v /fo LIST*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Cache Maintenance" /Disable*'
+      Scheduled Scan" /Disable*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Cleanup" /Disable*'
   - email.subject:
+    - '* /Create /TN sch.bat /TR "c:\temp\script.vbs" *'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks /Create /RU SYSTEM /XML c:\temp\*'
+    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
+      Refresh" /Disable*'
+    - '* /Create /RU SYSTEM /TN MicrosoftEdgeUpdateTaskMachine /TR *'
+    - '* /create /tn "SysChecks" /tr c:\temp\sch.bat *'
+    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
+      Cache Maintenance" /Disable*'
+    - '*schtasks /query /v /fo LIST*'
     - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
       -N -R * -o StrictHostKeyChecking=no -o *'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Scheduled Scan" /Disable*'
-    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
-      -f *\sshd\config\sshd_config*'
-    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
-      Refresh" /Disable*'
-    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Verification" /Disable*'
-    - '*schtasks /query /v /fo LIST*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Cache Maintenance" /Disable*'
+      Scheduled Scan" /Disable*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Cleanup" /Disable*'
   - device.model.name:
+    - '* /Create /TN sch.bat /TR "c:\temp\script.vbs" *'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks /Create /RU SYSTEM /XML c:\temp\*'
+    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
+      Refresh" /Disable*'
+    - '* /Create /RU SYSTEM /TN MicrosoftEdgeUpdateTaskMachine /TR *'
+    - '* /create /tn "SysChecks" /tr c:\temp\sch.bat *'
+    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
+      Cache Maintenance" /Disable*'
+    - '*schtasks /query /v /fo LIST*'
     - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
       -N -R * -o StrictHostKeyChecking=no -o *'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Scheduled Scan" /Disable*'
-    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
-      -f *\sshd\config\sshd_config*'
-    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
-      Refresh" /Disable*'
-    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Verification" /Disable*'
-    - '*schtasks /query /v /fo LIST*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Cache Maintenance" /Disable*'
+      Scheduled Scan" /Disable*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Cleanup" /Disable*'
   - container.image.name:
+    - '* /Create /TN sch.bat /TR "c:\temp\script.vbs" *'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks /Create /RU SYSTEM /XML c:\temp\*'
+    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
+      Refresh" /Disable*'
+    - '* /Create /RU SYSTEM /TN MicrosoftEdgeUpdateTaskMachine /TR *'
+    - '* /create /tn "SysChecks" /tr c:\temp\sch.bat *'
+    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
+      Cache Maintenance" /Disable*'
+    - '*schtasks /query /v /fo LIST*'
     - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
       -N -R * -o StrictHostKeyChecking=no -o *'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Scheduled Scan" /Disable*'
-    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
-      -f *\sshd\config\sshd_config*'
-    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
-      Refresh" /Disable*'
-    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Verification" /Disable*'
-    - '*schtasks /query /v /fo LIST*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Cache Maintenance" /Disable*'
+      Scheduled Scan" /Disable*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Cleanup" /Disable*'
   - container.name:
+    - '* /Create /TN sch.bat /TR "c:\temp\script.vbs" *'
+    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
+      -f *\sshd\config\sshd_config*'
+    - '*schtasks /Create /RU SYSTEM /XML c:\temp\*'
+    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
+      Refresh" /Disable*'
+    - '* /Create /RU SYSTEM /TN MicrosoftEdgeUpdateTaskMachine /TR *'
+    - '* /create /tn "SysChecks" /tr c:\temp\sch.bat *'
+    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
+      Cache Maintenance" /Disable*'
+    - '*schtasks /query /v /fo LIST*'
     - '*schtasks.exe /create /sc * /tr "%programdata%\sshd\sshd.exe -f %programdata%\sshd\config\sshd_config\keys\id_rsa
       -N -R * -o StrictHostKeyChecking=no -o *'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Scheduled Scan" /Disable*'
-    - '*schtasks.exe /create /sc minute /mo 1 /tn * /rl highest /np /tr *\sshd\sshd.exe
-      -f *\sshd\config\sshd_config*'
-    - '*schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy
-      Refresh" /Disable*'
-    - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Verification" /Disable*'
-    - '*schtasks /query /v /fo LIST*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
-      Cache Maintenance" /Disable*'
+      Scheduled Scan" /Disable*'
     - '*schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
       Cleanup" /Disable*'
   condition: selection
