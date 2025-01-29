@@ -1,0 +1,336 @@
+title: Simple keyword detection rule for VirtualBox
+id: 437c4389-fb97-4aaf-93ab-e11f52694f6c
+status: experimental
+description: Detects interesting keywords based on VirtualBox tool
+references:
+- https://embracethered.com/blog/posts/2020/shadowbunny-virtual-machine-red-teaming-technique/
+- https://news.sophos.com/en-us/2020/05/21/ragnar-locker-ransomware-deploys-virtual-machine-to-dodge-security/
+author: '@mthcht'
+date: 2023/07/30
+modified: 2025/01/29
+tags:
+- attack.T1021.001
+- attack.T1053
+- attack.T1072
+- attack.T1137
+- attack.T1202
+- attack.T1547
+- attack.T1564.001
+- attack.TA0003
+- attack.TA0005
+- attack.TA0006
+- attack.TA0008
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*\VboxHeadless.exe" -startvm * -v off*'
+    - '*VBoxManage.exe" startvm * --type headless*'
+    - '*<SharedFolder name="*" hostPath="C:\" writable="true"/>*'
+    - '* sharedfolder add * -hostpath c:\ -automount*'
+    - '*VBoxManage.exe startvm * --type headless*'
+    - '* hostPath="c:\" writable="true" autoMount="true"*'
+    - '*VBoxManage startvm * --type headless*'
+    - '*setextradata global GUI/SuppressMessages "all"*'
+    - '*setextradata global GUI/SuppressMessages all*'
+    - '*VboxHeadless.exe -startvm * -v off*'
+    - '*VBoxManage*setextradata global GUI/SuppressMessages *'
+    - '*VBoxManage.exe startvm * -v off*'
+    - '*start /min "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm * -type
+      headless*'
+  - CommandLine:
+    - '*\VboxHeadless.exe" -startvm * -v off*'
+    - '*VBoxManage.exe" startvm * --type headless*'
+    - '*<SharedFolder name="*" hostPath="C:\" writable="true"/>*'
+    - '* sharedfolder add * -hostpath c:\ -automount*'
+    - '*VBoxManage.exe startvm * --type headless*'
+    - '* hostPath="c:\" writable="true" autoMount="true"*'
+    - '*VBoxManage startvm * --type headless*'
+    - '*setextradata global GUI/SuppressMessages "all"*'
+    - '*setextradata global GUI/SuppressMessages all*'
+    - '*VboxHeadless.exe -startvm * -v off*'
+    - '*VBoxManage*setextradata global GUI/SuppressMessages *'
+    - '*VBoxManage.exe startvm * -v off*'
+    - '*start /min "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm * -type
+      headless*'
+  - Details:
+    - '*\VboxHeadless.exe" -startvm * -v off*'
+    - '*VBoxManage.exe" startvm * --type headless*'
+    - '*<SharedFolder name="*" hostPath="C:\" writable="true"/>*'
+    - '* sharedfolder add * -hostpath c:\ -automount*'
+    - '*VBoxManage.exe startvm * --type headless*'
+    - '* hostPath="c:\" writable="true" autoMount="true"*'
+    - '*VBoxManage startvm * --type headless*'
+    - '*setextradata global GUI/SuppressMessages "all"*'
+    - '*setextradata global GUI/SuppressMessages all*'
+    - '*VboxHeadless.exe -startvm * -v off*'
+    - '*VBoxManage*setextradata global GUI/SuppressMessages *'
+    - '*VBoxManage.exe startvm * -v off*'
+    - '*start /min "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm * -type
+      headless*'
+  - registry.value:
+    - '*\VboxHeadless.exe" -startvm * -v off*'
+    - '*VBoxManage.exe" startvm * --type headless*'
+    - '*<SharedFolder name="*" hostPath="C:\" writable="true"/>*'
+    - '* sharedfolder add * -hostpath c:\ -automount*'
+    - '*VBoxManage.exe startvm * --type headless*'
+    - '* hostPath="c:\" writable="true" autoMount="true"*'
+    - '*VBoxManage startvm * --type headless*'
+    - '*setextradata global GUI/SuppressMessages "all"*'
+    - '*setextradata global GUI/SuppressMessages all*'
+    - '*VboxHeadless.exe -startvm * -v off*'
+    - '*VBoxManage*setextradata global GUI/SuppressMessages *'
+    - '*VBoxManage.exe startvm * -v off*'
+    - '*start /min "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm * -type
+      headless*'
+  - process.args:
+    - '*\VboxHeadless.exe" -startvm * -v off*'
+    - '*VBoxManage.exe" startvm * --type headless*'
+    - '*<SharedFolder name="*" hostPath="C:\" writable="true"/>*'
+    - '* sharedfolder add * -hostpath c:\ -automount*'
+    - '*VBoxManage.exe startvm * --type headless*'
+    - '* hostPath="c:\" writable="true" autoMount="true"*'
+    - '*VBoxManage startvm * --type headless*'
+    - '*setextradata global GUI/SuppressMessages "all"*'
+    - '*setextradata global GUI/SuppressMessages all*'
+    - '*VboxHeadless.exe -startvm * -v off*'
+    - '*VBoxManage*setextradata global GUI/SuppressMessages *'
+    - '*VBoxManage.exe startvm * -v off*'
+    - '*start /min "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm * -type
+      headless*'
+  - process.command_line:
+    - '*\VboxHeadless.exe" -startvm * -v off*'
+    - '*VBoxManage.exe" startvm * --type headless*'
+    - '*<SharedFolder name="*" hostPath="C:\" writable="true"/>*'
+    - '* sharedfolder add * -hostpath c:\ -automount*'
+    - '*VBoxManage.exe startvm * --type headless*'
+    - '* hostPath="c:\" writable="true" autoMount="true"*'
+    - '*VBoxManage startvm * --type headless*'
+    - '*setextradata global GUI/SuppressMessages "all"*'
+    - '*setextradata global GUI/SuppressMessages all*'
+    - '*VboxHeadless.exe -startvm * -v off*'
+    - '*VBoxManage*setextradata global GUI/SuppressMessages *'
+    - '*VBoxManage.exe startvm * -v off*'
+    - '*start /min "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm * -type
+      headless*'
+  - process.env_vars:
+    - '*\VboxHeadless.exe" -startvm * -v off*'
+    - '*VBoxManage.exe" startvm * --type headless*'
+    - '*<SharedFolder name="*" hostPath="C:\" writable="true"/>*'
+    - '* sharedfolder add * -hostpath c:\ -automount*'
+    - '*VBoxManage.exe startvm * --type headless*'
+    - '* hostPath="c:\" writable="true" autoMount="true"*'
+    - '*VBoxManage startvm * --type headless*'
+    - '*setextradata global GUI/SuppressMessages "all"*'
+    - '*setextradata global GUI/SuppressMessages all*'
+    - '*VboxHeadless.exe -startvm * -v off*'
+    - '*VBoxManage*setextradata global GUI/SuppressMessages *'
+    - '*VBoxManage.exe startvm * -v off*'
+    - '*start /min "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm * -type
+      headless*'
+  - process.io.text:
+    - '*\VboxHeadless.exe" -startvm * -v off*'
+    - '*VBoxManage.exe" startvm * --type headless*'
+    - '*<SharedFolder name="*" hostPath="C:\" writable="true"/>*'
+    - '* sharedfolder add * -hostpath c:\ -automount*'
+    - '*VBoxManage.exe startvm * --type headless*'
+    - '* hostPath="c:\" writable="true" autoMount="true"*'
+    - '*VBoxManage startvm * --type headless*'
+    - '*setextradata global GUI/SuppressMessages "all"*'
+    - '*setextradata global GUI/SuppressMessages all*'
+    - '*VboxHeadless.exe -startvm * -v off*'
+    - '*VBoxManage*setextradata global GUI/SuppressMessages *'
+    - '*VBoxManage.exe startvm * -v off*'
+    - '*start /min "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm * -type
+      headless*'
+  - process.title:
+    - '*\VboxHeadless.exe" -startvm * -v off*'
+    - '*VBoxManage.exe" startvm * --type headless*'
+    - '*<SharedFolder name="*" hostPath="C:\" writable="true"/>*'
+    - '* sharedfolder add * -hostpath c:\ -automount*'
+    - '*VBoxManage.exe startvm * --type headless*'
+    - '* hostPath="c:\" writable="true" autoMount="true"*'
+    - '*VBoxManage startvm * --type headless*'
+    - '*setextradata global GUI/SuppressMessages "all"*'
+    - '*setextradata global GUI/SuppressMessages all*'
+    - '*VboxHeadless.exe -startvm * -v off*'
+    - '*VBoxManage*setextradata global GUI/SuppressMessages *'
+    - '*VBoxManage.exe startvm * -v off*'
+    - '*start /min "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm * -type
+      headless*'
+  - pe.company:
+    - '*\VboxHeadless.exe" -startvm * -v off*'
+    - '*VBoxManage.exe" startvm * --type headless*'
+    - '*<SharedFolder name="*" hostPath="C:\" writable="true"/>*'
+    - '* sharedfolder add * -hostpath c:\ -automount*'
+    - '*VBoxManage.exe startvm * --type headless*'
+    - '* hostPath="c:\" writable="true" autoMount="true"*'
+    - '*VBoxManage startvm * --type headless*'
+    - '*setextradata global GUI/SuppressMessages "all"*'
+    - '*setextradata global GUI/SuppressMessages all*'
+    - '*VboxHeadless.exe -startvm * -v off*'
+    - '*VBoxManage*setextradata global GUI/SuppressMessages *'
+    - '*VBoxManage.exe startvm * -v off*'
+    - '*start /min "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm * -type
+      headless*'
+  - pe.description:
+    - '*\VboxHeadless.exe" -startvm * -v off*'
+    - '*VBoxManage.exe" startvm * --type headless*'
+    - '*<SharedFolder name="*" hostPath="C:\" writable="true"/>*'
+    - '* sharedfolder add * -hostpath c:\ -automount*'
+    - '*VBoxManage.exe startvm * --type headless*'
+    - '* hostPath="c:\" writable="true" autoMount="true"*'
+    - '*VBoxManage startvm * --type headless*'
+    - '*setextradata global GUI/SuppressMessages "all"*'
+    - '*setextradata global GUI/SuppressMessages all*'
+    - '*VboxHeadless.exe -startvm * -v off*'
+    - '*VBoxManage*setextradata global GUI/SuppressMessages *'
+    - '*VBoxManage.exe startvm * -v off*'
+    - '*start /min "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm * -type
+      headless*'
+  - pe.product:
+    - '*\VboxHeadless.exe" -startvm * -v off*'
+    - '*VBoxManage.exe" startvm * --type headless*'
+    - '*<SharedFolder name="*" hostPath="C:\" writable="true"/>*'
+    - '* sharedfolder add * -hostpath c:\ -automount*'
+    - '*VBoxManage.exe startvm * --type headless*'
+    - '* hostPath="c:\" writable="true" autoMount="true"*'
+    - '*VBoxManage startvm * --type headless*'
+    - '*setextradata global GUI/SuppressMessages "all"*'
+    - '*setextradata global GUI/SuppressMessages all*'
+    - '*VboxHeadless.exe -startvm * -v off*'
+    - '*VBoxManage*setextradata global GUI/SuppressMessages *'
+    - '*VBoxManage.exe startvm * -v off*'
+    - '*start /min "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm * -type
+      headless*'
+  - os.full:
+    - '*\VboxHeadless.exe" -startvm * -v off*'
+    - '*VBoxManage.exe" startvm * --type headless*'
+    - '*<SharedFolder name="*" hostPath="C:\" writable="true"/>*'
+    - '* sharedfolder add * -hostpath c:\ -automount*'
+    - '*VBoxManage.exe startvm * --type headless*'
+    - '* hostPath="c:\" writable="true" autoMount="true"*'
+    - '*VBoxManage startvm * --type headless*'
+    - '*setextradata global GUI/SuppressMessages "all"*'
+    - '*setextradata global GUI/SuppressMessages all*'
+    - '*VboxHeadless.exe -startvm * -v off*'
+    - '*VBoxManage*setextradata global GUI/SuppressMessages *'
+    - '*VBoxManage.exe startvm * -v off*'
+    - '*start /min "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm * -type
+      headless*'
+  - host.hostname:
+    - '*\VboxHeadless.exe" -startvm * -v off*'
+    - '*VBoxManage.exe" startvm * --type headless*'
+    - '*<SharedFolder name="*" hostPath="C:\" writable="true"/>*'
+    - '* sharedfolder add * -hostpath c:\ -automount*'
+    - '*VBoxManage.exe startvm * --type headless*'
+    - '* hostPath="c:\" writable="true" autoMount="true"*'
+    - '*VBoxManage startvm * --type headless*'
+    - '*setextradata global GUI/SuppressMessages "all"*'
+    - '*setextradata global GUI/SuppressMessages all*'
+    - '*VboxHeadless.exe -startvm * -v off*'
+    - '*VBoxManage*setextradata global GUI/SuppressMessages *'
+    - '*VBoxManage.exe startvm * -v off*'
+    - '*start /min "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm * -type
+      headless*'
+  - event.original:
+    - '*\VboxHeadless.exe" -startvm * -v off*'
+    - '*VBoxManage.exe" startvm * --type headless*'
+    - '*<SharedFolder name="*" hostPath="C:\" writable="true"/>*'
+    - '* sharedfolder add * -hostpath c:\ -automount*'
+    - '*VBoxManage.exe startvm * --type headless*'
+    - '* hostPath="c:\" writable="true" autoMount="true"*'
+    - '*VBoxManage startvm * --type headless*'
+    - '*setextradata global GUI/SuppressMessages "all"*'
+    - '*setextradata global GUI/SuppressMessages all*'
+    - '*VboxHeadless.exe -startvm * -v off*'
+    - '*VBoxManage*setextradata global GUI/SuppressMessages *'
+    - '*VBoxManage.exe startvm * -v off*'
+    - '*start /min "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm * -type
+      headless*'
+  - email.subject:
+    - '*\VboxHeadless.exe" -startvm * -v off*'
+    - '*VBoxManage.exe" startvm * --type headless*'
+    - '*<SharedFolder name="*" hostPath="C:\" writable="true"/>*'
+    - '* sharedfolder add * -hostpath c:\ -automount*'
+    - '*VBoxManage.exe startvm * --type headless*'
+    - '* hostPath="c:\" writable="true" autoMount="true"*'
+    - '*VBoxManage startvm * --type headless*'
+    - '*setextradata global GUI/SuppressMessages "all"*'
+    - '*setextradata global GUI/SuppressMessages all*'
+    - '*VboxHeadless.exe -startvm * -v off*'
+    - '*VBoxManage*setextradata global GUI/SuppressMessages *'
+    - '*VBoxManage.exe startvm * -v off*'
+    - '*start /min "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm * -type
+      headless*'
+  - device.model.name:
+    - '*\VboxHeadless.exe" -startvm * -v off*'
+    - '*VBoxManage.exe" startvm * --type headless*'
+    - '*<SharedFolder name="*" hostPath="C:\" writable="true"/>*'
+    - '* sharedfolder add * -hostpath c:\ -automount*'
+    - '*VBoxManage.exe startvm * --type headless*'
+    - '* hostPath="c:\" writable="true" autoMount="true"*'
+    - '*VBoxManage startvm * --type headless*'
+    - '*setextradata global GUI/SuppressMessages "all"*'
+    - '*setextradata global GUI/SuppressMessages all*'
+    - '*VboxHeadless.exe -startvm * -v off*'
+    - '*VBoxManage*setextradata global GUI/SuppressMessages *'
+    - '*VBoxManage.exe startvm * -v off*'
+    - '*start /min "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm * -type
+      headless*'
+  - container.image.name:
+    - '*\VboxHeadless.exe" -startvm * -v off*'
+    - '*VBoxManage.exe" startvm * --type headless*'
+    - '*<SharedFolder name="*" hostPath="C:\" writable="true"/>*'
+    - '* sharedfolder add * -hostpath c:\ -automount*'
+    - '*VBoxManage.exe startvm * --type headless*'
+    - '* hostPath="c:\" writable="true" autoMount="true"*'
+    - '*VBoxManage startvm * --type headless*'
+    - '*setextradata global GUI/SuppressMessages "all"*'
+    - '*setextradata global GUI/SuppressMessages all*'
+    - '*VboxHeadless.exe -startvm * -v off*'
+    - '*VBoxManage*setextradata global GUI/SuppressMessages *'
+    - '*VBoxManage.exe startvm * -v off*'
+    - '*start /min "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm * -type
+      headless*'
+  - container.name:
+    - '*\VboxHeadless.exe" -startvm * -v off*'
+    - '*VBoxManage.exe" startvm * --type headless*'
+    - '*<SharedFolder name="*" hostPath="C:\" writable="true"/>*'
+    - '* sharedfolder add * -hostpath c:\ -automount*'
+    - '*VBoxManage.exe startvm * --type headless*'
+    - '* hostPath="c:\" writable="true" autoMount="true"*'
+    - '*VBoxManage startvm * --type headless*'
+    - '*setextradata global GUI/SuppressMessages "all"*'
+    - '*setextradata global GUI/SuppressMessages all*'
+    - '*VboxHeadless.exe -startvm * -v off*'
+    - '*VBoxManage*setextradata global GUI/SuppressMessages *'
+    - '*VBoxManage.exe startvm * -v off*'
+    - '*start /min "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm * -type
+      headless*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium

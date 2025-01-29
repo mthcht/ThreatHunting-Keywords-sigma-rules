@@ -2,10 +2,11 @@ title: Simple keyword detection rule for xcopy
 id: 63f6ec9a-d30e-47f4-84e9-87935882bbe2
 status: experimental
 description: Detects interesting keywords based on xcopy tool
-references: []
+references:
+- https://thedfirreport.com/2024/12/02/the-curious-case-of-an-egg-cellent-resume/
 author: '@mthcht'
 date: 2023/07/30
-modified: 2024/12/09
+modified: 2025/01/29
 tags:
 - attack.T1012
 - attack.T1027
@@ -16,17 +17,22 @@ tags:
 - attack.T1057
 - attack.T1059.003
 - attack.T1070.001
+- attack.T1070.009
 - attack.T1083
 - attack.T1105
 - attack.T1112
 - attack.T1136
+- attack.T1556.001
 - attack.T1562.001
 - attack.T1564.001
 - attack.T1564.002
 - attack.T1564.003
 - attack.T1564.005
+- attack.T1574
 - attack.TA0002
 - attack.TA0003
+- attack.TA0004
+- attack.TA0005
 - attack.TA0006
 - attack.TA0007
 - attack.TA0008
@@ -37,62 +43,81 @@ logsource:
 detection:
   selection:
   - ParentCommandLine:
-    - '*xcopy c:\* \\*\c$*'
     - '*cmd /c xcopy /s /i /h /e /q /y /d*'
+    - '*xcopy /Y /C /Q C:\Windows\system32\*.exe *Ie4uinit.exe*'
+    - '*xcopy c:\* \\*\c$*'
   - CommandLine:
-    - '*xcopy c:\* \\*\c$*'
     - '*cmd /c xcopy /s /i /h /e /q /y /d*'
+    - '*xcopy /Y /C /Q C:\Windows\system32\*.exe *Ie4uinit.exe*'
+    - '*xcopy c:\* \\*\c$*'
   - Details:
-    - '*xcopy c:\* \\*\c$*'
     - '*cmd /c xcopy /s /i /h /e /q /y /d*'
+    - '*xcopy /Y /C /Q C:\Windows\system32\*.exe *Ie4uinit.exe*'
+    - '*xcopy c:\* \\*\c$*'
   - registry.value:
-    - '*xcopy c:\* \\*\c$*'
     - '*cmd /c xcopy /s /i /h /e /q /y /d*'
+    - '*xcopy /Y /C /Q C:\Windows\system32\*.exe *Ie4uinit.exe*'
+    - '*xcopy c:\* \\*\c$*'
   - process.args:
-    - '*xcopy c:\* \\*\c$*'
     - '*cmd /c xcopy /s /i /h /e /q /y /d*'
+    - '*xcopy /Y /C /Q C:\Windows\system32\*.exe *Ie4uinit.exe*'
+    - '*xcopy c:\* \\*\c$*'
   - process.command_line:
-    - '*xcopy c:\* \\*\c$*'
     - '*cmd /c xcopy /s /i /h /e /q /y /d*'
+    - '*xcopy /Y /C /Q C:\Windows\system32\*.exe *Ie4uinit.exe*'
+    - '*xcopy c:\* \\*\c$*'
   - process.env_vars:
-    - '*xcopy c:\* \\*\c$*'
     - '*cmd /c xcopy /s /i /h /e /q /y /d*'
+    - '*xcopy /Y /C /Q C:\Windows\system32\*.exe *Ie4uinit.exe*'
+    - '*xcopy c:\* \\*\c$*'
   - process.io.text:
-    - '*xcopy c:\* \\*\c$*'
     - '*cmd /c xcopy /s /i /h /e /q /y /d*'
+    - '*xcopy /Y /C /Q C:\Windows\system32\*.exe *Ie4uinit.exe*'
+    - '*xcopy c:\* \\*\c$*'
   - process.title:
-    - '*xcopy c:\* \\*\c$*'
     - '*cmd /c xcopy /s /i /h /e /q /y /d*'
+    - '*xcopy /Y /C /Q C:\Windows\system32\*.exe *Ie4uinit.exe*'
+    - '*xcopy c:\* \\*\c$*'
   - pe.company:
-    - '*xcopy c:\* \\*\c$*'
     - '*cmd /c xcopy /s /i /h /e /q /y /d*'
+    - '*xcopy /Y /C /Q C:\Windows\system32\*.exe *Ie4uinit.exe*'
+    - '*xcopy c:\* \\*\c$*'
   - pe.description:
-    - '*xcopy c:\* \\*\c$*'
     - '*cmd /c xcopy /s /i /h /e /q /y /d*'
+    - '*xcopy /Y /C /Q C:\Windows\system32\*.exe *Ie4uinit.exe*'
+    - '*xcopy c:\* \\*\c$*'
   - pe.product:
-    - '*xcopy c:\* \\*\c$*'
     - '*cmd /c xcopy /s /i /h /e /q /y /d*'
+    - '*xcopy /Y /C /Q C:\Windows\system32\*.exe *Ie4uinit.exe*'
+    - '*xcopy c:\* \\*\c$*'
   - os.full:
-    - '*xcopy c:\* \\*\c$*'
     - '*cmd /c xcopy /s /i /h /e /q /y /d*'
+    - '*xcopy /Y /C /Q C:\Windows\system32\*.exe *Ie4uinit.exe*'
+    - '*xcopy c:\* \\*\c$*'
   - host.hostname:
-    - '*xcopy c:\* \\*\c$*'
     - '*cmd /c xcopy /s /i /h /e /q /y /d*'
+    - '*xcopy /Y /C /Q C:\Windows\system32\*.exe *Ie4uinit.exe*'
+    - '*xcopy c:\* \\*\c$*'
   - event.original:
-    - '*xcopy c:\* \\*\c$*'
     - '*cmd /c xcopy /s /i /h /e /q /y /d*'
+    - '*xcopy /Y /C /Q C:\Windows\system32\*.exe *Ie4uinit.exe*'
+    - '*xcopy c:\* \\*\c$*'
   - email.subject:
-    - '*xcopy c:\* \\*\c$*'
     - '*cmd /c xcopy /s /i /h /e /q /y /d*'
+    - '*xcopy /Y /C /Q C:\Windows\system32\*.exe *Ie4uinit.exe*'
+    - '*xcopy c:\* \\*\c$*'
   - device.model.name:
-    - '*xcopy c:\* \\*\c$*'
     - '*cmd /c xcopy /s /i /h /e /q /y /d*'
+    - '*xcopy /Y /C /Q C:\Windows\system32\*.exe *Ie4uinit.exe*'
+    - '*xcopy c:\* \\*\c$*'
   - container.image.name:
-    - '*xcopy c:\* \\*\c$*'
     - '*cmd /c xcopy /s /i /h /e /q /y /d*'
+    - '*xcopy /Y /C /Q C:\Windows\system32\*.exe *Ie4uinit.exe*'
+    - '*xcopy c:\* \\*\c$*'
   - container.name:
-    - '*xcopy c:\* \\*\c$*'
     - '*cmd /c xcopy /s /i /h /e /q /y /d*'
+    - '*xcopy /Y /C /Q C:\Windows\system32\*.exe *Ie4uinit.exe*'
+    - '*xcopy c:\* \\*\c$*'
   condition: selection
 fields:
 - ParentCommandLine

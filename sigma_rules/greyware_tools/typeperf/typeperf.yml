@@ -1,0 +1,80 @@
+title: Simple keyword detection rule for typeperf
+id: 20de761d-a707-4b1b-9c56-8d9ce06780f5
+status: experimental
+description: Detects interesting keywords based on typeperf tool
+references:
+- https://www.securonix.com/blog/threat-labs-security-advisory-new-ocxharvester-attack-campaign-leverages-modernized-more_eggs-suite/
+author: '@mthcht'
+date: 2023/07/30
+modified: 2025/01/29
+tags:
+- attack.T1057
+- attack.T1202
+- attack.TA0005
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*typeperf.exe "\System\Processor Queue Length" -si * -sc 1*'
+  - CommandLine:
+    - '*typeperf.exe "\System\Processor Queue Length" -si * -sc 1*'
+  - Details:
+    - '*typeperf.exe "\System\Processor Queue Length" -si * -sc 1*'
+  - registry.value:
+    - '*typeperf.exe "\System\Processor Queue Length" -si * -sc 1*'
+  - process.args:
+    - '*typeperf.exe "\System\Processor Queue Length" -si * -sc 1*'
+  - process.command_line:
+    - '*typeperf.exe "\System\Processor Queue Length" -si * -sc 1*'
+  - process.env_vars:
+    - '*typeperf.exe "\System\Processor Queue Length" -si * -sc 1*'
+  - process.io.text:
+    - '*typeperf.exe "\System\Processor Queue Length" -si * -sc 1*'
+  - process.title:
+    - '*typeperf.exe "\System\Processor Queue Length" -si * -sc 1*'
+  - pe.company:
+    - '*typeperf.exe "\System\Processor Queue Length" -si * -sc 1*'
+  - pe.description:
+    - '*typeperf.exe "\System\Processor Queue Length" -si * -sc 1*'
+  - pe.product:
+    - '*typeperf.exe "\System\Processor Queue Length" -si * -sc 1*'
+  - os.full:
+    - '*typeperf.exe "\System\Processor Queue Length" -si * -sc 1*'
+  - host.hostname:
+    - '*typeperf.exe "\System\Processor Queue Length" -si * -sc 1*'
+  - event.original:
+    - '*typeperf.exe "\System\Processor Queue Length" -si * -sc 1*'
+  - email.subject:
+    - '*typeperf.exe "\System\Processor Queue Length" -si * -sc 1*'
+  - device.model.name:
+    - '*typeperf.exe "\System\Processor Queue Length" -si * -sc 1*'
+  - container.image.name:
+    - '*typeperf.exe "\System\Processor Queue Length" -si * -sc 1*'
+  - container.name:
+    - '*typeperf.exe "\System\Processor Queue Length" -si * -sc 1*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium
