@@ -13,8 +13,11 @@ if os.path.isfile(filename):
         reader = csv.DictReader(f)
         # Iterate over the rows
         for row in reader:
+            keyword = row['keyword'].strip()
+            if not keyword:  # Skip empty keyword rows
+                continue
+
             tool_name = sanitize_filename(row['metadata_tool'])
-            keyword = row['keyword']
 
             # Create a dictionary for this tool if it doesn't exist
             if tool_name not in tools:
@@ -51,12 +54,14 @@ for tool_name, tool_data in tools.items():
         tool_directory = 'greyware_tools'
     elif tool_data["type"] == "signature_keyword":
         tool_directory = 'signatures'
+    else:
+        continue  # Skip if type is unrecognized
 
     os.makedirs(os.path.join('..', 'sigma_rules', tool_directory, tool_name), exist_ok=True)
 
     # Remove duplicates
     deduped_tool_data = [dict(t) for t in set(tuple(d.items()) for d in tool_data["data"])]
-    
+
     # Write out the data to a JSON file inside the tool's directory in sigma_rules
     with open(os.path.join('..', 'sigma_rules', tool_directory, tool_name, f'{tool_name}.json'), 'w') as f:
         json.dump(deduped_tool_data, f, indent=4)
