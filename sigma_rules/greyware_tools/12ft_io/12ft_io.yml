@@ -1,0 +1,149 @@
+title: Simple keyword detection rule for 12ft.io
+id: 437e2c98-0184-4854-83a0-d066ca83e49a
+status: experimental
+description: Detects interesting keywords based on 12ft.io tool
+references:
+- https://12ft.io/
+author: '@mthcht'
+date: 2023/07/30
+modified: 2025/03/02
+tags:
+- attack.T1036
+- attack.T1204.002
+- attack.T1566.002
+- attack.TA0001
+- attack.TA0005
+logsource:
+  category:
+  - network
+detection:
+  selection:
+  - url:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - dest_url:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - uri:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - uri_query:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - query:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - url_domain:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - uri_path:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - domain:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - QueryName:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - QueryResults:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - DestinationHostname:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - DestinationIp:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - http_referrer:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - http_referrer_domain:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - http_user_agent:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - dest_nt_host:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - sender:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - recipient:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - orig_recipient:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - subject:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - url.domain:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - url.full:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - url.original:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - url.query:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - user_agent.original:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - network.application:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - http.request.body.content:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - http.request.referrer:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - email.from.address:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - dns.question.name:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  - destination.domain:
+    - '*https://12ft.io/proxy?q=*'
+    - '*https://12ft.io/api/proxy?q=http*'
+  condition: selection
+fields:
+- url
+- dest_url
+- uri
+- uri_query
+- query
+- url_domain
+- uri_path
+- domain
+- QueryName
+- QueryResults
+- DestinationHostname
+- DestinationIp
+- http_referrer
+- http_referrer_domain
+- http_user_agent
+- dest_nt_host
+- sender
+- recipient
+- orig_recipient
+- subject
+- url.domain
+- url.full
+- url.original
+- url.query
+- user_agent.original
+- network.application
+- http.request.body.content
+- http.request.referrer
+- email.from.address
+- dns.question.name
+- destination.domain
+falsepositives:
+- unknown
+level: medium

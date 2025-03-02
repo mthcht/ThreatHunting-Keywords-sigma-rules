@@ -1,0 +1,98 @@
+title: Simple keyword detection rule for truncate
+id: 31303680-2ac9-4eb3-8086-d60be2a1cf30
+status: experimental
+description: Detects interesting keywords based on truncate tool
+references:
+- https://github.com/mthcht/atomic-red-team/blob/master/atomics/T1070.002/T1070.002.md
+author: '@mthcht'
+date: 2023/07/30
+modified: 2025/03/02
+tags:
+- attack.T1070.002
+- attack.TA0005
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*truncate --size=0 /var/log/security*'
+    - '*truncate -s 0 /var/log/messages*'
+  - CommandLine:
+    - '*truncate --size=0 /var/log/security*'
+    - '*truncate -s 0 /var/log/messages*'
+  - Details:
+    - '*truncate --size=0 /var/log/security*'
+    - '*truncate -s 0 /var/log/messages*'
+  - registry.value:
+    - '*truncate --size=0 /var/log/security*'
+    - '*truncate -s 0 /var/log/messages*'
+  - process.args:
+    - '*truncate --size=0 /var/log/security*'
+    - '*truncate -s 0 /var/log/messages*'
+  - process.command_line:
+    - '*truncate --size=0 /var/log/security*'
+    - '*truncate -s 0 /var/log/messages*'
+  - process.env_vars:
+    - '*truncate --size=0 /var/log/security*'
+    - '*truncate -s 0 /var/log/messages*'
+  - process.io.text:
+    - '*truncate --size=0 /var/log/security*'
+    - '*truncate -s 0 /var/log/messages*'
+  - process.title:
+    - '*truncate --size=0 /var/log/security*'
+    - '*truncate -s 0 /var/log/messages*'
+  - pe.company:
+    - '*truncate --size=0 /var/log/security*'
+    - '*truncate -s 0 /var/log/messages*'
+  - pe.description:
+    - '*truncate --size=0 /var/log/security*'
+    - '*truncate -s 0 /var/log/messages*'
+  - pe.product:
+    - '*truncate --size=0 /var/log/security*'
+    - '*truncate -s 0 /var/log/messages*'
+  - os.full:
+    - '*truncate --size=0 /var/log/security*'
+    - '*truncate -s 0 /var/log/messages*'
+  - host.hostname:
+    - '*truncate --size=0 /var/log/security*'
+    - '*truncate -s 0 /var/log/messages*'
+  - event.original:
+    - '*truncate --size=0 /var/log/security*'
+    - '*truncate -s 0 /var/log/messages*'
+  - email.subject:
+    - '*truncate --size=0 /var/log/security*'
+    - '*truncate -s 0 /var/log/messages*'
+  - device.model.name:
+    - '*truncate --size=0 /var/log/security*'
+    - '*truncate -s 0 /var/log/messages*'
+  - container.image.name:
+    - '*truncate --size=0 /var/log/security*'
+    - '*truncate -s 0 /var/log/messages*'
+  - container.name:
+    - '*truncate --size=0 /var/log/security*'
+    - '*truncate -s 0 /var/log/messages*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium

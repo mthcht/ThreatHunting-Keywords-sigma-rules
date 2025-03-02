@@ -1,0 +1,80 @@
+title: Simple keyword detection rule for awk
+id: 635433da-4874-4f8a-88e1-940cfb6819c0
+status: experimental
+description: Detects interesting keywords based on awk tool
+references: []
+author: '@mthcht'
+date: 2023/07/30
+modified: 2025/03/02
+tags:
+- attack.T1059
+- attack.T1059.006
+- attack.T1070.004
+- attack.TA0004
+logsource:
+  category:
+  - endpoint
+detection:
+  selection:
+  - ParentCommandLine:
+    - '*sudo awk ''BEGIN {system("/bin/bash")}''*'
+  - CommandLine:
+    - '*sudo awk ''BEGIN {system("/bin/bash")}''*'
+  - Details:
+    - '*sudo awk ''BEGIN {system("/bin/bash")}''*'
+  - registry.value:
+    - '*sudo awk ''BEGIN {system("/bin/bash")}''*'
+  - process.args:
+    - '*sudo awk ''BEGIN {system("/bin/bash")}''*'
+  - process.command_line:
+    - '*sudo awk ''BEGIN {system("/bin/bash")}''*'
+  - process.env_vars:
+    - '*sudo awk ''BEGIN {system("/bin/bash")}''*'
+  - process.io.text:
+    - '*sudo awk ''BEGIN {system("/bin/bash")}''*'
+  - process.title:
+    - '*sudo awk ''BEGIN {system("/bin/bash")}''*'
+  - pe.company:
+    - '*sudo awk ''BEGIN {system("/bin/bash")}''*'
+  - pe.description:
+    - '*sudo awk ''BEGIN {system("/bin/bash")}''*'
+  - pe.product:
+    - '*sudo awk ''BEGIN {system("/bin/bash")}''*'
+  - os.full:
+    - '*sudo awk ''BEGIN {system("/bin/bash")}''*'
+  - host.hostname:
+    - '*sudo awk ''BEGIN {system("/bin/bash")}''*'
+  - event.original:
+    - '*sudo awk ''BEGIN {system("/bin/bash")}''*'
+  - email.subject:
+    - '*sudo awk ''BEGIN {system("/bin/bash")}''*'
+  - device.model.name:
+    - '*sudo awk ''BEGIN {system("/bin/bash")}''*'
+  - container.image.name:
+    - '*sudo awk ''BEGIN {system("/bin/bash")}''*'
+  - container.name:
+    - '*sudo awk ''BEGIN {system("/bin/bash")}''*'
+  condition: selection
+fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
+falsepositives:
+- unknown
+level: medium

@@ -5,7 +5,7 @@ description: Detects interesting keywords based on cp tool
 references: []
 author: '@mthcht'
 date: 2023/07/30
-modified: 2025/01/29
+modified: 2025/03/02
 tags:
 - attack.T1012
 - attack.T1027
@@ -15,6 +15,7 @@ tags:
 - attack.T1053.005
 - attack.T1057
 - attack.T1059.003
+- attack.T1070
 - attack.T1070.001
 - attack.T1083
 - attack.T1105
@@ -27,6 +28,7 @@ tags:
 - attack.T1564.005
 - attack.TA0002
 - attack.TA0003
+- attack.TA0005
 - attack.TA0006
 - attack.TA0007
 - attack.TA0008
@@ -36,260 +38,851 @@ logsource:
   - endpoint
 detection:
   selection:
-  - Image:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - OriginalFileName:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - CurrentDirectory:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - ParentImage:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
   - ParentCommandLine:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
     - '*cp /etc/shadow*'
     - '*cp /etc/passwd*'
-  - TargetFilename:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - Signature:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - signature:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - ImageLoaded:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - Company:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - Description:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - description:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
   - CommandLine:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
     - '*cp /etc/shadow*'
     - '*cp /etc/passwd*'
-  - SourceImage:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - TargetImage:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - CallTrace:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - TargetObject:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
   - Details:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
     - '*cp /etc/shadow*'
     - '*cp /etc/passwd*'
-  - PipeName:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - Consumer:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - Destination:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - Name:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - Query:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - NewName:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - StartAddress:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - StartModule:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - StartFunction:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - SourceHostname:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - Device:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - file_name:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - file_path:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - process:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - original_file_name:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - parent_process:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - process_path:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - service_path:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - registry_path:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - registry_value_data:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - registry_value_name:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - ContextInfo:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - Payload:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - ScriptBlockText:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - ServerName:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - TransportName:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - NewProcessName:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - ParentProcessName:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - Application:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - Product Name:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - Threat Name:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - Process Name:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - Path:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - ImagePath:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - ServiceName:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - ProcessPath:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - AppName:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - AppPath:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - ModulePath:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - registry.data.strings:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - registry.path:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
   - registry.value:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
     - '*cp /etc/shadow*'
     - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
   - process.args:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
     - '*cp /etc/shadow*'
     - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
   - process.command_line:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
     - '*cp /etc/shadow*'
     - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
   - process.env_vars:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
     - '*cp /etc/shadow*'
     - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
   - process.io.text:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
     - '*cp /etc/shadow*'
     - '*cp /etc/passwd*'
-  - process.executable:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - process.name:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
   - process.title:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
     - '*cp /etc/shadow*'
     - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
   - pe.company:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
     - '*cp /etc/shadow*'
     - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
   - pe.description:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
     - '*cp /etc/shadow*'
     - '*cp /etc/passwd*'
-  - pe.original_file_name:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
   - pe.product:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
     - '*cp /etc/shadow*'
     - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
   - os.full:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
     - '*cp /etc/shadow*'
     - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
   - host.hostname:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
     - '*cp /etc/shadow*'
     - '*cp /etc/passwd*'
-  - file.fork_name:
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - event.original:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
     - '*cp /etc/shadow*'
     - '*cp /etc/passwd*'
-  - file.name:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - file.path:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - file.target_path:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
-  - email.attachments.file.name:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
   - email.subject:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
     - '*cp /etc/shadow*'
     - '*cp /etc/passwd*'
-  - dll.path:
-    - '*cp /etc/shadow*'
-    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
   - device.model.name:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
     - '*cp /etc/shadow*'
     - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
   - container.image.name:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
     - '*cp /etc/shadow*'
     - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
   - container.name:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
     - '*cp /etc/shadow*'
     - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - Image:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - OriginalFileName:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - CurrentDirectory:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - ParentImage:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - ParentCommandLine:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - TargetFilename:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - Signature:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - signature:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - ImageLoaded:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - Company:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - Description:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - description:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - CommandLine:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - SourceImage:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - TargetImage:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - CallTrace:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - TargetObject:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - Details:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - PipeName:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - Consumer:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - Destination:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - Name:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - Query:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - NewName:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - StartAddress:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - StartModule:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - StartFunction:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - SourceHostname:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - Device:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - file_name:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - file_path:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - process:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - original_file_name:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - parent_process:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - process_path:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - service_path:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - registry_path:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - registry_value_data:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - registry_value_name:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - ContextInfo:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - Payload:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - ScriptBlockText:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - ServerName:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - TransportName:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - NewProcessName:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - ParentProcessName:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - Application:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - Product Name:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - Threat Name:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - Process Name:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - Path:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - ImagePath:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - ServiceName:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - ProcessPath:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - AppName:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - AppPath:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - ModulePath:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - registry.data.strings:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - registry.path:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - registry.value:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - process.args:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - process.command_line:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - process.env_vars:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - process.io.text:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - process.executable:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - process.name:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - process.title:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - pe.company:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - pe.description:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - pe.original_file_name:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - pe.product:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - os.full:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - host.hostname:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - file.fork_name:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - file.name:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - file.path:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - file.target_path:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - email.attachments.file.name:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - email.subject:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - dll.path:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - device.model.name:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - container.image.name:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
+  - container.name:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
+    - '*cp /etc/shadow*'
+    - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
   - object:
+    - '*cp -i /bin/bash /tmp/*'
+    - '*cp /bin/sh /tmp/*'
+    - '*cp -i /bin/sh /tmp/*'
     - '*cp /etc/shadow*'
     - '*cp /etc/passwd*'
+    - '*HackTool:Linux/CopyBashtoTemp*'
+    - '*cp /bin/bash /tmp/*'
   condition: selection
 fields:
+- ParentCommandLine
+- CommandLine
+- Details
+- registry.value
+- process.args
+- process.command_line
+- process.env_vars
+- process.io.text
+- process.title
+- pe.company
+- pe.description
+- pe.product
+- os.full
+- host.hostname
+- event.original
+- email.subject
+- device.model.name
+- container.image.name
+- container.name
 - Image
 - OriginalFileName
 - CurrentDirectory
